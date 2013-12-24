@@ -40,6 +40,10 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'guard-rspec', '2.5.0'
+  gem 'terminal-notifier-guard'
+  gem "rails-erd"
 end
 
 # Use ActiveModel has_secure_password
