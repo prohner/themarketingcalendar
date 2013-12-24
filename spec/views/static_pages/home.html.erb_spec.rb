@@ -11,4 +11,9 @@ feature "Home Page" do
     visit "/static_pages/home.html"
     expect(page).to have_title "#{application_name} | Home"
   end
+
+  scenario "User visits home page" do
+    visit "/static_pages/home.html"
+    expect(page).to have_link "Sign up now!", href: signup_path
+  end
 end
