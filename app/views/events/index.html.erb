@@ -1,0 +1,55 @@
+<h1>Listing events</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Campaign</th>
+      <th>Category</th>
+      <th>Repetition type</th>
+      <th>Repetition frequency</th>
+      <th>On sunday</th>
+      <th>On monday</th>
+      <th>On tuesday</th>
+      <th>On wednesday</th>
+      <th>On thursday</th>
+      <th>On friday</th>
+      <th>On saturday</th>
+      <th>Repetition options</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.description %></td>
+        <td><%= event.start_date %></td>
+        <td><%= event.end_date %></td>
+        <td><%= event.campaign_id %></td>
+        <td><%= event.category_id %></td>
+        <td><%= event.repetition_type %></td>
+        <td><%= event.repetition_frequency %></td>
+        <td><%= event.on_sunday %></td>
+        <td><%= event.on_monday %></td>
+        <td><%= event.on_tuesday %></td>
+        <td><%= event.on_wednesday %></td>
+        <td><%= event.on_thursday %></td>
+        <td><%= event.on_friday %></td>
+        <td><%= event.on_saturday %></td>
+        <td><%= event.repetition_options %></td>
+        <td><%= link_to 'Show', event %></td>
+        <td><%= link_to 'Edit', edit_event_path(event) %></td>
+        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event', new_event_path %>

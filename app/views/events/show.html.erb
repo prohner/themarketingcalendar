@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @event.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @event.end_date %>
+</p>
+
+<p>
+  <strong>Campaign:</strong>
+  <%= @event.campaign_id %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @event.category_id %>
+</p>
+
+<p>
+  <strong>Repetition type:</strong>
+  <%= @event.repetition_type %>
+</p>
+
+<p>
+  <strong>Repetition frequency:</strong>
+  <%= @event.repetition_frequency %>
+</p>
+
+<p>
+  <strong>On sunday:</strong>
+  <%= @event.on_sunday %>
+</p>
+
+<p>
+  <strong>On monday:</strong>
+  <%= @event.on_monday %>
+</p>
+
+<p>
+  <strong>On tuesday:</strong>
+  <%= @event.on_tuesday %>
+</p>
+
+<p>
+  <strong>On wednesday:</strong>
+  <%= @event.on_wednesday %>
+</p>
+
+<p>
+  <strong>On thursday:</strong>
+  <%= @event.on_thursday %>
+</p>
+
+<p>
+  <strong>On friday:</strong>
+  <%= @event.on_friday %>
+</p>
+
+<p>
+  <strong>On saturday:</strong>
+  <%= @event.on_saturday %>
+</p>
+
+<p>
+  <strong>Repetition options:</strong>
+  <%= @event.repetition_options %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

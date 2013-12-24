@@ -1,0 +1,77 @@
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br>
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br>
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :campaign_id %><br>
+    <%= f.number_field :campaign_id %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br>
+    <%= f.number_field :category_id %>
+  </div>
+  <div class="field">
+    <%= f.label :repetition_type %><br>
+    <%= f.text_field :repetition_type %>
+  </div>
+  <div class="field">
+    <%= f.label :repetition_frequency %><br>
+    <%= f.number_field :repetition_frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :on_sunday %><br>
+    <%= f.check_box :on_sunday %>
+  </div>
+  <div class="field">
+    <%= f.label :on_monday %><br>
+    <%= f.check_box :on_monday %>
+  </div>
+  <div class="field">
+    <%= f.label :on_tuesday %><br>
+    <%= f.check_box :on_tuesday %>
+  </div>
+  <div class="field">
+    <%= f.label :on_wednesday %><br>
+    <%= f.check_box :on_wednesday %>
+  </div>
+  <div class="field">
+    <%= f.label :on_thursday %><br>
+    <%= f.check_box :on_thursday %>
+  </div>
+  <div class="field">
+    <%= f.label :on_friday %><br>
+    <%= f.check_box :on_friday %>
+  </div>
+  <div class="field">
+    <%= f.label :on_saturday %><br>
+    <%= f.check_box :on_saturday %>
+  </div>
+  <div class="field">
+    <%= f.label :repetition_options %><br>
+    <%= f.text_field :repetition_options %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

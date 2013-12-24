@@ -1,4 +1,14 @@
 TheMarketingCalendar::Application.routes.draw do
+  resources :events
+
+  resources :categories
+
+  resources :campaigns
+
+  resources :users
+
+  resources :companies
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
