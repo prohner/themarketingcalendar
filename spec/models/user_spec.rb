@@ -13,7 +13,7 @@ describe User do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:authenticate) }
-  
+  it { should respond_to(:full_name) }
   
   it { should be_valid }
   
@@ -99,6 +99,22 @@ describe User do
 
       it { should_not eq user_for_invalid_password }
       specify { expect(user_for_invalid_password).to be_false }
+    end
+  end
+  
+  describe "#full_name results" do
+    it "should combine first and last names" do
+      expect(@user.full_name).to eq(@user.first_name + " " + @user.last_name)
+    end
+    
+    it "should be okay with nil first name" do
+      @user.first_name = nil
+      expect(@user.full_name).to eq(@user.last_name)
+    end
+    
+    it "should be okay with nil last name" do
+      @user.last_name = nil
+      expect(@user.full_name).to eq(@user.first_name)
     end
   end
 end

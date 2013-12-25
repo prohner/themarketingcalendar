@@ -10,9 +10,15 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   
-  attr_accessor :first_name, :last_name#, :email
-  
   has_secure_password
   validates :password, length: { minimum: 6 }
-  
+
+  def full_name
+    f = ""
+    l = ""
+    f = first_name unless first_name.nil?
+    l = last_name unless last_name.nil?
+
+    (f.strip + " " + l.strip).strip
+  end
 end

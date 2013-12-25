@@ -45,6 +45,12 @@ describe UsersController do
       get :show, {:id => user.to_param}, valid_session
       assigns(:user).should eq(user)
     end
+    
+    it "should show a valid page" do
+      user = User.create! valid_attributes
+      get :show, {:id => user.to_param}, valid_session
+      response.should render_template("show")
+    end
   end
 
   describe "GET new" do

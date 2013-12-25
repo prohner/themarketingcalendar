@@ -38,6 +38,10 @@ group :development do
   gem "rails-erd"
 end
 
+group :test do
+  gem 'factory_girl_rails', '4.2.1'
+end
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
