@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  before_save { self.email = email.downcase }
   belongs_to :company
   has_many :stakeholders
   has_many :events, :through => :stakeholders
@@ -10,5 +11,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   
   attr_accessor :first_name, :last_name#, :email
+  
+  has_secure_password
+  validates :password, length: { minimum: 6 }
   
 end
