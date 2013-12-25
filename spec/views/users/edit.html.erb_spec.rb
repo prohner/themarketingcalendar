@@ -20,7 +20,6 @@ describe "users/edit" do
       assert_select "input#user_last_name[name=?]", "user[last_name]"
       assert_select "input#user_email[name=?]", "user[email]"
       assert_select "input#user_password[name=?]", "user[password]"
-      assert_select "input#user_company_id[name=?]", "user[company_id]"
     end
   end
 end
