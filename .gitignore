@@ -17,11 +17,22 @@
 
 database.yml
 doc/
+/uploads
+!app/views/uploads
+Capfile
+deploy.rb
+
+#ignore mailer
+user_mailer.rb
+
+#Initializers
+setup_mail.rb
+devise.rb
+secret_token.rb
+
 *.swp
 *~
 .project
 .DS_Store
 .idea
 .secret
-
-secret_token.rb

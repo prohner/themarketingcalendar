@@ -6,7 +6,9 @@ gem 'rails', '4.0.2'
 gem 'bootstrap-sass', '2.3.2.0'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+group :production do
+  gem 'mysql2'
+end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -36,6 +38,8 @@ end
 
 group :development do
   gem "rails-erd"
+  gem 'capistrano', '~> 2.15.5'
+  gem 'capistrano-ext'
 end
 
 group :test do
@@ -43,6 +47,8 @@ group :test do
 end
 
 group :development, :test do
+  gem 'sqlite3'
+
   gem 'rspec-rails'
   gem 'capybara'
   gem 'guard-rspec', '2.5.0'
@@ -57,7 +63,7 @@ gem 'bcrypt-ruby', '~> 3.1.2'
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-gem 'capistrano', group: :development
+# gem 'capistrano', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
