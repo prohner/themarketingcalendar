@@ -18,7 +18,7 @@ describe "Signup Page" do
     it { should have_title("The Marketing Calendar | Signup") }
   end
   
-  describe "signup page" do
+  describe "signing up" do
     before { visit signup_path }
     
     let(:submit) { "Create my account" }
@@ -40,6 +40,15 @@ describe "Signup Page" do
 
       it "should create a user" do
         expect { click_button submit }.to change(User, :count).by(1)
+      end
+      
+      describe "after saving the user" do
+        before { click_button submit }
+        let(:user) { User.find_by(email: user.email) }
+        
+        it { should have_link('Sign out') }
+        it { should have_title("The Marketing Calendar | BillFirst BillLast") }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
       end
     end
     

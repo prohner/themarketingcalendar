@@ -28,13 +28,12 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        sign_in @user
+        flash[:success] = "Welcome!"
+        
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render action: 'show', status: :created, location: @user }
       else
-        puts ""
-        puts "create"
-        puts user_params.inspect
-        puts @user.errors.inspect
         format.html { render action: 'new' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
