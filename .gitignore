@@ -21,6 +21,7 @@ doc/
 !app/views/uploads
 Capfile
 deploy.rb
+erd.pdf
 
 #ignore mailer
 user_mailer.rb
