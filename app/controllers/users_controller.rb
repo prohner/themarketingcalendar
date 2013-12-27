@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :signed_in_user, only: [:edit, :update]
+  before_action :signed_in_user, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -66,7 +66,11 @@ class UsersController < ApplicationController
   end
 
   def signed_in_user
-    redirect_to signin_url, notice: "Please sign in." unless signed_in?
+    set_user
+    if current_user.nil? or @user.nil? or current_user.id != @user.id or not signed_in?
+      redirect_to signin_url, notice: "Please sign in."
+    end
+    
   end
 
   private

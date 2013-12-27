@@ -5,7 +5,10 @@ describe "Signup Page" do
   
   describe "User visits profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    before { visit user_path(user) }
+    before do
+      sign_in user
+      visit user_path(user)
+    end
 
     it { should have_content(user.first_name) }
     it { should have_title(user.full_name) }
