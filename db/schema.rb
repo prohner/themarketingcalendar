@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131227071142) do
+ActiveRecord::Schema.define(version: 20131227151233) do
 
   create_table "campaigns", force: true do |t|
     t.string   "description"
@@ -47,8 +47,8 @@ ActiveRecord::Schema.define(version: 20131227071142) do
 
   create_table "events", force: true do |t|
     t.string   "description"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.date     "starts_at"
+    t.date     "ends_at"
     t.integer  "campaign_id"
     t.integer  "category_id"
     t.string   "repetition_type"

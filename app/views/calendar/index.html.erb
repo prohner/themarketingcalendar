@@ -1,0 +1,38 @@
+<%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js' %>
+<%= javascript_include_tag "jquery.qtip-1.0.0-rc3.min.js" %>
+
+
+<div id='calendar' class="calendar"></div>
+
+<div id="calendar_entry" class="calendar_entry">
+   <% if @event.starts_at.nil? %>
+      Click on a day to add an event.  Or, click on an event to change it.
+   <% else %>
+      <%= render :partial => "events/event_form" %>
+   <% end %>
+</div>
+<hr />
+
+<% if Rails.env.development? %>
+   <ul>
+      <li> <%= link_to "QTIP", "http://craigsworks.com/projects/qtip/" %> 
+      <li>Nice example of tool tip on calendar: <%= link_to "http://obpk.com/fc/ex/fc.html", "http://obpk.com/fc/ex/fc.html" %></li>
+   </ul>
+<% end %>
+
+<% if 1 == 0 %>
+
+
+   <%= calendar_for(@styles) do |t| %>
+     <%= t.head('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun') %>
+     <% t.day(:day_method => :created_at) do |day, styles| %>
+       <%= day.day %><br/>
+       <% styles.each do |style| %>
+         <%= style.name %>
+         <small><%= style.created_at %></small>
+         <br/>
+       <% end %>
+     <% end %>
+  <% end %>
+<% end %>
+   

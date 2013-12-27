@@ -59,6 +59,8 @@ end
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 
+gem 'fullcalendar-rails'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

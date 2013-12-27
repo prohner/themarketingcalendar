@@ -26,6 +26,7 @@ module TheMarketingCalendar
     # config.i18n.default_locale = :de
     
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    config.assets.precompile += ['application-print.css']
     I18n.enforce_available_locales = true
   end
 end
