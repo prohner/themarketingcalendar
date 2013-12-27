@@ -1,5 +1,6 @@
 TheMarketingCalendar::Application.routes.draw do
   get "calendar/index"
+  get "calendar/events"
   match '/signup',  to: 'users#new',  via: 'get'
   resources :sessions, only: [:new, :create, :destroy]
 

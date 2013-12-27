@@ -68,122 +68,131 @@ namespace :db do
     research.categories << customer_surveys
     research.categories << advertising_effectiveness
 
-    campaign_1 = Campaign.create(description:"Campaign 1", color: "#fbfbfb", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 7) )
-    campaign_2 = Campaign.create(description:"Campaign 2", color: "#fbfbfb", start_date: make_time(2014, 1, 8), end_date: make_time(2014, 1, 15) )
+    campaign_1 = Campaign.create(description:"Campaign 1", color: "red", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 7) )
+    campaign_2 = Campaign.create(description:"Campaign 2", color: "green", starts_at: make_time(2014, 1, 8), ends_at: make_time(2014, 1, 15) )
     
-    e = Event.create(description:"Sales Promo (offer)", start_date: make_time(2014, 1, 25), end_date: make_time(2014, 2, 1))
+    e = Event.create(description:"Sales Promo (offer)", starts_at: make_time(2014, 1, 25), ends_at: make_time(2014, 2, 1))
     sales_promotion.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Product Brochures", start_date: make_time(2014, 1, 10), end_date: make_time(2014, 1, 17))
+    e = Event.create(description:"Product Brochures", starts_at: make_time(2014, 1, 10), ends_at: make_time(2014, 1, 17))
     collateral.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Industry Pres.", start_date: make_time(2014, 1, 15), end_date: make_time(2014, 1, 25))
+    e = Event.create(description:"Industry Pres.", starts_at: make_time(2014, 1, 15), ends_at: make_time(2014, 1, 25))
     collateral.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Industry Conference", start_date: make_time(2014, 1, 15), end_date: make_time(2014, 1, 25))
+    e = Event.create(description:"Industry Conference", starts_at: make_time(2014, 1, 15), ends_at: make_time(2014, 1, 25))
     special_events.events << e
     campaign_2.events << e
 
-    e = Event.create(description:"Pre Conf", start_date: make_time(2014, 1, 10), end_date: make_time(2014, 1, 17))
+    e = Event.create(description:"Pre Conf", starts_at: make_time(2014, 1, 10), ends_at: make_time(2014, 1, 17))
     press_releases.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Post Conf", start_date: make_time(2014, 1, 26), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Post Conf", starts_at: make_time(2014, 1, 26), ends_at: make_time(2014, 1, 31))
     press_releases.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Keyword/Search Advertising", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Keyword/Search Advertising", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 31))
     keyword.events << e
     campaign_2.events << e
 
-    e = Event.create(description:"Promote Conference", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 7))
+    e = Event.create(description:"Promote Conference", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 7))
     site_ads.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Online Auction & Stores", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Online Auction & Stores", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 31))
     auctions.events << e
     campaign_2.events << e
 
-    e = Event.create(description:"Online Directory Listings & Classified", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Online Directory Listings & Classified", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 31))
     classifieds.events << e
     campaign_2.events << e
 
-    e = Event.create(description:"Affiliate Recruitment Incentive Program", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Affiliate Recruitment Incentive Program", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 31))
     affiliates.events << e
     campaign_2.events << e
 
-    e = Event.create(description:"Facebook Announce", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 7))
+    e = Event.create(description:"Facebook Announce", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 7))
     social_media.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Pre Conf Tweets", start_date: make_time(2014, 1, 8), end_date: make_time(2014, 1, 15))
+    e = Event.create(description:"Pre Conf Tweets", starts_at: make_time(2014, 1, 8), ends_at: make_time(2014, 1, 15))
     social_media.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Live Tweets", start_date: make_time(2014, 1, 16), end_date: make_time(2014, 1, 23))
+    e = Event.create(description:"Live Tweets", starts_at: make_time(2014, 1, 16), ends_at: make_time(2014, 1, 23))
     social_media.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Post Conf. Tweets", start_date: make_time(2014, 1, 24), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Post Conf. Tweets", starts_at: make_time(2014, 1, 24), ends_at: make_time(2014, 1, 31))
     social_media.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Visit us at conference & receive free gift", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 14))
+    e = Event.create(description:"Visit us at conference & receive free gift", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 14))
     blog.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Daily Conf. Recap", start_date: make_time(2014, 1, 16), end_date: make_time(2014, 1, 23))
+    e = Event.create(description:"Daily Conf. Recap", starts_at: make_time(2014, 1, 16), ends_at: make_time(2014, 1, 23))
     blog.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Upcoming Sales Promo", start_date: make_time(2014, 1, 24), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Upcoming Sales Promo", starts_at: make_time(2014, 1, 24), ends_at: make_time(2014, 1, 31))
     social_media.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Visit us at conference & receive free gift", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 14))
+    e = Event.create(description:"Visit us at conference & receive free gift", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 14))
     email.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Upcoming Sales Promo", start_date: make_time(2014, 1, 24), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Upcoming Sales Promo", starts_at: make_time(2014, 1, 24), ends_at: make_time(2014, 1, 31))
     email.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Promo", start_date: make_time(2014, 1, 24), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Promo", starts_at: make_time(2014, 1, 24), ends_at: make_time(2014, 1, 31))
     website.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Coupon", start_date: make_time(2014, 2, 1), end_date: make_time(2014, 2, 7))
+    e = Event.create(description:"Coupon", starts_at: make_time(2014, 2, 1), ends_at: make_time(2014, 2, 7))
     website.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Highlights", start_date: make_time(2014, 1, 24), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Highlights", starts_at: make_time(2014, 1, 24), ends_at: make_time(2014, 1, 31))
     podcast.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"XYZ Campaign QR Code - product info", start_date: make_time(2014, 1, 16), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"XYZ Campaign QR Code - product info", starts_at: make_time(2014, 1, 16), ends_at: make_time(2014, 1, 31))
     mobile.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"XYZ Campaign", start_date: make_time(2014, 1, 16), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"XYZ Campaign", starts_at: make_time(2014, 1, 16), ends_at: make_time(2014, 1, 31))
     tv.events << e
     campaign_2.events << e
 
-    e = Event.create(description:"XYZ Campaign", start_date: make_time(2014, 1, 16), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"XYZ Campaign", starts_at: make_time(2014, 1, 16), ends_at: make_time(2014, 1, 31))
     radio.events << e
     campaign_2.events << e
 
-    e = Event.create(description:"XYZ Campaign with QR Code", start_date: make_time(2014, 1, 16), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"XYZ Campaign with QR Code", starts_at: make_time(2014, 1, 16), ends_at: make_time(2014, 1, 31))
     print.events << e
     campaign_2.events << e
 
-    e = Event.create(description:"Survey", start_date: make_time(2014, 1, 8), end_date: make_time(2014, 1, 23))
+    e = Event.create(description:"Survey", starts_at: make_time(2014, 1, 8), ends_at: make_time(2014, 1, 23))
     customer_surveys.events << e
     campaign_2.events << e
 
-    e = Event.create(description:"Campaign Analysis", start_date: make_time(2014, 1, 1), end_date: make_time(2014, 1, 31))
+    e = Event.create(description:"Campaign Analysis", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 31))
+    advertising_effectiveness.events << e
+    campaign_2.events << e
+
+
+    e = Event.create(description:"Campaign Analysis", starts_at: make_time(2013, 12, 1), ends_at: make_time(2013, 12, 6))
+    advertising_effectiveness.events << e
+    campaign_2.events << e
+
+    e = Event.create(description:"Survey", starts_at: make_time(2013, 12, 5), ends_at: make_time(2013, 12, 8))
     advertising_effectiveness.events << e
     campaign_2.events << e
   end

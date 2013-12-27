@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131227151233) do
+ActiveRecord::Schema.define(version: 20131227192020) do
 
   create_table "campaigns", force: true do |t|
     t.string   "description"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.date     "starts_at"
+    t.date     "ends_at"
     t.integer  "company_id"
     t.string   "color"
     t.datetime "created_at"
