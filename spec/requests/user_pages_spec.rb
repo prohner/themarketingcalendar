@@ -53,7 +53,7 @@ describe "Signup Page" do
     end
     
   end
-<<<<<<< Local Changes
+
   
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
@@ -75,6 +75,5 @@ describe "Signup Page" do
     describe "with valid information" do
     end
   end
-=======
->>>>>>> External Changes
+
 end

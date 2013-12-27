@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  # before_action :signed_in_user, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -62,6 +63,10 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :no_content }
     end
+  end
+
+  def signed_in_user
+    redirect_to signin_url, notice: "Please sign in." unless signed_in?
   end
 
   private
