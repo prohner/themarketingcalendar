@@ -5,6 +5,14 @@
 ready = ->
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	# remoteServerName = "http://0.0.0.0:3000"
+	$('[rel=tooltip]').tooltip()
+	
+	popover_func = -> 
+		$('.popover-test').popover ({
+			html: true,
+			title: 'This is a test',
+			content: '<b>Hello popover world</b>'
+		}).popover('show')
 	
 	remoteServerName = ""
 	eventsSourceUrl = remoteServerName + '/calendar/events.js'
@@ -44,13 +52,18 @@ ready = ->
 			}
 		]
 		eventRender: (event, element) ->
-			# element.children('.fc-event-inner').css({'background-color':'yellow'})
-		 	# $(element).css({'background-color':'red'})
+			$(element).attr "rel", "tooltip"
+			$(element).attr "data-original-title", event.description
+			
+		eventAfterAllRender: () ->
+			$('[rel=tooltip]').tooltip()
 	}
 	
 ajaxComplete = (e, xhr, settings) ->
 	console.log(xhr.responseText)
 	eval(xhr.responseText)
+	
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

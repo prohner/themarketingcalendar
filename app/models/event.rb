@@ -14,8 +14,8 @@ class Event < ActiveRecord::Base
   def as_json(options = {})
     {
       :id => self.id,
-      :title => "#{self.description} (fg:#{self.category.color_scheme.foreground}, bg:#{self.category.color_scheme.background})",
-      :description => self.description || "",
+      :title => "#{self.description}",
+      :description => "From event.rb description (fg:#{self.category.color_scheme.foreground}, bg:#{self.category.color_scheme.background})",
       :start => self.starts_at.rfc822,
       :end => self.ends_at.rfc822,
       :allDay => true,
