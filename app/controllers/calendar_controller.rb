@@ -1,4 +1,6 @@
 class CalendarController < ApplicationController
+  before_action :signed_in_user #, only: [:show, :edit, :update, :destroy]
+
   def index
     @event = Event.new
   end
@@ -39,4 +41,12 @@ class CalendarController < ApplicationController
 
   def repeating_events
   end
+  
+  def signed_in_user
+    if current_user.nil? or not signed_in?
+      redirect_to signin_url, notice: "Please sign in."
+    end
+    
+  end
+  
 end

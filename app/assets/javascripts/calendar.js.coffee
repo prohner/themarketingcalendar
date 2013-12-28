@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
+	alert 'loading'
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	remoteServerName = "http://0.0.0.0:3000"
 	eventsSourceUrl = remoteServerName + '/calendar/events.js'
@@ -23,15 +24,15 @@ $(document).ready ->
 		timeFormat: 'h:mm t{ - h:mm t} '
 		dragOpacity: "0.5"
 		eventSources: [
-			{
-				url: repeatingEventsSourceUrl
-				color: 'green'
-				textColor: 'white'
-				ignoreTimezone: true
-				editable: true
-				crossDomain: true
-				jsonp: true
-			}
+			# {
+			# 	url: repeatingEventsSourceUrl
+			# 	color: 'green'
+			# 	textColor: 'white'
+			# 	ignoreTimezone: true
+			# 	editable: true
+			# 	crossDomain: true
+			# 	jsonp: true
+			# }
 			{
 				url: eventsSourceUrl 
 				ignoreTimezone: true

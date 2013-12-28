@@ -11,30 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131227071142) do
+ActiveRecord::Schema.define(version: 20131228063709) do
 
   create_table "campaigns", force: true do |t|
     t.string   "description"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.date     "starts_at"
+    t.date     "ends_at"
     t.integer  "company_id"
-    t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "color_scheme_id"
   end
 
   create_table "categories", force: true do |t|
     t.string   "description"
-    t.string   "color"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_group_id"
+    t.integer  "color_scheme_id"
   end
 
   create_table "category_groups", force: true do |t|
     t.integer  "company_id"
     t.string   "description"
-    t.string   "color"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "color_scheme_id"
+  end
+
+  create_table "color_schemes", force: true do |t|
+    t.string   "foreground"
+    t.string   "background"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -47,8 +54,8 @@ ActiveRecord::Schema.define(version: 20131227071142) do
 
   create_table "events", force: true do |t|
     t.string   "description"
-    t.date     "start_date"
-    t.date     "end_date"
+    t.date     "starts_at"
+    t.date     "ends_at"
     t.integer  "campaign_id"
     t.integer  "category_id"
     t.string   "repetition_type"

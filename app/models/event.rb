@@ -12,17 +12,16 @@ class Event < ActiveRecord::Base
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})
-    color = self.category.color.nil? ? "blue" : self.category.color
     {
       :id => self.id,
-      :title => "#{self.description} (#{color})",
+      :title => "#{self.description} (fg:#{self.category.color_scheme.foreground}, bg:#{self.category.color_scheme.background})",
       :description => self.description || "",
       :start => self.starts_at.rfc822,
       :end => self.ends_at.rfc822,
       :allDay => true,
       :recurring => false,
-      :color => color,
-      :textColor => "white",
+      :color => self.category.color_scheme.background.nil? ? "blue" : self.category.color_scheme.background,
+      :textColor => self.category.color_scheme.foreground.nil? ? "white" : self.category.color_scheme.foreground,
       :location => "",
       :notes => "",
       :url => "" #self.edit_url #Rails.application.routes.url_helpers.edit_event_path(id)
