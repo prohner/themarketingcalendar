@@ -2,8 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready ->
-	alert 'loading'
+ready = ->
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	remoteServerName = "http://0.0.0.0:3000"
 	eventsSourceUrl = remoteServerName + '/calendar/events.js'
@@ -50,3 +49,6 @@ $(document).ready ->
 ajaxComplete = (e, xhr, settings) ->
 	console.log(xhr.responseText)
 	eval(xhr.responseText)
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
