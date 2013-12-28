@@ -143,10 +143,6 @@ namespace :db do
     social_media.events << e
     campaign_1.events << e
 
-    e = Event.create(description:"Visit us at conference & receive free gift", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 14))
-    email.events << e
-    campaign_1.events << e
-
     e = Event.create(description:"Upcoming Sales Promo", starts_at: make_time(2014, 1, 24), ends_at: make_time(2014, 1, 31))
     email.events << e
     campaign_1.events << e
