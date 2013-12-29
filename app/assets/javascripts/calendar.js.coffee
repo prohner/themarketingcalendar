@@ -5,6 +5,7 @@
 ready = ->
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	# remoteServerName = "http://0.0.0.0:3000"
+	
 	remoteServerName = ""
 	eventsSourceUrl = remoteServerName + '/calendar/events.js'
 	repeatingEventsSourceUrl = remoteServerName + '/repeating_events.js?id=1'
@@ -42,19 +43,24 @@ ready = ->
 					alert "there was an error while fetching events"
 			}
 		]
-		eventRender: (event, element) ->
-			event.element = element # Stored for use in eventClick
-			$(element).attr "rel", "tooltip"
-			# $(element).attr "data-original-title", 
-			$(element).addClass "popover-item"
 
-			$(element).attr "data-content", event.description
-			$(element).attr "data-original-title", "Edit Event"
-			# $(element).attr "data-toggle", "popover"
+		eventAfterRender: (event, element, view) ->
+			event.element = element # Stored for use in eventClick
+			$(element).tooltip { 
+				title: event.description
+				html: true 
+				placement: 'left'
+			}
+			
+			$(element).popover { 
+				title: "Title"
+				content: () ->
+					"here am the content"
+				'placement': 'top'
+			}
 			
 		eventAfterAllRender: () ->
-			$('[rel=tooltip]').tooltip()
-			$('.popover-item').popover(placement: 'left')
+			$('.popover-item').popover(placement: 'auto')
 		
 	}
 	
