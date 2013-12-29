@@ -5,15 +5,6 @@
 ready = ->
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	# remoteServerName = "http://0.0.0.0:3000"
-	$('[rel=tooltip]').tooltip()
-	
-	popover_func = -> 
-		$('.popover-test').popover ({
-			html: true,
-			title: 'This is a test',
-			content: '<b>Hello popover world</b>'
-		}).popover('show')
-	
 	remoteServerName = ""
 	eventsSourceUrl = remoteServerName + '/calendar/events.js'
 	repeatingEventsSourceUrl = remoteServerName + '/repeating_events.js?id=1'
@@ -52,11 +43,19 @@ ready = ->
 			}
 		]
 		eventRender: (event, element) ->
+			event.element = element # Stored for use in eventClick
 			$(element).attr "rel", "tooltip"
-			$(element).attr "data-original-title", event.description
+			# $(element).attr "data-original-title", 
+			$(element).addClass "popover-item"
+
+			$(element).attr "data-content", event.description
+			$(element).attr "data-original-title", "Edit Event"
+			# $(element).attr "data-toggle", "popover"
 			
 		eventAfterAllRender: () ->
 			$('[rel=tooltip]').tooltip()
+			$('.popover-item').popover(placement: 'left')
+		
 	}
 	
 ajaxComplete = (e, xhr, settings) ->
