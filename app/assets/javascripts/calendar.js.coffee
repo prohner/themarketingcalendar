@@ -44,23 +44,58 @@ ready = ->
 			}
 		]
 
+		eventClick: (event, jsEvent, view) ->
+			thisObject = this
+			$.get event.my_url, (d) ->
+				po = $(thisObject).popover ({
+					title: event.title
+					html: true
+					content: d
+					placement: 'top'
+					container: 'body'
+				})
+				$(thisObject).popover('show')
+
+			# $.get event.my_url, (d) ->
+			# 	# alert "got it: " + d.substring(0, 100)
+			# 	console.log "got it: " + d.substring(0, 50)
+			# 	this.popover ({
+			# 		title: event.title
+			# 		html: true
+			# 		content: "content here"
+			# 		placement: 'top'
+			# 		container: 'body'
+			# 	})
+			# 	this.popover('show')
+
 		eventAfterRender: (event, element, view) ->
 			event.element = element # Stored for use in eventClick
-			$(element).tooltip { 
-				title: event.description
-				html: true 
-				placement: 'left'
-			}
+			# $(element).tooltip { 
+			# 	title: event.description
+			# 	html: true 
+			# 	placement: 'top'
+			# 	container: 'body'
+			# }
 			
-			$(element).popover { 
-				title: "Title"
-				content: () ->
-					"here am the content"
-				'placement': 'top'
-			}
+			# $(element).attr "data-ajaxload", event.my_url
+			# $(element).popover { 
+			# 	title: event.title
+			# 	html: true
+			# 	content: () ->
+			# 		e = $(this)
+			# 		$.get event.my_url, (d) ->
+			# 			$(this).popover {content: d}
+			# 			# e.popover({ content: d })
+			# 	'placement': 'top'
+			# 	container: 'body'
+			# }
 			
-		eventAfterAllRender: () ->
-			$('.popover-item').popover(placement: 'auto')
+			# $(element).on 'shown.bs.popover', () ->
+			# 	$(this).tooltip('hide')
+			# 	# console.log "whatev"
+			
+		# eventAfterAllRender: () ->
+		# 	$('.popover-item').popover(placement: 'auto')
 		
 	}
 	
@@ -69,6 +104,18 @@ ajaxComplete = (e, xhr, settings) ->
 	eval(xhr.responseText)
 	
 
+myLittleTest = (me) ->
+	po = $(me).popover ({
+		title: event.title
+		html: true
+		content: "content here"
+		placement: 'top'
+		container: 'body'
+	})
+	$(me).popover('show')
+	false
+window.myLittleTest = myLittleTest
+	
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   has_many :stakeholders
   has_many :users, :through => :stakeholders
 
+  attr_accessor :edit_url
   
   scope :before, lambda {|end_time| {:conditions => ["ends_at <= ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
@@ -24,7 +25,8 @@ class Event < ActiveRecord::Base
       :textColor => self.category.color_scheme.foreground.nil? ? "white" : self.category.color_scheme.foreground,
       :location => "",
       :notes => "",
-      :url => "" #self.edit_url #Rails.application.routes.url_helpers.edit_event_path(id)
+      :url => "", # used by FullCalendar
+      :my_url => self.edit_url #Rails.application.routes.url_helpers.edit_event_path(id)
     }
   end
 end
