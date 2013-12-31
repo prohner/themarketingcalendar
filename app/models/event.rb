@@ -14,6 +14,7 @@ class Event < ActiveRecord::Base
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})
     {
+      # These same variables are assigned individually, by name, in calendar.js.coffee
       :id => self.id,
       :title => "#{self.description} (#{self.category.description})",
       :description => "From event.rb description (fg:#{self.category.color_scheme.foreground}, bg:#{self.category.color_scheme.background})",

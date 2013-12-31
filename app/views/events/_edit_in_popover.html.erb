@@ -22,8 +22,7 @@ $(document).ready(function() {
 	    }).success(function(json){
 			$("#flash").show();
 			$("#flash").effect("fade", {}, 3500);
-			alert(JSON.stringify(json));
-			this.popover('hide');
+			$('#saved_event_result_as_json').val(JSON.stringify(json));
 	    });
 		
 	    return false; // prevents normal behaviour
@@ -43,6 +42,8 @@ $(document).ready(function() {
       </ul>
     </div>
   <% end %>
+	
+  <%= hidden_field_tag :saved_event_result_as_json %>
 
   <div class="field">
     <%= f.label :description %>

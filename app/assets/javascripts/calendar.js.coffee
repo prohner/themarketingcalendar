@@ -66,17 +66,29 @@ ready = ->
 						container: 'body'
 					})
 					.popover('show')
-					# .on('click', () ->
-					# 	alert "clicking"
-					# 	$(thisObject).popover('hide')
-					# 	)
+					
+					popover.on "hidden", (e) ->
+						new_json = $("#saved_event_result_as_json").val()
+						if new_json.length > 0
+							# These variables are coming from event.rb
+							json_obj = jQuery.parseJSON new_json 
+							event.title = json_obj.title
+							event.start = json_obj.start
+							event.end = json_obj.end
+							event.allDay = json_obj.allDay
+							event.recurring = json_obj.recurring
+							event.color = json_obj.color
+							event.textColor = json_obj.textColor
+							event.location = json_obj.location
+							event.notes = json_obj.notes
+							event.url = json_obj.url
+							event.my_url = json_obj.my_url
+							$('#calendar').fullCalendar('updateEvent', event);
 
-					# alert popover
-					popover.myHandleToMainWindow = this
-			else
-				popoverIsShowing = false
-				event.title = "C new title after save"
-				$('#calendar').fullCalendar('updateEvent', event);
+			# else
+			# 	popoverIsShowing = false
+			# 	event.title = "C new title after save"
+			# 	$('#calendar').fullCalendar('updateEvent', event);
 
 		eventAfterRender: (event, element, view) ->
 			event.element = element # Stored for use in eventClick
