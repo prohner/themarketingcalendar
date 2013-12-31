@@ -14,6 +14,7 @@ ready = ->
 	
 	$('#calendar').fullCalendar {
 		editable: true
+		ignoreTimezone: false
 		header: {
 			left: 'prev,next today'
 			center: 'title'
