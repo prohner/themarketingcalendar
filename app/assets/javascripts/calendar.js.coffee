@@ -56,6 +56,7 @@ ready = ->
 			# alert event.my_url
 			if ! popoverIsShowing
 				popoverIsShowing = true
+				console.log "popping " + event.title
 				$.get event.my_url, (d) ->
 					popover = $(thisObject).popover({
 						title: '<span class="text-info"><strong>' + event.title + '</strong></span>' + '<button type="button" id="close" class="close" onclick="$(\'#example\').popover(\'hide\');">&times;</button>'
@@ -65,28 +66,30 @@ ready = ->
 						placement: 'top'
 						container: 'body'
 					})
-					.popover('show')
 					
 					popover.on "hidden", (e) ->
 						new_json = $("#saved_event_result_as_json").val()
 						if new_json.length > 0
 							# These variables are coming from event.rb
-							json_obj = jQuery.parseJSON new_json 
+							json_obj = jQuery.parseJSON new_json
+							# event.id = json_obj.id
 							event.title = json_obj.title
+							event.color = json_obj.color
+							event.textColor = json_obj.textColor
 							event.start = json_obj.start
 							event.end = json_obj.end
 							event.allDay = json_obj.allDay
 							event.recurring = json_obj.recurring
-							event.color = json_obj.color
-							event.textColor = json_obj.textColor
 							event.location = json_obj.location
 							event.notes = json_obj.notes
 							event.url = json_obj.url
-							event.my_url = json_obj.my_url
+							# event.my_url = json_obj.my_url  ## causes second display of popover to get wonked up
 							$('#calendar').fullCalendar('updateEvent', event);
+							popoverIsShowing = false
+					popover.popover('show')
 
-			# else
-			# 	popoverIsShowing = false
+			else
+				popoverIsShowing = false
 			# 	event.title = "C new title after save"
 			# 	$('#calendar').fullCalendar('updateEvent', event);
 

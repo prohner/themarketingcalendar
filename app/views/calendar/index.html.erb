@@ -1,40 +1,10 @@
 <% provide(:title, "Calendar") %>
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js' %>
 <%= javascript_include_tag "jquery.qtip-1.0.0-rc3.min.js" %>
-<style type="text/css" media="screen">
-.popover-width-control {
-    display:block !important;
-    max-width: 1000px!important;
-    width:auto;
-}
-
-div.field {
-  display: inline;
-}
-
-</style>
-<%= link_to 'Popover test', '#', :class => 'popover-test', :rel => 'popover' %><br/>
-<label class="popover-item"
-         data-content="popover content"
-         data-title="popover title" style="width:100px;">Popover label</label>
-
-<a href="#" onclick="return myLittleTest(this);">href test</a>
-<div id="popover-content" class="hide">
-	<form>
-		<input id="easyeventtitle" />
-	</form>
-</div>
 		 
 <div id='loading' class="loading">Loading calendar...</div>
 <div id='calendar' class="calendar"></div>
 
-<div id="calendar_entry" class="calendar_entry">
-   <% if @event.starts_at.nil? %>
-      Click on a day to add an event.  Or, click on an event to change it.
-   <% else %>
-      <%= render :partial => "events/event_form" %>
-   <% end %>
-</div>
 <hr />
 
 <% if Rails.env.development? %>
