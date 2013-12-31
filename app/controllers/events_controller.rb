@@ -48,7 +48,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render :json => @event }
       else
         format.html { render action: 'edit' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -74,6 +74,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:description, :ends_at, :ends_at, :campaign_id, :category_id, :repetition_type, :repetition_frequency, :on_sunday, :on_monday, :on_tuesday, :on_wednesday, :on_thursday, :on_friday, :on_saturday, :repetition_options)
+      params.require(:event).permit(:description, :starts_at, :ends_at, :campaign_id, :category_id, :repetition_type, :repetition_frequency, :on_sunday, :on_monday, :on_tuesday, :on_wednesday, :on_thursday, :on_friday, :on_saturday, :repetition_options)
     end
 end

@@ -57,8 +57,8 @@ ready = ->
 			if ! popoverIsShowing
 				popoverIsShowing = true
 				$.get event.my_url, (d) ->
-					$(thisObject).popover({
-						title: '<strong>Updating</strong> ' + event.title
+					popover = $(thisObject).popover({
+						title: '<span class="text-info"><strong>' + event.title + '</strong></span>' + '<button type="button" id="close" class="close" onclick="$(\'#example\').popover(\'hide\');">&times;</button>'
 						html: true
 						template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
 						content: d
@@ -66,12 +66,17 @@ ready = ->
 						container: 'body'
 					})
 					.popover('show')
-					
-					$('edit_event').submit ->
-						alert 'doing it' 
-					
+					# .on('click', () ->
+					# 	alert "clicking"
+					# 	$(thisObject).popover('hide')
+					# 	)
+
+					# alert popover
+					popover.myHandleToMainWindow = this
 			else
 				popoverIsShowing = false
+				event.title = "C new title after save"
+				$('#calendar').fullCalendar('updateEvent', event);
 
 		eventAfterRender: (event, element, view) ->
 			event.element = element # Stored for use in eventClick
@@ -109,31 +114,37 @@ ajaxComplete = (e, xhr, settings) ->
 	eval(xhr.responseText)
 	
 
-myLittleTest = (me) ->
-	po = $(me).popover ({
-		title: event.title
-		html: true
-		content: "content here"
-		placement: 'top'
-		container: 'body'
-	})
-	$(me).popover('show')
-	false
-window.myLittleTest = myLittleTest
-	
-$('#edit_event').submit ->
-	alert 'submitting'
-	valuesToSubmit = $(this).serialize()
-	$.ajax {
-		url: $(this).attr('action')
-		data: valuesToSubmit,
-		dataType: "JSON"
-	} 
-	.success (json) -> 
-		console.log "success"
-
-	false
-
+# myLittleTest = (me) ->
+# 	po = $(me).popover ({
+# 		title: event.title
+# 		html: true
+# 		content: "content here"
+# 		placement: 'top'
+# 		container: 'body'
+# 	})
+# 	$(me).popover('show')
+# 	false
+# window.myLittleTest = myLittleTest
+# 	
+# 
+# $('body').on('click',  (e) ->
+# 	$('[data-toggle="popover"]').each( () ->
+# 			if !$(this).is(e.target)
+# 				if $(this).has(e.target).length == 0 
+# 					if $('.popover').has(e.target).length == 0
+# 						$(this).popover('hide')
+# 		)
+# 	)
+#         
+#     
+# 
+# $('body').on('click', function (e) {
+#     $('[data-toggle="popover"]').each(function () {
+#         if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+#             $(this).popover('hide');
+#         }
+#     });
+# });
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

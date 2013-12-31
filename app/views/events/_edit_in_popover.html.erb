@@ -2,26 +2,34 @@
 div.field {
   display: inline!important;
 }
+#flash { 
+	display:none; 
+	color:#0000;
+	background-color:yellow;
+}
 </style>
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function() {
 	//alert('ready');
 	$('.event_form').submit(function() {  
-	    //alert('submit to ' + $(this).attr('action'));
+	    // alert('handle: ' + myHandleToMainWindow);
 	    var valuesToSubmit = $(this).serialize();
-		//alert($(this).attr('action') + ' \r\n' + valuesToSubmit)
 	    $.ajax({
 	        url: $(this).attr('action'), //sumbits it to the given url of the form
 	        data: valuesToSubmit,
 			type: "POST",
 	        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
 	    }).success(function(json){
-	        alert('changes saved')
+			$("#flash").show();
+			$("#flash").effect("fade", {}, 3500);
+			alert(JSON.stringify(json));
+			this.popover('hide');
 	    });
 		
 	    return false; // prevents normal behaviour
 	});
 });
+
 </script>
 <%= form_for @event, :html => { :class => 'event_form' } do |f| %>
   <% if @event.errors.any? %>
@@ -108,6 +116,6 @@ $(document).ready(function() {
     <%= f.text_field :repetition_options %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit %> <span id="flash">Your changes have been saved!</span>
   </div>
 <% end %>
