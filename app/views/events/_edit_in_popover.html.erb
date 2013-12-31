@@ -1,0 +1,113 @@
+<style type="text/css" media="screen">
+div.field {
+  display: inline!important;
+}
+</style>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function() {
+	//alert('ready');
+	$('.event_form').submit(function() {  
+	    //alert('submit to ' + $(this).attr('action'));
+	    var valuesToSubmit = $(this).serialize();
+		//alert($(this).attr('action') + ' \r\n' + valuesToSubmit)
+	    $.ajax({
+	        url: $(this).attr('action'), //sumbits it to the given url of the form
+	        data: valuesToSubmit,
+			type: "POST",
+	        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+	    }).success(function(json){
+	        alert('changes saved')
+	    });
+		
+	    return false; // prevents normal behaviour
+	});
+});
+</script>
+<%= form_for @event, :html => { :class => 'event_form' } do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_field :description, :placeholder => "New description of activity" %>
+  </div>
+  <div class="field">
+    <%= f.label :starts_at %>
+    <%= f.text_field :starts_at, :placeholder => "Date activity starts" %>
+  </div>
+  <div class="field">
+    <%= f.label :ends_at %>
+    <%= f.text_field :ends_at, :placeholder => "Date activity ends" %>
+  </div>
+  <div class="field">
+    <%= f.label :campaign %>
+	<%= f.collection_select :campaign_id, Campaign.order(:description), :id, :description, :prompt => "--  Select Campaign --" %>	
+	
+  </div>
+  <div class="field">
+    <%= f.label :category_id %>
+	<%= f.collection_select :category_id, Category.order(:description), :id, :description, :prompt => "--  Select Category --" %>	
+  </div>
+  
+  <table border="0" style="background-color:#f0f0f0" cellpadding="0" cellspacing="0">
+	<tr><th colspan="1">Repetition Info</th></tr>
+	<tr>
+		  <td>
+			<div class="field">
+			<%= f.label :repetition_type %><br>
+			<%= f.text_field :repetition_type %>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		  <td>
+			<div class="field">
+			    <%= f.label :repetition_frequency %><br>
+			    <%= f.number_field :repetition_frequency %>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		    <div class="field">
+		  	  <table border="0">
+		  		  <tr>
+		  			  <th>Sun</th>
+		  			  <th>Mon</th>
+		  			  <th>Tue</th>
+		  			  <th>Wed</th>
+		  			  <th>Thu</th>
+		  			  <th>Fri</th>
+		  			  <th>Sat</th>
+		  		  </tr>
+		  		  <tr>
+		  			  <td align="center"><%= f.check_box :on_sunday %></td>
+		  			  <td align="center"><%= f.check_box :on_monday %></td>
+		  			  <td align="center"><%= f.check_box :on_tuesday %></td>
+		  			  <td align="center"><%= f.check_box :on_wednesday %></td>
+		  			  <td align="center"><%= f.check_box :on_thursday %></td>
+		  			  <td align="center"><%= f.check_box :on_friday %></td>
+		  			  <td align="center"><%= f.check_box :on_saturday %></td>
+		  		  </tr>
+		  	  </table>
+		    </div>
+		</td>
+	</tr>
+</table>
+  <div class="field">
+    <%= f.label :repetition_options %>
+    <%= f.text_field :repetition_options %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

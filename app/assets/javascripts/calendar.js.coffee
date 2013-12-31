@@ -6,6 +6,8 @@ ready = ->
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	# remoteServerName = "http://0.0.0.0:3000"
 	
+	popoverIsShowing = false
+	
 	remoteServerName = ""
 	eventsSourceUrl = remoteServerName + '/calendar/events.js'
 	repeatingEventsSourceUrl = remoteServerName + '/repeating_events.js?id=1'
@@ -46,27 +48,30 @@ ready = ->
 
 		eventClick: (event, jsEvent, view) ->
 			thisObject = this
-			$.get event.my_url, (d) ->
-				po = $(thisObject).popover ({
-					title: event.title
-					html: true
-					content: d
-					placement: 'top'
-					container: 'body'
-				})
-				$(thisObject).popover('show')
-
-			# $.get event.my_url, (d) ->
-			# 	# alert "got it: " + d.substring(0, 100)
-			# 	console.log "got it: " + d.substring(0, 50)
-			# 	this.popover ({
-			# 		title: event.title
-			# 		html: true
-			# 		content: "content here"
-			# 		placement: 'top'
-			# 		container: 'body'
-			# 	})
-			# 	this.popover('show')
+			offset = $(this).offset()
+			left = jsEvent.pageX
+			top = jsEvent.pageY
+			console.log "(" + left + ", " + top + ")"
+			
+			# alert event.my_url
+			if ! popoverIsShowing
+				popoverIsShowing = true
+				$.get event.my_url, (d) ->
+					$(thisObject).popover({
+						title: '<strong>Updating</strong> ' + event.title
+						html: true
+						template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+						content: d
+						placement: 'top'
+						container: 'body'
+					})
+					.popover('show')
+					
+					$('edit_event').submit ->
+						alert 'doing it' 
+					
+			else
+				popoverIsShowing = false
 
 		eventAfterRender: (event, element, view) ->
 			event.element = element # Stored for use in eventClick
@@ -116,6 +121,19 @@ myLittleTest = (me) ->
 	false
 window.myLittleTest = myLittleTest
 	
+$('#edit_event').submit ->
+	alert 'submitting'
+	valuesToSubmit = $(this).serialize()
+	$.ajax {
+		url: $(this).attr('action')
+		data: valuesToSubmit,
+		dataType: "JSON"
+	} 
+	.success (json) -> 
+		console.log "success"
+
+	false
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

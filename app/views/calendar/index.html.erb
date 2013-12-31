@@ -1,7 +1,18 @@
 <% provide(:title, "Calendar") %>
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js' %>
 <%= javascript_include_tag "jquery.qtip-1.0.0-rc3.min.js" %>
+<style type="text/css" media="screen">
+.popover-width-control {
+    display:block !important;
+    max-width: 1000px!important;
+    width:auto;
+}
 
+div.field {
+  display: inline;
+}
+
+</style>
 <%= link_to 'Popover test', '#', :class => 'popover-test', :rel => 'popover' %><br/>
 <label class="popover-item"
          data-content="popover content"

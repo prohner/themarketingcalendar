@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :edit_event_in_popover]
 
   # GET /events
   # GET /events.json
@@ -21,6 +21,11 @@ class EventsController < ApplicationController
   def edit
   end
 
+  # GET /edit_event_in_popover/29/edit
+  def edit_event_in_popover
+    render :partial => "edit_in_popover", :layout => false
+  end
+
   # POST /events
   # POST /events.json
   def create
@@ -29,7 +34,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @event }
+        format.json { render action: 'edit', status: :created, location: @event }
       else
         format.html { render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
@@ -69,6 +74,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:description, :start_date, :end_date, :campaign_id, :category_id, :repetition_type, :repetition_frequency, :on_sunday, :on_monday, :on_tuesday, :on_wednesday, :on_thursday, :on_friday, :on_saturday, :repetition_options)
+      params.require(:event).permit(:description, :ends_at, :ends_at, :campaign_id, :category_id, :repetition_type, :repetition_frequency, :on_sunday, :on_monday, :on_tuesday, :on_wednesday, :on_thursday, :on_friday, :on_saturday, :repetition_options)
     end
 end

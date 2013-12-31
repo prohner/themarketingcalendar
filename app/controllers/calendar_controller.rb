@@ -27,7 +27,7 @@ class CalendarController < ApplicationController
     # @events = @events.user_id(user_id) if (user_id)
     
     @events.each do |event|
-      event.edit_url = edit_event_path(event)
+      event.edit_url = edit_in_po_path(event)
     end
     
     puts "Sending back #{@events.count} records"
