@@ -14,7 +14,6 @@ ready = ->
 	
 	$('#calendar').fullCalendar {
 		editable: true
-		ignoreTimezone: false
 		header: {
 			left: 'prev,next today'
 			center: 'title'
@@ -62,13 +61,17 @@ ready = ->
 					popover = $(thisObject).popover({
 						title: '<span class="text-info"><strong>' + event.title + '</strong></span>' + '<button type="button" id="close" class="close" onclick="$(\'#example\').popover(\'hide\');">&times;</button>'
 						html: true
-						template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+						template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px; height:400px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
 						content: d
 						placement: 'top'
 						container: 'body'
 					})
 					
+					popover.on "show", (e) ->
+						console.log "popover.on.show"
+					
 					popover.on "hidden", (e) ->
+						console.log "popover.on.hidden"
 						new_json = $("#saved_event_result_as_json").val()
 						if new_json.length > 0
 							# These variables are coming from event.rb
@@ -85,7 +88,7 @@ ready = ->
 							event.notes = json_obj.notes
 							event.url = json_obj.url
 							# event.my_url = json_obj.my_url  ## causes second display of popover to get wonked up
-							$('#calendar').fullCalendar('updateEvent', event);
+							$('#calendar').fullCalendar 'updateEvent', event
 							popoverIsShowing = false
 					popover.popover('show')
 

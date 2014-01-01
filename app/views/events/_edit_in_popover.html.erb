@@ -1,36 +1,47 @@
+
 <style type="text/css" media="screen">
-div.field {
-  display: inline!important;
-}
-#flash { 
-	display:none; 
-	color:#0000;
-	background-color:yellow;
-}
+	#flash { 
+		display:none; 
+		color:#0000;
+		background-color:yellow;
+	}
+	
+	.form-group {
+		margin-bottom: 2px;
+	}
+	.tcm-form-control {
+		width: 60%;
+		padding-left: 4px;
+	}
+	.event-repetition {
+		background-color:#f6f6f6;
+	}
 </style>
 <script type="text/javascript" charset="utf-8">
-$(document).ready(function() {
-	//alert('ready');
-	$('.event_form').submit(function() {  
-	    // alert('handle: ' + myHandleToMainWindow);
-	    var valuesToSubmit = $(this).serialize();
-	    $.ajax({
-	        url: $(this).attr('action'), //sumbits it to the given url of the form
-	        data: valuesToSubmit,
-			type: "POST",
-	        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
-	    }).success(function(json){
-			$("#flash").show();
-			$("#flash").effect("fade", {}, 3500);
-			$('#saved_event_result_as_json').val(JSON.stringify(json));
-	    });
-		
-	    return false; // prevents normal behaviour
-	});
-});
+	$(document).ready(function() {
+		//alert('ready');
+		// $(".datepickerField").datepicker();
 
+		$('.event-form').submit(function() {  
+		    // alert('handle: ' + myHandleToMainWindow);
+		    var valuesToSubmit = $(this).serialize();
+		    $.ajax({
+		        url: $(this).attr('action'), //sumbits it to the given url of the form
+		        data: valuesToSubmit,
+				type: "POST",
+		        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+		    }).success(function(json){
+				$("#flash").show();
+				$("#flash").effect("fade", {}, 3500);
+				$('#saved_event_result_as_json').val(JSON.stringify(json));
+		    });
+		
+		    return false; // prevents normal behaviour
+		});
+	});
 </script>
-<%= form_for @event, :html => { :class => 'event_form' } do |f| %>
+
+<%= form_for @event, :html => { :class => 'form-horizontal event-form', :role => "form" } do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -45,77 +56,95 @@ $(document).ready(function() {
 	
   <%= hidden_field_tag :saved_event_result_as_json %>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description, :placeholder => "New description of activity" %>
+  <div class="form-group">
+	<%= f.label :description, :class => "col-sm-2 control-label" %>
+	<div class="col-sm-10">
+		<%= f.text_field :description, :placeholder => "New description of activity", :class => "tcm-form-control" %>
+	</div>
   </div>
-  <div class="field">
-    <%= f.label :starts_at %>
-    <%= f.text_field :starts_at, :placeholder => "Date activity starts" %>
+  <div class="form-group">
+    <%= f.label :starts_at, :class => "col-sm-2 control-label" %>
+	<div class="col-sm-10">
+		<%= f.text_field :starts_at, :placeholder => "Date activity starts", :class => "datepickerField tcm-form-control" %>
+	</div>
   </div>
-  <div class="field">
-    <%= f.label :ends_at %>
-    <%= f.text_field :ends_at, :placeholder => "Date activity ends" %>
+  <div class="form-group">
+    <%= f.label :ends_at, :class => "col-sm-2 control-label" %>
+	<div class="col-sm-10">
+		<%= f.text_field :ends_at, :placeholder => "Date activity ends", :class => "datepickerField tcm-form-control" %>
+	</div>
   </div>
-  <div class="field">
-    <%= f.label :campaign %>
-	<%= f.collection_select :campaign_id, Campaign.order(:description), :id, :description, :prompt => "--  Select Campaign --" %>	
+  <div class="form-group">
+    <%= f.label :campaign, :class => "col-sm-2 control-label"  %>
+	<div class="col-sm-10">
+		<%= f.collection_select :campaign_id, Campaign.order(:description), :id, :description, {:prompt => "--  Select Campaign --"}, {:class => "tcm-form-control"} %>	
+	</div>
 	
   </div>
-  <div class="field">
-    <%= f.label :category_id %>
-	<%= f.collection_select :category_id, Category.order(:description), :id, :description, :prompt => "--  Select Category --" %>	
+  <div class="form-group">
+    <%= f.label :category_id, :class => "col-sm-2 control-label"  %>
+	<div class="col-sm-10">
+		<%= f.collection_select :category_id, Category.order(:description), :id, :description, {:prompt => "--  Select Category --"}, {:class => "tcm-form-control"} %>	
+	</div>
   </div>
   
-  <table border="0" style="background-color:#f0f0f0" cellpadding="0" cellspacing="0">
-	<tr><th colspan="1">Repetition Info</th></tr>
-	<tr>
-		  <td>
-			<div class="field">
-			<%= f.label :repetition_type %><br>
-			<%= f.text_field :repetition_type %>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		  <td>
-			<div class="field">
-			    <%= f.label :repetition_frequency %><br>
-			    <%= f.number_field :repetition_frequency %>
-			</div>
-		</td>
-	</tr>
-	<tr>
-		<td>
-		    <div class="field">
-		  	  <table border="0">
-		  		  <tr>
-		  			  <th>Sun</th>
-		  			  <th>Mon</th>
-		  			  <th>Tue</th>
-		  			  <th>Wed</th>
-		  			  <th>Thu</th>
-		  			  <th>Fri</th>
-		  			  <th>Sat</th>
-		  		  </tr>
-		  		  <tr>
-		  			  <td align="center"><%= f.check_box :on_sunday %></td>
-		  			  <td align="center"><%= f.check_box :on_monday %></td>
-		  			  <td align="center"><%= f.check_box :on_tuesday %></td>
-		  			  <td align="center"><%= f.check_box :on_wednesday %></td>
-		  			  <td align="center"><%= f.check_box :on_thursday %></td>
-		  			  <td align="center"><%= f.check_box :on_friday %></td>
-		  			  <td align="center"><%= f.check_box :on_saturday %></td>
-		  		  </tr>
-		  	  </table>
-		    </div>
-		</td>
-	</tr>
-</table>
-  <div class="field">
-    <%= f.label :repetition_options %>
-    <%= f.text_field :repetition_options %>
+  
+  <div class="event-repetition">
+	  <div class="form-group">
+	    <%= f.label "Repetition Info", :class => "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= f.text_field :repetition_type, :placeholder => "Repetition Info", :class => "tcm-form-control" %>
+		</div>
+	  </div>
+	  <div class="form-group">
+	    <%= f.label "Repetition Frequency", :class => "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= f.text_field :repetition_frequency, :placeholder => "Repetition Frequency", :class => "tcm-form-control" %>
+		</div>
+	  </div>
+	  <div class="form-group">
+	    <%= f.label "Repetition Options", :class => "col-sm-2 control-label" %>
+		<div class="col-sm-10">
+			<%= f.text_field :repetition_options, :placeholder => "Repetition Options", :class => "tcm-form-control" %>
+		</div>
+	  </div>
+	  
+	  <div class="form-group">
+		<%= f.label "Occurs on", :class => "col-sm-2 control-label" %>
+		<div class="col-sm-offset-2 col-sm-10">
+				<label class="checkbox inline">
+					<%= f.check_box :on_sunday %> Sun
+				</label>
+
+				<label class="checkbox inline">
+					<%= f.check_box :on_monday %> Mon
+				</label>
+
+				<label class="checkbox inline">
+					<%= f.check_box :on_tuesday %> Tue
+				</label>
+
+				<label class="checkbox inline">
+					<%= f.check_box :on_wednesday %> Wed
+				</label>
+
+				<label class="checkbox inline">
+					<%= f.check_box :on_thursday %> Thu
+				</label>
+
+				<label class="checkbox inline">
+					<%= f.check_box :on_friday %> Fri
+				</label>
+
+				<label class="checkbox inline">
+					<%= f.check_box :on_saturday %> Sat
+				</label>
+		</div>
+	  </div>
+
   </div>
+
+
   <div class="actions">
     <%= f.submit %> <span id="flash">Your changes have been saved!</span>
   </div>
