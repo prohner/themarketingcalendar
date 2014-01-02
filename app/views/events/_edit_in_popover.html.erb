@@ -22,8 +22,8 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		//alert('ready');
-		$("#event_starts_at").datepicker();
-		$("#event_ends_at").datepicker();
+		$("#event_starts_at").datepicker({ dateFormat: "yy-mm-dd" });
+		$("#event_ends_at").datepicker({ dateFormat: "yy-mm-dd" });
 
 		$('.event-form').submit(function() {  
 		    // alert('handle: ' + myHandleToMainWindow);
