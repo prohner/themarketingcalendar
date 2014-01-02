@@ -46,6 +46,9 @@ ready = ->
 			}
 		]
 
+		eventAfterRender: (event, element, view) ->
+			$(element).attr "id", "event-id-" + event.id
+			
 		eventClick: (event, jsEvent, view) ->
 			thisObject = this
 			offset = $(this).offset()
@@ -58,19 +61,19 @@ ready = ->
 				popoverIsShowing = true
 				console.log "popping " + event.title
 				$.get event.my_url, (d) ->
-					popover = $(thisObject).popover({
-						title: '<span class="text-info"><strong>' + event.title + '</strong></span>' + '<button type="button" id="close" class="close" onclick="$(\'#example\').popover(\'hide\');">&times;</button>'
+					$(thisObject).popover({
+						title: '<span class="text-info"><strong>' + event.title + '</strong></span>' + '<button type="button" id="popovercloseid" class="close" onclick="return false;">&times;</button>'
 						html: true
 						template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px; height:400px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
 						content: d
-						placement: 'top'
+						placement: 'bottom'
 						container: 'body'
 					})
-					
-					popover.on "show", (e) ->
+				
+					$(thisObject).on "show", (e) ->
 						console.log "popover.on.show"
-					
-					popover.on "hidden", (e) ->
+				
+					$(thisObject).on "hidden", (e) ->
 						console.log "popover.on.hidden"
 						new_json = $("#saved_event_result_as_json").val()
 						if new_json.length > 0
@@ -89,43 +92,11 @@ ready = ->
 							event.url = json_obj.url
 							# event.my_url = json_obj.my_url  ## causes second display of popover to get wonked up
 							$('#calendar').fullCalendar 'updateEvent', event
-							popoverIsShowing = false
-					popover.popover('show')
+						popoverIsShowing = false
+					$(thisObject).popover('show')
 
 			else
 				popoverIsShowing = false
-			# 	event.title = "C new title after save"
-			# 	$('#calendar').fullCalendar('updateEvent', event);
-
-		eventAfterRender: (event, element, view) ->
-			event.element = element # Stored for use in eventClick
-			# $(element).tooltip { 
-			# 	title: event.description
-			# 	html: true 
-			# 	placement: 'top'
-			# 	container: 'body'
-			# }
-			
-			# $(element).attr "data-ajaxload", event.my_url
-			# $(element).popover { 
-			# 	title: event.title
-			# 	html: true
-			# 	content: () ->
-			# 		e = $(this)
-			# 		$.get event.my_url, (d) ->
-			# 			$(this).popover {content: d}
-			# 			# e.popover({ content: d })
-			# 	'placement': 'top'
-			# 	container: 'body'
-			# }
-			
-			# $(element).on 'shown.bs.popover', () ->
-			# 	$(this).tooltip('hide')
-			# 	# console.log "whatev"
-			
-		# eventAfterAllRender: () ->
-		# 	$('.popover-item').popover(placement: 'auto')
-		
 	}
 	
 ajaxComplete = (e, xhr, settings) ->
