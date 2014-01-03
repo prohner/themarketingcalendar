@@ -1,12 +1,15 @@
 <% provide(:title, "Calendar") %>
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js' %>
 <%= javascript_include_tag "jquery.qtip-1.0.0-rc3.min.js" %>
-		 
+
 <div id='loading' class="loading">Loading calendar...</div>
 <div id='calendar' class="calendar"></div>
 
 <hr />
-
+<button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-star"></span> Star
+</button>
+<i class="fa fa-rub"></i> fa-rub
 <% if Rails.env.development? %>
    <ul>
       <li> <%= link_to "QTIP", "http://craigsworks.com/projects/qtip/" %> 
@@ -30,21 +33,3 @@
   <% end %>
 <% end %>
    
-<a id="manualinputlabel" href="#" onclick="return false;" data-toggle="popover" title="weclome to use the sql quer" data-html=true  data-original-title="weclome to use the sql query" data-content="content">example</a>
-
-<script type="text/javascript" charset="utf-8">
-	
-$('#manualinputlabel').click(function(e) {
-              $('.popover-title').append('<button id="popovercloseid" type="button" class="close">&times;</button>');
-              $(this).popover();
-
-          });
-
-      $(document).click(function(e) {
-         if(e.target.id=="popovercloseid" )
-         {
-              $('#manualinputlabel').popover('hide');                
-         }
-
-      });
-	  </script>
