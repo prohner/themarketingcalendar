@@ -37,6 +37,7 @@
 				$("#flash").show();
 				$("#flash").effect("fade", {}, 3500);
 				$('#saved_event_result_as_json').val(JSON.stringify(json));
+				setTimeout(function() { hideThePopoverThatContainsMe(); }, 2000 );
 		    });
 		
 		    return false; // prevents normal behaviour
