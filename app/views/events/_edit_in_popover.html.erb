@@ -34,37 +34,39 @@
 			
 			if ($("#event_description").val().length == 0) {
 				$("#event_description_group").addClass("event_edit_field_with_errors");
+				isOkayToSave = false;
 			} else {
 				$("#event_description_group").removeClass("event_edit_field_with_errors");
 			}
 			
 			if ($("#event_starts_at").val().length == 0) {
 				$("#event_starts_at_group").addClass("event_edit_field_with_errors");
+				isOkayToSave = false;
 			} else {
 				$("#event_starts_at_group").removeClass("event_edit_field_with_errors");
 			}
 			
 			if ($("#event_ends_at").val().length == 0) {
 				$("#event_ends_at_group").addClass("event_edit_field_with_errors");
+				isOkayToSave = false;
 			} else {
 				$("#event_ends_at_group").removeClass("event_edit_field_with_errors");
 			}
 			
 			if ($("#event_campaign_id").val() == 0) {
 				$("#event_campaign_group").addClass("event_edit_field_with_errors");
+				isOkayToSave = false;
 			} else {
 				$("#event_campaign_group").removeClass("event_edit_field_with_errors");
 			}
 			
 			if ($("#event_category_id").val() == 0) {
 				$("#event_category_group").addClass("event_edit_field_with_errors");
+				isOkayToSave = false;
 			} else {
 				$("#event_category_group").removeClass("event_edit_field_with_errors");
 			}
 			
-			
-			
-			isOkayToSave = false;
 			if (isOkayToSave) {
 			    var valuesToSubmit = $(this).serialize();
 			

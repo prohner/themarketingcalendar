@@ -134,19 +134,7 @@ presentPopover = (url, sourceObject, event) ->
 		console.log "showing popover"
 		$(thisObject).popover('show')
 
-# myLittleTest = (me) ->
-# 	po = $(me).popover ({
-# 		title: event.title
-# 		html: true
-# 		content: "content here"
-# 		placement: 'top'
-# 		container: 'body'
-# 	})
-# 	$(me).popover('show')
-# 	false
-# window.myLittleTest = myLittleTest
-# 	
-# 
+
 # $('body').on('click',  (e) ->
 # 	$('[data-toggle="popover"]').each( () ->
 # 			if !$(this).is(e.target)
