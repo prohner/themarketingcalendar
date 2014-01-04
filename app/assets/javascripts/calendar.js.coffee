@@ -19,6 +19,7 @@ ready = ->
 			center: 'title'
 			right: 'month,basicWeek,basicDay'
 		}
+		weekNumbers: true
 		loading: (bool) ->
 			if bool
 				$('#loading').show()
@@ -60,49 +61,78 @@ ready = ->
 			if ! popoverIsShowing
 				popoverIsShowing = true
 				console.log "popping " + event.title
-				$.get event.my_url, (d) ->
-					$(thisObject).popover({
-						title: '<span class="text-info"><strong>' + event.title + '</strong></span>' + '<button type="button" id="popovercloseid" class="close" onclick="return false;">&times;</button>'
-						html: true
-						template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px; height:400px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
-						content: d
-						placement: 'bottom'
-						container: 'body'
-					})
-				
-					$(thisObject).on "show", (e) ->
-						console.log "popover.on.show"
-				
-					$(thisObject).on "hidden", (e) ->
-						console.log "popover.on.hidden"
-						new_json = $("#saved_event_result_as_json").val()
-						if new_json.length > 0
-							# These variables are coming from event.rb
-							json_obj = jQuery.parseJSON new_json
-							# event.id = json_obj.id
-							event.title = json_obj.title
-							event.color = json_obj.color
-							event.textColor = json_obj.textColor
-							event.start = json_obj.start
-							event.end = json_obj.end
-							event.allDay = json_obj.allDay
-							event.recurring = json_obj.recurring
-							event.location = json_obj.location
-							event.notes = json_obj.notes
-							event.url = json_obj.url
-							# event.my_url = json_obj.my_url  ## causes second display of popover to get wonked up
-							$('#calendar').fullCalendar 'updateEvent', event
-						popoverIsShowing = false
-					$(thisObject).popover('show')
+				presentPopover event.my_url, thisObject, event
 
 			else
 				popoverIsShowing = false
 	}
 	
+	$('span:contains(today)').parents('td').filter(':first').after('<span class="fc-header-space"></span><span id="add-calendar-event" class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right">Add Event</span>');
+	$('#add-calendar-event').click (e) ->
+		thisObject = this
+		if popoverIsShowing 
+			popoverIsShowing = false
+		else
+			popoverIsShowing = true
+			presentPopover "/new_event_in_popover", thisObject, { }
+	
+	
 ajaxComplete = (e, xhr, settings) ->
 	console.log(xhr.responseText)
 	eval(xhr.responseText)
 	
+massAssignEvent = (event, json_obj) ->
+	event.title = json_obj.title
+	event.color = json_obj.color
+	event.textColor = json_obj.textColor
+	event.start = json_obj.start
+	event.end = json_obj.end
+	event.allDay = json_obj.allDay
+	event.recurring = json_obj.recurring
+	event.location = json_obj.location
+	event.notes = json_obj.notes
+	event.url = json_obj.url
+	event
+
+presentPopover = (url, sourceObject, event) ->
+	thisObject = sourceObject
+	console.log "presentPopover starting"
+	$.get url, (d) ->
+		title = event.title
+		if typeof event.title == "undefined"
+			title = "New Event"
+		$(thisObject).popover({
+			title: '<span class="text-info"><strong>' + title + '</strong></span>' + '<button type="button" id="popovercloseid" class="close" onclick="return false;">&times;</button>'
+			html: true
+			template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px; height:400px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+			content: d
+			placement: 'bottom'
+			container: 'body'
+		})
+	
+		$(thisObject).on "show", (e) ->
+			console.log "popover.on.show"
+	
+		$(thisObject).on "hidden", (e) ->
+			console.log "popover.on.hidden"
+			new_json = $("#saved_event_result_as_json").val()
+			is_new_record = ($("#saved_event_is_new_event").val() == "true")
+			
+			# alert $("#saved_event_is_new_event").val() + " " + is_new_record
+			if typeof new_json != "undefined" and new_json.length > 0
+				# These variables are coming from event.rb
+				json_obj = jQuery.parseJSON new_json
+				if is_new_record
+					event = { }
+					event = massAssignEvent event, json_obj
+					$('#calendar').fullCalendar 'renderEvent', event, true
+				else
+					event = massAssignEvent event, json_obj
+					$('#calendar').fullCalendar 'updateEvent', event
+			popoverIsShowing = false
+			
+		console.log "showing popover"
+		$(thisObject).popover('show')
 
 # myLittleTest = (me) ->
 # 	po = $(me).popover ({

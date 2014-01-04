@@ -21,6 +21,12 @@ class EventsController < ApplicationController
   def edit
   end
 
+  # GET /new_event_in_popover
+  def new_event_in_popover
+    @event = Event.new
+    render :partial => "edit_in_popover", :layout => false
+  end
+
   # GET /edit_event_in_popover/29/edit
   def edit_event_in_popover
     render :partial => "edit_in_popover", :layout => false
@@ -34,7 +40,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render action: 'edit', status: :created, location: @event }
+        format.json { render :json => @event, status: :created, location: @event }
       else
         format.html { render action: 'new' }
         format.json { render json: @event.errors, status: :unprocessable_entity }

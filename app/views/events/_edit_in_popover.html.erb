@@ -59,7 +59,7 @@
 		function hideThePopoverThatContainsMe() {
 			var id = '#event-id-<%= @event.id %>';
 			var x = $(id);
-			console.log('mmm bueno (' + id + ') ' + x);
+			// console.log('mmm bueno (' + id + ') ' + x);
 			x.popover('hide');                
 		}
 	});
@@ -79,6 +79,7 @@
   <% end %>
 	
   <%= hidden_field_tag :saved_event_result_as_json %>
+  <%= hidden_field_tag :saved_event_is_new_event, @event.new_record? %>
 
   <div class="form-group">
 	<%= f.label :description, :class => "col-sm-2 control-label" %>

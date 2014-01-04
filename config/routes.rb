@@ -10,6 +10,7 @@ TheMarketingCalendar::Application.routes.draw do
   match '/signout', to: 'sessions#destroy',     via: 'delete'
   
   get 'edit_event_in_popover/:id/edit' => 'events#edit_event_in_popover', as: :edit_in_po
+  get 'new_event_in_popover' => 'events#new_event_in_popover', as: :new_in_po
 
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
