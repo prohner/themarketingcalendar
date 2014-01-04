@@ -28,24 +28,63 @@
 		$("#event_starts_at").datepicker({ dateFormat: "yy-mm-dd" });
 		$("#event_ends_at").datepicker({ dateFormat: "yy-mm-dd" });
 
-		$('.event-form').submit(function() {  
+		$('.edit-event-popover-form').submit(function() {  
 		    // alert('handle: ' + myHandleToMainWindow);
-		    var valuesToSubmit = $(this).serialize();
+			var isOkayToSave = true;
 			
-			$("#submit-button").hide();
-			$("#spinner").show();
-		    $.ajax({
-		        url: $(this).attr('action'), //sumbits it to the given url of the form
-		        data: valuesToSubmit,
-				type: "POST",
-		        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
-		    }).success(function(json){
-				$("#spinner").hide();
-				$("#flash").show();
-				$("#flash").effect("fade", {}, 3500);
-				$('#saved_event_result_as_json').val(JSON.stringify(json));
-				setTimeout(function() { hideThePopoverThatContainsMe(); }, 2000 );
-		    });
+			if ($("#event_description").val().length == 0) {
+				$("#event_description_group").addClass("event_edit_field_with_errors");
+			} else {
+				$("#event_description_group").removeClass("event_edit_field_with_errors");
+			}
+			
+			if ($("#event_starts_at").val().length == 0) {
+				$("#event_starts_at_group").addClass("event_edit_field_with_errors");
+			} else {
+				$("#event_starts_at_group").removeClass("event_edit_field_with_errors");
+			}
+			
+			if ($("#event_ends_at").val().length == 0) {
+				$("#event_ends_at_group").addClass("event_edit_field_with_errors");
+			} else {
+				$("#event_ends_at_group").removeClass("event_edit_field_with_errors");
+			}
+			
+			if ($("#event_campaign_id").val() == 0) {
+				$("#event_campaign_group").addClass("event_edit_field_with_errors");
+			} else {
+				$("#event_campaign_group").removeClass("event_edit_field_with_errors");
+			}
+			
+			if ($("#event_category_id").val() == 0) {
+				$("#event_category_group").addClass("event_edit_field_with_errors");
+			} else {
+				$("#event_category_group").removeClass("event_edit_field_with_errors");
+			}
+			
+			
+			
+			isOkayToSave = false;
+			if (isOkayToSave) {
+			    var valuesToSubmit = $(this).serialize();
+			
+				$("#submit-button").hide();
+				$("#spinner").show();
+			    $.ajax({
+			        url: $(this).attr('action'), //sumbits it to the given url of the form
+			        data: valuesToSubmit,
+					type: "POST",
+			        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+			    }).success(function(json){
+					$("#spinner").hide();
+					$("#flash").show();
+					$("#flash").effect("fade", {}, 3500);
+					$('#saved_event_result_as_json').val(JSON.stringify(json));
+					setTimeout(function() { hideThePopoverThatContainsMe(); }, 2000 );
+			    });
+			// } else {
+			// 	alert("Need to fix things");
+			}
 		
 		    return false; // prevents normal behaviour
 		});
@@ -65,7 +104,7 @@
 	});
 </script>
 
-<%= form_for @event, :html => { :class => 'form-horizontal event-form', :role => "form" } do |f| %>
+<%= form_for @event, :html => { :class => 'form-horizontal edit-event-popover-form', :role => "form" } do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -81,32 +120,32 @@
   <%= hidden_field_tag :saved_event_result_as_json %>
   <%= hidden_field_tag :saved_event_is_new_event, @event.new_record? %>
 
-  <div class="form-group">
+  <div class="form-group" id="event_description_group">
 	<%= f.label :description, :class => "col-sm-2 control-label" %>
 	<div class="col-sm-10">
 		<%= f.text_field :description, :placeholder => "New description of activity", :class => "tcm-form-control" %>
 	</div>
   </div>
-  <div class="form-group">
+  <div class="form-group" id="event_starts_at_group">
     <%= f.label :starts_at, :class => "col-sm-2 control-label" %>
 	<div class="col-sm-10">
 		<%= f.text_field :starts_at, :placeholder => "Date activity starts", :class => "datepickerField tcm-form-control" %>
 	</div>
   </div>
-  <div class="form-group">
+  <div class="form-group" id="event_ends_at_group">
     <%= f.label :ends_at, :class => "col-sm-2 control-label" %>
 	<div class="col-sm-10">
 		<%= f.text_field :ends_at, :placeholder => "Date activity ends", :class => "datepickerField tcm-form-control" %>
 	</div>
   </div>
-  <div class="form-group">
+  <div class="form-group" id="event_campaign_group">
     <%= f.label :campaign, :class => "col-sm-2 control-label"  %>
 	<div class="col-sm-10">
 		<%= f.collection_select :campaign_id, Campaign.order(:description), :id, :description, {:prompt => "--  Select Campaign --"}, {:class => "tcm-form-control"} %>	
 	</div>
 	
   </div>
-  <div class="form-group">
+  <div class="form-group" id="event_category_group">
     <%= f.label :category_id, :class => "col-sm-2 control-label"  %>
 	<div class="col-sm-10">
 		<%= f.collection_select :category_id, Category.order(:description), :id, :description, {:prompt => "--  Select Category --"}, {:class => "tcm-form-control"} %>	
