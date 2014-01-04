@@ -2,11 +2,11 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+popoverIsShowing = false
+
 ready = ->
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	# remoteServerName = "http://0.0.0.0:3000"
-	
-	popoverIsShowing = false
 	
 	remoteServerName = ""
 	eventsSourceUrl = remoteServerName + '/calendar/events.js'
@@ -99,7 +99,9 @@ presentPopover = (url, sourceObject, event) ->
 	console.log "presentPopover starting"
 	$.get url, (d) ->
 		title = event.title
-		if typeof event.title == "undefined"
+		adding_new_event = (typeof event.title == "undefined")
+		
+		if adding_new_event
 			title = "New Event"
 		$(thisObject).popover({
 			title: '<span class="text-info"><strong>' + title + '</strong></span>' + '<button type="button" id="popovercloseid" class="close" onclick="return false;">&times;</button>'
@@ -111,7 +113,14 @@ presentPopover = (url, sourceObject, event) ->
 		})
 	
 		$(thisObject).on "show", (e) ->
-			console.log "popover.on.show"
+			console.log "popover.on.show "
+			
+		$(thisObject).on "shown", (e) ->
+			console.log "popover.on.shown "
+			if adding_new_event
+				$("#name_of_popover_that_contains_me").val("add-calendar-event")
+			else
+				$("#name_of_popover_that_contains_me").val("event-id-" + event.id)
 	
 		$(thisObject).on "hidden", (e) ->
 			console.log "popover.on.hidden"
