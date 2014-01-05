@@ -24,11 +24,38 @@
 </style>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
-		//alert('ready');
 		$("#event_starts_at").datepicker({ dateFormat: "yy-mm-dd" });
 		$("#event_ends_at").datepicker({ dateFormat: "yy-mm-dd" });
+		
+		$('.delete-event-button-actual').submit( function() {
+			console.log('delete form');
+		    var valuesToSubmit = $(this).serialize();
+		
+			$("#submit-button").hide();
+			$("#delete-event-button-proxy").hide();
+			$("#spinner").show();
+		    $.ajax({
+		        url: $(this).attr('action'), //sumbits it to the given url of the form
+		        data: valuesToSubmit,
+				type: "POST",
+		        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+		    }).success(function(json){
+				$("#spinner").hide();
+				
+				$("#flash").text("This event has been deleted.");
+				$("#flash").show();
+				$("#flash").effect("fade", {}, 3500);
+				$('#event_was_deleted').val(true);
+				setTimeout(function() { hideThePopoverThatContainsMe(); }, 2000 );
+		    });
+			return false;
+		});
 
 		$('.edit-event-popover-form').submit(function() {  
+			var val = $("input[type=submit][clicked=true]");
+			console.log('edit form');
+			// 		
+			// alert(val);
 		    // alert('handle: ' + myHandleToMainWindow);
 			var isOkayToSave = true;
 			
@@ -71,6 +98,7 @@
 			    var valuesToSubmit = $(this).serialize();
 			
 				$("#submit-button").hide();
+				$("#delete-event-button-proxy").hide();
 				$("#spinner").show();
 			    $.ajax({
 			        url: $(this).attr('action'), //sumbits it to the given url of the form
@@ -121,6 +149,7 @@
 	
   <%= hidden_field_tag :saved_event_result_as_json %>
   <%= hidden_field_tag :saved_event_is_new_event, @event.new_record? %>
+  <%= hidden_field_tag :event_was_deleted, false %>
   <%= hidden_field_tag :name_of_popover_that_contains_me %>
 
   <div class="form-group" id="event_description_group">
@@ -214,9 +243,18 @@
 
   <div class="actions">
     <%= f.submit :id => "submit-button" %>
+	<% unless @event.new_record? %>
+		<label for="delete-button" class="delete-event-button-proxy" id="delete-event-button-proxy">Delete this event</label>	
+	<% end %>
     <i class="fa fa-spinner fa-spin spinner" id="spinner"></i>
-	
 	<span id="flash">Your changes have been saved!</span>
   </div>
   
 <% end %>
+
+<% unless @event.new_record? %>
+	<%= form_for @event, :html => { :id => "delete-event-form", :class => 'delete-event-button-actual', :role => "form" } do |f| %>
+		<%= button_to 'Delete Event', @event, :id => "delete-button", :method => :delete, :class => :destroy, data: { :confirm => "This will completely remove '#{@event.description}' from your calendar.  Are you sure?" } %>
+	<% end %>
+<% end %>
+

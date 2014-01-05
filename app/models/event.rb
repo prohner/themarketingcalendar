@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
+  
   belongs_to :category
   belongs_to :campaign
   has_many :stakeholders
@@ -27,7 +29,8 @@ class Event < ActiveRecord::Base
       :location => "",
       :notes => "",
       :url => "", # used by FullCalendar
-      :my_url => self.edit_url #Rails.application.routes.url_helpers.edit_event_path(id)
+      #:my_url => self.edit_url #Rails.application.routes.url_helpers.edit_event_path(id)
+      :my_url => edit_in_po_path(self)
     }
   end
 end

@@ -182,3 +182,17 @@ input {
 	margin: 0;
     margin-bottom: 2px;
 }
+
+.delete-event-button-proxy {
+	color:darkgray;
+	display:inline;
+	margin-left:40px;
+	vertical-align:bottom;
+	text-decoration:underline;
+}
+
+.delete-event-button-actual {
+	position: absolute;
+	left: -1000px;
+	top: -1000px;
+}

@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 popoverIsShowing = false
+is_deleted_event = false
 
 ready = ->
 	# remoteServerName = "http://www.themarketingcalendar.com"
@@ -82,6 +83,7 @@ ajaxComplete = (e, xhr, settings) ->
 	eval(xhr.responseText)
 	
 massAssignEvent = (event, json_obj) ->
+	event.id = json_obj.id
 	event.title = json_obj.title
 	event.color = json_obj.color
 	event.textColor = json_obj.textColor
@@ -92,10 +94,12 @@ massAssignEvent = (event, json_obj) ->
 	event.location = json_obj.location
 	event.notes = json_obj.notes
 	event.url = json_obj.url
+	event.my_url = json_obj.my_url
 	event
 
 presentPopover = (url, sourceObject, event) ->
 	thisObject = sourceObject
+	is_deleted_event = false
 	console.log "presentPopover starting"
 	$.get url, (d) ->
 		title = event.title
@@ -121,17 +125,25 @@ presentPopover = (url, sourceObject, event) ->
 				$("#name_of_popover_that_contains_me").val("add-calendar-event")
 			else
 				$("#name_of_popover_that_contains_me").val("event-id-" + event.id)
+
+		$(thisObject).on "hide", (e) ->
+			console.log "popover.on.hide, deleted: " + $("#event_was_deleted").val() + ", typeof=" + typeof($("#event_was_deleted").val())
+			is_deleted_event = ($("#event_was_deleted").val() == "true")
+			console.log "    => is_deleted_event = " + is_deleted_event
 	
 		$(thisObject).on "hidden", (e) ->
 			console.log "popover.on.hidden"
 			new_json = $("#saved_event_result_as_json").val()
-			is_new_record = ($("#saved_event_is_new_event").val() == "true")
+			is_new_event = ($("#saved_event_is_new_event").val() == "true")
+			console.log "    => is_deleted_event = " + is_deleted_event + ", is_new_event = " + is_new_event 
 			
-			# alert $("#saved_event_is_new_event").val() + " " + is_new_record
-			if typeof new_json != "undefined" and new_json.length > 0
+			# alert $("#saved_event_is_new_event").val() + " " + is_new_event
+			if is_deleted_event
+				$('#calendar').fullCalendar 'removeEvents', [ event._id ]
+			else if typeof new_json != "undefined" and new_json.length > 0
 				# These variables are coming from event.rb
 				json_obj = jQuery.parseJSON new_json
-				if is_new_record
+				if is_new_event
 					event = { }
 					event = massAssignEvent event, json_obj
 					$('#calendar').fullCalendar 'renderEvent', event, true
