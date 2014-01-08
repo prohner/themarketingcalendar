@@ -7,6 +7,33 @@
 
 <hr />
 
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Calendar Filters
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse ">
+      <div class="panel-body">
+		  Showing Categories
+		  <% @categories.each do |category| %>
+			<%= check_box_tag "category-#{category.id}", category.id, true, :onclick=>"toggleCalendarFilterCategory(#{category.id});" %>
+			<span style="background-color:<%= category.color_scheme.background %>">
+				&ordm;
+			</span>
+			<label for="<%= "category-#{category.id}" %>" style="display:inline;">
+				<%= category.description %>
+			</label>
+		  	<br/>
+		  <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <% if Rails.env.development? %>
    <ul>
       <li> <%= link_to "QTIP", "http://craigsworks.com/projects/qtip/" %> 

@@ -4,6 +4,7 @@
 
 popoverIsShowing = false
 is_deleted_event = false
+hidden_categories = []
 
 ready = ->
 	# remoteServerName = "http://www.themarketingcalendar.com"
@@ -48,6 +49,11 @@ ready = ->
 			}
 		]
 
+		eventRender: (event, element) ->
+			if hidden_categories.indexOf(event.category_id) >= 0
+				console.log "Event's category is hidden"
+				$(element).hide();
+			
 		eventAfterRender: (event, element, view) ->
 			$(element).attr "id", "event-id-" + event.id
 			
@@ -156,6 +162,16 @@ presentPopover = (url, sourceObject, event) ->
 		$(thisObject).popover('show')
 
 
+@toggleCalendarFilterCategory = (categoryId) ->
+	indexOfCategoryId = hidden_categories.indexOf(categoryId)
+	if indexOfCategoryId >= 0
+		hidden_categories.splice indexOfCategoryId, 1
+		console.log "Remove " + categoryId
+	else
+		hidden_categories.push(categoryId)
+		console.log "  Add  " + categoryId
+	$('#calendar').fullCalendar 'rerenderEvents'
+	
 # $('body').on('click',  (e) ->
 # 	$('[data-toggle="popover"]').each( () ->
 # 			if !$(this).is(e.target)
