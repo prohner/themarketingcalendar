@@ -11,8 +11,8 @@
 		display:none; 
 	}
 	
-	.form-group {
-		margin-bottom: 2px;
+	form .form-group {
+		margin-bottom: 1px;
 	}
 	.tcm-form-control {
 		width: 60%;
@@ -21,7 +21,14 @@
 	.event-repetition {
 		background-color:#f6f6f6;
 	}
+	.form-horizontal .control-group {
+	    margin-bottom: 2px;
+	}
+	.actions {
+		margin-top: 6px;
+	}
 </style>
+
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$("#event_starts_at").datepicker({ dateFormat: "yy-mm-dd" });
@@ -152,32 +159,32 @@
   <%= hidden_field_tag :event_was_deleted, false %>
   <%= hidden_field_tag :name_of_popover_that_contains_me %>
 
-  <div class="form-group" id="event_description_group">
+  <div class="control-group form-group" id="event_description_group">
 	<%= f.label :description, :class => "col-sm-2 control-label" %>
 	<div class="col-sm-10">
 		<%= f.text_field :description, :placeholder => "New description of activity", :class => "tcm-form-control" %>
 	</div>
   </div>
-  <div class="form-group" id="event_starts_at_group">
+  <div class="control-group form-group" id="event_starts_at_group">
     <%= f.label :starts_at, :class => "col-sm-2 control-label" %>
 	<div class="col-sm-10">
 		<%= f.text_field :starts_at, :placeholder => "Date activity starts", :class => "datepickerField tcm-form-control" %>
 	</div>
   </div>
-  <div class="form-group" id="event_ends_at_group">
+  <div class="control-group form-group" id="event_ends_at_group">
     <%= f.label :ends_at, :class => "col-sm-2 control-label" %>
 	<div class="col-sm-10">
 		<%= f.text_field :ends_at, :placeholder => "Date activity ends", :class => "datepickerField tcm-form-control" %>
 	</div>
   </div>
-  <div class="form-group" id="event_campaign_group">
+  <div class="control-group form-group" id="event_campaign_group">
     <%= f.label :campaign, :class => "col-sm-2 control-label"  %>
 	<div class="col-sm-10">
 		<%= f.collection_select :campaign_id, Campaign.order(:description), :id, :description, {:prompt => "--  Select Campaign --"}, {:class => "tcm-form-control"} %>	
 	</div>
 	
   </div>
-  <div class="form-group" id="event_category_group">
+  <div class="control-group form-group" id="event_category_group">
     <%= f.label :category_id, :class => "col-sm-2 control-label"  %>
 	<div class="col-sm-10">
 		<%= f.collection_select :category_id, Category.order(:description), :id, :description, {:prompt => "--  Select Category --"}, {:class => "tcm-form-control"} %>	
@@ -186,26 +193,26 @@
   
   
   <div class="event-repetition">
-	  <div class="form-group">
+	  <div class="control-group form-group">
 	    <%= f.label "Repetition Info", :class => "col-sm-2 control-label" %>
 		<div class="col-sm-10">
 			<%= f.text_field :repetition_type, :placeholder => "Repetition Info", :class => "tcm-form-control" %>
 		</div>
 	  </div>
-	  <div class="form-group">
+	  <div class="control-group form-group">
 	    <%= f.label "Repetition Frequency", :class => "col-sm-2 control-label" %>
 		<div class="col-sm-10">
 			<%= f.text_field :repetition_frequency, :placeholder => "Repetition Frequency", :class => "tcm-form-control" %>
 		</div>
 	  </div>
-	  <div class="form-group">
+	  <div class="control-group form-group">
 	    <%= f.label "Repetition Options", :class => "col-sm-2 control-label" %>
 		<div class="col-sm-10">
 			<%= f.text_field :repetition_options, :placeholder => "Repetition Options", :class => "tcm-form-control" %>
 		</div>
 	  </div>
 	  
-	  <div class="form-group">
+	  <div class="control-group form-group">
 		<%= f.label "Occurs on", :class => "col-sm-2 control-label" %>
 		<div class="col-sm-offset-2 col-sm-10">
 				<label class="checkbox inline">
@@ -241,7 +248,7 @@
   </div>
 
 
-  <div class="actions">
+  <div class="actions pull-right">
     <%= f.submit :id => "submit-button" %>
 	<% unless @event.new_record? %>
 		<label for="delete-button" class="delete-event-button-proxy" id="delete-event-button-proxy">Delete this event</label>	
