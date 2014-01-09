@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require fullcalendar
 //= require calendar
+//= require jquery.slidePanel
 

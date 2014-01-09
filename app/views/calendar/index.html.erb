@@ -2,26 +2,114 @@
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js' %>
 <%= javascript_include_tag "jquery.qtip-1.0.0-rc3.min.js" %>
 
+<style type="text/css" media="screen">
+a.trigger{
+	position: absolute;
+	background:#88bbd4 url(images/plus.png) 6% 55% no-repeat;
+	text-decoration: none;
+	font-size: 16px;
+	letter-spacing:-1px;
+	font-family: verdana, helvetica, arial, sans-serif;
+	color:#fff;
+	padding:4px 12px 6px 24px;
+	font-weight: bold;
+	
+	z-index:2;
+}
+a.trigger.left {
+	left: 0;
+	border-top-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+a.trigger.right {
+	right: 0;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+}
+a.trigger:hover {
+	background-color:#59B;
+}
+a.active.trigger {
+	background:#666 url(images/minus.png) 6% 55% no-repeat;
+}
+
+.panel {
+	color:#CCC;
+	position: absolute;
+	display: none;
+	background: #000000;
+	width: 300px;
+	height: auto;
+	z-index:999999;
+}
+.panel.right {
+	right: 0;
+	padding: 20px 100px 20px 30px;
+	border-bottom-left-radius: 15px;
+	border-top-left-radius: 15px;
+	-moz-border-radius-bottomleft: 15px;
+	-moz-border-radius-topleft: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-webkit-border-top-left-radius: 15px;
+}
+	
+</style>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	$('#panel2').slidePanel({
+		triggerName: '#trigger2',
+		triggerTopPos: '60px',
+		panelTopPos: '60px'
+	});
+	
+});
+</script>
+
 <div id='loading' class="loading">Loading calendar...</div>
 <div id='calendar' class="calendar"></div>
 
 <hr />
 
-<div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          Calendar Filters
-        </a>
-      </h4>
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse ">
-      <div class="panel-body">
-		  Showing Categories
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Calendar Filters
+</button>
+
+<a href="#" id="trigger2" class="trigger left">Filters</a>
+<div id="panel2" class="panel left">
+  <% @categories.each do |category| %>
+	<%= check_box_tag "category-#{category.id}", category.id, true, :onclick=>"toggleCalendarFilterCategory(#{category.id});" %>
+	<span style="background-color:<%= category.color_scheme.background %>;color:<%= category.color_scheme.foreground %>; vertical-align:center;">
+		&ordm;
+	</span>
+	<label for="<%= "category-#{category.id}" %>" style="display:inline;">
+		<%= category.description %>
+	</label>
+  	<br/>
+  <% end %>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Checked Categories Are Visible</h4>
+      </div>
+      <div class="modal-body">
 		  <% @categories.each do |category| %>
 			<%= check_box_tag "category-#{category.id}", category.id, true, :onclick=>"toggleCalendarFilterCategory(#{category.id});" %>
-			<span style="background-color:<%= category.color_scheme.background %>">
+			<span style="background-color:<%= category.color_scheme.background %>;color:<%= category.color_scheme.foreground %>; vertical-align:center;">
 				&ordm;
 			</span>
 			<label for="<%= "category-#{category.id}" %>" style="display:inline;">
@@ -29,10 +117,15 @@
 			</label>
 		  	<br/>
 		  <% end %>
+
       </div>
-    </div>
-  </div>
-</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 <% if Rails.env.development? %>
    <ul>
