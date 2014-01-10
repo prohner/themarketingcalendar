@@ -1,8 +1,12 @@
 @import "bootstrap";
 
-/* mixins, variables, etc. */
 
+/* mixins, variables, etc. */
 $grayMediumLight: #eaeaea;
+$grayLight:#999;
+$grayDarker:#222;
+$grayLighter:#eee;
+
 
 /* universal */
 
@@ -11,7 +15,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 70px;
 }
 
 section {
@@ -62,7 +66,7 @@ p {
 #logo {
   float: left;
   margin-right: 10px;
-  font-size: 1.7em;
+  font-size: 1.2em;
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
@@ -104,7 +108,7 @@ footer {
 
 /* mixins, variables, etc. */
 
-$grayMediumLight: #eaeaea;
+
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
