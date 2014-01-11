@@ -85,7 +85,7 @@ ready = ->
 	}
 	
 	$('span:contains(today)').parents('td').filter(':first').after('<span class="fc-header-space"></span><span id="add-calendar-event" class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right">Add Event</span>');
-	$('span:contains(today)').parents('td').filter(':first').before('<span class="fc-header-space"></span><span class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right"><a href="#" onclick=" return toggleSnap();">&equiv;</a></span>');
+	$('span:contains(today)').parents('td').filter(':first').before('<span class="fc-header-space"></span><span class="fc-button fc-state-default fc-corner-left fc-corner-right"><a href="#" onclick="return toggleSnap();" style="a:hover {text-decoration:none;}">&equiv;</a></span>');
 		
 	$('#add-calendar-event').click (e) ->
 		thisObject = this
