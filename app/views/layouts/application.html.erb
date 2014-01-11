@@ -7,17 +7,32 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
 	<%= render 'layouts/shim' %>
+
+	</style>
   </head>
   <body>
-  	<%= render 'layouts/header' %>
+	  
+      <div class="snap-drawers">
+          <div class="snap-drawer snap-drawer-left">
+              <div>
+				  <%= yield :snap_menu %>
+              </div>
+          </div>
+          <div class="snap-drawer snap-drawer-right"></div>
+      </div>
+      	  
+	  
+      <div id="content" class="snap-content">
+		  	<%= render 'layouts/header' %>
 
-    <div class="container">
-		<% flash.each do |key, value| %>
-			<div class="alert alert-<%= key %>"><%= value %></div>
-		<% end %>
-		<%= yield %>
-		<%= render 'layouts/footer' %>
-		<%= debug(params) if Rails.env.development? and 1==0 %>
-    </div>
+		    <div class="container">
+				<% flash.each do |key, value| %>
+					<div class="alert alert-<%= key %>"><%= value %></div>
+				<% end %>
+				<%= yield %>
+				<%= render 'layouts/footer' %>
+				<%= debug(params) if Rails.env.development? and 1==0 %>
+		    </div>
+	    </div>
   </body>
 </html>

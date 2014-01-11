@@ -12,6 +12,8 @@
  *= require fullcalendar
  *= require calendar
  *= require campaigns
- *= require custom
  *= require font-awesome
+ *= require snap
+ *= require snap_demo
+ *= require custom
  */

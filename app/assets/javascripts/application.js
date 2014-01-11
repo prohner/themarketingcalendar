@@ -16,4 +16,4 @@
 //= require bootstrap
 //= require fullcalendar
 //= require calendar
-
+//= require snap
