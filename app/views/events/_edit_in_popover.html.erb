@@ -27,6 +27,19 @@
 	.actions {
 		margin-top: 6px;
 	}
+	
+	.form-horizontal .control-label {
+		display:inline;
+	}
+
+	.form-horizontal .control-container {
+		display:inline;
+		clear:both;
+	}
+	.col-sm-10 {
+		display:inline;
+		float:none;
+	}
 </style>
 
 <script type="text/javascript" charset="utf-8">
@@ -161,7 +174,7 @@
 
   <div class="control-group form-group" id="event_description_group">
 	<%= f.label :description, :class => "col-sm-2 control-label" %>
-	<div class="col-sm-10">
+	<div class="col-sm-10 control-container">
 		<%= f.text_field :description, :placeholder => "New description of activity", :class => "tcm-form-control" %>
 	</div>
   </div>
@@ -214,7 +227,7 @@
 	  
 	  <div class="control-group form-group">
 		<%= f.label "Occurs on", :class => "col-sm-2 control-label" %>
-		<div class="col-sm-offset-2 col-sm-10">
+		<div class="col-sm-offset-2 col-sm-10" style="float:left;">
 				<label class="checkbox inline">
 					<%= f.check_box :on_sunday %> Sun
 				</label>
