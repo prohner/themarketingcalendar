@@ -26,6 +26,7 @@
 	}
 	.actions {
 		margin-top: 6px;
+		width:160px;
 	}
 	
 	.form-horizontal .control-label {
@@ -267,10 +268,10 @@
   </div>
 
 
-  <div class="actions pull-right">
-    <%= f.submit :id => "submit-button" %>
+  <div class="actions pull-right inline" style="width:230px;">
+    <%= f.submit :id => "submit-button", :style => "float:left;" %>
 	<% unless @event.new_record? %>
-		<label for="delete-button" class="pull-left delete-event-button-proxy" id="delete-event-button-proxy">Delete this event</label>	
+		<label for="delete-button" class="delete-event-button-proxy" id="delete-event-button-proxy" style="float:right;">Delete this event</label>	
 	<% end %>
     <i class="fa fa-spinner fa-spin spinner" id="spinner"></i>
 	<span id="flash">Your changes have been saved!</span>

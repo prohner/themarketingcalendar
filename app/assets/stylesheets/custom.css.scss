@@ -161,7 +161,7 @@ aside {
 
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
-  width: 100%;
+//  width: 100%;
   margin-bottom: 15px;
   @include box_sizing;
 }
@@ -190,8 +190,9 @@ input {
 
 .delete-event-button-proxy {
 	color:darkgray;
-	display:inline;
-	margin-left:40px;
+	font-weight:normal;
+//	display:inline;
+//	margin-left:40px;
 	vertical-align:bottom;
 	text-decoration:underline;
 }
