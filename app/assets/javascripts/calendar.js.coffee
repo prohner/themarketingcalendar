@@ -4,6 +4,17 @@
 
 popoverIsShowing = false
 is_deleted_event = false
+hidden_categories = []
+snapIsShowing = false
+
+@toggleSnap = ->
+	if snapIsShowing
+		snapper.close()
+		snapIsShowing = false
+	else
+		snapper.expand('left')
+		snapIsShowing = true
+	false
 
 ready = ->
 	# remoteServerName = "http://www.themarketingcalendar.com"
@@ -48,6 +59,11 @@ ready = ->
 			}
 		]
 
+		eventRender: (event, element) ->
+			if hidden_categories.indexOf(event.category_id) >= 0
+				console.log "Event's category is hidden"
+				$(element).hide();
+			
 		eventAfterRender: (event, element, view) ->
 			$(element).attr "id", "event-id-" + event.id
 			
@@ -69,6 +85,8 @@ ready = ->
 	}
 	
 	$('span:contains(today)').parents('td').filter(':first').after('<span class="fc-header-space"></span><span id="add-calendar-event" class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right">Add Event</span>');
+	$('span:contains(today)').parents('td').filter(':first').before('<span class="fc-header-space"></span><span class="fc-button fc-state-default fc-corner-left fc-corner-right"><a href="#" onclick="return toggleSnap();" style="a:hover {text-decoration:none;}">&equiv;</a></span>');
+		
 	$('#add-calendar-event').click (e) ->
 		thisObject = this
 		if popoverIsShowing 
@@ -156,6 +174,16 @@ presentPopover = (url, sourceObject, event) ->
 		$(thisObject).popover('show')
 
 
+@toggleCalendarFilterCategory = (categoryId) ->
+	indexOfCategoryId = hidden_categories.indexOf(categoryId)
+	if indexOfCategoryId >= 0
+		hidden_categories.splice indexOfCategoryId, 1
+		console.log "Remove " + categoryId
+	else
+		hidden_categories.push(categoryId)
+		console.log "  Add  " + categoryId
+	$('#calendar').fullCalendar 'rerenderEvents'
+	
 # $('body').on('click',  (e) ->
 # 	$('[data-toggle="popover"]').each( () ->
 # 			if !$(this).is(e.target)

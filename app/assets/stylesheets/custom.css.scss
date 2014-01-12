@@ -6,6 +6,7 @@ $grayMediumLight: #eaeaea;
 $grayLight:#999;
 $grayDarker:#222;
 $grayLighter:#eee;
+$gray:#ccc;
 
 
 /* universal */
@@ -199,4 +200,8 @@ input {
 	position: absolute;
 	left: -1000px;
 	top: -1000px;
+}
+
+.container {
+	padding-top:55px;
 }

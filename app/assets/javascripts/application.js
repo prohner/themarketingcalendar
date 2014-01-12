@@ -16,4 +16,4 @@
 //= require turbolinks
 //= require fullcalendar
 //= require calendar
-
+//= require snap

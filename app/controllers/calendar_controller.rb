@@ -3,6 +3,7 @@ class CalendarController < ApplicationController
 
   def index
     @event = Event.new
+    @categories = Category.all.order('description')
   end
 
   def events

@@ -13,8 +13,10 @@
  *= require fullcalendar
  *= require calendar
  *= require campaigns
- *= require custom
  *= require font-awesome
+ *= require custom
+ *= require snap
+ *= require snap_demo
  */
 
 @font-face {

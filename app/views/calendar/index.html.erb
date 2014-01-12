@@ -2,10 +2,82 @@
 <%= javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js' %>
 <%= javascript_include_tag "jquery.qtip-1.0.0-rc3.min.js" %>
 
+<script type="text/javascript">
+// alert ("snapping");
+    var snapper = new Snap({
+		element: document.getElementById('content'),
+		dragger: null,
+		disable: 'none',
+		addBodyClasses: true,
+		hyperextensible: false,
+		resistance: 0.5,
+		flickThreshold: 50,
+		transitionSpeed: 0.3,
+		easing: 'ease',
+		maxPosition: 266,
+		minPosition: -266,
+		tapToClose: true,
+		touchToDrag: true,
+		slideIntent: 40,
+		minDragDistance: 5
+	});
+	// toggleSnap();
+	
+</script>
+
 <div id='loading' class="loading">Loading calendar...</div>
 <div id='calendar' class="calendar"></div>
 
 <hr />
+
+<style type="text/css">
+label {
+    display: block;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+input {
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    margin:0;
+    vertical-align: bottom;
+    position: relative;
+    top: -1px;
+    *overflow: hidden;
+}
+</style>
+
+<% content_for :snap_menu do %>
+<%= form_tag '#', class: "form-horizontal" do %>
+	<div class="panel-group" id="accordion">
+	  <div xclass="panel panel-default">
+	    <div id="collapseOne" xclass="panel-collapse">
+			<div xclass="panel-heading">
+				<div class="panel-body">
+					<h4 class="panel-title">Showing Checked Categories</h4>
+					<div class="panel-body">
+  					  <% @categories.each do |category| %>
+
+						<div class="control-group form-group" style="margin:0">
+							<div class="controls">
+
+								<label class="checkbox inline" style="font-weight:normal;">
+									<%= check_box_tag "category-#{category.id}", category.id, true, :onclick=>"toggleCalendarFilterCategory(#{category.id});" %>
+									&nbsp; &nbsp; <%= category.description %> 
+								</label>
+							</div>
+						</div>
+
+  					  <% end %>
+					</div>
+				</div>
+		    </div>
+	    </div>
+	  </div>
+	</div>
+<% end %>
+<% end %>
 
 <% if Rails.env.development? %>
    <ul>
