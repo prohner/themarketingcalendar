@@ -207,36 +207,42 @@
   
   <div class="event-repetition">
 	  <div class="control-group form-group">
-	    <%= f.label "Repetition Info", :class => "col-sm-2 control-label" %>
+	    <%= f.label "Info", :class => "col-sm-2 control-label" %>
 		<div class="col-sm-10">
 			<%= f.text_field :repetition_type, :placeholder => "Repetition Info", :class => "tcm-form-control" %>
 		</div>
 	  </div>
 	  <div class="control-group form-group">
-	    <%= f.label "Repetition Frequency", :class => "col-sm-2 control-label" %>
+	    <%= f.label "Frequency", :class => "col-sm-2 control-label" %>
 		<div class="col-sm-10">
 			<%= f.text_field :repetition_frequency, :placeholder => "Repetition Frequency", :class => "tcm-form-control" %>
 		</div>
 	  </div>
 	  <div class="control-group form-group">
-	    <%= f.label "Repetition Options", :class => "col-sm-2 control-label" %>
+	    <%= f.label "Options", :class => "col-sm-2 control-label" %>
 		<div class="col-sm-10">
 			<%= f.text_field :repetition_options, :placeholder => "Repetition Options", :class => "tcm-form-control" %>
 		</div>
 	  </div>
-	  
+	  <style type="text/css" media="screen">
+	  .checkbox {
+		  float:left;
+		  text-align:right;
+		  margin-right:15px;
+	  }
+	  </style>
 	  <div class="control-group form-group">
 		<%= f.label "Occurs on", :class => "col-sm-2 control-label" %>
-		<div class="col-sm-offset-2 col-sm-10" style="float:left;">
-				<label class="checkbox inline">
+		<div class="col-sm-offset-2 col-sm-10 inline" style="float:left;">
+				<label class="checkbox inline" style="">
 					<%= f.check_box :on_sunday %> Sun
 				</label>
 
-				<label class="checkbox inline">
+				<label class="checkbox inline" style="">
 					<%= f.check_box :on_monday %> Mon
 				</label>
 
-				<label class="checkbox inline">
+				<label class="checkbox inline" style="">
 					<%= f.check_box :on_tuesday %> Tue
 				</label>
 
@@ -264,7 +270,7 @@
   <div class="actions pull-right">
     <%= f.submit :id => "submit-button" %>
 	<% unless @event.new_record? %>
-		<label for="delete-button" class="delete-event-button-proxy" id="delete-event-button-proxy">Delete this event</label>	
+		<label for="delete-button" class="pull-left delete-event-button-proxy" id="delete-event-button-proxy">Delete this event</label>	
 	<% end %>
     <i class="fa fa-spinner fa-spin spinner" id="spinner"></i>
 	<span id="flash">Your changes have been saved!</span>
