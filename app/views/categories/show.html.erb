@@ -6,13 +6,8 @@
 </p>
 
 <p>
-  <strong>Company:</strong>
-  <%= @category.company_id %>
-</p>
-
-<p>
   <strong>Color:</strong>
-  <%= @category.color %>
+  <%= color_scheme_as_html_snippet_to_display(@category.color_scheme) %>
 </p>
 
 <%= link_to 'Edit', edit_category_path(@category) %> |

@@ -5,7 +5,7 @@ describe "categories/show" do
     @category = assign(:category, stub_model(Category,
       :description => "Description",
       :company_id => 1,
-      :color => "Color"
+      :color_scheme => ColorScheme.new(:foreground => "black", :background => "white")
     ))
   end
 

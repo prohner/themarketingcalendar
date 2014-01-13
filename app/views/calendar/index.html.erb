@@ -63,7 +63,9 @@ input {
 
 								<label class="checkbox inline" style="font-weight:normal;">
 									<%= check_box_tag "category-#{category.id}", category.id, true, :onclick=>"toggleCalendarFilterCategory(#{category.id});", :style => "width:13px" %>
-									&nbsp; &nbsp; <%= category.description %> 
+									&nbsp; &nbsp;
+									<%= color_scheme_as_html_snippet_to_display(category.color_scheme) %>
+									<%= category.description %> 
 								</label>
 							</div>
 						</div>

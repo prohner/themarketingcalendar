@@ -16,12 +16,8 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :company_id %><br>
-    <%= f.number_field :company_id %>
-  </div>
-  <div class="field">
     <%= f.label :color %><br>
-    <%= f.text_field :color %>
+	<%= collection_select(:category, :color_scheme_id, ColorScheme.all, :id, :name, prompt: false) %>
   </div>
   <div class="actions">
     <%= f.submit %>
