@@ -134,22 +134,23 @@ presentPopover = (url, sourceObject, event) ->
 			container: 'body'
 		})
 	
-		$(thisObject).on "show", (e) ->
+		$(thisObject).on "show.bs.popover", (e) ->
 			console.log "popover.on.show "
 			
-		$(thisObject).on "shown", (e) ->
+		$(thisObject).on "shown.bs.popover", (e) ->
 			console.log "popover.on.shown "
 			if adding_new_event
 				$("#name_of_popover_that_contains_me").val("add-calendar-event")
 			else
+				console.log "name_of_popover_that_contains_me = " + "event-id-" + event.id
 				$("#name_of_popover_that_contains_me").val("event-id-" + event.id)
 
-		$(thisObject).on "hide", (e) ->
+		$(thisObject).on "hide.bs.popover", (e) ->
 			console.log "popover.on.hide, deleted: " + $("#event_was_deleted").val() + ", typeof=" + typeof($("#event_was_deleted").val())
 			is_deleted_event = ($("#event_was_deleted").val() == "true")
 			console.log "    => is_deleted_event = " + is_deleted_event
 	
-		$(thisObject).on "hidden", (e) ->
+		$(thisObject).on "hidden.bs.popover", (e) ->
 			console.log "popover.on.hidden"
 			new_json = $("#saved_event_result_as_json").val()
 			is_new_event = ($("#saved_event_is_new_event").val() == "true")

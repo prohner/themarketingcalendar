@@ -131,6 +131,7 @@
 					$("#flash").show();
 					$("#flash").effect("fade", {}, 3500);
 					$('#saved_event_result_as_json').val(JSON.stringify(json));
+					console.log("finished with result");
 					setTimeout(function() { hideThePopoverThatContainsMe(); }, 2000 );
 			    });
 			// } else {
@@ -147,6 +148,7 @@
 		});
 		
 		function hideThePopoverThatContainsMe() {
+			console.log("attempting to hide popover");
 			var id = "#" + $('#name_of_popover_that_contains_me').val();
 			var x = $(id);
 			console.log('mmm bueno (' + id + ') ' + x);
