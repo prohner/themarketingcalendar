@@ -17,3 +17,4 @@
 //= require fullcalendar
 //= require calendar
 //= require snap
+//= require categories

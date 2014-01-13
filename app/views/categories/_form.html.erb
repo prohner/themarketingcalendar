@@ -17,7 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :color %><br>
-	<%= collection_select(:category, :color_scheme_id, ColorScheme.all, :id, :name, prompt: false) %>
+	<%= collection_select(:category, :color_scheme_id, ColorScheme.all, :id, :name, 
+		{prompt: false},
+		{:onChange => "editCategoryColorSchemeChange(this);"}) 
+	%>
+	<span id="editCategoryColorSchemeExample"></span>
   </div>
   <div class="actions">
     <%= f.submit %>

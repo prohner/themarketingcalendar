@@ -24,65 +24,66 @@ ready = ->
 	eventsSourceUrl = remoteServerName + '/calendar/events.js'
 	repeatingEventsSourceUrl = remoteServerName + '/repeating_events.js?id=1'
 	
-	$('#calendar').fullCalendar {
-		editable: true
-		header: {
-			left: 'prev,next today'
-			center: 'title'
-			right: 'month,basicWeek,basicDay'
-		}
-		weekNumbers: true
-		loading: (bool) ->
-			if bool
-				$('#loading').show()
-			else
-				$('#loading').hide()
-		timeFormat: 'h:mm t{ - h:mm t} '
-		dragOpacity: "0.5"
-		eventSources: [
-			# {
-			# 	url: repeatingEventsSourceUrl
-			# 	color: 'green'
-			# 	textColor: 'white'
-			# 	ignoreTimezone: true
-			# 	editable: true
-			# 	crossDomain: true
-			# 	jsonp: true
-			# }
-			{
-				url: eventsSourceUrl 
-				ignoreTimezone: true
-				crossDomain: true
-				jsonp: true
-				error: () ->
-					alert "there was an error while fetching events"
+	if typeof $('#calendar').fullCalendar != 'undefined'
+		$('#calendar').fullCalendar {
+			editable: true
+			header: {
+				left: 'prev,next today'
+				center: 'title'
+				right: 'month,basicWeek,basicDay'
 			}
-		]
+			weekNumbers: true
+			loading: (bool) ->
+				if bool
+					$('#loading').show()
+				else
+					$('#loading').hide()
+			timeFormat: 'h:mm t{ - h:mm t} '
+			dragOpacity: "0.5"
+			eventSources: [
+				# {
+				# 	url: repeatingEventsSourceUrl
+				# 	color: 'green'
+				# 	textColor: 'white'
+				# 	ignoreTimezone: true
+				# 	editable: true
+				# 	crossDomain: true
+				# 	jsonp: true
+				# }
+				{
+					url: eventsSourceUrl 
+					ignoreTimezone: true
+					crossDomain: true
+					jsonp: true
+					error: () ->
+						alert "there was an error while fetching events"
+				}
+			]
 
-		eventRender: (event, element) ->
-			if hidden_categories.indexOf(event.category_id) >= 0
-				console.log "Event's category is hidden"
-				$(element).hide();
+			eventRender: (event, element) ->
+				if hidden_categories.indexOf(event.category_id) >= 0
+					console.log "Event's category is hidden"
+					$(element).hide();
 			
-		eventAfterRender: (event, element, view) ->
-			$(element).attr "id", "event-id-" + event.id
+			eventAfterRender: (event, element, view) ->
+				$(element).attr "id", "event-id-" + event.id
 			
-		eventClick: (event, jsEvent, view) ->
-			thisObject = this
-			offset = $(this).offset()
-			left = jsEvent.pageX
-			top = jsEvent.pageY
-			console.log "(" + left + ", " + top + ")"
+			eventClick: (event, jsEvent, view) ->
+				thisObject = this
+				offset = $(this).offset()
+				left = jsEvent.pageX
+				top = jsEvent.pageY
+				console.log "(" + left + ", " + top + ")"
 			
-			# alert event.my_url
-			if ! popoverIsShowing
-				popoverIsShowing = true
-				console.log "popping " + event.title
-				presentPopover event.my_url, thisObject, event
+				# alert event.my_url
+				if ! popoverIsShowing
+					popoverIsShowing = true
+					console.log "popping " + event.title
+					presentPopover event.my_url, thisObject, event
 
-			else
-				popoverIsShowing = false
-	}
+				else
+					popoverIsShowing = false
+		}
 	
 	$('span:contains(today)').parents('td').filter(':first').after('<span class="fc-header-space"></span><span id="add-calendar-event" class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right">Add Event</span>');
 	$('span:contains(today)').parents('td').filter(':first').before('<span class="fc-header-space"></span><span class="fc-button fc-state-default fc-corner-left fc-corner-right"><a href="#" onclick="return toggleSnap();" style="a:hover {text-decoration:none;}">&equiv;</a></span>');
