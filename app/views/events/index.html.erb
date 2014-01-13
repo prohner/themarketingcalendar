@@ -28,8 +28,8 @@
     <% @events.each do |event| %>
       <tr>
         <td><%= event.description %></td>
-        <td><%= event.start_date %></td>
-        <td><%= event.end_date %></td>
+        <td><%= event.starts_at %></td>
+        <td><%= event.ends_at %></td>
         <td><%= event.campaign_id %></td>
         <td><%= event.category_id %></td>
         <td><%= event.repetition_type %></td>

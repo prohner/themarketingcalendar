@@ -6,5 +6,5 @@ describe Category do
   subject { @category }
   
   it { should respond_to(:description) }
-  it { should respond_to(:color) }
+  it { should respond_to(:color_scheme) }
 end

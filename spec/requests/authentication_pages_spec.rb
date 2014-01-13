@@ -31,8 +31,9 @@ describe "Authentication" do
         fill_in "Password",   with: user.password
         click_button "Sign in"
       end
+
       
-      it { should have_title(user.full_name) }
+      it { should have_title("Calendar") }
       it { should have_link('Profile', href: user_path(user)) }
       it { should have_link('Settings', href: edit_user_path(user)) }
       it { should have_link('Sign out', href: signout_path) }

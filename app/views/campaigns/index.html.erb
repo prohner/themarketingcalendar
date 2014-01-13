@@ -18,8 +18,8 @@
     <% @campaigns.each do |campaign| %>
       <tr>
         <td><%= campaign.description %></td>
-        <td><%= campaign.start_date %></td>
-        <td><%= campaign.end_date %></td>
+        <td><%= campaign.starts_at %></td>
+        <td><%= campaign.ends_at %></td>
         <td><%= campaign.company_id %></td>
         <td><%= campaign.color %></td>
         <td><%= link_to 'Show', campaign %></td>
