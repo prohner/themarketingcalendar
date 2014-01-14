@@ -21,7 +21,7 @@
 		{prompt: false},
 		{:onChange => "editCategoryColorSchemeChange(this);"}) 
 	%>
-	<span id="editCategoryColorSchemeExample"></span>
+	<span id="editCategoryColorSchemeExample"><%= @category.color_scheme.name %></span>
   </div>
   <div class="actions">
     <%= f.submit %>
