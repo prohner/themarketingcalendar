@@ -193,13 +193,6 @@
 		<%= f.text_field :ends_at, :placeholder => "Date activity ends", :class => "datepickerField tcm-form-control" %>
 	</div>
   </div>
-  <div class="control-group form-group" id="event_campaign_group">
-    <%= f.label :campaign, :class => "col-sm-2 control-label"  %>
-	<div class="col-sm-10">
-		<%= f.collection_select :campaign_id, Campaign.order(:description), :id, :description, {:prompt => "--  Select Campaign --"}, {:class => "tcm-form-control"} %>	
-	</div>
-	
-  </div>
   <div class="control-group form-group" id="event_category_group">
     <%= f.label :category_id, :class => "col-sm-2 control-label"  %>
 	<div class="col-sm-10">
