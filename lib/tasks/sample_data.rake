@@ -5,37 +5,37 @@ namespace :db do
     User.delete_all
     ColorScheme.delete_all
     
-    cs1  = ColorScheme.create(background:"#A75C56", foreground:"#F5C972")
-    cs2  = ColorScheme.create(background:"#AE695A", foreground:"#EAB06E")
-    cs3  = ColorScheme.create(background:"#E89C84", foreground:"#F5C972")
-    cs4  = ColorScheme.create(background:"brown", foreground:"white")
-    cs5  = ColorScheme.create(background:"slate", foreground:"white")
+    cs1  = ColorScheme.create(name: "Light brown on brown", background:"#A75C56", foreground:"#F5C972")
+    cs2  = ColorScheme.create(name: "Brown on brown", background:"#AE695A", foreground:"#EAB06E")
+    cs3  = ColorScheme.create(name: "Light brown on dark brown", background:"#E89C84", foreground:"#F5C972")
+    cs4  = ColorScheme.create(name: "White on brown", background:"brown", foreground:"white")
+    cs5  = ColorScheme.create(name: "cs5", background:"slate", foreground:"white")
 
-    cs6  = ColorScheme.create(background:"#90CA77", foreground:"#E48743")
-    cs7  = ColorScheme.create(background:"#81C6DD", foreground:"#E48743")
-    cs8  = ColorScheme.create(background:"#E9B64D", foreground:"#9E3B33")
+    cs6  = ColorScheme.create(name: "Brown on green", background:"#90CA77", foreground:"#E48743")
+    cs7  = ColorScheme.create(name: "Brown on cyan", background:"#81C6DD", foreground:"#E48743")
+    cs8  = ColorScheme.create(name: "Dark brown on light brown", background:"#E9B64D", foreground:"#9E3B33")
 
-    cs9  = ColorScheme.create(background:"#527578", foreground:"#84978F")
-    cs10 = ColorScheme.create(background:"#ADA692", foreground:"#47423F")
-    cs11 = ColorScheme.create(background:"#B3B1B2", foreground:"#FFFFFF")
+    cs9  = ColorScheme.create(name: "Gray on graphite", background:"#527578", foreground:"#84978F")
+    cs10 = ColorScheme.create(name: "Dark gray on light gray", background:"#ADA692", foreground:"#47423F")
+    cs11 = ColorScheme.create(name: "White on gray", background:"#B3B1B2", foreground:"#FFFFFF")
 
-    cs12 = ColorScheme.create(background:"#74A6BD", foreground:"#EB8540")
-    cs13 = ColorScheme.create(background:"#7195A3", foreground:"#B06A3B")
-    cs14 = ColorScheme.create(background:"#D4E7ED", foreground:"#AB988B")
+    cs12 = ColorScheme.create(name: "Brown on slate", background:"#74A6BD", foreground:"#EB8540")
+    cs13 = ColorScheme.create(name: "Brown on graphite", background:"#7195A3", foreground:"#B06A3B")
+    cs14 = ColorScheme.create(name: "Dark gray on pale", background:"#D4E7ED", foreground:"#AB988B")
 
-    cs15 = ColorScheme.create(background:"#8D3A61", foreground:"#3E4957")
-    cs16 = ColorScheme.create(background:"#B04979", foreground:"#D9E6F7")
-    cs17 = ColorScheme.create(background:"#C55186", foreground:"#FFFFFF")
+    cs15 = ColorScheme.create(name: "Dark gray on brown", background:"#8D3A61", foreground:"#3E4957")
+    cs16 = ColorScheme.create(name: "White on brown", background:"#B04979", foreground:"#D9E6F7")
+    cs17 = ColorScheme.create(name: "White on light brown", background:"#C55186", foreground:"#FFFFFF")
 
-    cs18 = ColorScheme.create(background:"#DD1E2F", foreground:"#218559")
-    cs19 = ColorScheme.create(background:"#EBB035", foreground:"#D0C6B1")
-    cs20 = ColorScheme.create(background:"#06A2CB", foreground:"#192823")
+    cs18 = ColorScheme.create(name: "Green on brown", background:"#DD1E2F", foreground:"#218559")
+    cs19 = ColorScheme.create(name: "Gray on light brown", background:"#EBB035", foreground:"#D0C6B1")
+    cs20 = ColorScheme.create(name: "Graphite on cyan", background:"#06A2CB", foreground:"#192823")
     
-    user_pr = User.create(email:"pr@TheMarketingCalendar.com", first_name: "Preston", last_name: "Rohner", password: "foobar", password_confirmation: "foobar")
-    user_ya = User.create(email:"ya@TheMarketingCalendar.com", first_name: "Yves", last_name: "Accad", password: "foobar", password_confirmation: "foobar")
+    user_pr = User.create(email:"pr@TheMarketingCalendar.com", first_name: "Preston", last_name: "Rohner", password: "foobar", password_confirmation: "foobar", user_type: 1)
+    user_ya = User.create(email:"ya@TheMarketingCalendar.com", first_name: "Yves", last_name: "Accad", password: "foobar", password_confirmation: "foobar", user_type: 1)
 
-    # user_pr.save
-    # user_ya.save
+    user_pr.save
+    user_ya.save
     
     sales_support = CategoryGroup.create(description: "Sales Support", color_scheme: cs1)
     sales_promotion = Category.create(description: "Sales Promotions", color_scheme: cs2)

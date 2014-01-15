@@ -21,6 +21,7 @@
 		{prompt: false},
 		{:onChange => "editCategoryColorSchemeChange(this);"}) 
 	%>
+	<%= color_scheme_as_html_snippet_to_display(@category.color_scheme) %>
 	<span id="editCategoryColorSchemeExample"><%= @category.color_scheme.name %></span>
   </div>
   <div class="actions">
