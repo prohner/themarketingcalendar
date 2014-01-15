@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   before { @user = User.new(first_name: "a", last_name: "b", email: "user@example.com", 
-    password: "123456", password_confirmation: "123456") }
+    password: "123456", password_confirmation: "123456", user_type: 1) }
   
   subject { @user }
   
@@ -15,6 +15,8 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:full_name) }
   it { should respond_to(:remember_token) }
+  it { should respond_to(:user_type) }
+  it { should respond_to(:user_type_description) }
   
   it { should be_valid }
   
@@ -43,6 +45,25 @@ describe User do
     it { should_not be_valid }
   end
 
+  describe "when user type is invalid" do
+    it "should be invalid" do
+      invalid_types = %w[0 5 -1]
+      invalid_types.each do |bad_type|
+        @user.user_type = bad_type
+        expect(@user).not_to be_valid
+      end
+    end
+  end
+  
+  describe "when user type is valid" do
+    it "should have a description" do
+      User::USER_TYPE_VALUES.each do |type|
+        @user.user_type = type
+        @user.user_type_description.should_not be_nil
+      end
+    end
+  end
+  
   describe "when email format is invalid" do
     it "should be invalid" do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo.

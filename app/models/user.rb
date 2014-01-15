@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  before_save { self.email = email.downcase }
+  before_save :default_values
   before_create :create_remember_token
   
   belongs_to :company
@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  
+  USER_TYPES = [ [:root, 1], [:administrator, 2], [:user, 3], [:viewer, 4] ]
+  USER_TYPE_VALUES = [1, 2, 3, 4]
+  validates_inclusion_of :user_type, :in => USER_TYPE_VALUES
   
   has_secure_password
   validates :password, length: { minimum: 6 }
@@ -31,11 +35,28 @@ class User < ActiveRecord::Base
   def User.encrypt(token)
     Digest::SHA1.hexdigest(token.to_s)
   end
+  
+  def user_type_description
+    case self.user_type
+    when 1
+      "Root"
+    when 2
+      "Admin"
+    when 3
+      "User"
+    when 4
+      "Viewer"
+    end
+  end
 
   private
 
     def create_remember_token
       self.remember_token = User.encrypt(User.new_remember_token)
     end
-  
+
+    def default_values
+       self.email = email.downcase
+       self.user_type ||= 1
+    end
 end

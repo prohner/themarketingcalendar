@@ -24,7 +24,7 @@ describe UsersController do
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) { { first_name: "a", last_name: "b", email: "user@example.com", 
-    password: "123456", password_confirmation: "123456" } }
+    password: "123456", password_confirmation: "123456", user_type: 1 } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in

@@ -39,6 +39,7 @@ describe "Signup Page" do
         fill_in "Email",        with: "bill@example.com"
         fill_in "Password",     with: "foobar"
         fill_in "Confirmation", with: "foobar"
+        fill_in "User type",    with: 1
       end
 
       it "should create a user" do
