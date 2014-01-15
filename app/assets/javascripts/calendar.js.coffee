@@ -6,6 +6,7 @@ popoverIsShowing = false
 is_deleted_event = false
 hidden_categories = []
 snapIsShowing = false
+popoverThatIsCurrentlyShowing = null
 
 @toggleSnap = ->
 	if snapIsShowing
@@ -17,6 +18,16 @@ snapIsShowing = false
 	false
 
 ready = ->
+	
+	$('body').on 'click', (e) ->
+		console.log "click 0 " + popoverIsShowing
+		if popoverIsShowing
+			console.log "click 1 " + popoverThatIsCurrentlyShowing
+			if popoverThatIsCurrentlyShowing != null
+				console.log "click 2"
+				$(popoverThatIsCurrentlyShowing).popover('hide')
+				popoverThatIsCurrentlyShowing = null
+	
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	# remoteServerName = "http://0.0.0.0:3000"
 	
@@ -118,6 +129,7 @@ massAssignEvent = (event, json_obj) ->
 
 presentPopover = (url, sourceObject, event) ->
 	thisObject = sourceObject
+
 	is_deleted_event = false
 	console.log "presentPopover starting"
 	$.get url, (d) ->
@@ -175,6 +187,9 @@ presentPopover = (url, sourceObject, event) ->
 		console.log "showing popover"
 		$(thisObject).popover('show')
 
+		popoverThatIsCurrentlyShowing = thisObject
+		console.log "POPOVERTHATISCURRENTLYSHOWING: " + popoverThatIsCurrentlyShowing
+
 
 @toggleCalendarFilterCategory = (categoryId) ->
 	indexOfCategoryId = hidden_categories.indexOf(categoryId)
@@ -185,7 +200,7 @@ presentPopover = (url, sourceObject, event) ->
 		hidden_categories.push(categoryId)
 		console.log "  Add  " + categoryId
 	$('#calendar').fullCalendar 'rerenderEvents'
-	
+
 # $('body').on('click',  (e) ->
 # 	$('[data-toggle="popover"]').each( () ->
 # 			if !$(this).is(e.target)
