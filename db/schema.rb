@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140114050441) do
+ActiveRecord::Schema.define(version: 20140116063522) do
 
   create_table "categories", force: true do |t|
     t.string   "description"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20140114050441) do
   end
 
   create_table "category_groups", force: true do |t|
-    t.integer  "company_id"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -34,6 +33,7 @@ ActiveRecord::Schema.define(version: 20140114050441) do
     t.string   "background"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   create_table "events", force: true do |t|
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 20140114050441) do
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
+    t.integer  "user_type"
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"

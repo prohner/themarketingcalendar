@@ -12,6 +12,13 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :category_group %><br>
+    <%= link_to @category.category_group.description, edit_category_group_path(@category.category_group) %>
+	&nbsp;<br/>
+	&nbsp;<br/>
+  </div>
+
+  <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>
