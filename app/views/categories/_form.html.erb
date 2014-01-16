@@ -12,6 +12,14 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :category_group %><br>
+	<%= collection_select(:category, :category_group_id, CategoryGroup.all, :id, :description, 
+		{prompt: false}) 
+	%>
+	
+  </div>
+
+  <div class="field">
     <%= f.label :description %><br>
     <%= f.text_field :description %>
   </div>

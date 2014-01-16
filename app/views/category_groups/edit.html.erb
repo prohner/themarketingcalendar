@@ -1,0 +1,14 @@
+<h1>Editing category_group</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @category_group %> |
+<%= link_to 'Back', category_groups_path %>
+
+<div>
+	<h3>Categories in this Group</h3>
+	<% @category_group.categories.each do |cat| %>
+		<%= link_to cat.description, edit_category_path(cat) %> <br/>
+	<% end %>
+</div>
+

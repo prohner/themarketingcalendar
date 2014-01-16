@@ -19,8 +19,6 @@
 		    <li class=""><%= link_to "Home",    root_path %></li>
 		    <li><%= link_to "Contact", contact_path %></li>
         
-	    
-	
 
         <% if signed_in? %>
 	  <li><%= link_to 'Calendar', calendar_index_path %></li>
@@ -30,6 +28,9 @@
               Account <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
+              <li><%= link_to "Categories", categories_path %></li>
+              <li><%= link_to "Category Groups", category_groups_path %></li>
+              <li class="divider"></li>
               <li><%= link_to "Profile", current_user %></li>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>

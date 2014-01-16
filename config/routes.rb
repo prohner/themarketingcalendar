@@ -23,6 +23,7 @@ TheMarketingCalendar::Application.routes.draw do
   resources :events
 
   resources :categories
+  resources :category_groups
 
   resources :campaigns
 
