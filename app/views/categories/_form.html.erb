@@ -13,9 +13,10 @@
 
   <div class="field">
     <%= f.label :category_group %><br>
-    <%= link_to @category.category_group.description, edit_category_group_path(@category.category_group) %>
-	&nbsp;<br/>
-	&nbsp;<br/>
+	<%= collection_select(:category, :category_group_id, CategoryGroup.all, :id, :description, 
+		{prompt: false}) 
+	%>
+	
   </div>
 
   <div class="field">
