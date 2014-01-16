@@ -7,5 +7,6 @@ describe CategoryGroup do
   
   it { should respond_to(:description) }
   it { should respond_to(:color_scheme) }
+  it { should respond_to(:categories) }
 
 end
