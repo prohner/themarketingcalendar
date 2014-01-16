@@ -15,7 +15,7 @@
   <tbody>
     <% @categories.each do |category| %>
       <tr>
-        <td><%= category.category_group.description %></td>
+        <td><%= link_to category.category_group.description, edit_category_group_path(category.category_group) %></td>
         <td><%= category.description %></td>
         <td><%= color_scheme_as_html_snippet_to_display(category.color_scheme) %></td>
         <td><%= link_to 'Edit', edit_category_path(category) %></td>
