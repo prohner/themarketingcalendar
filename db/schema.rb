@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140117044910) do
+ActiveRecord::Schema.define(version: 20140117194019) do
 
   create_table "categories", force: true do |t|
     t.string   "description"
@@ -60,6 +60,26 @@ ActiveRecord::Schema.define(version: 20140117044910) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "repeating_events", force: true do |t|
+    t.string   "title"
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.boolean  "all_day"
+    t.string   "description"
+    t.string   "repetition_type"
+    t.integer  "repetition_frequency"
+    t.boolean  "on_sunday"
+    t.boolean  "on_monday"
+    t.boolean  "on_tuesday"
+    t.boolean  "on_wednesday"
+    t.boolean  "on_thursday"
+    t.boolean  "on_friday"
+    t.boolean  "on_saturday"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "category_id"
   end
 
   create_table "stakeholders", force: true do |t|

@@ -2,7 +2,6 @@ class Event < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   
   belongs_to :category
-  belongs_to :campaign
   has_many :stakeholders
   has_many :users, :through => :stakeholders
 

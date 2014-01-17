@@ -8,6 +8,15 @@ describe Category do
   it { should respond_to(:description) }
   it { should respond_to(:color_scheme) }
   it { should respond_to(:category_group) }
+
+  describe "object from scope" do
+    it "should not be read only" do
+      category = Category.create!(:description => "new cat", :category_group_id => 1)
+      category.description = 'description new'
+      category.save
+      category.description.should == 'description new'
+    end
+  end
   
   describe "when category group is absent" do
     it "should be invalid" do

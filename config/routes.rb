@@ -1,4 +1,6 @@
 TheMarketingCalendar::Application.routes.draw do
+  resources :repeating_events
+
   get "calendar/index"
   get "calendar/events"
   get "calendar/repeating_events"
