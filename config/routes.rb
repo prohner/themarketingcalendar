@@ -8,6 +8,7 @@ TheMarketingCalendar::Application.routes.draw do
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
+  match '/interested', to: 'static_pages#interested',     via: 'post'
   
   get 'edit_event_in_popover/:id/edit' => 'events#edit_event_in_popover', as: :edit_in_po
   get 'new_event_in_popover' => 'events#new_event_in_popover', as: :new_in_po
@@ -20,6 +21,7 @@ TheMarketingCalendar::Application.routes.draw do
   get "static_pages/help"
   get "static_pages/about"
   get "static_pages/contact"
+
   resources :events
 
   resources :categories
