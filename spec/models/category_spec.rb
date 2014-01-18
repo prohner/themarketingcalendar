@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id                :integer          not null, primary key
+#  description       :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  category_group_id :integer
+#  color_scheme_id   :integer
+#
+
 require 'spec_helper'
 
 describe Category do

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: color_schemes
+#
+#  id         :integer          not null, primary key
+#  foreground :string(255)
+#  background :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  name       :string(255)
+#
+
 require 'spec_helper'
 
 describe ColorScheme do

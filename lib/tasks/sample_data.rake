@@ -91,6 +91,8 @@ namespace :db do
     research.categories << customer_surveys
     research.categories << advertising_effectiveness
 
+    e = Event.create(description:"Every Friday", starts_at: make_time(2014, 1, 17), ends_at: make_time(2014, 3, 31), repetition_type: "weekly", on_friday: true)
+
     e = Event.create(description:"Sales Promo (offer)", starts_at: make_time(2014, 1, 25), ends_at: make_time(2014, 2, 1))
     sales_promotion.events << e
 

@@ -56,6 +56,8 @@ group :development, :test do
   gem "rails-erd"
 end
 
+gem 'annotate', ">=2.6.0"
+
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 
