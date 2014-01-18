@@ -14,6 +14,6 @@ feature "Home Page" do
 
   scenario "User visits home page" do
     visit "/static_pages/home.html"
-    # expect(page).to have_link "Sign up now!", href: signup_path
+    expect(page).to have_link "Sign up now!", href: signup_path
   end
 end

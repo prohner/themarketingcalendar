@@ -1,1 +1,0 @@
-json.extract! @repeating_event, :id, :title, :starts_at, :ends_at, :all_day, :description, :repetition_type, :repetition_frequency, :on_sunday, :on_monday, :on_tuesday, :on_wednesday, :on_thursday, :on_friday, :on_saturday, :created_at, :updated_at
