@@ -25,13 +25,13 @@ describe CategoriesController do
   # adjust the attributes here as well.
 
   before(:each) do
-    @category_group = CategoryGroup.new(description: "category group")
+    @category_group = CategoryGroup.create(description: "category group")
   end
   
   let(:valid_attributes) { { 
     :description => "MyString", 
     :color_scheme_id => 1, 
-    :category_group_id => 1 } }
+    :category_group_id => @category_group.id } }
   # let(:valid_attributes) { { 
   #   :description => "MyString", 
   #   :color_scheme_id => 1, 
@@ -44,9 +44,9 @@ describe CategoriesController do
 
   describe "GET index" do
     it "assigns all categories as @categories" do
-      category = Category.new valid_attributes
+      category = Category.create valid_attributes
       get :index, {}, valid_session
-      # assigns(:categories).should eq([category])
+      assigns(:categories).should eq([category])
     end
   end
 
