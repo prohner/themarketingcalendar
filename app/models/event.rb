@@ -24,6 +24,7 @@
 
 class Event < ActiveRecord::Base
   include Rails.application.routes.url_helpers
+  before_validation :default_values
   
   belongs_to :category
   has_many :stakeholders
@@ -37,6 +38,9 @@ class Event < ActiveRecord::Base
             :presence   => true
   validates :ends_at, 
             :presence   => true
+  validates :repetition_type, 
+            :presence   => true,
+            :inclusion=> { :in => ["none", "weekly", "monthly"] }            
 
   attr_accessor :edit_url
   
@@ -53,6 +57,10 @@ class Event < ActiveRecord::Base
       end
     end
   end
+  
+  def repeating_event?
+    self.repetition_type == "none" ? false : true
+  end
 
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
@@ -65,7 +73,7 @@ class Event < ActiveRecord::Base
       :start => (self.starts_at + 1.days).rfc822,
       :end => (self.ends_at + 1.days).rfc822,
       :allDay => true,
-      :recurring => (self.repetition_type == "weekly"),
+      :recurring => false,
       :color => self.category.color_scheme.background.nil? ? "blue" : self.category.color_scheme.background,
       :textColor => self.category.color_scheme.foreground.nil? ? "white" : self.category.color_scheme.foreground,
       :location => "",
@@ -80,6 +88,7 @@ class Event < ActiveRecord::Base
   def events_for_timeframe(from_date_as_int, to_date_as_int)
     events = []
     
+    # puts "repetition type is #{self.repetition_type}"
     from_date = Time.at(from_date_as_int.to_i).to_formatted_s.to_date
     to_date   = Time.at(to_date_as_int.to_i).to_formatted_s.to_date
     if repetition_type == "weekly"
@@ -93,7 +102,13 @@ class Event < ActiveRecord::Base
           new_starts_at = DateTime.strptime(str_starts_at, "%m/%d/%Y %H:%M")
           new_ends_at   = DateTime.strptime(str_ends_at, "%m/%d/%Y %H:%M")
           #puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
-          events << self
+          
+          # serialize then deserialize in order to copy the whole object
+          new_event = Marshal::load(Marshal.dump(self))
+          new_event.starts_at = new_starts_at
+          new_event.ends_at = new_ends_at
+          
+          events << new_event
         end
       end
       
@@ -113,6 +128,10 @@ class Event < ActiveRecord::Base
         end
       end
       is_it_on_the_day
+    end
+
+    def default_values
+       self.repetition_type ||= "none"
     end
   
 end

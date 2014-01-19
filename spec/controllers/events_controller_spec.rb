@@ -26,7 +26,7 @@ describe EventsController do
   before(:each) do
     @category = FactoryGirl.create(:category)
   end
-  let(:valid_attributes) { { "description" => "MyString", :starts_at => "2/12/2012", :ends_at => "3/12/2012", :category_id => @category.id } }
+  let(:valid_attributes) { { "description" => "MyString", :starts_at => "2/12/2012", :ends_at => "3/12/2012", :category_id => @category.id, :repetition_type => "none" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
