@@ -23,7 +23,10 @@ describe EventsController do
   # This should return the minimal set of attributes required to create a valid
   # Event. As you add validations to Event, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "description" => "MyString" } }
+  before(:each) do
+    @category = FactoryGirl.create(:category)
+  end
+  let(:valid_attributes) { { "description" => "MyString", :starts_at => "2/12/2012", :ends_at => "3/12/2012", :category_id => @category.id } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in

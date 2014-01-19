@@ -26,15 +26,33 @@ class Event < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   
   belongs_to :category
-  belongs_to :campaign
   has_many :stakeholders
   has_many :users, :through => :stakeholders
+
+  validates :description, 
+            :presence   => true,
+            :length     => { :maximum => 150 }
+  validates :category_id, :presence => true
+  validates :starts_at, 
+            :presence   => true
+  validates :ends_at, 
+            :presence   => true
 
   attr_accessor :edit_url
   
   scope :before, lambda {|end_time| {:conditions => ["ends_at <= ?", Event.format_date(end_time)] }}
   scope :after, lambda {|start_time| {:conditions => ["starts_at > ?", Event.format_date(start_time)] }}
   scope :user_id, lambda {|studio_id| {:conditions => ["user_id = ?", user_id] }}
+
+  validate :starts_at_must_be_before_ends_at
+  
+  def starts_at_must_be_before_ends_at
+    unless starts_at.nil? or ends_at.nil?
+      if starts_at > ends_at
+        errors.add(:starts_at, "Start date must be before end date")
+      end
+    end
+  end
 
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
@@ -47,7 +65,7 @@ class Event < ActiveRecord::Base
       :start => (self.starts_at + 1.days).rfc822,
       :end => (self.ends_at + 1.days).rfc822,
       :allDay => true,
-      :recurring => false,
+      :recurring => (self.repetition_type == "weekly"),
       :color => self.category.color_scheme.background.nil? ? "blue" : self.category.color_scheme.background,
       :textColor => self.category.color_scheme.foreground.nil? ? "white" : self.category.color_scheme.foreground,
       :location => "",
@@ -58,4 +76,43 @@ class Event < ActiveRecord::Base
       :category_id => self.category.id
     }
   end
+  
+  def events_for_timeframe(from_date_as_int, to_date_as_int)
+    events = []
+    
+    from_date = Time.at(from_date_as_int.to_i).to_formatted_s.to_date
+    to_date   = Time.at(to_date_as_int.to_i).to_formatted_s.to_date
+    if repetition_type == "weekly"
+      # puts "working in weekly from #{from_date} to #{to_date} (starts=#{starts_at}, ends=#{ends_at})"
+      (from_date..to_date).each do |d|
+        if appears_on_day(d)
+          str_starts_at = (d.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M"))
+          str_ends_at = (d.strftime("%m/%d/%Y") + " " + ends_at.strftime("%H:%M"))
+          
+          #puts "starts==(#{str_starts_at})  ends==(#{str_ends_at})"
+          new_starts_at = DateTime.strptime(str_starts_at, "%m/%d/%Y %H:%M")
+          new_ends_at   = DateTime.strptime(str_ends_at, "%m/%d/%Y %H:%M")
+          #puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
+          events << self
+        end
+      end
+      
+    end
+    #puts "adding #{@events.inspect}"
+    events
+  end
+  
+  
+  private
+    def appears_on_day(day)
+      is_it_on_the_day = false
+      if (day.wday == 0 and on_sunday) or (day.wday == 1 and on_monday) or (day.wday == 2 and on_tuesday) or (day.wday == 3 and on_wednesday) or (day.wday == 4 and on_thursday) or (day.wday == 5 and on_friday) or (day.wday == 6 and on_saturday)
+        # puts "checking #{day} between #{starts_at} and #{ends_at}"
+        if starts_at < day and ends_at > day
+          is_it_on_the_day = true
+        end
+      end
+      is_it_on_the_day
+    end
+  
 end

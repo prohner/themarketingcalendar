@@ -1,4 +1,14 @@
 FactoryGirl.define do
+  factory :category_group do |cg|
+    cg.description "category group"
+  end
+
+  factory :category do |c|
+    c.description "category"
+    c.association :category_group
+  end
+
+
   factory :user do
     first_name            "BillFirst"
     last_name             "BillLast"
