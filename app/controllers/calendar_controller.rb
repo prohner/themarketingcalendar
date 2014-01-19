@@ -22,7 +22,7 @@ class CalendarController < ApplicationController
     raise ActionController::RoutingError.new("User missing") if user_id.blank? || User.find(user_id).nil?
     
     @event  = Event.new
-    @events = Event.all
+    events1 = Event.all
     # @events = @events.after(params['start']) if (params['start'])
     # @events = @events.before(params['end']) if (params['end'])
     # @events = @events.user_id(user_id) if (user_id)
@@ -30,6 +30,18 @@ class CalendarController < ApplicationController
     # @events.each do |event|
     #   event.edit_url = edit_in_po_path(event)
     # end
+    
+    @events = []
+    events1.each do |ev|
+      # puts "#{ev.description} => #{ev.repetition_type}, #{ev.repeating_event?} (#{params['start']}, #{params['end']})"
+      if ev.repeating_event?
+        evts = ev.events_for_timeframe(params['start'], params['end'])
+        # puts evts.inspect
+        @events.concat evts
+      else
+        @events << ev
+      end
+    end
     
     puts "Sending back #{@events.count} records"
     
