@@ -85,7 +85,8 @@ class Event < ActiveRecord::Base
       :url => "", # used by FullCalendar
       #:my_url => self.edit_url #Rails.application.routes.url_helpers.edit_event_path(id)
       :my_url => edit_in_po_path(self),
-      :category_id => self.category.id
+      :category_id => self.category.id,
+      :repetition_type => self.repetition_type
     }
   end
   

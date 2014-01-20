@@ -39,7 +39,6 @@ ready = ->
 	
 	remoteServerName = ""
 	eventsSourceUrl = remoteServerName + '/calendar/events.js'
-	repeatingEventsSourceUrl = remoteServerName + '/repeating_events.js?id=1'
 	
 	if typeof $('#calendar').fullCalendar != 'undefined'
 		$('#calendar').fullCalendar {
@@ -58,15 +57,6 @@ ready = ->
 			timeFormat: 'h:mm t{ - h:mm t} '
 			dragOpacity: "0.5"
 			eventSources: [
-				# {
-				# 	url: repeatingEventsSourceUrl
-				# 	color: 'green'
-				# 	textColor: 'white'
-				# 	ignoreTimezone: true
-				# 	editable: true
-				# 	crossDomain: true
-				# 	jsonp: true
-				# }
 				{
 					url: eventsSourceUrl 
 					ignoreTimezone: true
@@ -173,6 +163,8 @@ presentPopover = (url, sourceObject, event) ->
 			console.log "popover.on.hidden"
 			new_json = $("#saved_event_result_as_json").val()
 			is_new_event = ($("#saved_event_is_new_event").val() == "true")
+			original_repetition_type = $("#original_repetition_type").val()
+			
 			console.log "    => is_deleted_event = " + is_deleted_event + ", is_new_event = " + is_new_event 
 			
 			# alert $("#saved_event_is_new_event").val() + " " + is_new_event
@@ -181,7 +173,11 @@ presentPopover = (url, sourceObject, event) ->
 			else if typeof new_json != "undefined" and new_json.length > 0
 				# These variables are coming from event.rb
 				json_obj = jQuery.parseJSON new_json
-				if is_new_event
+				console.log "rep_type=" + json_obj.repetition_type + ", originally:" + original_repetition_type
+				if json_obj.repetition_type == "weekly" and original_repetition_type == "none"
+					console.log "		REFETCHING EVENTS"
+					$('#calendar').fullCalendar 'refetchEvents'
+				else if is_new_event
 					event = { }
 					event = massAssignEvent event, json_obj
 					$('#calendar').fullCalendar 'renderEvent', event, true

@@ -172,6 +172,7 @@
 	
   <%= hidden_field_tag :saved_event_result_as_json %>
   <%= hidden_field_tag :saved_event_is_new_event, @event.new_record? %>
+  <%= hidden_field_tag :original_repetition_type, @event.repetition_type %>
   <%= hidden_field_tag :event_was_deleted, false %>
   <%= hidden_field_tag :name_of_popover_that_contains_me %>
 
