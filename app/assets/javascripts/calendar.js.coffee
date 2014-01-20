@@ -174,7 +174,7 @@ presentPopover = (url, sourceObject, event) ->
 				# These variables are coming from event.rb
 				json_obj = jQuery.parseJSON new_json
 				console.log "rep_type=" + json_obj.repetition_type + ", originally:" + original_repetition_type
-				if json_obj.repetition_type == "weekly" and original_repetition_type == "none"
+				if json_obj.repetition_type == "weekly" 
 					console.log "		REFETCHING EVENTS"
 					$('#calendar').fullCalendar 'refetchEvents'
 				else if is_new_event
@@ -186,11 +186,9 @@ presentPopover = (url, sourceObject, event) ->
 					$('#calendar').fullCalendar 'updateEvent', event
 			popoverIsShowing = false
 			
-		console.log "showing popover"
 		$(thisObject).popover('show')
 
 		popoverThatIsCurrentlyShowing = thisObject
-		console.log "POPOVERTHATISCURRENTLYSHOWING: " + popoverThatIsCurrentlyShowing
 
 
 @toggleCalendarFilterCategory = (categoryId) ->
