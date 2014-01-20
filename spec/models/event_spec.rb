@@ -120,6 +120,10 @@ describe Event do
     end
   end
   
+  it "should return the list of repetition types exactly correctly" do
+    list_of_repetition_types = Event.list_of_repetition_type_options
+  end
+  
   describe "when building events for timeframe" do
     before(:each) do
       @attr = { 

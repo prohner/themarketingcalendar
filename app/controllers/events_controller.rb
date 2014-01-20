@@ -24,11 +24,13 @@ class EventsController < ApplicationController
   # GET /new_event_in_popover
   def new_event_in_popover
     @event = Event.new
+    @repetition_types = Event.list_of_repetition_type_options
     render :partial => "edit_in_popover", :layout => false
   end
 
   # GET /edit_event_in_popover/29/edit
   def edit_event_in_popover
+    @repetition_types = Event.list_of_repetition_type_options
     render :partial => "edit_in_popover", :layout => false
   end
 
@@ -83,4 +85,5 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:description, :starts_at, :ends_at, :category_id, :repetition_type, :repetition_frequency, :on_sunday, :on_monday, :on_tuesday, :on_wednesday, :on_thursday, :on_friday, :on_saturday, :repetition_options)
     end
+    
 end

@@ -6,7 +6,5 @@ class CreateInterestedParties < ActiveRecord::Migration
       t.timestamps
     end
     
-    add_column :users, :user_type, :integer
-    
   end
 end

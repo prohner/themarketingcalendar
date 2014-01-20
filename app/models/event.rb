@@ -30,6 +30,10 @@ class Event < ActiveRecord::Base
   has_many :stakeholders
   has_many :users, :through => :stakeholders
 
+  def self.list_of_repetition_type_options
+    ["none", "weekly", "monthly"]
+  end
+  
   validates :description, 
             :presence   => true,
             :length     => { :maximum => 150 }
@@ -40,7 +44,7 @@ class Event < ActiveRecord::Base
             :presence   => true
   validates :repetition_type, 
             :presence   => true,
-            :inclusion=> { :in => ["none", "weekly", "monthly"] }            
+            :inclusion=> { :in => self.list_of_repetition_type_options }            
 
   attr_accessor :edit_url
   

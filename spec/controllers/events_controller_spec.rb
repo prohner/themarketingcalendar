@@ -49,6 +49,26 @@ describe EventsController do
     end
   end
 
+  describe "GET new_event_in_popover" do
+    it "assigns an @event and the @repetition_types" do
+      event = Event.create! valid_attributes
+      get :new_event_in_popover, { }, valid_session
+      assigns(:event).should be_an(Event)
+
+      assigns(:repetition_types).should eq(Event.list_of_repetition_type_options)
+    end
+  end
+
+  describe "GET edit_event_in_popover" do
+    it "assigns the requested @event and the @repetition_types" do
+      event = Event.create! valid_attributes
+      get :edit_event_in_popover, { :id => event.to_param }, valid_session
+      assigns(:event).should eq(event)
+
+      assigns(:repetition_types).should eq(Event.list_of_repetition_type_options)
+    end
+  end
+
   describe "GET new" do
     it "assigns a new event as @event" do
       get :new, {}, valid_session

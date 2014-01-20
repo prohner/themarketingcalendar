@@ -141,7 +141,7 @@ presentPopover = (url, sourceObject, event) ->
 		$(thisObject).popover({
 			title: '<span class="text-info"><strong>' + title + '</strong></span>' + '<button type="button" id="popovercloseid" class="close" onclick="return false;">&times;</button>'
 			html: true
-			template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px; height:400px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
+			template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px; height:300px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
 			content: d
 			placement: 'bottom'
 			container: 'body'
