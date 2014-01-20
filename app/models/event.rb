@@ -96,8 +96,9 @@ class Event < ActiveRecord::Base
     from_date = Time.at(from_date_as_int.to_i).to_formatted_s.to_date
     to_date   = Time.at(to_date_as_int.to_i).to_formatted_s.to_date
     if repetition_type == "weekly"
-      puts "working in weekly from #{from_date} to #{to_date} (starts=#{starts_at}, ends=#{ends_at})"
+      # puts "working in weekly from #{from_date} to #{to_date} (starts=#{starts_at}, ends=#{ends_at})"
       (from_date..to_date).each do |d|
+        # puts "  checking #{d} - #{appears_on_day(d)}"
         if appears_on_day(d)
           str_starts_at = (d.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M"))
           str_ends_at = (d.strftime("%m/%d/%Y") + " " + ends_at.strftime("%H:%M"))
@@ -127,7 +128,7 @@ class Event < ActiveRecord::Base
       is_it_on_the_day = false
       if (day.wday == 0 and on_sunday) or (day.wday == 1 and on_monday) or (day.wday == 2 and on_tuesday) or (day.wday == 3 and on_wednesday) or (day.wday == 4 and on_thursday) or (day.wday == 5 and on_friday) or (day.wday == 6 and on_saturday)
         # puts "checking #{day} between #{starts_at} and #{ends_at}"
-        if starts_at < day and ends_at > day
+        if starts_at <= day and ends_at > day
           is_it_on_the_day = true
         end
       end

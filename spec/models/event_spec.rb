@@ -180,6 +180,23 @@ describe Event do
       events.count.should == 0
     end
     
+    it "should create the repeating events starting on starts_at" do
+      repeater = Event.new({ 
+        :description => "the description", 
+        :starts_at => Date.strptime("1/1/2014", "%m/%d/%Y"), 
+        :ends_at => Date.strptime("3/31/2014", "%m/%d/%Y"), 
+        :category => @category, 
+        :repetition_type => "weekly", 
+        :on_wednesday => true 
+      })
+      repeater.should be_valid
+
+      from_date_as_int = Date.strptime("1/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("1/29/2014", "%m/%d/%Y").to_time.to_i
+
+      events = repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      events.count.should == 5
+    end
     ### it "should create the correct number of events for a monthly repeater"
     
   end

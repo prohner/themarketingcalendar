@@ -75,11 +75,11 @@ ActiveRecord::Schema.define(version: 20140117044910) do
     t.string   "last_name"
     t.string   "email"
     t.integer  "company_id"
+    t.integer  "user_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "remember_token"
-    t.integer  "user_type"
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"
