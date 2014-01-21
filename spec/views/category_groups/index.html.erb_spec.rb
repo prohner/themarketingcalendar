@@ -12,4 +12,12 @@ describe "category_groups/index" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
   end
+  
+  describe "categories list" do
+    it "User views category groups page" do
+      visit "/category_groups"
+      expect(page).to have_title "#{application_name} | Category Groups"
+    end
+  end
+  
 end

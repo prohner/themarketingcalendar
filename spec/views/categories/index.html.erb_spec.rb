@@ -36,4 +36,12 @@ describe "categories/index" do
   
   it "should have the category group name in the list"
 
+
+  describe "categories list" do
+    it "User views categories page" do
+      visit "/categories"
+      expect(page).to have_title "#{application_name} | Categories"
+    end
+  end
+
 end
