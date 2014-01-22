@@ -51,9 +51,6 @@ class CalendarController < ApplicationController
       format.js  { render :json => @events }
     end
   end
-
-  def repeating_events
-  end
   
   def signed_in_user
     if current_user.nil? or not signed_in?

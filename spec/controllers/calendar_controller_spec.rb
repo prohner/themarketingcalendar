@@ -16,11 +16,5 @@ describe CalendarController do
     end
   end
 
-  describe "GET 'repeating_events'" do
-    it "returns http success" do
-      get 'repeating_events'
-      response.should redirect_to(signin_url)
-    end
-  end
 
 end
