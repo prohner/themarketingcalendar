@@ -34,6 +34,7 @@ describe User do
   it { should respond_to(:user_type) }
   it { should respond_to(:user_type_description) }
   it { should respond_to(:all_events) }
+  it { should respond_to(:all_events_in_timeframe) }
   
   it { should be_valid }
   
@@ -162,12 +163,27 @@ describe User do
     its(:remember_token) { should_not be_blank }
   end
   
-  describe "all_events" do
-    it "should return the correct number of events" do
-      dave = FactoryGirl.create(:user_dave)
-      events = dave.all_events
-      events.count.should == 10
+  describe "owning events" do
+    before(:each) do
+      @dave = FactoryGirl.create(:user_dave)
+
+      @feb_01 = DateTime.strptime('02/01/2014', '%m/%d/%Y')
+      @feb_28 = DateTime.strptime('02/28/2014', '%m/%d/%Y')
     end
+    it "should return the correct number of events for all_events" do
+      @dave.all_events.count.should == 10
+    end
+    
+    it "should return the correct number of events for Feb 2014 with all_events_in_timeframe " do
+      events = @dave.all_events_in_timeframe(@feb_01, @feb_28)
+      
+      # puts "SPEC OUTPUT"
+      # events.each do |e|
+      #   puts "  #{e.explain}"
+      # end
+      events.count.should == 12
+    end
+    
     
   end
 end

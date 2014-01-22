@@ -123,13 +123,16 @@ class Event < ActiveRecord::Base
     events
   end
   
+  def explain
+    "#{description}  #{starts_at}=>#{ends_at} (#{repetition_type})"
+  end
   
   private
     def appears_on_day(day)
       is_it_on_the_day = false
       if (day.wday == 0 and on_sunday) or (day.wday == 1 and on_monday) or (day.wday == 2 and on_tuesday) or (day.wday == 3 and on_wednesday) or (day.wday == 4 and on_thursday) or (day.wday == 5 and on_friday) or (day.wday == 6 and on_saturday)
         # puts "checking #{day} between #{starts_at} and #{ends_at}"
-        if starts_at <= day and ends_at > day
+        if (starts_at <= day and ends_at > day) or (starts_at < day and ends_at >= day)
           is_it_on_the_day = true
         end
       end

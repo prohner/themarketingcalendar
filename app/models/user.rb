@@ -75,6 +75,31 @@ class User < ActiveRecord::Base
     end
     events
   end
+  
+  def all_events_in_timeframe(start_date, end_date)
+    # puts_user self
+    # puts
+    # puts "User#all_events_in_timeframe"
+    events = []
+    category_groups.each do |cg|
+      cg.categories.each do |c|
+        c.events.each do |e|
+          # puts "  #{e.explain}"
+          if e.repeating_event?
+            evts = e.events_for_timeframe((start_date + 1).to_time.to_i, (end_date + 1).to_time.to_i)
+            events.concat(evts)
+          else
+            if e.starts_at <= start_date and e.ends_at > start_date
+              events << e
+            elsif e.starts_at <= end_date and e.ends_at > end_date
+              events << e
+            end
+          end
+        end
+      end
+    end
+    events
+  end
 
   private
 

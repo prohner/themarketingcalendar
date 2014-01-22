@@ -20,7 +20,7 @@ def puts_user(u)
     cg.categories.each do |c|
       puts "    #{c.description}"
       c.events.each do |e|
-        puts "      #{e.description}"
+        puts "      #{e.explain})"
       end
     end
   end

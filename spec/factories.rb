@@ -17,9 +17,9 @@ FactoryGirl.define do
       after(:create) do |c|
         FactoryGirl.create(:event, category: c)
         FactoryGirl.create(:event, category: c)
-        FactoryGirl.create(:event, category: c)
-        FactoryGirl.create(:event, category: c, starts_at: "2014-02-01", ends_at: "2014-02-28")
-        FactoryGirl.create(:event, category: c, starts_at: "2014-02-15", ends_at: "2014-02-28")
+        FactoryGirl.create(:event, category: c, repetition_type: "weekly", on_friday: true)
+        FactoryGirl.create(:event, category: c, repetition_type: "weekly", on_friday: true, starts_at: "2014-02-01", ends_at: "2014-02-28")
+        FactoryGirl.create(:event, category: c, repetition_type: "weekly", on_friday: true, starts_at: "2014-02-15", ends_at: "2014-02-28")
       end
     end
   end
