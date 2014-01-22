@@ -16,5 +16,17 @@ describe CalendarController do
     end
   end
 
-
+  describe "when signed in" do
+    before(:each) do
+      @bill = FactoryGirl.create(:user_bill)
+      @dave = FactoryGirl.create(:user_dave)
+      
+    end
+    
+    it "should have the right number of events" do
+      
+      puts_user @bill
+      @bill.should be_valid
+    end
+  end
 end

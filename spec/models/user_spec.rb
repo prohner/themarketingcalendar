@@ -33,6 +33,7 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:user_type) }
   it { should respond_to(:user_type_description) }
+  it { should respond_to(:all_events) }
   
   it { should be_valid }
   
@@ -159,5 +160,14 @@ describe User do
   describe "remember token" do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
+  end
+  
+  describe "all_events" do
+    it "should return the correct number of events" do
+      dave = FactoryGirl.create(:user_dave)
+      events = dave.all_events
+      events.count.should == 10
+    end
+    
   end
 end
