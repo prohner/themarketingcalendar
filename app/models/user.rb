@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   belongs_to :company
   has_many :stakeholders
   has_many :events, :through => :stakeholders
+  has_many :category_groups
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }

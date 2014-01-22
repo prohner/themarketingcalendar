@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20140121073115) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "color_scheme_id"
-    t.integer  "user_id"
   end
 
   create_table "color_schemes", force: true do |t|
@@ -41,6 +40,7 @@ ActiveRecord::Schema.define(version: 20140121073115) do
     t.string   "description"
     t.date     "starts_at"
     t.date     "ends_at"
+    t.integer  "campaign_id"
     t.integer  "category_id"
     t.string   "repetition_type"
     t.integer  "repetition_frequency"
