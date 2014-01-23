@@ -39,11 +39,15 @@ namespace :db do
     user_ya.save
     
     create_sample_data_for_user(user_pr, color_schemes)
+    create_sample_data_for_user(user_ya, color_schemes)
     
   end
 end
 
 def create_sample_data_for_user(user, cs)
+  tag = user.email[0]
+  puts "our tag is #{tag}"
+
   sales_support = CategoryGroup.create(description: "Sales Support", color_scheme: cs[1], user: user)
   sales_promotion = Category.create(description: "Sales Promotions", color_scheme: cs[2])
   collateral = Category.create(description: "Collateral & Presentations", color_scheme: cs[3])
@@ -83,7 +87,8 @@ def create_sample_data_for_user(user, cs)
   interactive.categories << mobile
 
   advertising = CategoryGroup.create(description: "Advertising", color_scheme: cs[19], user: user)
-  tv = Category.create(description: "TV", color_scheme: cs[20])
+  
+  tv = Category.create(description: "TV", color_scheme: cs[0])
   radio = Category.create(description: "Radio", color_scheme: cs[1])
   print = Category.create(description: "Print", color_scheme: cs[2])
   outdoor = Category.create(description: "Outdoor", color_scheme: cs[3])
@@ -94,7 +99,7 @@ def create_sample_data_for_user(user, cs)
   
   research = CategoryGroup.create(description: "Research", color_scheme: cs[4], user: user)
   customer_surveys = Category.create(description: "Customer Surveys", color_scheme: cs[5])
-  advertising_effectiveness = Category.create(description: "Advertising Effectiveness", color_scheme: cs[6])
+  advertising_effectiveness = Category.create(description: "#{tag}-Advertising Effectiveness", color_scheme: cs[6])
   research.categories << customer_surveys
   research.categories << advertising_effectiveness
 
@@ -103,28 +108,28 @@ def create_sample_data_for_user(user, cs)
 
   e = Event.create(description:"Sales Promo (offer)", starts_at: make_time(2014, 1, 25), ends_at: make_time(2014, 2, 1))
   sales_promotion.events << e
-
+  
   e = Event.create(description:"Product Brochures", starts_at: make_time(2014, 1, 10), ends_at: make_time(2014, 1, 17))
   collateral.events << e
-
+  
   e = Event.create(description:"Industry Pres.", starts_at: make_time(2014, 1, 15), ends_at: make_time(2014, 1, 25))
   collateral.events << e
-
+  
   e = Event.create(description:"Industry Conference", starts_at: make_time(2014, 1, 15), ends_at: make_time(2014, 1, 25))
   special_events.events << e
-
+  
   e = Event.create(description:"Pre Conf", starts_at: make_time(2014, 1, 10), ends_at: make_time(2014, 1, 17))
   press_releases.events << e
-
+  
   e = Event.create(description:"Post Conf", starts_at: make_time(2014, 1, 26), ends_at: make_time(2014, 1, 31))
   press_releases.events << e
-
+  
   e = Event.create(description:"Keyword/Search Advertising", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 31))
   keyword.events << e
-
+  
   e = Event.create(description:"Promote Conference", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 7))
   site_ads.events << e
-
+  
   e = Event.create(description:"Online Auction & Stores", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 31))
   auctions.events << e
   
@@ -146,7 +151,7 @@ def create_sample_data_for_user(user, cs)
   e = Event.create(description:"Post Conf. Tweets", starts_at: make_time(2014, 1, 24), ends_at: make_time(2014, 1, 31))
   social_media.events << e
   
-  e = Event.create(description:"Visit us at conference & receive free gift", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 14))
+  e = Event.create(description:"#{tag}-Visit us at conference & receive gift", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 14))
   blog.events << e
   
   e = Event.create(description:"Daily Conf. Recap", starts_at: make_time(2014, 1, 16), ends_at: make_time(2014, 1, 23))
@@ -155,7 +160,7 @@ def create_sample_data_for_user(user, cs)
   e = Event.create(description:"Upcoming Sales Promo", starts_at: make_time(2014, 1, 24), ends_at: make_time(2014, 1, 31))
   social_media.events << e
   
-  e = Event.create(description:"Visit us at conference & receive free gift", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 14))
+  e = Event.create(description:"#{tag}-Visit us at conference & receive free gift", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 14))
   email.events << e
   
   e = Event.create(description:"Upcoming Sales Promo", starts_at: make_time(2014, 1, 24), ends_at: make_time(2014, 1, 31))
@@ -187,7 +192,7 @@ def create_sample_data_for_user(user, cs)
   
   e = Event.create(description:"Campaign Analysis", starts_at: make_time(2014, 1, 1), ends_at: make_time(2014, 1, 31))
   advertising_effectiveness.events << e
-  
+
 end
 
 def make_time(y, m, d)
