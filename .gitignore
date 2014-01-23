@@ -24,7 +24,7 @@ deploy.rb
 erd.pdf
 
 #ignore mailer
-user_mailer.rb
+#user_mailer.rb
 
 #Initializers
 setup_mail.rb

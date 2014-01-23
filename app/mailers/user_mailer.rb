@@ -1,0 +1,13 @@
+class UserMailer < ActionMailer::Base
+  default :from => "admin@themarketingcalendar.com"
+
+  def daily_reminder
+   @interested_parties = InterestedParty.all
+   
+   puts "The admins are #{ADMINISTRATOR_EMAIL_ADDRESSES}"
+    mail(:to => ADMINISTRATOR_EMAIL_ADDRESSES,
+        :subject => "Daily reminder of interested parties")    
+  end
+  
+  
+end
