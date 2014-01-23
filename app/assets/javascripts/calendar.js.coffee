@@ -19,20 +19,20 @@ popoverThatIsCurrentlyShowing = null
 
 ready = ->
 	
-	$('body').on 'click', (e) ->
-		# console.log "click 0 " + popoverIsShowing
-		if popoverIsShowing
-			# console.log "  click 1 " + popoverThatIsCurrentlyShowing
-			if popoverThatIsCurrentlyShowing != null
-				# console.log "    click 2"
-				popContainer = jQuery("bs.popover")
-				# alert popContainer
-				if $('.popover').has(e.target).length == 0
-					# console.log "      click is NOT in popover"
-					$(popoverThatIsCurrentlyShowing).popover('hide')
-					popoverThatIsCurrentlyShowing = null
-				# else
-				# 	console.log "      click is in popover"
+	# $('body').on 'click', (e) ->
+	# 	# console.log "click 0 " + popoverIsShowing
+	# 	if popoverIsShowing
+	# 		# console.log "  click 1 " + popoverThatIsCurrentlyShowing
+	# 		if popoverThatIsCurrentlyShowing != null
+	# 			# console.log "    click 2"
+	# 			popContainer = jQuery("bs.popover")
+	# 			# alert popContainer
+	# 			if $('.popover').has(e.target).length == 0
+	# 				# console.log "      click is NOT in popover"
+	# 				$(popoverThatIsCurrentlyShowing).popover('hide')
+	# 				popoverThatIsCurrentlyShowing = null
+	# 			# else
+	# 			# 	console.log "      click is in popover"
 	
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	# remoteServerName = "http://0.0.0.0:3000"
