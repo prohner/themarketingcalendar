@@ -18,6 +18,6 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 2.minutes do
+every 1.day, :at => "9am" do
   rake "notifications:send"
 end
