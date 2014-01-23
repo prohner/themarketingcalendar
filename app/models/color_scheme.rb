@@ -16,5 +16,7 @@ class ColorScheme < ActiveRecord::Base
   has_many :campaigns
 
   validates :name, presence: true
+  validates :foreground, presence: true
+  validates :background, presence: true
   
 end

@@ -38,6 +38,17 @@ describe User do
   
   it { should be_valid }
   
+  describe "test little bit" do
+    it "should dump stuff" do
+      categories = Category.all
+      categories.each do |category|
+        puts category.description
+        
+        category.should be_valid
+      end
+    end
+  end
+  
   describe "when first name is not present" do
     before { @user.first_name = "  " }
     it { should_not be_valid }
