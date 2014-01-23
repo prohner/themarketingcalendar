@@ -16,7 +16,7 @@
 /tmp
 
 database.yml
-environment.rb
+
 doc/
 /uploads
 !app/views/uploads
