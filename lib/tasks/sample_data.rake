@@ -46,7 +46,7 @@ end
 
 def create_sample_data_for_user(user, cs)
   tag = user.email[0]
-  puts "our tag is #{tag}"
+  # puts "our tag is #{tag}"
 
   sales_support = CategoryGroup.create(description: "Sales Support", color_scheme: cs[1], user: user)
   sales_promotion = Category.create(description: "Sales Promotions", color_scheme: cs[2])
