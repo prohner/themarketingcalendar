@@ -10,6 +10,9 @@ group :production do
   gem 'mysql2'
 end
 
+
+gem 'whenever'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
