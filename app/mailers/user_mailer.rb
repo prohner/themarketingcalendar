@@ -4,8 +4,8 @@ class UserMailer < ActionMailer::Base
   def daily_reminder
    @interested_parties = InterestedParty.all
    
-   puts "The admins are #{ADMINISTRATOR_EMAIL_ADDRESSES}"
-    mail(:to => ADMINISTRATOR_EMAIL_ADDRESSES,
+   puts "The admins are #{UserMailer::ADMINISTRATOR_EMAIL_ADDRESSES}"
+    mail(:to => UserMailer::ADMINISTRATOR_EMAIL_ADDRESSES,
         :subject => "Daily reminder of interested parties")    
   end
   
