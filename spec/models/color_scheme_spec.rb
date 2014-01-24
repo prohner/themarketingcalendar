@@ -25,4 +25,14 @@ describe ColorScheme do
     before { @color_scheme.name = "  " }
     it { should_not be_valid }
   end
+
+  describe "when foreground is not present" do
+    before { @color_scheme.foreground = "  " }
+    it { should_not be_valid }
+  end
+
+  describe "when background is not present" do
+    before { @color_scheme.background = "  " }
+    it { should_not be_valid }
+  end
 end

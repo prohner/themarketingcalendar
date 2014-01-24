@@ -11,3 +11,17 @@ def sign_in(user, options={})
     click_button "Sign in"
   end
 end
+
+def puts_user(u)
+  puts
+  puts u.email
+  u.category_groups.each do |cg|
+    puts "  #{cg.description}"
+    cg.categories.each do |c|
+      puts "    #{c.description}"
+      c.events.each do |e|
+        puts "      #{e.explain})"
+      end
+    end
+  end
+end

@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   belongs_to :company
   has_many :stakeholders
   has_many :events, :through => :stakeholders
+  has_many :category_groups
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
@@ -63,6 +64,49 @@ class User < ActiveRecord::Base
     when 4
       "Viewer"
     end
+  end
+  
+  def all_events
+    events = []
+    category_groups.each do |cg|
+      cg.categories.each do |c|
+        events.concat(c.events)
+      end
+    end
+    events
+  end
+  
+  def all_categories
+    categories = []
+    category_groups.each do |cg|
+      categories.concat(cg.categories)
+    end
+    categories.sort_by{|e| e.description}
+  end
+  
+  def all_events_in_timeframe(start_date, end_date)
+    # puts_user self
+    # puts
+    # puts "User#all_events_in_timeframe"
+    events = []
+    category_groups.each do |cg|
+      cg.categories.each do |c|
+        c.events.each do |e|
+          # puts "  #{e.explain}"
+          if e.repeating_event?
+            evts = e.events_for_timeframe((start_date + 1).to_time.to_i, (end_date + 1).to_time.to_i)
+            events.concat(evts)
+          else
+            if e.starts_at <= start_date and e.ends_at > start_date
+              events << e
+            elsif e.starts_at <= end_date and e.ends_at > end_date
+              events << e
+            end
+          end
+        end
+      end
+    end
+    events
   end
 
   private

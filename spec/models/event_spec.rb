@@ -197,6 +197,24 @@ describe Event do
       events = repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
       events.count.should == 5
     end
+
+    it "should create the right repeating events for an exact month" do
+      repeater = Event.new({ 
+        :description => "the description", 
+        :starts_at => Date.strptime("2/1/2014", "%m/%d/%Y"), 
+        :ends_at => Date.strptime("2/28/2014", "%m/%d/%Y"), 
+        :category => @category, 
+        :repetition_type => "weekly", 
+        :on_friday => true 
+      })
+      repeater.should be_valid
+
+      from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
+
+      events = repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      events.count.should == 4
+    end
     ### it "should create the correct number of events for a monthly repeater"
     
   end
