@@ -13,7 +13,8 @@ class StaticPagesController < ApplicationController
   
   def interested
     @ip = InterestedParty.new(:email => params[:email])
-
+    
+    UserMailer.thank_you_interested_party(@ip.email, request.original_url).deliver
     if @ip.save
       flash[:success] = "How cool are you?!?  We're excited and we'll drop you a note at #{params[:email]} when it's ready."
     else
