@@ -76,6 +76,14 @@ class User < ActiveRecord::Base
     events
   end
   
+  def all_categories
+    categories = []
+    category_groups.each do |cg|
+      categories.concat(cg.categories)
+    end
+    categories.sort_by{|e| e.description}
+  end
+  
   def all_events_in_timeframe(start_date, end_date)
     # puts_user self
     # puts

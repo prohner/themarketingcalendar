@@ -35,6 +35,7 @@ describe User do
   it { should respond_to(:user_type_description) }
   it { should respond_to(:all_events) }
   it { should respond_to(:all_events_in_timeframe) }
+  it { should respond_to(:all_categories) }
   
   it { should be_valid }
   
@@ -194,7 +195,17 @@ describe User do
       # end
       events.count.should == 12
     end
+  end
+  
+  describe "owning categories" do
+    before(:each) do
+      @dave = FactoryGirl.create(:user_dave)
+      @bill = FactoryGirl.create(:user_bill)
+    end
     
-    
+    it "should return only its own categories" do
+      categories = @dave.all_categories
+      categories.count.should == 2
+    end
   end
 end
