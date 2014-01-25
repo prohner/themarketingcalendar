@@ -1,10 +1,11 @@
 class CategoryGroupsController < ApplicationController
   before_action :set_category_group, only: [:show, :edit, :update, :destroy]
+  before_action :verify_user_is_signed_in_or_redirect #, only: [:show, :edit, :update, :destroy]
 
   # GET /category_groups
   # GET /category_groups.json
   def index
-    @category_groups = CategoryGroup.all
+    @category_groups = current_user.category_groups
   end
 
   # GET /category_groups/1
@@ -25,6 +26,7 @@ class CategoryGroupsController < ApplicationController
   # POST /category_groups.json
   def create
     @category_group = CategoryGroup.new(category_group_params)
+    @category_group.user = current_user
 
     respond_to do |format|
       if @category_group.save
@@ -70,5 +72,6 @@ class CategoryGroupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_group_params
       params[:category_group]
+      params.require(:category_group).permit(:description, :color_scheme_id)
     end
 end

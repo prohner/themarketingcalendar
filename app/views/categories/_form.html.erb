@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :category_group %><br>
-	<%= collection_select(:category, :category_group_id, CategoryGroup.all, :id, :description, 
+	<%= collection_select(:category, :category_group_id, @category.category_group.user.category_groups, :id, :description, 
 		{prompt: false}) 
 	%>
 	
@@ -29,8 +29,11 @@
 		{prompt: false},
 		{:onChange => "editCategoryColorSchemeChange(this);"}) 
 	%>
-	<%= color_scheme_as_html_snippet_to_display(@category.color_scheme) %>
-	<span id="editCategoryColorSchemeExample"><%= @category.color_scheme.name %></span>
+	
+	<% unless @category.color_scheme.nil? %>
+		<%= color_scheme_as_html_snippet_to_display(@category.color_scheme) %>
+		<span id="editCategoryColorSchemeExample"><%= @category.color_scheme.name %></span>
+	<% end %>
   </div>
   <div class="actions">
     <%= f.submit %>
