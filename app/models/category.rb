@@ -14,6 +14,7 @@ class Category < ActiveRecord::Base
   belongs_to :category_group
   has_many :events
   belongs_to :color_scheme
+  has_many :hidden_category_flags
 
   default_scope { order('description') }
   # default_scope { joins(:category_group).order('category_groups.description, description') }

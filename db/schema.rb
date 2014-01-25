@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122213311) do
+ActiveRecord::Schema.define(version: 20140125141541) do
 
   create_table "categories", force: true do |t|
     t.string   "description"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20140122213311) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "color_scheme_id"
+    t.integer  "user_id"
   end
 
   create_table "color_schemes", force: true do |t|
@@ -52,6 +53,13 @@ ActiveRecord::Schema.define(version: 20140122213311) do
     t.boolean  "on_friday"
     t.boolean  "on_saturday"
     t.string   "repetition_options"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hidden_category_flags", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

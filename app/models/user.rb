@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :stakeholders
   has_many :events, :through => :stakeholders
   has_many :category_groups
+  has_many :hidden_category_flags
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
