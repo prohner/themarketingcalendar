@@ -1,0 +1,1 @@
+ADMINISTRATOR_EMAIL_ADDRESSES = "yaccad@gmail.com, prohner@mscnet.com"

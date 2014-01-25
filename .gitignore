@@ -31,7 +31,7 @@ erd.pdf
 setup_mail.rb
 devise.rb
 secret_token.rb
-
+private_constants.rb
 *.swp
 *~
 .project
