@@ -18,7 +18,6 @@ class User < ActiveRecord::Base
   before_validation :default_values
   before_create :create_remember_token
   
-  belongs_to :company
   has_many :stakeholders
   has_many :events, :through => :stakeholders
   has_many :category_groups

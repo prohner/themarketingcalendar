@@ -13,7 +13,6 @@
 class ColorScheme < ActiveRecord::Base
   has_many :category_groups
   has_many :categories
-  has_many :campaigns
 
   validates :name, presence: true
   validates :foreground, presence: true
