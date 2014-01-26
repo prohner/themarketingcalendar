@@ -3,10 +3,12 @@ require 'spec_helper'
 describe CalendarController do
 
   describe "GET 'index'" do
+    subject { get 'index' }
+    
     it "redirect to signin path" do
-      get 'index'
-      response.should redirect_to(signin_url)
+      expect(subject).to redirect_to(signin_url)
     end
+
     
     it "should return user's categories in alphabetical order"
     # it "should return user's categories in alphabetical order" do
@@ -19,9 +21,10 @@ describe CalendarController do
   end
 
   describe "GET 'events'" do
+    subject { get 'events' }
+
     it "returns http success" do
-      get 'events'
-      response.should redirect_to(signin_url)
+      expect(subject).to redirect_to(signin_url)
     end
   end
 
