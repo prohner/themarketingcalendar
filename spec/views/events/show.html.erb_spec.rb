@@ -22,18 +22,18 @@ describe "events/show" do
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Description/)
-    rendered.should match(/1/)
-    rendered.should match(/2/)
-    rendered.should match(/Repetition Type/)
-    rendered.should match(/3/)
-    rendered.should match(/false/)
-    rendered.should match(/false/)
-    rendered.should match(/false/)
-    rendered.should match(/false/)
-    rendered.should match(/false/)
-    rendered.should match(/false/)
-    rendered.should match(/false/)
-    rendered.should match(/Repetition Options/)
+    expect(rendered).to match(/Description/)
+    expect(rendered).to match(/1/)
+    expect(rendered).to match(/2/)
+    expect(rendered).to match(/Repetition Type/)
+    expect(rendered).to match(/3/)
+    expect(rendered).to match(/false/)
+    expect(rendered).to match(/false/)
+    expect(rendered).to match(/false/)
+    expect(rendered).to match(/false/)
+    expect(rendered).to match(/false/)
+    expect(rendered).to match(/false/)
+    expect(rendered).to match(/false/)
+    expect(rendered).to match(/Repetition Options/)
   end
 end
