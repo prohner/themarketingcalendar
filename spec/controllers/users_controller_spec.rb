@@ -35,7 +35,7 @@ describe UsersController do
     it "assigns all users as @users" do
       user = User.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:users).should eq([user])
+      expect(assigns(:users)).to eq([user])
     end
   end
 
@@ -56,7 +56,7 @@ describe UsersController do
   describe "GET new" do
     it "assigns a new user as @user" do
       get :new, {}, valid_session
-      assigns(:user).should be_a_new(User)
+      expect(assigns(:user)).to be_a_new(User)
     end
   end
 
@@ -79,13 +79,13 @@ describe UsersController do
 
       it "assigns a newly created user as @user" do
         post :create, {:user => valid_attributes}, valid_session
-        assigns(:user).should be_a(User)
-        assigns(:user).should be_persisted
+        expect(assigns(:user)).to be_a(User)
+        expect(assigns(:user)).to be_persisted
       end
 
       it "redirects to the created user" do
         post :create, {:user => valid_attributes}, valid_session
-        response.should redirect_to(User.last)
+        expect(response).to redirect_to(User.last)
       end
     end
 
@@ -94,14 +94,14 @@ describe UsersController do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
         post :create, {:user => { "email" => "xxx" }}, valid_session
-        assigns(:user).should be_a_new(User)
+        expect(assigns(:user)).to be_a_new(User)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         User.any_instance.stub(:save).and_return(false)
         post :create, {:user => { "email" => "xxx" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
