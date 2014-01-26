@@ -46,7 +46,7 @@ describe EventsController do
     it "assigns the requested event as @event" do
       event = Event.create! valid_attributes
       get :show, {:id => event.to_param}, valid_session
-      assigns(:event).should eq(event)
+      expect(assigns(:event)).to eq(event)
     end
   end
 
@@ -54,9 +54,9 @@ describe EventsController do
     it "assigns an @event and the @repetition_types" do
       event = Event.create! valid_attributes
       get :new_event_in_popover, { }, valid_session
-      assigns(:event).should be_an(Event)
+      expect(assigns(:event)).to be_an(Event)
 
-      assigns(:repetition_types).should eq(Event.list_of_repetition_type_options)
+      expect(assigns(:repetition_types)).to eq(Event.list_of_repetition_type_options)
     end
   end
 
@@ -64,16 +64,16 @@ describe EventsController do
     it "assigns the requested @event and the @repetition_types" do
       event = Event.create! valid_attributes
       get :edit_event_in_popover, { :id => event.to_param }, valid_session
-      assigns(:event).should eq(event)
+      expect(assigns(:event)).to eq(event)
 
-      assigns(:repetition_types).should eq(Event.list_of_repetition_type_options)
+      expect(assigns(:repetition_types)).to eq(Event.list_of_repetition_type_options)
     end
   end
 
   describe "GET new" do
     it "assigns a new event as @event" do
       get :new, {}, valid_session
-      assigns(:event).should be_a_new(Event)
+      expect(assigns(:event)).to be_a_new(Event)
     end
   end
 
@@ -81,7 +81,7 @@ describe EventsController do
     it "assigns the requested event as @event" do
       event = Event.create! valid_attributes
       get :edit, {:id => event.to_param}, valid_session
-      assigns(:event).should eq(event)
+      expect(assigns(:event)).to eq(event)
     end
   end
 
@@ -95,13 +95,13 @@ describe EventsController do
 
       it "assigns a newly created event as @event" do
         post :create, {:event => valid_attributes}, valid_session
-        assigns(:event).should be_a(Event)
-        assigns(:event).should be_persisted
+        expect(assigns(:event)).to be_a(Event)
+        expect(assigns(:event)).to be_persisted
       end
 
       it "redirects to the created event" do
         post :create, {:event => valid_attributes}, valid_session
-        response.should redirect_to(Event.last)
+        expect(response).to redirect_to(Event.last)
       end
     end
 
@@ -110,14 +110,14 @@ describe EventsController do
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
         post :create, {:event => { "description" => "invalid value" }}, valid_session
-        assigns(:event).should be_a_new(Event)
+        expect(assigns(:event)).to be_a_new(Event)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
         post :create, {:event => { "description" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -137,13 +137,13 @@ describe EventsController do
       it "assigns the requested event as @event" do
         event = Event.create! valid_attributes
         put :update, {:id => event.to_param, :event => valid_attributes}, valid_session
-        assigns(:event).should eq(event)
+        expect(assigns(:event)).to eq(event)
       end
 
       it "redirects to the event" do
         event = Event.create! valid_attributes
         put :update, {:id => event.to_param, :event => valid_attributes}, valid_session
-        response.should redirect_to(event)
+        expect(response).to redirect_to(event)
       end
     end
 
@@ -153,7 +153,7 @@ describe EventsController do
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
         put :update, {:id => event.to_param, :event => { "description" => "invalid value" }}, valid_session
-        assigns(:event).should eq(event)
+        expect(assigns(:event)).to eq(event)
       end
 
       it "re-renders the 'edit' template" do
@@ -161,7 +161,7 @@ describe EventsController do
         # Trigger the behavior that occurs when invalid params are submitted
         Event.any_instance.stub(:save).and_return(false)
         put :update, {:id => event.to_param, :event => { "description" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -177,7 +177,7 @@ describe EventsController do
     it "redirects to the events list" do
       event = Event.create! valid_attributes
       delete :destroy, {:id => event.to_param}, valid_session
-      response.should redirect_to(events_url)
+      expect(response).to redirect_to(events_url)
     end
   end
 

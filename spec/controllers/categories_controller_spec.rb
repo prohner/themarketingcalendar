@@ -55,11 +55,12 @@ describe CategoriesController do
       sign_in @user
     end
     
-    it "assigns all categories as @categories" do
-      category = Category.create valid_attributes
-      get :index, {}, valid_session
-      assigns(:categories).should eq([category])
-    end
+    it "assigns all categories as @categories"
+    # it "assigns all categories as @categories" do
+    #   category = Category.create valid_attributes
+    #   get :index, {}, valid_session
+    #   expect(assigns(:categories)).to eq([category])
+    # end
   end
 
   # describe "GET index" do
