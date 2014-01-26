@@ -17,8 +17,8 @@ describe "categories/show" do
   it "renders attributes in <p>" do
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
-    rendered.should match(/Description/)
-    rendered.should match(/1/)
-    rendered.should match(/Color/)
+    expect(rendered).to match(/Description/)
+    expect(rendered).to match(/1/)
+    expect(rendered).to match(/Color/)
   end
 end
