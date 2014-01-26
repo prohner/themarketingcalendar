@@ -17,10 +17,8 @@
 require 'spec_helper'
 
 describe User do
-  before { @user = User.new(first_name: "a", last_name: "b", email: "user@example.com", 
-    password: "123456", password_confirmation: "123456") }
-  
-  subject { @user }
+
+  subject(:user) { User.new(first_name: "a", last_name: "b", email: "user@example.com", password: "123456", password_confirmation: "123456") }
   
   it { should respond_to(:first_name) }
   it { should respond_to(:last_name) }
@@ -53,36 +51,36 @@ describe User do
   end
   
   describe "when first name is not present" do
-    before { @user.first_name = "  " }
+    before { user.first_name = "  " }
     it { should_not be_valid }
   end
   
   describe "when first name is too long" do
-    before { @user.first_name = "a" * 51 }
+    before { user.first_name = "a" * 51 }
     it { should_not be_valid }
   end
-
+  
   describe "when last name is not present" do
-    before { @user.last_name = "  " }
+    before { user.last_name = "  " }
     it { should_not be_valid }
   end
   
   describe "when last name is too long" do
-    before { @user.last_name = "a" * 51 }
+    before { user.last_name = "a" * 51 }
     it { should_not be_valid }
   end
-
+  
   describe "when email is not present" do
-    before { @user.email = "  " }
+    before { user.email = "  " }
     it { should_not be_valid }
   end
-
+  
   describe "when user type is invalid" do
     it "should be invalid" do
       invalid_types = %w[0 5 -1]
       invalid_types.each do |bad_type|
-        @user.user_type = bad_type
-        expect(@user).not_to be_valid
+        user.user_type = bad_type
+        expect(user).not_to be_valid
       end
     end
   end
@@ -90,8 +88,8 @@ describe User do
   describe "when user type is valid" do
     it "should have a description" do
       User::USER_TYPE_VALUES.each do |type|
-        @user.user_type = type
-        @user.user_type_description.should_not be_nil
+        user.user_type = type
+        expect(user.user_type_description).not_to be_nil
       end
     end
   end
@@ -101,56 +99,56 @@ describe User do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo.
                      foo@bar_baz.com foo@bar+baz.com]
       addresses.each do |invalid_address|
-        @user.email = invalid_address
-        expect(@user).not_to be_valid
+        user.email = invalid_address
+        expect(user).not_to be_valid
       end
     end
   end
-
+  
   describe "when email format is valid" do
     it "should be valid" do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
-        @user.email = valid_address
-        expect(@user).to be_valid
+        user.email = valid_address
+        expect(user).to be_valid
       end
     end
   end
-
+  
   describe "when email address is already taken" do
     before (:each) do
-      user_with_same_email = @user.dup
+      user_with_same_email = user.dup
       user_with_same_email.email = user_with_same_email.email.upcase
       user_with_same_email.save
     end
-
+  
     it { should_not be_valid }
   end
-
+  
   describe "when password is not present" do
     before do
-      @user = User.new(first_name: "a", last_name: "b", email: "user@example.com",
-                       password: " ", password_confirmation: " ")
+      user.password = " "
+      user.password_confirmation = " "
     end
     it { should_not be_valid }
   end
   
   describe "when password doesn't match confirmation" do
-    before { @user.password_confirmation = "mismatch" }
+    before { user.password_confirmation = "mismatch" }
     it { should_not be_valid }
   end  
   
   describe "return value of authenticate method" do
-    before { @user.save }
-    let(:found_user) { User.find_by(email: @user.email) }
-
+    before { user.save }
+    let(:found_user) { User.find_by(email: user.email) }
+  
     describe "with valid password" do
-      it { should eq found_user.authenticate(@user.password) }
+      it { should eq found_user.authenticate(user.password) }
     end
-
+  
     describe "with invalid password" do
       let(:user_for_invalid_password) { found_user.authenticate("invalid") }
-
+  
       it { should_not eq user_for_invalid_password }
       specify { expect(user_for_invalid_password).to be_false }
     end
@@ -158,34 +156,34 @@ describe User do
   
   describe "#full_name results" do
     it "should combine first and last names" do
-      expect(@user.full_name).to eq(@user.first_name + " " + @user.last_name)
+      expect(user.full_name).to eq(user.first_name + " " + user.last_name)
     end
     
     it "should be okay with nil first name" do
-      @user.first_name = nil
-      expect(@user.full_name).to eq(@user.last_name)
+      user.first_name = nil
+      expect(user.full_name).to eq(user.last_name)
     end
     
     it "should be okay with nil last name" do
-      @user.last_name = nil
-      expect(@user.full_name).to eq(@user.first_name)
+      user.last_name = nil
+      expect(user.full_name).to eq(user.first_name)
     end
   end
   
   describe "remember token" do
-    before { @user.save }
+    before { user.save }
     its(:remember_token) { should_not be_blank }
   end
   
   describe "owning events" do
     before(:each) do
       @dave = FactoryGirl.create(:user_dave)
-
+  
       @feb_01 = DateTime.strptime('02/01/2014', '%m/%d/%Y')
       @feb_28 = DateTime.strptime('02/28/2014', '%m/%d/%Y')
     end
     it "should return the correct number of events for all_events" do
-      @dave.all_events.count.should == 10
+      expect(@dave.all_events.count).to eq(10)
     end
     
     it "should return the correct number of events for Feb 2014 with all_events_in_timeframe " do
@@ -195,7 +193,7 @@ describe User do
       # events.each do |e|
       #   puts "  #{e.explain}"
       # end
-      events.count.should == 12
+      expect(events.count).to eq(12)
     end
   end
   
@@ -207,7 +205,7 @@ describe User do
     
     it "should return only its own categories" do
       categories = @dave.all_categories
-      categories.count.should == 2
+      expect(categories.count).to eq(2)
     end
   end
   
@@ -219,18 +217,18 @@ describe User do
     end
     
     it "should want to see a category by default" do
-      @dave.wants_to_see_category(@category_to_hide).should == true
-      @dave.wants_to_see_category(@category_to_see).should == true
+      expect(@dave.wants_to_see_category(@category_to_hide)).to eq(true)
+      expect(@dave.wants_to_see_category(@category_to_see)).to eq(true)
     end
-
+  
     it "should answer correctly that category should be hidden" do
       hcf = HiddenCategoryFlag.create(:user => @dave, :category => @category_to_hide)
-      @dave.wants_to_see_category(@category_to_hide).should == false
+      expect(@dave.wants_to_see_category(@category_to_hide)).to eq(false)
     end
     
     it "should answer correctly that category should be hidden" do
       hcf = HiddenCategoryFlag.create(:user => @dave, :category => @category_to_hide)
-      @dave.wants_to_see_category(@category_to_see).should == true
+      expect(@dave.wants_to_see_category(@category_to_see)).to eq(true)
     end
   end
   
@@ -243,19 +241,19 @@ describe User do
     
     it "should toggle a category" do
       @dave.toggle_viewing_category(@category)
-      @dave.wants_to_see_category(@category).should == false
-
+      expect(@dave.wants_to_see_category(@category)).to eq(false)
+  
       # destroy in the toggle_viewing_category doesn't seem to take effect in test environment
       # @dave.hidden_category_flags.reload
       # @dave.toggle_viewing_category(@category)
       # @dave.wants_to_see_category(@category).should == true
     end
-
+  
     it "should work when toggling multiple categories" do
       @dave.toggle_viewing_category(@category)
       @dave.toggle_viewing_category(@category2)
-      @dave.wants_to_see_category(@category).should == false
-      @dave.wants_to_see_category(@category2).should == false
+      expect(@dave.wants_to_see_category(@category)).to eq(false)
+      expect(@dave.wants_to_see_category(@category2)).to eq(false)
     end
   end
 
