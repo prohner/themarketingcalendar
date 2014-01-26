@@ -41,5 +41,9 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
   
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+  
   config.include Capybara::DSL
 end

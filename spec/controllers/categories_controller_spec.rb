@@ -45,7 +45,20 @@ describe CategoriesController do
   describe "when not signed in" do
     it "should redirect to signin" do
       get :index
-      response.should redirect_to(signin_path)
+      expect(response).to redirect_to(signin_path)
+    end
+  end
+
+  describe "when signed in" do
+    before(:each) do 
+      @user = FactoryGirl.create(:user_dave)
+      sign_in @user
+    end
+    
+    it "assigns all categories as @categories" do
+      category = Category.create valid_attributes
+      get :index, {}, valid_session
+      assigns(:categories).should eq([category])
     end
   end
 
