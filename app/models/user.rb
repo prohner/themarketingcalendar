@@ -108,6 +108,32 @@ class User < ActiveRecord::Base
     end
     events
   end
+  
+  def toggle_viewing_category(category)
+    if wants_to_see_category(category)
+      # so we need to hide it
+      hidden_category_flags << HiddenCategoryFlag.create(:user => self, :category => category)
+    else
+      # we need to remove the hidden flag
+      self.hidden_category_flags.each do |hcf|
+        if hcf.category_id == category.id
+          puts "DESTROY #{hcf.inspect}"
+          hcf.destroy
+        end
+      end
+    end
+  end
+  
+  def wants_to_see_category(category)
+    wants_to_see = true
+    self.hidden_category_flags.each do |hcf|
+      if hcf.category_id == category.id
+        puts "FOUND #{hcf.category_id} #{hcf.inspect}"
+        wants_to_see = false
+      end
+    end
+    wants_to_see
+  end
 
   private
 

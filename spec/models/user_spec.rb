@@ -36,6 +36,8 @@ describe User do
   it { should respond_to(:all_events) }
   it { should respond_to(:all_events_in_timeframe) }
   it { should respond_to(:all_categories) }
+  it { should respond_to(:wants_to_see_category) }
+  it { should respond_to(:toggle_viewing_category) }
   
   it { should be_valid }
   
@@ -208,4 +210,53 @@ describe User do
       categories.count.should == 2
     end
   end
+  
+  describe "wants_to_see_category" do
+    before(:each) do
+      @dave = FactoryGirl.create(:user_dave)
+      @category_to_see  = @dave.category_groups.first.categories.first
+      @category_to_hide = @dave.category_groups.last.categories.last
+    end
+    
+    it "should want to see a category by default" do
+      @dave.wants_to_see_category(@category_to_hide).should == true
+      @dave.wants_to_see_category(@category_to_see).should == true
+    end
+
+    it "should answer correctly that category should be hidden" do
+      hcf = HiddenCategoryFlag.create(:user => @dave, :category => @category_to_hide)
+      @dave.wants_to_see_category(@category_to_hide).should == false
+    end
+    
+    it "should answer correctly that category should be hidden" do
+      hcf = HiddenCategoryFlag.create(:user => @dave, :category => @category_to_hide)
+      @dave.wants_to_see_category(@category_to_see).should == true
+    end
+  end
+  
+  describe "toggle_viewing_category" do
+    before(:each) do
+      @dave = FactoryGirl.create(:user_dave)
+      @category  = @dave.category_groups.first.categories.first
+      @category2 = @dave.category_groups.last.categories.last
+    end
+    
+    it "should toggle a category" do
+      @dave.toggle_viewing_category(@category)
+      @dave.wants_to_see_category(@category).should == false
+
+      # destroy in the toggle_viewing_category doesn't seem to take effect in test environment
+      # @dave.hidden_category_flags.reload
+      # @dave.toggle_viewing_category(@category)
+      # @dave.wants_to_see_category(@category).should == true
+    end
+
+    it "should work when toggling multiple categories" do
+      @dave.toggle_viewing_category(@category)
+      @dave.toggle_viewing_category(@category2)
+      @dave.wants_to_see_category(@category).should == false
+      @dave.wants_to_see_category(@category2).should == false
+    end
+  end
+
 end

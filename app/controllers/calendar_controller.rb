@@ -24,5 +24,20 @@ class CalendarController < ApplicationController
     end
   end
 
+  def update_hidden_category_flag
+    category_id = params[:id]
+    puts "Hunting category id #{category_id} (#{Category.find(category_id).inspect})"
+    
+    current_user.toggle_viewing_category(Category.find(category_id))
+    
+    respond_to do |format|
+      format.js  { render :json => nil }
+    end
+  end
+  
+  private
+    def category_params
+      params.require(:id)
+    end
   
 end

@@ -22,7 +22,10 @@
 		minDragDistance: 5
 	});
 	// toggleSnap();
-	
+
+	<% current_user.hidden_category_flags.each do |hcf| %>
+		toggleCalendarFilterCategory(<%= hcf.category_id %>);
+	<% end %>
 </script>
 
 <div id='loading' class="loading">Loading calendar...</div>
@@ -48,6 +51,7 @@ input {
 </style>
 
 <% content_for :snap_menu do %>
+
 <%= form_tag '#', class: "form-horizontal" do %>
 	<div class="panel-group" id="accordion">
 	  <div xclass="panel panel-default">
@@ -62,7 +66,7 @@ input {
 							<div class="controls">
 
 								<label class="checkbox inline" style="font-weight:normal;">
-									<%= check_box_tag "category-#{category.id}", category.id, true, :onclick=>"toggleCalendarFilterCategory(#{category.id});", :style => "width:13px" %>
+									<%= check_box_tag "category-#{category.id}", category.id, current_user.wants_to_see_category(category), :onclick=>"toggleCalendarFilterCategory(#{category.id});", :style => "width:13px" %>
 									&nbsp; &nbsp;
 									<%= color_scheme_as_html_snippet_to_display(category.color_scheme) %>
 									<%= category.description %> 

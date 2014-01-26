@@ -2,9 +2,12 @@ require 'spec_helper'
 
 describe "categories/edit" do
   before(:each) do
+    @user = FactoryGirl.create(:user_dave)
+    cg = @user.category_groups.first
     @category = assign(:category, stub_model(Category,
       :description => "MyString",
-      :color_scheme => ColorScheme.new(:foreground => "black", :background => "white")
+      :color_scheme => ColorScheme.new(:foreground => "black", :background => "white"),
+      :category_group => cg
     ))
   end
 

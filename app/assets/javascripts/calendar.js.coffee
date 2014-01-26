@@ -199,6 +199,14 @@ presentPopover = (url, sourceObject, event) ->
 	else
 		hidden_categories.push(categoryId)
 		console.log "  Add  " + categoryId
+		
+	$.ajax {
+		url: "/update_hidden_category_flag", 
+		data: { "id": categoryId },
+		type: "GET",
+		dataType: "JSON" 
+	}
+	
 	$('#calendar').fullCalendar 'rerenderEvents'
 
 # $('body').on('click',  (e) ->
