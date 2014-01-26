@@ -201,8 +201,7 @@ presentPopover = (url, sourceObject, event) ->
 		console.log "  Add  " + categoryId
 		
 	$.ajax {
-		url: "/update_hidden_category_flag", 
-		data: { "id": categoryId },
+		url: "/update_hidden_category_flag/" + categoryId,
 		type: "GET",
 		dataType: "JSON" 
 	}
