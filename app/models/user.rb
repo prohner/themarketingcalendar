@@ -117,7 +117,6 @@ class User < ActiveRecord::Base
       # we need to remove the hidden flag
       self.hidden_category_flags.each do |hcf|
         if hcf.category_id == category.id
-          puts "DESTROY #{hcf.inspect}"
           hcf.destroy
         end
       end
@@ -128,7 +127,6 @@ class User < ActiveRecord::Base
     wants_to_see = true
     self.hidden_category_flags.each do |hcf|
       if hcf.category_id == category.id
-        puts "FOUND #{hcf.category_id} #{hcf.inspect}"
         wants_to_see = false
       end
     end
