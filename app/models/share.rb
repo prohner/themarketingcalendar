@@ -21,10 +21,10 @@ class Share < ActiveRecord::Base
             :presence   => true
   validates :category_group, 
             :presence   => true
-  validate :owner_is_different_from_partner?
+  validate :owner_is_different_from_partner
   
-  def owner_is_different_from_partner?
-    return false if owner.nil? or partner.nil?
+  def owner_is_different_from_partner
+    return if owner.nil? or partner.nil?
     if owner.id == partner.id
       errors.add(:owner, "owner and partner cannot be the same")
     end
