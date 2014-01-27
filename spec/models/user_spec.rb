@@ -266,5 +266,9 @@ describe User do
     it "owner should have the share" do
       expect(dave.shares).to eq ([share])
     end
+
+    it "partner should have the share" do
+      expect(bill.partners).to eq ([share])
+    end
   end
 end

@@ -14,4 +14,19 @@ class Share < ActiveRecord::Base
   belongs_to :owner, :class_name => "User", inverse_of: :shares
   belongs_to :partner, :class_name => "User", inverse_of: :partners
   belongs_to :category_group, :class_name => "CategoryGroup"
+  
+  validates :owner, 
+            :presence   => true
+  validates :partner, 
+            :presence   => true
+  validates :category_group, 
+            :presence   => true
+  validate :owner_is_different_from_partner?
+  
+  def owner_is_different_from_partner?
+    return false if owner.nil? or partner.nil?
+    if owner.id == partner.id
+      errors.add(:owner, "owner and partner cannot be the same")
+    end
+  end
 end
