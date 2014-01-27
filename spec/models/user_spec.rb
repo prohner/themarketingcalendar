@@ -6,12 +6,11 @@
 #  first_name      :string(255)
 #  last_name       :string(255)
 #  email           :string(255)
-#  company_id      :integer
+#  user_type       :integer
 #  created_at      :datetime
 #  updated_at      :datetime
 #  password_digest :string(255)
 #  remember_token  :string(255)
-#  user_type       :integer
 #
 
 require 'spec_helper'
@@ -36,6 +35,8 @@ describe User do
   it { should respond_to(:all_categories) }
   it { should respond_to(:wants_to_see_category) }
   it { should respond_to(:toggle_viewing_category) }
+  it { should respond_to(:shares) }
+  it { should respond_to(:partners) }
   
   it { should be_valid }
   
@@ -257,4 +258,13 @@ describe User do
     end
   end
 
+  describe "#shares" do
+    let(:dave) { FactoryGirl.create(:user_dave) }
+    let(:bill) { FactoryGirl.create(:user_bill) }
+    let(:share) { Share.create(:owner => dave, :partner => bill, :category_group => dave.category_groups.first) }
+    
+    it "owner should have the share" do
+      expect(dave.shares).to eq ([share])
+    end
+  end
 end

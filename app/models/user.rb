@@ -6,12 +6,11 @@
 #  first_name      :string(255)
 #  last_name       :string(255)
 #  email           :string(255)
-#  company_id      :integer
+#  user_type       :integer
 #  created_at      :datetime
 #  updated_at      :datetime
 #  password_digest :string(255)
 #  remember_token  :string(255)
-#  user_type       :integer
 #
 
 class User < ActiveRecord::Base
@@ -22,6 +21,9 @@ class User < ActiveRecord::Base
   has_many :events, :through => :stakeholders
   has_many :category_groups
   has_many :hidden_category_flags
+  
+  has_many :shares, :foreign_key => 'owner_id', :class_name => "Share"
+  has_many :partners, :foreign_key => 'partner_id', :class_name => "Share"
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
@@ -77,6 +79,11 @@ class User < ActiveRecord::Base
   end
   
   def all_categories
+    # Should be handled like this:
+    # has_many :posts
+    # has_many :comments, through: :posts
+    # has_many :commenters, through: :comments
+    
     categories = []
     category_groups.each do |cg|
       categories.concat(cg.categories)

@@ -7,6 +7,7 @@
 #  created_at      :datetime
 #  updated_at      :datetime
 #  color_scheme_id :integer
+#  user_id         :integer
 #
 
 require 'spec_helper'

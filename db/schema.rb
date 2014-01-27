@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140125141541) do
+ActiveRecord::Schema.define(version: 20140127063336) do
 
   create_table "categories", force: true do |t|
     t.string   "description"
@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(version: 20140125141541) do
 
   create_table "interested_parties", force: true do |t|
     t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shares", force: true do |t|
+    t.integer  "owner_id"
+    t.integer  "partner_id"
+    t.integer  "category_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
