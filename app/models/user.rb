@@ -91,6 +91,16 @@ class User < ActiveRecord::Base
     categories.sort_by{|e| e.description}
   end
   
+  def all_category_groups
+    all_of_them = category_groups
+    partners.each do |p|
+      all_of_them << p.category_group
+    end
+    
+    all_of_them.uniq!
+    # all_of_them.sort { |a, b| a.description > b.description }
+  end
+  
   def all_events_in_timeframe(start_date, end_date)
     # puts_user self
     # puts

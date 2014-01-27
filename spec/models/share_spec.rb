@@ -43,7 +43,7 @@ describe Share do
     expect(share).not_to be_valid
   end
   
-  it "should have different owner and partner ids" do
+  it "should require different owner and partner ids" do
     share = Share.create(:owner => dave, :partner => dave, :category_group => category_group)
     expect(share).not_to be_valid
   end

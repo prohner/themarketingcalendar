@@ -258,17 +258,52 @@ describe User do
     end
   end
 
-  describe "#shares" do
+  context "when sharing category groups" do
     let(:dave) { FactoryGirl.create(:user_dave) }
     let(:bill) { FactoryGirl.create(:user_bill) }
     let(:share) { Share.create(:owner => dave, :partner => bill, :category_group => dave.category_groups.first) }
     
-    it "owner should have the share" do
-      expect(dave.shares).to eq ([share])
-    end
+    describe "#shares" do
+      it "owner should have the share" do
+        expect(dave.shares).to eq ([share])
+        expect(dave.shares.count).to eq (1)
+      end
 
-    it "partner should have the share" do
-      expect(bill.partners).to eq ([share])
+      it "partner should have the share" do
+        expect(bill.partners).to eq ([share])
+        expect(bill.partners.count).to eq (1)
+      end
+    end
+  
+    describe "#all_category_groups" do
+      it { should respond_to(:all_category_groups) }
+      
+      it "should get all owned and shared category groups" do
+        # Not sure why has_many association is needs to be accessed before 
+        # using counts below.
+        expect(dave.shares).to eq ([share])
+        expect(bill.partners).to eq ([share])
+
+        owned = bill.category_groups
+        shared = bill.partners
+        count_of_all_category_groups = owned.count + shared.count
+        expect(bill.all_category_groups.count).to eq(count_of_all_category_groups)
+      end
+      
+      
+      it "should not return any duplicates" do
+        share2 = Share.create(:owner => dave, :partner => bill, :category_group => dave.category_groups.first)
+        
+        expect(dave.shares).to match_array([share, share2])
+        expect(bill.partners).to match_array([share, share2])
+
+        owned_count = bill.category_groups.count
+        shared_count = 1  ## two were shared, but only one unique
+        count_of_all_category_groups = owned_count + shared_count
+        expect(bill.all_category_groups.count).to eq(count_of_all_category_groups)
+        
+      end
+      
     end
   end
 end
