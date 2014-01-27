@@ -95,21 +95,21 @@ ready = ->
 			presentPopover "/new_event_in_popover", thisObject, { }
 
 removeAnyVisiblePopovers = (clickEvent) ->
-	console.log "click 0 " + popoverIsShowing
+	# console.log "click 0 " + popoverIsShowing
 	removedAnything = false
 	if popoverIsShowing
-		console.log "  click 1 " + popoverThatIsCurrentlyShowing
+		# console.log "  click 1 " + popoverThatIsCurrentlyShowing
 		if popoverThatIsCurrentlyShowing != null
-			console.log "    click 2"
+			# console.log "    click 2"
 			popContainer = jQuery("bs.popover")
 			# alert popContainer
 			if $('.popover').has(clickEvent.target).length == 0
-				console.log "      click is NOT in popover"
+				# console.log "      click is NOT in popover"
 				$(popoverThatIsCurrentlyShowing).popover('hide')
 				popoverThatIsCurrentlyShowing = null
 				removedAnything = true
-			else
-				console.log "      click is in popover"
+			# else
+			# 	console.log "      click is in popover"
 	removedAnything
 	
 	
