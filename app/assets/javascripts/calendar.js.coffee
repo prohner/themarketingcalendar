@@ -19,21 +19,9 @@ popoverThatIsCurrentlyShowing = null
 
 ready = ->
 	
-	# $('body').on 'click', (e) ->
-	# 	# console.log "click 0 " + popoverIsShowing
-	# 	if popoverIsShowing
-	# 		# console.log "  click 1 " + popoverThatIsCurrentlyShowing
-	# 		if popoverThatIsCurrentlyShowing != null
-	# 			# console.log "    click 2"
-	# 			popContainer = jQuery("bs.popover")
-	# 			# alert popContainer
-	# 			if $('.popover').has(e.target).length == 0
-	# 				# console.log "      click is NOT in popover"
-	# 				$(popoverThatIsCurrentlyShowing).popover('hide')
-	# 				popoverThatIsCurrentlyShowing = null
-	# 			# else
-	# 			# 	console.log "      click is in popover"
-	
+	$('body').on 'click', (e) ->
+		removeAnyVisiblePopovers(e)
+		
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	# remoteServerName = "http://0.0.0.0:3000"
 	
@@ -76,6 +64,9 @@ ready = ->
 				$(element).attr "id", "event-id-" + event.id
 			
 			eventClick: (event, jsEvent, view) ->
+				if removeAnyVisiblePopovers jsEvent
+					return
+				
 				thisObject = this
 				offset = $(this).offset()
 				left = jsEvent.pageX
@@ -102,6 +93,24 @@ ready = ->
 		else
 			popoverIsShowing = true
 			presentPopover "/new_event_in_popover", thisObject, { }
+
+removeAnyVisiblePopovers = (clickEvent) ->
+	console.log "click 0 " + popoverIsShowing
+	removedAnything = false
+	if popoverIsShowing
+		console.log "  click 1 " + popoverThatIsCurrentlyShowing
+		if popoverThatIsCurrentlyShowing != null
+			console.log "    click 2"
+			popContainer = jQuery("bs.popover")
+			# alert popContainer
+			if $('.popover').has(clickEvent.target).length == 0
+				console.log "      click is NOT in popover"
+				$(popoverThatIsCurrentlyShowing).popover('hide')
+				popoverThatIsCurrentlyShowing = null
+				removedAnything = true
+			else
+				console.log "      click is in popover"
+	removedAnything
 	
 	
 ajaxComplete = (e, xhr, settings) ->
