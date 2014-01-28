@@ -303,7 +303,27 @@ describe User do
         expect(bill.all_category_groups.count).to eq(count_of_all_category_groups)
         
       end
+    end
+  end
+  
+  describe "#all_events" do
+    let(:dave) { FactoryGirl.create(:user_dave) }
+    let(:bill) { FactoryGirl.create(:user_bill) }
+    let(:share) { Share.create(:owner => dave, :partner => bill, :category_group => dave.category_groups.first) }
+
+    it "should be able to get the shared events" do
+      all_events = []
+      bill.all_category_groups.each do |cg| 
+        cg.categories.each do |category|
+          category.events.each do |event|
+            all_events << event
+          end
+        end
+      end
+      
+      expect(bill.all_events).to match_array(all_events)
       
     end
   end
+  
 end

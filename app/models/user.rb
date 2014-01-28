@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   
   def all_events
     events = []
-    category_groups.each do |cg|
+    all_category_groups.each do |cg|
       cg.categories.each do |c|
         events.concat(c.events)
       end
