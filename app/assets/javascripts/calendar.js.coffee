@@ -19,8 +19,8 @@ popoverThatIsCurrentlyShowing = null
 
 ready = ->
 	
-	$('body').on 'click', (e) ->
-		removeAnyVisiblePopovers(e)
+	# $('body').on 'click', (e) ->
+	# 	removeAnyVisiblePopovers(e)
 		
 	# remoteServerName = "http://www.themarketingcalendar.com"
 	# remoteServerName = "http://0.0.0.0:3000"
