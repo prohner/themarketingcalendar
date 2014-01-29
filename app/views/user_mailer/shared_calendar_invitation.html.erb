@@ -1,5 +1,15 @@
-<p>Owner: <%= @owner.inspect %></p>
-<p>Partner: <%= @partner.inspect %></p>
+
+<h2>Please come join us</h2>
+
+<p><b><%= @owner.full_name %></b> wants you to join
+	in the <b><%= @calendar.description %></b> calendar 
+	at <%= application_name %>.
+</p>
+
+<p><a href="<%= @invitation_url %>">Visit the web site</a> and you'll be
+	looking at the calendar in seconds.</p>
+
+<!-- <p>Partner: <%= @partner.inspect %></p>
 <p>Calendar: <%= @calendar.inspect %></p>
-<p>URL: <%= @invitation_url.inspect %></p>
+<p>URL: <%= @invitation_url.inspect %></p> -->
 

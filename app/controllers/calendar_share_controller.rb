@@ -39,7 +39,7 @@ class CalendarShareController < ApplicationController
           
           share = Share.create(:owner => owner, :partner => partner, :category_group => category_group)
 
-          UserMailer.shared_calendar_invitation(share).deliver
+          UserMailer.shared_calendar_invitation(share, request.original_url).deliver
         end
         
       end
