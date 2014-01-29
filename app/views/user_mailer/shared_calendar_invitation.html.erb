@@ -1,18 +1,20 @@
 
 <div style="text-align:center; width:600px; height:428px; background-image:url('http://www.themarketingcalendar.com/assets/invitation_email_background_image.jpg'); ">
-	
-<h2>Please come join us</h2>
 
-<p><b><%= @owner.full_name %></b> wants you to join
-	in the <b><%= @calendar.description %></b> calendar 
-	at <%= application_name %>.
-</p>
+	<div style="margin: 120px;">
+		<h2>Please come join us</h2>
 
-<p><a href="<%= @invitation_url %>">Visit the web site</a> and you'll be
-	looking at the calendar in seconds.</p>
+		<p><b><%= @owner.full_name %></b> wants you to join
+			in the <b><%= @calendar.description %></b> calendar 
+			at <%= application_name %>.
+		</p>
 
-<!-- <p>Partner: <%= @partner.inspect %></p>
-<p>Calendar: <%= @calendar.inspect %></p>
-<p>URL: <%= @invitation_url.inspect %></p> -->
+		<p><a href="<%= @invitation_url %>">Visit the web site</a> and you'll be
+			looking at the calendar in seconds.</p>
+
+		<!-- <p>Partner: <%= @partner.inspect %></p>
+		<p>Calendar: <%= @calendar.inspect %></p>
+		<p>URL: <%= @invitation_url.inspect %></p> -->
+	</div>	
 
 </div>
