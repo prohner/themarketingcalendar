@@ -38,6 +38,14 @@ class User < ActiveRecord::Base
   has_secure_password
   validates :password, length: { minimum: 6 }
 
+  def self.status_options
+    ["new", "invited", "signed up", "expired"]
+  end
+
+  validates :status, 
+            :presence   => true,
+            :inclusion=> { :in => self.status_options }            
+
   def full_name
     f = ""
     l = ""
@@ -159,5 +167,6 @@ class User < ActiveRecord::Base
     def default_values
        self.email = email.downcase
        self.user_type ||= 1
+       self.status ||= 'new'
     end
 end

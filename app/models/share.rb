@@ -11,6 +11,7 @@
 #
 
 class Share < ActiveRecord::Base
+  before_validation :default_values
   belongs_to :owner, :class_name => "User", inverse_of: :shares
   belongs_to :partner, :class_name => "User", inverse_of: :partners
   belongs_to :category_group, :class_name => "CategoryGroup"
@@ -21,6 +22,8 @@ class Share < ActiveRecord::Base
             :presence   => true
   validates :category_group, 
             :presence   => true
+  validates :uuid,
+            :presence   => true
   validate :owner_is_different_from_partner
   
   def owner_is_different_from_partner
@@ -29,4 +32,10 @@ class Share < ActiveRecord::Base
       errors.add(:owner, "owner and partner cannot be the same")
     end
   end
+  
+  private
+  def default_values
+     self.uuid ||= SecureRandom.uuid
+  end
+  
 end

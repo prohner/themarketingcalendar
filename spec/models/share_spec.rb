@@ -22,6 +22,7 @@ describe Share do
   it { should respond_to(:owner) }
   it { should respond_to(:partner) }
   it { should respond_to(:category_group) }
+  it { should respond_to(:uuid) }
 
   it "should be valid with good parameters" do
     share = Share.new(:owner => dave, :partner => bill, :category_group => category_group)

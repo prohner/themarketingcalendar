@@ -326,4 +326,22 @@ describe User do
     end
   end
   
+  describe ".status" do
+    let(:user) { FactoryGirl.create(:user_dave) }
+    
+    # ["new", "invited", "signed up", "expired"]
+    
+    it "should accept valid status options" do
+      User.status_options.each do |status|
+        user.status = status
+        expect(user).to be_valid
+      end
+    end
+    
+    it "should reject invalid status options" do
+      user.status = "xstatus"
+      expect(user).not_to be_valid
+    end
+    
+  end
 end

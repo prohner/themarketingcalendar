@@ -1,0 +1,32 @@
+<% provide(:title, "Calendar to Share") %>
+<h1>Choose Calendars to Share</h1>
+
+
+<%= form_tag '/choose-person-to-share', :method => :post do %>
+<table align="center">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+	    <% @category_groups.each do |category_group| %>
+	      <tr>
+  	        <td><%= check_box_tag "category_groups[]", category_group.id, false %></td>
+	        <td><%= category_group.description %></td>
+	      </tr>
+	    <% end %>
+		<tr>
+			<td colspan="3" align="center">
+				<%= submit_tag %>
+			</td>
+		</tr>
+  </tbody>
+</table>
+<% end %>
+
+<br>
+

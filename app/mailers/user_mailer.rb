@@ -14,5 +14,14 @@ class UserMailer < ActionMailer::Base
     @url = url
     mail(:to => email, :subject => "Thank you for your interest!")
   end
+  
+  def shared_calendar_invitation(share)
+    @owner = share.owner
+    @partner = share.partner
+    @calendar = share.category_group
+    @invitation_url = "http://whatever/?u=#{share.uuid}"
+
+    mail(:to => @partner.email, :subject => "#{@owner.full_name} shared '#{@calendar.description}' with you")
+  end
 end
 

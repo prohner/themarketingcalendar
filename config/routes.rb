@@ -1,4 +1,7 @@
 TheMarketingCalendar::Application.routes.draw do
+  get "calendar_share/choose_calendar"
+  get "calendar_share/choose_user"
+
   get "calendar/index"
   get "calendar/events"
 
@@ -18,6 +21,10 @@ TheMarketingCalendar::Application.routes.draw do
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
+  
+  match '/choose-calendar-to-share',  to: 'calendar_share#choose_calendar', via: 'get'
+  match '/choose-person-to-share',    to: 'calendar_share#choose_user',     via: 'post'
+  match '/share-calendars',           to: 'calendar_share#share_calendars', via: 'post'
   
   get "static_pages/home"
   get "static_pages/help"
