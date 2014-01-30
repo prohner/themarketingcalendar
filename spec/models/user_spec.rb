@@ -156,7 +156,7 @@ describe User do
     end
   end
   
-  describe "#full_name results" do
+  describe "#full_name" do
     it "should combine first and last names" do
       expect(user.full_name).to eq(user.first_name + " " + user.last_name)
     end
@@ -169,6 +169,30 @@ describe User do
     it "should be okay with nil last name" do
       user.last_name = nil
       expect(user.full_name).to eq(user.first_name)
+    end
+    
+    it "should default to email if first and last are missing" do
+      user.first_name = nil
+      user.last_name = nil
+      expect(user.full_name).to eq(user.email)
+    end
+  end
+  
+  describe "#default_value_for_empty_name" do
+    it "should be the same as missing name" do
+      user.first_name = User.default_value_for_empty_name
+      expect(user.full_name).to eq(user.last_name)
+    end
+
+    it "should be okay with nil last name" do
+      user.last_name = User.default_value_for_empty_name
+      expect(user.full_name).to eq(user.first_name)
+    end
+    
+    it "should default to email if first and last are missing" do
+      user.first_name = User.default_value_for_empty_name
+      user.last_name = User.default_value_for_empty_name
+      expect(user.full_name).to eq(user.email)
     end
   end
   

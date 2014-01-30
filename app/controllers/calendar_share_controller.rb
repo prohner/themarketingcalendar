@@ -30,8 +30,8 @@ class CalendarShareController < ApplicationController
           
           if partner.nil?
             partner = User.create!(:email => email, 
-                        :first_name => 'tbd',
-                        :last_name => 'tbd', 
+                        :first_name => User.default_value_for_empty_name,
+                        :last_name => User.default_value_for_empty_name, 
                         :status => 'invited',
                         :password => 'should_be_in_secret_initializer',
                         :password_confirmation => 'should_be_in_secret_initializer')

@@ -1,12 +1,13 @@
-<% provide(:title, "Category Groups") %>
-<h1>Listing category groups</h1>
+<% provide(:title, "Calendars") %>
+<h1>All Calendars</h1>
 
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Calendar</th>
+      <th>Colors</th>
+      <th colspan="2">Actions</th>
+      <th colspan="2">Shared Partners</th>
     </tr>
   </thead>
 
@@ -17,6 +18,11 @@
         <td><%= color_scheme_as_html_snippet_to_display(category_group.color_scheme) %></td>
         <td><%= link_to 'Edit', edit_category_group_path(category_group) %></td>
         <td><%= link_to 'Destroy', category_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td>
+			<% category_group.shares.each do |share| %>
+				<%= share.partner.full_name %> (<%= share.partner.status %>)&nbsp;&nbsp;&nbsp;
+			<% end %>
+		</td>
       </tr>
     <% end %>
   </tbody>

@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
   def self.status_options
     ["new", "invited", "signed up", "expired"]
   end
+  
+  def self.default_value_for_empty_name
+    "tmc name tbd"
+  end
 
   validates :status, 
             :presence   => true,
@@ -53,10 +57,14 @@ class User < ActiveRecord::Base
   def full_name
     f = ""
     l = ""
-    f = first_name unless first_name.nil?
-    l = last_name unless last_name.nil?
+    f = first_name unless first_name.nil? || first_name == User.default_value_for_empty_name
+    l = last_name unless last_name.nil? || last_name == User.default_value_for_empty_name
 
-    (f.strip + " " + l.strip).strip
+    if f == "" && l == ""
+      email
+    else
+      (f.strip + " " + l.strip).strip
+    end
   end
   
   def User.new_remember_token
