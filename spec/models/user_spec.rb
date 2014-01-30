@@ -304,8 +304,7 @@ describe User do
       it { should respond_to(:all_category_groups) }
       
       it "should get all owned and shared category groups" do
-        # Not sure why has_many association is needs to be accessed before 
-        # using counts below.
+        # Not sure why has_many association it needs to be accessed before using counts below.
         expect(dave.shares).to eq ([share])
         expect(bill.partners).to eq ([share])
 
@@ -326,6 +325,16 @@ describe User do
         shared_count = 1  ## two were shared, but only one unique
         count_of_all_category_groups = owned_count + shared_count
         expect(bill.all_category_groups.count).to eq(count_of_all_category_groups)
+      end
+      
+      it "should not change ownership of any category groups" do
+        # Not sure why has_many association it needs to be accessed before using counts below.
+        expect(dave.shares).to eq ([share])
+        expect(bill.partners).to eq ([share])
+
+        expect(dave.category_groups.count).to eq (2)
+        expect(bill.all_category_groups.count).to eq (3)
+        expect(dave.category_groups.count).to eq (2)
         
       end
     end

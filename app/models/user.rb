@@ -112,13 +112,16 @@ class User < ActiveRecord::Base
   end
   
   def all_category_groups
-    all_of_them = category_groups
-    partners.each do |p|
-      all_of_them << p.category_group
+    all_of_them = []
+    all_of_them.concat(category_groups)
+    
+    partners.each do |share|
+      all_of_them << share.category_group
     end
     
     all_of_them.uniq!
     # all_of_them.sort { |a, b| a.description > b.description }
+    all_of_them
   end
   
   def all_events_in_timeframe(start_date, end_date)
@@ -126,6 +129,8 @@ class User < ActiveRecord::Base
     # puts
     # puts "User#all_events_in_timeframe"
     events = []
+    
+    puts "USING category_groups, BUT SHOULD USE all_category_groups"
     category_groups.each do |cg|
       cg.categories.each do |c|
         c.events.each do |e|
