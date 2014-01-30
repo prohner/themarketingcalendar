@@ -1,0 +1,21 @@
+<% provide(:title, 'Sharing Calendar') %>
+
+<% if @share.nil? %>
+	Please forward your email to <%= mail_to 'admin@TheMarketingCalendar.com' %>.
+<% else %>
+
+<p>
+	
+<b><%= @share.owner.full_name %></b> invited you to use the
+<b><%= @share.category_group.description %></b> calendar.  Cool!
+</p>
+
+	<% if @share.partner.user_can_use_system %>
+		<p>Your account, <%= @share.partner.email %>, is now linked up.</p>
+		<p>Jump in and <%= link_to "use the #{ application_name }", calendar_index_path %>.</p>
+	<% else %>
+		<p>Uh-oh, gotta signup now.</p>
+	<% end %>
+
+<% end %>
+

@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
             :presence   => true,
             :inclusion=> { :in => self.status_options }            
 
+  def user_can_use_system
+    status == "signed up"
+  end
+  
   def full_name
     f = ""
     l = ""

@@ -37,6 +37,7 @@ describe User do
   it { should respond_to(:toggle_viewing_category) }
   it { should respond_to(:shares) }
   it { should respond_to(:partners) }
+  it { should respond_to(:user_can_use_system) }
   
   it { should be_valid }
   
@@ -342,6 +343,20 @@ describe User do
       user.status = "xstatus"
       expect(user).not_to be_valid
     end
-    
+  end
+  
+  describe "#user_can_use_system" do
+    let(:user) { FactoryGirl.create(:user_dave) }
+
+    it "should grant access appropriately" do
+      User.status_options.each do |status|
+        user.status = status
+        if status == "signed up"
+          expect(user.user_can_use_system).to be_true
+        else
+          expect(user.user_can_use_system).to be_false
+        end
+      end
+    end
   end
 end

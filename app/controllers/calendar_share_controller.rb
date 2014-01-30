@@ -44,6 +44,14 @@ class CalendarShareController < ApplicationController
         
       end
     end
-    
+  end
+  
+  def share_calendars_signup
+    @share = Share.find_by_uuid(params[:u])
+    if @share.nil?
+      flash[:notice] = "Oh geez, we looked but couldn't find the invitation to share."
+    else
+      sign_in @share.partner
+    end
   end
 end
