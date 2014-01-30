@@ -130,8 +130,7 @@ class User < ActiveRecord::Base
     # puts "User#all_events_in_timeframe"
     events = []
     
-    puts "USING category_groups, BUT SHOULD USE all_category_groups"
-    category_groups.each do |cg|
+    all_category_groups.each do |cg|
       cg.categories.each do |c|
         c.events.each do |e|
           # puts "  #{e.explain}"
