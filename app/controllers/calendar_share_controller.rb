@@ -1,5 +1,5 @@
 class CalendarShareController < ApplicationController
-  before_action :verify_user_is_signed_in_or_redirect
+  before_action :verify_user_is_signed_in_or_redirect, except: [:share_calendars_signup]
 
   def choose_calendar
     @category_groups = current_user.all_category_groups
