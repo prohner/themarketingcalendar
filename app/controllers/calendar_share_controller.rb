@@ -20,13 +20,13 @@ class CalendarShareController < ApplicationController
     owner = current_user
     
     emails.each do |email|
-      puts "Invite #{email} to"
+      # puts "Invite #{email} to"
       partner = User.find_by_email(email)
       category_group_ids.each do |category_group_id|
         category_group = CategoryGroup.find_by_id(category_group_id)
 
         unless category_group.nil?
-          puts "  Category_group=#{category_group.description}" 
+          # puts "  Category_group=#{category_group.description}" 
           
           if partner.nil?
             partner = User.create!(:email => email, 
