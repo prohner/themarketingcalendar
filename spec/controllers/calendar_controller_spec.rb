@@ -6,7 +6,7 @@ describe CalendarController do
     subject { get 'index' }
     
     it "redirect to signin path" do
-      expect(subject).to redirect_to(signin_url)
+      expect(subject).to redirect_to(new_user_session_path)
     end
 
     
@@ -24,7 +24,7 @@ describe CalendarController do
     subject { get 'events' }
 
     it "returns http success" do
-      expect(subject).to redirect_to(signin_url)
+      expect(subject).to redirect_to(new_user_session_path)
     end
   end
 

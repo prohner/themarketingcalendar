@@ -5,7 +5,7 @@ describe CalendarShareController do
   let(:category_groups) { user.all_category_groups }
   
   before(:each) do
-    sign_in user, :no_capybara => true
+    sign_in user#, :no_capybara => true
   end
 
   describe "GET 'choose_calendar'" do

@@ -1,6 +1,8 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :verify_user_is_signed_in_or_redirect #, only: [:show, :edit, :update, :destroy]
+
+  # before_action :verify_user_is_signed_in_or_redirect #, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /categories
   # GET /categories.json

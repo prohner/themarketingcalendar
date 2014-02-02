@@ -1,5 +1,5 @@
 class CalendarController < ApplicationController
-  before_action :verify_user_is_signed_in_or_redirect #, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user! #, only: [:show, :edit, :update, :destroy]
 
   def index
     @event = Event.new

@@ -45,7 +45,7 @@ describe CategoriesController do
   describe "when not signed in" do
     it "should redirect to signin" do
       get :index
-      expect(response).to redirect_to(signin_path)
+      expect(response).to redirect_to(new_user_session_path)
     end
   end
 
