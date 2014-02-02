@@ -36,6 +36,7 @@ describe User do
   it { should respond_to(:shares) }
   it { should respond_to(:partners) }
   it { should respond_to(:user_can_use_system) }
+  it { should respond_to(:role?) }
   
   it { should be_valid }
   
@@ -372,6 +373,33 @@ describe User do
           expect(user.user_can_use_system).to be_false
         end
       end
+    end
+  end
+  
+  describe "#role?" do
+    let(:user) { FactoryGirl.create(:user_dave) }
+    
+    it "should raise a ArgumentError exception appropriately" do
+      expect{user.role?(:abc)}.to raise_error(ArgumentError)
+    end
+    
+    it "should respond correctly about each user type" do
+      expect(user.role?(:root)).to be_true
+    end
+    
+    it "should respond correctly about each user type: administrator" do
+      user.user_type = 2
+      expect(user.role?(:administrator)).to be_true
+    end
+    
+    it "should respond correctly about each user type: administrator" do
+      user.user_type = 3
+      expect(user.role?(:user)).to be_true
+    end
+    
+    it "should respond correctly about each user type: administrator" do
+      user.user_type = 4
+      expect(user.role?(:viewer)).to be_true
     end
   end
 end

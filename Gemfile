@@ -73,3 +73,4 @@ gem "font-awesome-rails"
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
+gem 'cancan'

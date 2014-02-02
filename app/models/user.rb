@@ -49,6 +49,20 @@ class User < ActiveRecord::Base
   def self.default_value_for_empty_name
     "tmc name tbd"
   end
+  
+  def role?(role)
+    if role == :root
+      user_type == 1
+    elsif role == :administrator
+      user_type == 2
+    elsif role == :user
+      user_type == 3
+    elsif role == :viewer
+      user_type == 4
+    else
+      raise ArgumentError, 'Argument is invalid'
+    end
+  end
 
   validates :status, 
             :presence   => true,
