@@ -16,10 +16,12 @@ class CalendarShareController < ApplicationController
   
   def share_calendars
     category_group_ids = params[:i].split(' ')
-    emails = params[:email].split(',').uniq
+    @emails = params[:email].split(',').uniq
+    @calendar_descriptions = []
     owner = current_user
     
-    emails.each do |email|
+    @emails.each do |email|
+      email.strip!
       # puts "Invite #{email} to"
       partner = User.find_by_email(email)
       category_group_ids.each do |category_group_id|
@@ -27,6 +29,7 @@ class CalendarShareController < ApplicationController
 
         unless category_group.nil?
           # puts "  Category_group=#{category_group.description}" 
+          @calendar_descriptions << category_group.description
           
           if partner.nil?
             partner = User.create!(:email => email, 

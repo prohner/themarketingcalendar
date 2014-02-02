@@ -1,13 +1,8 @@
 <h1>Sharing Calendars</h1>
 
 <div style="text-align:center;">
-	<p>You are about to share these calendars:</p>
-
-	<% @category_group_descriptions.each do |desc| %>
-	<%= desc %><br/>
-	<% end %>
-
-	<p>with</p>
+	<p>You are about to share <b><%= @category_group_descriptions.to_sentence %></b>
+	with</p>
 	
 	<%= form_tag '/share-calendars', :method => :post do %>
 	<%= hidden_field_tag :i, @category_group_ids %>

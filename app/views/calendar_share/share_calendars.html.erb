@@ -1,1 +1,13 @@
-Sharing calendars<br/>
+<% provide :title, "Calendar Share" %>
+
+<h1>Brilliant!</h1>
+
+<p>We are sending <%= 'email'.pluralize(@emails.count) %> to
+	<b><%= @emails.to_sentence %></b> so they can use your 
+	<b><%= @calendar_descriptions.to_sentence %></b>
+	<%= 'calendars'.pluralize(@calendar_descriptions.count) %>.
+</p>
+
+<p>
+	<%= link_to 'The Calendar', calendar_index_path %>
+</p>
