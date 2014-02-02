@@ -58,6 +58,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    devise (3.2.2)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -112,6 +118,7 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    orm_adapter (0.5.0)
     polyglot (0.3.3)
     pry (0.9.12.4)
       coderay (~> 1.0)
@@ -195,6 +202,8 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    warden (1.2.3)
+      rack (>= 1.0)
     whenever (0.9.0)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
@@ -211,6 +220,7 @@ DEPENDENCIES
   capistrano-ext
   capybara
   coffee-rails (~> 4.0.0)
+  devise
   factory_girl_rails (= 4.2.1)
   font-awesome-rails
   guard-rspec (= 2.5.0)

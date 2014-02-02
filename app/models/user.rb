@@ -14,6 +14,11 @@
 #
 
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+         
   before_validation :default_values
   before_create :create_remember_token
   
@@ -35,7 +40,6 @@ class User < ActiveRecord::Base
   USER_TYPE_VALUES = [1, 2, 3, 4]
   validates_inclusion_of :user_type, :in => USER_TYPE_VALUES
   
-  has_secure_password
   validates :password, length: { minimum: 6 }
 
   def self.status_options

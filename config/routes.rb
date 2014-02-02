@@ -1,12 +1,10 @@
 TheMarketingCalendar::Application.routes.draw do
+  devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
   get "calendar_share/choose_calendar"
   get "calendar_share/choose_user"
 
   get "calendar/index"
   get "calendar/events"
-
-  match '/signup',  to: 'users#new',  via: 'get'
-  resources :sessions, only: [:new, :create, :destroy]
 
   match '/update_hidden_category_flag/:id',  to: 'calendar#update_hidden_category_flag',    via: 'get'
 

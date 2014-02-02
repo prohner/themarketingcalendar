@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :verify_user_is_signed_in_or_redirect, only: [:show, :edit, :update, :destroy]
+  # before_action :verify_user_is_signed_in_or_redirect, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -26,6 +26,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    puts "creating #{user_params.inspect}"
 
     respond_to do |format|
       if @user.save

@@ -12,6 +12,12 @@
 
   </head>
   <body>
+
+	  <% if user_signed_in? %>
+	  devise user signed in
+	  <% else %>
+	  devise user NOT signed in
+	  <% end %>
 	  
       <div class="snap-drawers">
           <div class="snap-drawer snap-drawer-left">
@@ -28,7 +34,7 @@
 
 		    <div class="container">
 				<% flash.each do |key, value| %>
-					<div class="alert alert-<%= key %>"><%= value %></div>
+					<div class="alert alert-<%= key %> <%= key %>"><%= value %></div>
 				<% end %>
 				<%= yield %>
 				<%= render 'layouts/footer' %>
