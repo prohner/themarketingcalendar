@@ -14,7 +14,9 @@
 		<p>Your account, <%= @share.partner.email %>, is now linked up.</p>
 		<p>Jump in and <%= link_to "use the #{ application_name }", calendar_index_path %>.</p>
 	<% else %>
-		<p>Uh-oh, gotta signup now.</p>
+		<p>Uh-oh, gotta signup now so that <%= @share.partner.email %> can use the system.</p>
+		<p><%= link_to "Go do it", edit_user_registration_path(@share.partner) %></p>
+		
 	<% end %>
 
 <% end %>

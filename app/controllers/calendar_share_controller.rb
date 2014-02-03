@@ -36,8 +36,8 @@ class CalendarShareController < ApplicationController
                         :first_name => User.default_value_for_empty_name,
                         :last_name => User.default_value_for_empty_name, 
                         :status => 'invited',
-                        :password => 'should_be_in_secret_initializer',
-                        :password_confirmation => 'should_be_in_secret_initializer')
+                        :password => User.default_value_for_password,
+                        :password_confirmation => User.default_value_for_password)
           end
           
           share = Share.create(:owner => owner, :partner => partner, :category_group => category_group)
@@ -51,9 +51,12 @@ class CalendarShareController < ApplicationController
   
   def share_calendars_signup
     @share = Share.find_by_uuid(params[:u])
+    puts "MARK 1"
     if @share.nil?
+      puts "MARK 2"
       flash[:notice] = "Oh geez, we looked but couldn't find the invitation to share."
     else
+      puts "MARK 3"
       sign_in @share.partner
     end
   end

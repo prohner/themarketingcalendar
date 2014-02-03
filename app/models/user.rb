@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     "tmc name tbd"
   end
   
+  def self.default_value_for_password
+    "secret"
+  end
+  
   def role?(role)
     if role == :root
       user_type == 1

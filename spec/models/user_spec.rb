@@ -402,4 +402,10 @@ describe User do
       expect(user.role?(:viewer)).to be_true
     end
   end
+
+  # describe ".default_value_for_password" do
+  #   pwd = User.default_value_for_password
+  #   puts "pwd=#{pwd}"
+  #   expect(pwd).not_to eq("")
+  # end
 end
