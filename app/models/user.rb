@@ -127,7 +127,7 @@ class User < ActiveRecord::Base
     # has_many :commenters, through: :comments
     
     categories = []
-    category_groups.each do |cg|
+    all_category_groups.each do |cg|
       categories.concat(cg.categories)
     end
     categories.sort_by{|e| e.description}
