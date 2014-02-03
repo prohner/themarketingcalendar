@@ -403,9 +403,10 @@ describe User do
     end
   end
 
-  # describe ".default_value_for_password" do
-  #   pwd = User.default_value_for_password
-  #   puts "pwd=#{pwd}"
-  #   expect(pwd).not_to eq("")
-  # end
+  describe ".default_value_for_password" do
+    it "should have the method" do
+      pwd = User.default_value_for_password
+      expect(pwd).not_to eq("")
+    end
+  end
 end
