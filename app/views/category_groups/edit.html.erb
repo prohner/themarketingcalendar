@@ -1,14 +1,20 @@
-<h1>Editing category_group</h1>
+<h1>Editing calendar</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @category_group %> |
 <%= link_to 'Back', category_groups_path %>
 
-<div>
-	<h3>Categories in this Group</h3>
-	<% @category_group.categories.each do |cat| %>
-		<%= link_to cat.description, edit_category_path(cat) %> <br/>
+<% unless @category_group.new_record? %>	
+	<div>
+		<h3>Categories in this Calendar</h3>
+		<% if @category_group.categories.count > 0 %>
+			<% @category_group.categories.each do |cat| %>
+				<%= link_to cat.description, edit_category_path(cat) %> <br/>
+			<% end %>
+		<% else %>
+			<p>Sadly there are not yet any categories in this calendar.
+				You can <%= link_to "add categories", categories_path %> to this calendar.
+			</p>
+		<% end %>
+	</div>
 	<% end %>
-</div>
-

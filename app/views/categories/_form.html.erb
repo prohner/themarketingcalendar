@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :category_group %><br>
-	<%= collection_select(:category, :category_group_id, @category.category_group.user.category_groups, :id, :description, 
+    <%= f.label :calendar %><br>
+	<%= collection_select(:category, :category_group_id, current_user.all_category_groups, :id, :description, 
 		{prompt: false}) 
 	%>
 	
