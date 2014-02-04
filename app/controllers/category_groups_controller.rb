@@ -30,7 +30,7 @@ class CategoryGroupsController < ApplicationController
 
     respond_to do |format|
       if @category_group.save
-        format.html { redirect_to @category_group, notice: 'Category group was successfully created.' }
+        format.html { redirect_to @category_group, notice: 'Calendar was successfully created.' }
         format.json { render action: 'show', status: :created, location: @category_group }
       else
         format.html { render action: 'new' }
@@ -44,7 +44,7 @@ class CategoryGroupsController < ApplicationController
   def update
     respond_to do |format|
       if @category_group.update(category_group_params)
-        format.html { redirect_to @category_group, notice: 'Category group was successfully updated.' }
+        format.html { redirect_to @category_group, notice: 'Calendar was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

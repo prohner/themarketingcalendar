@@ -6,6 +6,7 @@
   <% unless resource.user_can_use_system %>
 	  <% resource.first_name = "" %>
 	  <% resource.last_name = "" %>
+	  <% password = User.default_value_for_password %>
   <% end %>
 
   <div><%= f.label :first_name %><br />
@@ -28,7 +29,7 @@
   <%= f.password_field :password_confirmation %></div>
 
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password, value: (resource.user_can_use_system ? "" : User.default_value_for_password) %></div>
+  <%= f.password_field :current_password, value: password %></div>
 
   <div><%= f.submit "Update" %></div>
 <% end %>

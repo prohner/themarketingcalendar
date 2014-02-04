@@ -32,8 +32,8 @@ namespace :db do
     color_schemes << ColorScheme.create(name: "Gray on light brown", background:"#EBB035", foreground:"#D0C6B1")
     color_schemes << ColorScheme.create(name: "Graphite on cyan", background:"#06A2CB", foreground:"#192823")
     
-    user_pr = User.create(email:"pr@TheMarketingCalendar.com", first_name: "Preston", last_name: "Rohner", password: "foobar", password_confirmation: "foobar", user_type: 1)
-    user_ya = User.create(email:"ya@TheMarketingCalendar.com", first_name: "Yves", last_name: "Accad", password: "foobar", password_confirmation: "foobar", user_type: 1)
+    user_pr = User.create(email:"pr@TheMarketingCalendar.com", first_name: "Preston", last_name: "Rohner", password: "foobar", password_confirmation: "foobar", user_type: 1, status: "signed up")
+    user_ya = User.create(email:"ya@TheMarketingCalendar.com", first_name: "Yves", last_name: "Accad", password: "foobar", password_confirmation: "foobar", user_type: 1, status: "signed up")
 
     user_pr.save
     user_ya.save
