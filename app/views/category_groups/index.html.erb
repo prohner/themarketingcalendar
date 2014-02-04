@@ -1,13 +1,22 @@
 <% provide(:title, "Calendars") %>
 <h1>All Calendars</h1>
 
+<script type="text/javascript" charset="utf-8">
+	$('#calendar-shares').tooltip()
+</script>
+<style type="text/css" media="screen">
+a:hover {
+	text-decoration:none;
+}
+</style>
+
 <table>
   <thead>
     <tr>
       <th>Calendar</th>
       <th>Colors</th>
+      <th>Shared Partners</th>
       <th colspan="2">Actions</th>
-      <th colspan="2">Shared Partners</th>
     </tr>
   </thead>
 
@@ -16,13 +25,16 @@
       <tr>
         <td><%= category_group.description %></td>
         <td><%= color_scheme_as_html_snippet_to_display(category_group.color_scheme) %></td>
-        <td><%= link_to 'Edit', edit_category_group_path(category_group) %></td>
-        <td><%= link_to 'Destroy', category_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<td>
-			<% category_group.shares.each do |share| %>
-				<%= share.partner.full_name %> (<%= share.partner.status %>)&nbsp;&nbsp;&nbsp;
+			<% category_group.shares[0..0].each do |share| %>
+				<%= share.partner.full_name %> (<%= share.partner.status %>)&nbsp;
+			<% end %>
+			<% if category_group.shares.count > 1 %>
+				<a href="#" class="calendar-shares" data-toggle="tooltip" title="<%= category_group.list_of_invited_partner_names.to_sentence %>">and others</a>
 			<% end %>
 		</td>
+        <td><%= link_to 'Edit', edit_category_group_path(category_group) %></td>
+        <td><%= link_to 'Destroy', category_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

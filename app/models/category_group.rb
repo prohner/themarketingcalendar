@@ -17,4 +17,12 @@ class CategoryGroup < ActiveRecord::Base
   has_many :shares
   
   default_scope { order('description') }
+  
+  def list_of_invited_partner_names
+    partner_names = []
+    shares.each do |s|
+      partner_names << s.partner.full_name
+    end
+    partner_names
+  end
 end

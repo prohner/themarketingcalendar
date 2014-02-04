@@ -21,5 +21,11 @@ describe CategoryGroup do
   it { should respond_to(:color_scheme) }
   it { should respond_to(:categories) }
   it { should respond_to(:shares) }
+  it { should respond_to(:list_of_invited_partner_names) }
 
+  describe "#list_of_invited_partner_names" do
+    it "should return an array" do
+      expect(@category_group.list_of_invited_partner_names).to be_an(Array)
+    end
+  end
 end

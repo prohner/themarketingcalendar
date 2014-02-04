@@ -5,16 +5,38 @@
 <%= link_to 'Back', category_groups_path %>
 
 <% unless @category_group.new_record? %>	
-	<div>
-		<h3>Categories in this Calendar</h3>
-		<% if @category_group.categories.count > 0 %>
-			<% @category_group.categories.each do |cat| %>
-				<%= link_to cat.description, edit_category_path(cat) %> <br/>
-			<% end %>
-		<% else %>
-			<p>Sadly there are not yet any categories in this calendar.
-				You can <%= link_to "add categories", categories_path %> to this calendar.
-			</p>
-		<% end %>
-	</div>
-	<% end %>
+<table border="0" cellspacing="5" cellpadding="5">
+	<tr>
+		<td valign="top">
+			<div>
+				<h3>Categories in this Calendar</h3>
+				<% if @category_group.categories.count > 0 %>
+					<% @category_group.categories.each do |cat| %>
+						<%= link_to cat.description, edit_category_path(cat) %> <br/>
+					<% end %>
+				<% else %>
+					<p>Sadly there are not yet any categories in this calendar.
+						You can <%= link_to "add categories", categories_path %> to this calendar.
+					</p>
+				<% end %>
+			</div>
+		</td>
+		<td>&nbsp;</td>
+		<td valign="top">
+			<div>
+				<h3>Partners in this Calendar</h3>
+				<% if @category_group.shares.count > 0 %>
+					<% @category_group.shares.each do |share| %>
+						<%= share.partner.full_name %> <br/>
+					<% end %>
+				<% else %>
+					<p>This calendar is yours, and yours alone.
+					</p>
+				<% end %>
+			</div>
+		</td>
+	</tr>
+</table>
+	
+	
+<% end %>
