@@ -43,6 +43,8 @@ group :development do
   gem "rails-erd"
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
+ 
+ 
 end
 
 group :test do
@@ -74,3 +76,5 @@ gem "font-awesome-rails"
 
 gem 'devise'
 gem 'cancan'
+
+gem 'net-ssh', '2.6.5'
