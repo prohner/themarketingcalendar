@@ -206,3 +206,7 @@ input {
 .container {
 	padding-top:55px;
 }
+
+.alert-notice {
+	@extend .alert-warning;
+}
