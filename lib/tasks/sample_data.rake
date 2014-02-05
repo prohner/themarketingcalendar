@@ -56,8 +56,8 @@ namespace :db do
 end
 
 def create_sample_email_calendars_for_user(user, cs)
-  gc_calendar = CategoryGroup.create(description: "Retail X Business", color_scheme: cs[1], user: user)
-  mf_calendar = CategoryGroup.create(description: "Online X Business", color_scheme: cs[2], user: user)
+  gc_calendar = CategoryGroup.create(description: "Retail Business", color_scheme: cs[1], user: user)
+  mf_calendar = CategoryGroup.create(description: "Online Business", color_scheme: cs[2], user: user)
 
   global = Category.create(description: "Global", color_scheme: cs[3])
   local_events = Category.create(description: "Local Events", color_scheme: cs[4])
