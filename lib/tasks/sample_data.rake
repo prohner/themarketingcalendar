@@ -1,9 +1,15 @@
 namespace :db do
   desc "Fill database with sample data"
   task :populate => :environment do
-    Rake::Task['db:reset'].invoke
+    # Delete from specific tables to we don't delete all in InterestedParty
     User.delete_all
     ColorScheme.delete_all
+    CategoryGroup.delete_all
+    Share.delete_all
+    Category.delete_all
+    HiddenCategoryFlag.delete_all
+    Stakeholder.delete_all
+    Event.delete_all
     
     color_schemes = []
     color_schemes << ColorScheme.create(name: "Light brown on brown", background:"#A75C56", foreground:"#E4D861")
@@ -38,17 +44,20 @@ namespace :db do
 
     user_pr.save
     user_ya.save
-    
+
+    puts "Creating data for #{user_pr.email}"
     create_sample_data_for_user(user_pr, color_schemes)
-    create_sample_data_for_user(user_ya, color_schemes)
     create_sample_email_calendars_for_user(user_pr, color_schemes)
+
+    puts "Creating data for #{user_ya.email}"
+    create_sample_data_for_user(user_ya, color_schemes)
     create_sample_email_calendars_for_user(user_ya, color_schemes)
   end
 end
 
 def create_sample_email_calendars_for_user(user, cs)
-  gc_calendar = CategoryGroup.create(description: "Retail Business", color_scheme: cs[1], user: user)
-  mf_calendar = CategoryGroup.create(description: "Online Business", color_scheme: cs[2], user: user)
+  gc_calendar = CategoryGroup.create(description: "Retail X Business", color_scheme: cs[1], user: user)
+  mf_calendar = CategoryGroup.create(description: "Online X Business", color_scheme: cs[2], user: user)
 
   global = Category.create(description: "Global", color_scheme: cs[3])
   local_events = Category.create(description: "Local Events", color_scheme: cs[4])
