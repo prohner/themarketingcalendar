@@ -210,3 +210,7 @@ input {
 .alert-notice {
 	@extend .alert-warning;
 }
+
+.alert-alert {
+	@extend .alert-danger;
+}

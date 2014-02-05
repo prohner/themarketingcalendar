@@ -72,7 +72,7 @@ class Event < ActiveRecord::Base
     {
       # These same variables are assigned individually, by name, in calendar.js.coffee
       :id => self.id,
-      :title => "#{self.category.color_scheme.name}#{self.description} (#{self.category.description})",
+      :title => "#{self.description} (#{self.category.description})",
       :description => "From event.rb description (fg:#{self.category.color_scheme.foreground}, bg:#{self.category.color_scheme.background})",
       :start => (self.starts_at + 1.days).rfc822,
       :end => (self.ends_at + 1.days).rfc822,
