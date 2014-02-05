@@ -3,7 +3,9 @@ class CalendarController < ApplicationController
 
   def index
     @event = Event.new
-    @categories = current_user.all_categories
+    # @categories = current_user.all_categories
+    puts current_user.inspect
+    @calendars = current_user.all_category_groups
   end
 
   def events

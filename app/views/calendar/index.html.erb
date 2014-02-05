@@ -61,21 +61,38 @@ input {
 	    <div id="collapseOne" xclass="panel-collapse">
 			<div xclass="panel-heading">
 				<div class="panel-body">
-					<h4 class="panel-title">Showing Checked Categories</h4>
+					<h4 class="panel-title">Checked Items Are Visible</h4>
 					<div class="panel-body">
-  					  <% @categories.each do |category| %>
-
-						<div class="control-group form-group" style="margin:0">
-							<div class="controls">
-
-								<label class="checkbox inline" style="font-weight:normal;">
-									<%= check_box_tag "category-#{category.id}", category.id, current_user.wants_to_see_category(category), :onclick=>"toggleCalendarFilterCategory(#{category.id});", :style => "width:13px" %>
-									&nbsp; &nbsp;
-									<%= color_scheme_as_html_snippet_to_display(category.color_scheme) %>
-									<%= category.description %> 
-								</label>
-							</div>
+						
+  					  <% @calendars.each do |calendar| %>
+						<div class="control-group form-group" style="margin:0; margin-left:-15px;">
+							<%= check_box_tag "calendar-#{calendar.id}", calendar.id, true, :onclick => "toggleCalendar_#{calendar.id}();", :style => "width:13px" %>
+							<%= calendar.description %>
+							<script type="text/javascript" charset="utf-8">
+							function toggleCalendar_<%= calendar.id %>() {
+								var on_or_off = $("#calendar-<%= calendar.id %>").is(":checked");
+								// alert("checked is " + on_or_off);
+								<% calendar.categories.each do |category| %>
+									$("#category-<%= category.id %>").prop('checked', on_or_off);
+									toggleCalendarFilterCategory(<%= category.id %>);
+								<% end %>
+							}
+							</script>
 						</div>
+						<% calendar.categories.each do |category| %>
+							<div class="control-group form-group" style="margin:0; margin-left:5px;">
+								<div class="controls">
+
+									<label class="checkbox inline" style="font-weight:normal;">
+										<%= check_box_tag "category-#{category.id}", category.id, current_user.wants_to_see_category(category), :onclick => "toggleCalendarFilterCategory(#{category.id});", :style => "width:13px" %>
+										&nbsp; &nbsp;
+										<%= color_scheme_as_html_snippet_to_display(category.color_scheme) %>
+										<%= category.description %> 
+										<!-- <span class="badge pull-right"><%= category.events.count %></span> -->
+									</label>
+								</div>
+							</div>
+						<% end %>
 
   					  <% end %>
 					</div>

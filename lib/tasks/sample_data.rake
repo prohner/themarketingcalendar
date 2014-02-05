@@ -9,14 +9,14 @@ namespace :db do
     color_schemes << ColorScheme.create(name: "Light brown on brown", background:"#A75C56", foreground:"#F5C972")
     color_schemes << ColorScheme.create(name: "Brown on brown", background:"#AE695A", foreground:"#EAB06E")
     color_schemes << ColorScheme.create(name: "Light brown on dark brown", background:"#E89C84", foreground:"#F5C972")
-    color_schemes << ColorScheme.create(name: "White on brown", background:"brown", foreground:"white")
-    color_schemes << ColorScheme.create(name: "cs5", background:"slate", foreground:"white")
+    color_schemes << ColorScheme.create(name: "White on brown", background:"brown", foreground:"rgb(220, 220, 220)")
+    color_schemes << ColorScheme.create(name: "cs5", background:"slate", foreground:"rgb(220, 220, 220)")
 
-    color_schemes << ColorScheme.create(name: "Brown on green", background:"#90CA77", foreground:"#E48743")
-    color_schemes << ColorScheme.create(name: "Brown on cyan", background:"#81C6DD", foreground:"#E48743")
+    color_schemes << ColorScheme.create(name: "Brown on green", background:"#90CA77", foreground:"rgb(50, 50, 50)")
+    color_schemes << ColorScheme.create(name: "Brown on cyan", background:"#81C6DD", foreground:"rgb(50, 50, 50)")
     color_schemes << ColorScheme.create(name: "Dark brown on light brown", background:"#E9B64D", foreground:"#9E3B33")
 
-    color_schemes << ColorScheme.create(name: "Gray on graphite", background:"#527578", foreground:"#84978F")
+    color_schemes << ColorScheme.create(name: "Gray on graphite", background:"#527578", foreground:"rgb(220, 220, 220)")
     color_schemes << ColorScheme.create(name: "Dark gray on light gray", background:"#ADA692", foreground:"#47423F")
     color_schemes << ColorScheme.create(name: "White on gray", background:"#B3B1B2", foreground:"#FFFFFF")
 
@@ -39,7 +39,7 @@ namespace :db do
     user_pr.save
     user_ya.save
     
-    create_sample_data_for_user(user_gr, color_schemes)
+    create_sample_data_for_user(user_pr, color_schemes)
     create_sample_data_for_user(user_ya, color_schemes)
     create_sample_email_calendars_for_user(user_pr, color_schemes)
   end

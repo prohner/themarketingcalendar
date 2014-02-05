@@ -31,12 +31,18 @@ describe CalendarController do
   it "should respond to update_hidden_category_flag when user is logged in and save data "
 
   it "should verify that the controller assigns the right variables"
-  # # describe "GET 'events'" do
-  # #   before(:each) do
-  # #     @dave = FactoryGirl.create(:user_dave)
-  # #     sign_in @dave
-  # #   end
-  # # end
+  # describe "GET 'events'" do
+  #   before(:each) do
+  #     @dave = FactoryGirl.create(:user_dave)
+  #     sign_in @dave
+  #   end
+  # 
+  #   subject { get 'index' }
+  #   
+  #   it "should assign properly" do
+  #     expect(assigns(:category_groups)).not_to be_nil
+  #   end
+  # end
   # 
   # describe "when signed in" do
   #   before(:each) do
