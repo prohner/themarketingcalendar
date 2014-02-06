@@ -31,7 +31,7 @@ class Event < ActiveRecord::Base
   has_many :users, :through => :stakeholders
 
   def self.list_of_repetition_type_options
-    ["norepeat", "weekly", "monthly"]
+    ["none", "weekly", "monthly"]
   end
   
   validates :description, 
@@ -63,7 +63,7 @@ class Event < ActiveRecord::Base
   end
   
   def repeating_event?
-    self.repetition_type == "norepeat" ? false : true
+    self.repetition_type == "none" ? false : true
   end
   
   def repetition_type=(new_repetition_type)
@@ -164,7 +164,7 @@ class Event < ActiveRecord::Base
     end
 
     def default_values
-       self.repetition_type ||= :norepeat
+       self.repetition_type ||= :none
     end
   
 end

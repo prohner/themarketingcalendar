@@ -31,7 +31,7 @@ describe Event do
                     :starts_at => "2/12/2012", 
                     :ends_at => "2/12/2012", 
                     :category => category, 
-                    :repetition_type => :norepeat, 
+                    :repetition_type => :none, 
                     :on_sunday => true 
                   } }
   subject(:event) { Event.new(attr) }
@@ -86,7 +86,7 @@ describe Event do
   
   describe "when changing repetition type" do
     it "should be valid with valid repetition types" do
-      [:weekly, :monthly, :norepeat].each do |freq|
+      [:weekly, :monthly, :none].each do |freq|
         ev = Event.new(attr.merge(:repetition_type => freq))
         expect(ev).to be_valid
       end
@@ -102,7 +102,7 @@ describe Event do
     it "should answer :repeating_event? correctly" do
       ev = Event.new(attr)
   
-      ev.repetition_type = :norepeat
+      ev.repetition_type = :none
       expect(ev.repeating_event?).to be_false
   
       ev.repetition_type = :weekly
@@ -114,7 +114,7 @@ describe Event do
   end
   
   it "should return the list of repetition types exactly correctly" do
-    expect(Event.list_of_repetition_type_options).to eq(["norepeat", "weekly", "monthly"])
+    expect(Event.list_of_repetition_type_options).to eq(["none", "weekly", "monthly"])
   end
 
   describe "when building monthly events for timeframe" do
