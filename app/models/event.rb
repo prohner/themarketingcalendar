@@ -100,27 +100,36 @@ class Event < ActiveRecord::Base
       # puts "working in weekly from #{from_date} to #{to_date} (starts=#{starts_at}, ends=#{ends_at})"
       (from_date..to_date).each do |d|
         # puts "  checking #{d} - #{appears_on_day(d)}"
-        if appears_on_day(d)
-          str_starts_at = (d.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M"))
-          str_ends_at = (d.strftime("%m/%d/%Y") + " " + ends_at.strftime("%H:%M"))
-          
-          #puts "starts==(#{str_starts_at})  ends==(#{str_ends_at})"
-          new_starts_at = DateTime.strptime(str_starts_at, "%m/%d/%Y %H:%M")
-          new_ends_at   = DateTime.strptime(str_ends_at, "%m/%d/%Y %H:%M")
-          #puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
-          
-          # serialize then deserialize in order to copy the whole object
-          new_event = Marshal::load(Marshal.dump(self))
-          new_event.starts_at = new_starts_at
-          new_event.ends_at = new_ends_at
-          
-          events << new_event
+        if appears_on_day_of_weekly_repetition(d)
+          events << copy_of_self_for_one_day(d)
         end
       end
-      
+    elsif repetition_type == "monthly"
+      (from_date..to_date).each do |d|
+        if appears_on_day_of_monthly_repetition(d)
+          events << copy_of_self_for_one_day(d)
+        end
+      end
     end
     #puts "adding #{@events.inspect}"
     events
+  end
+  
+  def copy_of_self_for_one_day(the_day)
+    str_starts_at = (the_day.strftime("%m/%d/%Y") + " " + starts_at.strftime("%H:%M"))
+    str_ends_at = (the_day.strftime("%m/%d/%Y") + " " + ends_at.strftime("%H:%M"))
+    
+    #puts "starts==(#{str_starts_at})  ends==(#{str_ends_at})"
+    new_starts_at = DateTime.strptime(str_starts_at, "%m/%d/%Y %H:%M")
+    new_ends_at   = DateTime.strptime(str_ends_at, "%m/%d/%Y %H:%M")
+    #puts "#{title} from #{new_starts_at} to #{new_ends_at} (#{starts_at}, #{ends_at})"
+    
+    # serialize then deserialize in order to copy the whole object
+    new_event = Marshal::load(Marshal.dump(self))
+    new_event.starts_at = new_starts_at
+    new_event.ends_at = new_ends_at
+    
+    new_event
   end
   
   def explain
@@ -128,7 +137,18 @@ class Event < ActiveRecord::Base
   end
   
   private
-    def appears_on_day(day)
+    def appears_on_day_of_monthly_repetition(day)
+      is_it_on_the_day = false
+      if day.day == starts_at.day
+        # puts "checking #{day} between #{starts_at} and #{ends_at}"
+        if (starts_at <= day and ends_at > day) or (starts_at < day and ends_at >= day)
+          is_it_on_the_day = true
+        end
+      end
+      is_it_on_the_day
+    end
+
+    def appears_on_day_of_weekly_repetition(day)
       is_it_on_the_day = false
       if (day.wday == 0 and on_sunday) or (day.wday == 1 and on_monday) or (day.wday == 2 and on_tuesday) or (day.wday == 3 and on_wednesday) or (day.wday == 4 and on_thursday) or (day.wday == 5 and on_friday) or (day.wday == 6 and on_saturday)
         # puts "checking #{day} between #{starts_at} and #{ends_at}"

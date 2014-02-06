@@ -116,8 +116,71 @@ describe Event do
   it "should return the list of repetition types exactly correctly" do
     expect(Event.list_of_repetition_type_options).to eq(["none", "weekly", "monthly"])
   end
+
+  describe "when building monthly events for timeframe" do
+    before(:each) do
+      @attr = { 
+        :description => "the description", 
+        :starts_at => Date.strptime("2/1/2014", "%m/%d/%Y"), 
+        :ends_at => Date.strptime("5/15/2014", "%m/%d/%Y"), 
+        :category => category, 
+        :repetition_type => "monthly", 
+        :on_sunday => true 
+      }
   
-  describe "when building events for timeframe" do
+      @monthly_repeater = Event.new(@attr)
+      
+      from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("5/31/2014", "%m/%d/%Y").to_time.to_i
+      @events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      
+    end
+    
+    it "should be valid" do
+      expect(@monthly_repeater).to be_valid
+    end
+    
+    it "should repeat on the first of each month" do
+      expect(@events.count).to eq(4)
+    end
+  
+    it "should have each event set to one date" do
+      @events.each do |e|
+        expect(e.starts_at).to eq(e.ends_at)
+      end
+    end
+      
+    it "should have each day covered correctly" do
+      expect(@events[0].starts_at).to eq(Date.strptime("2/1/2014", "%m/%d/%Y"))
+      expect(@events[1].starts_at).to eq(Date.strptime("3/1/2014", "%m/%d/%Y"))
+      expect(@events[2].starts_at).to eq(Date.strptime("4/1/2014", "%m/%d/%Y"))
+      expect(@events[3].starts_at).to eq(Date.strptime("5/1/2014", "%m/%d/%Y"))
+    end
+    
+    it "should create the correct number of events for a subset of weekly repeater timeframe" do
+      from_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("4/2/2014", "%m/%d/%Y").to_time.to_i
+      events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(2)
+    end
+    
+    it "should not create any events for prior to its timeframe" do
+      from_date_as_int = Date.strptime("1/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("1/31/2014", "%m/%d/%Y").to_time.to_i
+      events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(0)
+    end
+    
+    it "should not create any events for after to its timeframe" do
+      from_date_as_int = Date.strptime("5/2/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("8/31/2014", "%m/%d/%Y").to_time.to_i
+      events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(0)
+    end
+    
+  end
+  
+  describe "when building weekly events for timeframe" do
     before(:each) do
       @attr = { 
         :description => "the description", 
