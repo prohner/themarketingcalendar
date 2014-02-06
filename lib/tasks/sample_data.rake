@@ -262,7 +262,7 @@ def create_sample_data_for_user(user, cs)
   current_month = 2
   last_day_of_month = 28
 
-  e = Event.create(description:"Every Friday", starts_at: make_time(2014, 1, 17), ends_at: make_time(2014, 3, 31), repetition_type: "weekly", on_friday: true)
+  e = Event.create(description:"Every Friday", starts_at: make_time(2014, 1, 17), ends_at: make_time(2014, 3, 31), repetition_type: :weekly, on_friday: true)
   sales_promotion.events << e
 
   e = Event.create(description:"Sales Promo (offer)", starts_at: make_time(2014, 1, 25), ends_at: make_time(current_year, current_month, 7))

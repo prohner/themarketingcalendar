@@ -153,11 +153,14 @@ class User < ActiveRecord::Base
     events = []
     
     all_category_groups.each do |cg|
+      # puts "#{cg.description}"
       cg.categories.each do |c|
+        # puts "  #{c.description}"
         c.events.each do |e|
-          # puts "  #{e.explain}"
+          # puts "    #{e.explain}"
           if e.repeating_event?
             evts = e.events_for_timeframe((start_date + 1).to_time.to_i, (end_date + 1).to_time.to_i)
+            # puts "      evts.count: #{evts.count}"
             events.concat(evts)
           else
             if e.starts_at <= start_date and e.ends_at > start_date

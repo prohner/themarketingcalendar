@@ -185,7 +185,7 @@ presentPopover = (url, sourceObject, event) ->
 				json_obj = jQuery.parseJSON new_json
 				console.log "rep_type=" + json_obj.repetition_type + ", originally:" + original_repetition_type
 				if json_obj.repetition_type == "weekly" 
-					console.log "		REFETCHING EVENTS"
+					console.log "		REFETCHING EVENTS " + json_obj.repetition_type
 					$('#calendar').fullCalendar 'refetchEvents'
 				else if is_new_event
 					event = { }

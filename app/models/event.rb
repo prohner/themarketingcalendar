@@ -31,7 +31,7 @@ class Event < ActiveRecord::Base
   has_many :users, :through => :stakeholders
 
   def self.list_of_repetition_type_options
-    ["none", "weekly", "monthly"]
+    ["norepeat", "weekly", "monthly"]
   end
   
   validates :description, 
@@ -63,9 +63,13 @@ class Event < ActiveRecord::Base
   end
   
   def repeating_event?
-    self.repetition_type == "none" ? false : true
+    self.repetition_type == "norepeat" ? false : true
   end
-
+  
+  def repetition_type=(new_repetition_type)
+    super new_repetition_type.nil? ? nil : new_repetition_type.to_s
+  end
+  
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})
@@ -160,7 +164,7 @@ class Event < ActiveRecord::Base
     end
 
     def default_values
-       self.repetition_type ||= "none"
+       self.repetition_type ||= :norepeat
     end
   
 end
