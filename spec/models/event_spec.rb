@@ -140,140 +140,138 @@ describe Event do
       expect(@monthly_repeater).to be_valid
     end
     
-  #   it "should repeat on the first of each month" do
-  #     expect(@events.count).to eq(4)
-  #   end
-  # 
-  #   it "should have each event set to one date" do
-  #     @events.each do |e|
-  #       expect(e.starts_at).to eq(e.ends_at)
-  #     end
-  #   end
-  #     
-  #   it "should have each day covered correctly" do
-  #     expect(@events[0].starts_at).to eq(Date.strptime("2/1/2014", "%m/%d/%Y"))
-  #     expect(@events[1].starts_at).to eq(Date.strptime("3/1/2014", "%m/%d/%Y"))
-  #     expect(@events[2].starts_at).to eq(Date.strptime("4/1/2014", "%m/%d/%Y"))
-  #     expect(@events[3].starts_at).to eq(Date.strptime("5/1/2014", "%m/%d/%Y"))
-  #   end
-  #   
-  #   it "should create the correct number of events for a subset of weekly repeater timeframe" do
-  #     from_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
-  #     to_date_as_int = Date.strptime("4/2/2014", "%m/%d/%Y").to_time.to_i
-  #     events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
-  #     expect(events.count).to eq(2)
-  #   end
-  #   
-  #   it "should not create any events for prior to its timeframe" do
-  #     from_date_as_int = Date.strptime("1/1/2014", "%m/%d/%Y").to_time.to_i
-  #     to_date_as_int = Date.strptime("1/31/2014", "%m/%d/%Y").to_time.to_i
-  #     events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
-  #     expect(events.count).to eq(0)
-  #   end
-  #   
-  #   it "should not create any events for after to its timeframe" do
-  #     from_date_as_int = Date.strptime("5/2/2014", "%m/%d/%Y").to_time.to_i
-  #     to_date_as_int = Date.strptime("8/31/2014", "%m/%d/%Y").to_time.to_i
-  #     events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
-  #     expect(events.count).to eq(0)
-  #   end
-  #   
-  # end
-  # 
-  # describe "when building weekly events for timeframe" do
-  #   before(:each) do
-  #     @attr = { 
-  #       :description => "the description", 
-  #       :starts_at => Date.strptime("2/1/2014", "%m/%d/%Y"), 
-  #       :ends_at => Date.strptime("2/28/2014", "%m/%d/%Y"), 
-  #       :category => category, 
-  #       :repetition_type => :weekly, 
-  #       :on_sunday => true 
-  #     }
-  # 
-  #     @february_repeater = Event.new(@attr)
-  #     expect(@february_repeater).to be_valid
-  #     # @february_repeater.should be_valid
-  # 
-  #     from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
-  #     to_date_as_int = Date.strptime("2/16/2014", "%m/%d/%Y").to_time.to_i
-  #     @events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
-  #   end
-  # 
-  #   it "should create the correct number of events for a subset of weekly repeater timeframe" do
-  #     expect(@events.count).to eq(3)
-  #   end
-  #     
-  #   it "should have each event set to one date" do
-  #     @events.each do |e|
-  #       expect(e.starts_at).to eq(e.ends_at)
-  #     end
-  #   end
-  #     
-  #   it "should have each day covered correctly" do
-  #     expect(@events[0].starts_at).to eq(Date.strptime("2/2/2014", "%m/%d/%Y"))
-  #     expect(@events[1].starts_at).to eq(Date.strptime("2/9/2014", "%m/%d/%Y"))
-  #     expect(@events[2].starts_at).to eq(Date.strptime("2/16/2014", "%m/%d/%Y"))
-  #   end
-  #   
-  #   it "should create the correct number of events for a subset of weekly repeater timeframe" do
-  #     from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
-  #     to_date_as_int = Date.strptime("3/16/2014", "%m/%d/%Y").to_time.to_i
-  #     events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
-  #     expect(events.count).to eq(4)
-  #   end
-  #   
-  #   it "should not create any events for prior to its timeframe" do
-  #     from_date_as_int = Date.strptime("1/1/2014", "%m/%d/%Y").to_time.to_i
-  #     to_date_as_int = Date.strptime("1/31/2014", "%m/%d/%Y").to_time.to_i
-  #     events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
-  #     expect(events.count).to eq(0)
-  #   end
-  #   
-  #   it "should not create any events for after to its timeframe" do
-  #     from_date_as_int = Date.strptime("3/1/2014", "%m/%d/%Y").to_time.to_i
-  #     to_date_as_int = Date.strptime("6/30/2014", "%m/%d/%Y").to_time.to_i
-  #     events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
-  #     expect(events.count).to eq(0)
-  #   end
-  #   
-  #   it "should create the repeating events starting on starts_at" do
-  #     repeater = Event.new({ 
-  #       :description => "the description", 
-  #       :starts_at => Date.strptime("1/1/2014", "%m/%d/%Y"), 
-  #       :ends_at => Date.strptime("3/31/2014", "%m/%d/%Y"), 
-  #       :category => category, 
-  #       :repetition_type => :weekly, 
-  #       :on_wednesday => true 
-  #     })
-  #     expect(repeater).to be_valid
-  # 
-  #     from_date_as_int = Date.strptime("1/1/2014", "%m/%d/%Y").to_time.to_i
-  #     to_date_as_int = Date.strptime("1/29/2014", "%m/%d/%Y").to_time.to_i
-  # 
-  #     events = repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
-  #     expect(events.count).to eq(5)
-  #   end
-  # 
-  #   it "should create the right repeating events for an exact month" do
-  #     repeater = Event.new({ 
-  #       :description => "the description", 
-  #       :starts_at => Date.strptime("2/1/2014", "%m/%d/%Y"), 
-  #       :ends_at => Date.strptime("2/28/2014", "%m/%d/%Y"), 
-  #       :category => category, 
-  #       :repetition_type => :weekly, 
-  #       :on_friday => true 
-  #     })
-  #     expect(repeater).to be_valid
-  # 
-  #     from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
-  #     to_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
-  # 
-  #     events = repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
-  #     expect(events.count).to eq(4)
-  #   end
-  #   ### it "should create the correct number of events for a monthly repeater"
+    it "should repeat on the first of each month" do
+      expect(@events.count).to eq(4)
+    end
+  
+    it "should have each event set to one date" do
+      @events.each do |e|
+        expect(e.starts_at).to eq(e.ends_at)
+      end
+    end
+      
+    it "should have each day covered correctly" do
+      expect(@events[0].starts_at).to eq(Date.strptime("2/1/2014", "%m/%d/%Y"))
+      expect(@events[1].starts_at).to eq(Date.strptime("3/1/2014", "%m/%d/%Y"))
+      expect(@events[2].starts_at).to eq(Date.strptime("4/1/2014", "%m/%d/%Y"))
+      expect(@events[3].starts_at).to eq(Date.strptime("5/1/2014", "%m/%d/%Y"))
+    end
     
+    it "should create the correct number of events for a subset of weekly repeater timeframe" do
+      from_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("4/2/2014", "%m/%d/%Y").to_time.to_i
+      events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(2)
+    end
+    
+    it "should not create any events for prior to its timeframe" do
+      from_date_as_int = Date.strptime("1/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("1/31/2014", "%m/%d/%Y").to_time.to_i
+      events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(0)
+    end
+    
+    it "should not create any events for after to its timeframe" do
+      from_date_as_int = Date.strptime("5/2/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("8/31/2014", "%m/%d/%Y").to_time.to_i
+      events = @monthly_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(0)
+    end
+    
+  end
+  
+  describe "when building weekly events for timeframe" do
+    before(:each) do
+      @attr = { 
+        :description => "the description", 
+        :starts_at => Date.strptime("2/1/2014", "%m/%d/%Y"), 
+        :ends_at => Date.strptime("2/28/2014", "%m/%d/%Y"), 
+        :category => category, 
+        :repetition_type => :weekly, 
+        :on_sunday => true 
+      }
+  
+      @february_repeater = Event.new(@attr)
+      expect(@february_repeater).to be_valid
+      # @february_repeater.should be_valid
+  
+      from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("2/16/2014", "%m/%d/%Y").to_time.to_i
+      @events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+    end
+  
+    it "should create the correct number of events for a subset of weekly repeater timeframe" do
+      expect(@events.count).to eq(3)
+    end
+      
+    it "should have each event set to one date" do
+      @events.each do |e|
+        expect(e.starts_at).to eq(e.ends_at)
+      end
+    end
+      
+    it "should have each day covered correctly" do
+      expect(@events[0].starts_at).to eq(Date.strptime("2/2/2014", "%m/%d/%Y"))
+      expect(@events[1].starts_at).to eq(Date.strptime("2/9/2014", "%m/%d/%Y"))
+      expect(@events[2].starts_at).to eq(Date.strptime("2/16/2014", "%m/%d/%Y"))
+    end
+    
+    it "should create the correct number of events for a subset of weekly repeater timeframe" do
+      from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("3/16/2014", "%m/%d/%Y").to_time.to_i
+      events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(4)
+    end
+    
+    it "should not create any events for prior to its timeframe" do
+      from_date_as_int = Date.strptime("1/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("1/31/2014", "%m/%d/%Y").to_time.to_i
+      events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(0)
+    end
+    
+    it "should not create any events for after to its timeframe" do
+      from_date_as_int = Date.strptime("3/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("6/30/2014", "%m/%d/%Y").to_time.to_i
+      events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(0)
+    end
+    
+    it "should create the repeating events starting on starts_at" do
+      repeater = Event.new({ 
+        :description => "the description", 
+        :starts_at => Date.strptime("1/1/2014", "%m/%d/%Y"), 
+        :ends_at => Date.strptime("3/31/2014", "%m/%d/%Y"), 
+        :category => category, 
+        :repetition_type => :weekly, 
+        :on_wednesday => true 
+      })
+      expect(repeater).to be_valid
+  
+      from_date_as_int = Date.strptime("1/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("1/29/2014", "%m/%d/%Y").to_time.to_i
+  
+      events = repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(5)
+    end
+  
+    it "should create the right repeating events for an exact month" do
+      repeater = Event.new({ 
+        :description => "the description", 
+        :starts_at => Date.strptime("2/1/2014", "%m/%d/%Y"), 
+        :ends_at => Date.strptime("2/28/2014", "%m/%d/%Y"), 
+        :category => category, 
+        :repetition_type => :weekly, 
+        :on_friday => true 
+      })
+      expect(repeater).to be_valid
+  
+      from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
+      to_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
+  
+      events = repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      expect(events.count).to eq(4)
+    end
   end
   
 end

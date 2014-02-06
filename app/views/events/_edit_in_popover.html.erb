@@ -154,6 +154,21 @@
 			console.log('mmm bueno (' + id + ') ' + x);
 			x.popover('hide');                
 		}
+		
+		$('#event_repetition_type').change(function() {
+			updateDailyCheckboxes();
+		});
+		
+		function updateDailyCheckboxes() {
+			var repetitionTypeDropDown = $('#event_repetition_type');
+			
+			if (repetitionTypeDropDown.attr('value') == "weekly") {
+				$("input.daily_checkbox").removeAttr("disabled");
+			} else {
+				$("input.daily_checkbox").attr("disabled", true);
+			}			
+		}
+		updateDailyCheckboxes();
 	});
 </script>
 
@@ -224,31 +239,31 @@
 		<%= f.label "Occurs", :class => "col-sm-2 control-label" %>
 		<div class="col-sm-10">
 				<label class="checkbox inline">
-					<%= f.check_box :on_sunday %> Sun
+					<%= f.check_box :on_sunday, :class => "daily_checkbox" %> Sun
 				</label>
 
 				<label class="checkbox inline">
-					<%= f.check_box :on_monday %> Mon
+					<%= f.check_box :on_monday, :class => "daily_checkbox" %> Mon
 				</label>
 
 				<label class="checkbox inline">
-					<%= f.check_box :on_tuesday %> Tue
+					<%= f.check_box :on_tuesday, :class => "daily_checkbox" %> Tue
 				</label>
 
 				<label class="checkbox inline">
-					<%= f.check_box :on_wednesday %> Wed
+					<%= f.check_box :on_wednesday, :class => "daily_checkbox" %> Wed
 				</label>
 
 				<label class="checkbox inline">
-					<%= f.check_box :on_thursday %> Thu
+					<%= f.check_box :on_thursday, :class => "daily_checkbox" %> Thu
 				</label>
 
 				<label class="checkbox inline">
-					<%= f.check_box :on_friday %> Fri
+					<%= f.check_box :on_friday, :class => "daily_checkbox" %> Fri
 				</label>
 
 				<label class="checkbox inline">
-					<%= f.check_box :on_saturday %> Sat
+					<%= f.check_box :on_saturday, :class => "daily_checkbox" %> Sat
 				</label>
 		</div>
 	  </div>
