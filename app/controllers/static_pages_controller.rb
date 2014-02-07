@@ -21,6 +21,6 @@ class StaticPagesController < ApplicationController
       flash[:error] = "Something went wrong...argh...we didn't get to save your email."
     end
     
-    redirect_to request.referer
+    redirect_to "#{request.referer}?ip=y"
   end
 end
