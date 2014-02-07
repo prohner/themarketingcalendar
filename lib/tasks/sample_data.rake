@@ -11,32 +11,7 @@ namespace :db do
     Stakeholder.delete_all
     Event.delete_all
     
-    color_schemes = []
-    color_schemes << ColorScheme.create(name: "Light brown on brown", background:"#A75C56", foreground:"#E4D861")
-    color_schemes << ColorScheme.create(name: "Brown on brown", background:"#AE695A", foreground:"#EAB06E")
-    color_schemes << ColorScheme.create(name: "Light brown on dark brown", background:"#E89C84", foreground:"rgb(220, 220, 220)")
-    color_schemes << ColorScheme.create(name: "White on brown", background:"brown", foreground:"rgb(220, 220, 220)")
-    color_schemes << ColorScheme.create(name: "cs5", background:"slate", foreground:"rgb(220, 220, 220)")
-
-    color_schemes << ColorScheme.create(name: "Brown on green", background:"#90CA77", foreground:"rgb(50, 50, 50)")
-    color_schemes << ColorScheme.create(name: "Brown on cyan", background:"#81C6DD", foreground:"rgb(50, 50, 50)")
-    color_schemes << ColorScheme.create(name: "Dark brown on light brown", background:"#E9B64D", foreground:"#9E3B33")
-
-    color_schemes << ColorScheme.create(name: "Gray on graphite", background:"#527578", foreground:"rgb(220, 220, 220)")
-    color_schemes << ColorScheme.create(name: "Dark gray on light gray", background:"#ADA692", foreground:"#47423F")
-    color_schemes << ColorScheme.create(name: "White on gray", background:"#B3B1B2", foreground:"#FFFFFF")
-
-    color_schemes << ColorScheme.create(name: "Brown on slate", background:"#74A6BD", foreground:"rgb(50, 50, 50)")
-    color_schemes << ColorScheme.create(name: "Brown on graphite", background:"#7195A3", foreground:"rgb(50, 50, 50)")
-    color_schemes << ColorScheme.create(name: "Dark gray on pale", background:"#D4E7ED", foreground:"#AB988B")
-
-    color_schemes << ColorScheme.create(name: "Dark gray on brown", background:"#8D3A61", foreground:"rgb(220, 220, 220)")
-    color_schemes << ColorScheme.create(name: "White on brown", background:"#B04979", foreground:"#D9E6F7")
-    color_schemes << ColorScheme.create(name: "White on light brown", background:"#C55186", foreground:"#FFFFFF")
-
-    color_schemes << ColorScheme.create(name: "Green on brown", background:"#DD1E2F", foreground:"#218559")
-    color_schemes << ColorScheme.create(name: "Gray on light brown", background:"#EBB035", foreground:"#D0C6B1")
-    color_schemes << ColorScheme.create(name: "Graphite on cyan", background:"#06A2CB", foreground:"#192823")
+    color_schemes = create_array_of_color_schemes
     
     user_pr = User.create(email:"pr@TheMarketingCalendar.com", first_name: "Preston", last_name: "Rohner", password: "foobar", password_confirmation: "foobar", user_type: 1, status: "signed up")
     user_ya = User.create(email:"ya@TheMarketingCalendar.com", first_name: "Yves", last_name: "Accad", password: "foobar", password_confirmation: "foobar", user_type: 1, status: "signed up")
@@ -53,6 +28,36 @@ namespace :db do
     create_sample_data_for_user(user_ya, color_schemes)
     create_sample_email_calendars_for_user(user_ya, color_schemes)
   end
+end
+
+def create_array_of_color_schemes
+  color_schemes = []
+  color_schemes << ColorScheme.create(name: "Light brown on brown", background:"#A75C56", foreground:"#E4D861")
+  color_schemes << ColorScheme.create(name: "Brown on brown", background:"#AE695A", foreground:"#EAB06E")
+  color_schemes << ColorScheme.create(name: "Light brown on dark brown", background:"#E89C84", foreground:"rgb(220, 220, 220)")
+  color_schemes << ColorScheme.create(name: "White on brown", background:"brown", foreground:"rgb(220, 220, 220)")
+  color_schemes << ColorScheme.create(name: "cs5", background:"slate", foreground:"rgb(220, 220, 220)")
+
+  color_schemes << ColorScheme.create(name: "Brown on green", background:"#90CA77", foreground:"rgb(50, 50, 50)")
+  color_schemes << ColorScheme.create(name: "Brown on cyan", background:"#81C6DD", foreground:"rgb(50, 50, 50)")
+  color_schemes << ColorScheme.create(name: "Dark brown on light brown", background:"#E9B64D", foreground:"#9E3B33")
+
+  color_schemes << ColorScheme.create(name: "Gray on graphite", background:"#527578", foreground:"rgb(220, 220, 220)")
+  color_schemes << ColorScheme.create(name: "Dark gray on light gray", background:"#ADA692", foreground:"#47423F")
+  color_schemes << ColorScheme.create(name: "White on gray", background:"#B3B1B2", foreground:"#FFFFFF")
+
+  color_schemes << ColorScheme.create(name: "Brown on slate", background:"#74A6BD", foreground:"rgb(50, 50, 50)")
+  color_schemes << ColorScheme.create(name: "Brown on graphite", background:"#7195A3", foreground:"rgb(50, 50, 50)")
+  color_schemes << ColorScheme.create(name: "Dark gray on pale", background:"#D4E7ED", foreground:"#AB988B")
+
+  color_schemes << ColorScheme.create(name: "Dark gray on brown", background:"#8D3A61", foreground:"rgb(220, 220, 220)")
+  color_schemes << ColorScheme.create(name: "White on brown", background:"#B04979", foreground:"#D9E6F7")
+  color_schemes << ColorScheme.create(name: "White on light brown", background:"#C55186", foreground:"#FFFFFF")
+
+  color_schemes << ColorScheme.create(name: "Green on brown", background:"#DD1E2F", foreground:"#218559")
+  color_schemes << ColorScheme.create(name: "Gray on light brown", background:"#EBB035", foreground:"#D0C6B1")
+  color_schemes << ColorScheme.create(name: "Graphite on cyan", background:"#06A2CB", foreground:"#192823")
+  color_schemes
 end
 
 def create_sample_email_calendars_for_user(user, cs)

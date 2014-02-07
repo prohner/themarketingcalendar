@@ -16,8 +16,15 @@ class CalendarController < ApplicationController
     # this to be starts_at and ends_at to match rails conventions.
     # I'll eventually do that to make the demo a little cleaner.
     puts params.inspect
+
+    start_date_int = params[:start]
+    end_date_int = params[:end]
     
-    @events = current_user.all_events
+    start_date_int ||= 1.month.ago.to_i
+    end_date_int ||= 1.month.from_now.to_i
+    
+    puts "Going from #{start_date_int} to #{end_date_int}"
+    @events = current_user.all_events_in_timeframe(start_date_int, end_date_int)
     
     respond_to do |format|
       format.html # index.html.erb

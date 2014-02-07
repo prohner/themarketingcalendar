@@ -159,7 +159,8 @@ class User < ActiveRecord::Base
         c.events.each do |e|
           # puts "    #{e.explain}"
           if e.repeating_event?
-            evts = e.events_for_timeframe((start_date + 1).to_time.to_i, (end_date + 1).to_time.to_i)
+            puts "From #{start_date} to #{end_date}"
+            evts = e.events_for_timeframe(Time.at(start_date.to_i).to_i, Time.at(end_date.to_i).to_i)
             # puts "      evts.count: #{evts.count}"
             events.concat(evts)
           else
