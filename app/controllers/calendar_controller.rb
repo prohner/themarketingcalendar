@@ -24,7 +24,10 @@ class CalendarController < ApplicationController
     end_date_int ||= 1.month.from_now.to_i
     
     puts "Going from #{start_date_int} to #{end_date_int}"
+    puts "Agos #{1.month.ago.to_i} to #{1.month.from_now.to_i}"
     @events = current_user.all_events_in_timeframe(start_date_int, end_date_int)
+    
+    puts "Returning #{@events.count} events"
     
     respond_to do |format|
       format.html # index.html.erb

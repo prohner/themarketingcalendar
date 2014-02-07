@@ -150,6 +150,11 @@ class User < ActiveRecord::Base
     # puts_user self
     # puts
     # puts "User#all_events_in_timeframe"
+    
+    start_date  = start_date.to_i
+    end_date    = end_date.to_i
+    
+    puts "#{start_date} to #{end_date}"
     events = []
     
     all_category_groups.each do |cg|
@@ -159,14 +164,16 @@ class User < ActiveRecord::Base
         c.events.each do |e|
           # puts "    #{e.explain}"
           if e.repeating_event?
-            puts "From #{start_date} to #{end_date}"
             evts = e.events_for_timeframe(Time.at(start_date.to_i).to_i, Time.at(end_date.to_i).to_i)
             # puts "      evts.count: #{evts.count}"
             events.concat(evts)
           else
-            if e.starts_at <= start_date and e.ends_at > start_date
+            puts "a #{e.starts_at.to_time.to_i}, b #{start_date}"
+            if e.starts_at.to_time.to_i <= start_date and e.ends_at.to_time.to_i > start_date
               events << e
-            elsif e.starts_at <= end_date and e.ends_at > end_date
+            elsif e.starts_at.to_time.to_i <= end_date and e.ends_at.to_time.to_i > end_date
+              events << e
+            elsif start_date <= e.starts_at.to_time.to_i and e.starts_at.to_time.to_i <= end_date
               events << e
             end
           end
