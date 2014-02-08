@@ -24,6 +24,7 @@ TheMarketingCalendar::Application.routes.draw do
   match '/choose-person-to-share',    to: 'calendar_share#choose_user',             via: 'post'
   match '/share-calendars',           to: 'calendar_share#share_calendars',         via: 'post'
   match '/share-calendars',           to: 'calendar_share#share_calendars_signup',  via: 'get'
+  match '/calendar-reminder',         to: 'calendar#stakeholder_interest',          via: 'post'
   
   get "static_pages/home"
   get "static_pages/help"

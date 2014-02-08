@@ -26,7 +26,74 @@
 	<% current_user.hidden_category_flags.each do |hcf| %>
 		toggleCalendarFilterCategory(<%= hcf.category_id %>);
 	<% end %>
+	
+	$(function () {
+	    var contextMenu = $("#contextMenu");
+	    var eventIdThatWasClicked;
+	
+	    $("body").on("contextmenu", "div", function (e) {
+			eventIdThatWasClicked = $(this).parent().attr("id");
+	        divClicked = this.innerHTML;//$(this).find('.fc-event-inner').find('.fc-event-title');
+	        contextMenu.css({
+	            display: "block",
+	            left: e.pageX,
+	            top: e.pageY
+	        });
+	        return false;
+	    });
+	
+	    contextMenu.on("click", "a", function () {
+	        // var message = "You clicked on '"  + eventIdThatWasClicked + "'\n";
+	        // message += "And selected the menu item '" + $(this).text() + "'";
+	        // alert(message);
+		    var valuesToSubmit = { 
+				id: eventIdThatWasClicked.substr(9),
+				days: $(this).text().substr(0, 1)
+			};
+			
+		    $.ajax({
+		        url: '/calendar-reminder', //sumbits it to the given url of the form
+		        data: valuesToSubmit,
+				type: "POST",
+		        dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
+		    }).success(function(json){
+				console.log("finished adding stakeholder interest");
+		    });
+			
+	        contextMenu.hide();
+			return false;
+	    });
+	
+	    $(document).click(function () {
+	        contextMenu.hide();
+			return false;
+	    });
+	
+	});
 </script>
+
+<style type="text/css" media="screen">
+#contextMenu {
+    position: absolute;
+    display:none;
+	z-index:99999;
+}
+</style>
+
+
+<div id="contextMenu" class="dropdown clearfix">
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
+		<li role="presentation" class="dropdown-header">Email an event alert</li>
+        <li><a tabindex="-1" href="#">1 day before </a></li>
+        <li><a tabindex="-1" href="#">2 days before</a></li>
+        <li><a tabindex="-1" href="#">5 days before</a></li>
+        <li><a tabindex="-1" href="#">7 days before</a></li>
+        <!-- <li class="divider"></li>
+        <li><a tabindex="-1" href="#">Separated link</a></li> -->
+    </ul>
+</div>
+
+
 
 <div id='loading' class="loading">Loading calendar...</div>
 <div id='calendar' class="calendar"></div>
@@ -51,7 +118,24 @@ input {
 .no-underline-on-hover a:hover {
 	text-decoration: none;
 }
+
 </style>
+
+
+<div id="contextMenu" class="dropdown">
+  <button class="btn dropdown-toggle sr-only" type="button" id="dropdownMenu1" data-toggle="dropdown">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+    <li role="presentation" class="divider"></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+  </ul>
+</div>
+
 
 <% content_for :snap_menu do %>
 

@@ -47,6 +47,15 @@ class CalendarController < ApplicationController
     end
   end
   
+  def stakeholder_interest
+    puts params.inspect
+    event = Event.find(params[:id])
+    reminder_notification_days = params[:days]
+    
+    s = Stakeholder.new(:event => event, :user => current_user, :reminder_notification_days => reminder_notification_days)
+    s.save
+  end
+  
   private
     def category_params
       params.require(:id)
