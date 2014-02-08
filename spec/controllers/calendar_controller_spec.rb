@@ -28,6 +28,18 @@ describe CalendarController do
     end
   end
 
+  it { should respond_to(:stakeholder_interest) }
+  # describe "#stakeholder_interest" do
+  #   before(:each) do
+  #     @dave = FactoryGirl.create(:user_dave)
+  #     sign_in @dave
+  #   end
+  #   
+  #   it "should create a new record" do
+  #     ??????
+  #   end
+  # end
+  
   it "should respond to update_hidden_category_flag when user is logged in and save data "
 
   it "should verify that the controller assigns the right variables"

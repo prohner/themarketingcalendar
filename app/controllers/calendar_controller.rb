@@ -52,8 +52,7 @@ class CalendarController < ApplicationController
     event = Event.find(params[:id])
     reminder_notification_days = params[:days]
     
-    s = Stakeholder.new(:event => event, :user => current_user, :reminder_notification_days => reminder_notification_days)
-    s.save
+    Stakeholder.create(:event => event, :user => current_user, :reminder_notification_days => reminder_notification_days)
   end
   
   private
