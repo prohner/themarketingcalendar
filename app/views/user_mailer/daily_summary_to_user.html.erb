@@ -1,0 +1,18 @@
+<p>Hello <%= @user.full_name %>,</p>
+
+<p>This is your daily summary of events coming up in the next <%= pluralize(@look_ahead_days, "day") %> The Marketing Calendar:</p>
+
+<table>
+<% @events.each do |event| %>
+	<tr>
+		<td bgcolor="<%= event.category.color_scheme.background %>">&nbsp;</td>
+		<td><%= event.starts_at %> - <%= event.ends_at %></td>
+		<td><%= event.description %></td>
+    
+	</tr>
+<% end %>
+</table>
+
+
+  
+<h2>The Marketing Calendar Guys</h2>

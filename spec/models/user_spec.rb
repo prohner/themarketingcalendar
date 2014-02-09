@@ -270,6 +270,16 @@ describe User do
     end
   end
 
+  context "when registering as stakeholders" do
+    let(:dave) { FactoryGirl.create(:user_dave) }
+    let(:bill) { FactoryGirl.create(:user_bill) }
+    let(:daves_event) { dave.all_events.first }
+
+    describe "#stakeholder_events" do
+      it { should respond_to(:stakeholder_events) }
+    end
+    
+  end
   context "when sharing category groups" do
     let(:dave) { FactoryGirl.create(:user_dave) }
     let(:bill) { FactoryGirl.create(:user_bill) }

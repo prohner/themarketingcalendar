@@ -66,6 +66,11 @@ class Event < ActiveRecord::Base
     self.repetition_type == "none" ? false : true
   end
   
+  def number_of_days_until_event_starts(comparison_date = nil)
+    comparison_date ||= Date.today
+    (self.starts_at - comparison_date).to_i
+  end
+  
   def repetition_type=(new_repetition_type)
     super new_repetition_type.nil? ? nil : new_repetition_type.to_s
   end

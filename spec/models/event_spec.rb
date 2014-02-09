@@ -43,6 +43,7 @@ describe Event do
   it { should respond_to(:ends_at) }
   it { should respond_to(:events_for_timeframe) }
   it { should respond_to(:repeating_event?) }
+  it { should respond_to(:number_of_days_until_event_starts) }
     
   it "should require a description" do
     ev = Event.new(attr.merge(:description => ""))
@@ -273,5 +274,28 @@ describe Event do
       expect(events.count).to eq(4)
     end
   end
-  
+
+  describe "#number_of_days_until_event_starts" do 
+    it "should handle a single day into the future" do
+      start_date = Date.today + 1.day
+      end_date = Date.today + 2.day
+      ev = Event.new(attr.merge(:starts_at => start_date, :ends_at => end_date))
+      expect(ev.number_of_days_until_event_starts).to eq(1)
+    end
+    
+    it "should be return a negative when the event starts in the past" do
+      start_date = Date.today - 2.days
+      end_date = Date.today - 1.day
+      ev = Event.new(attr.merge(:starts_at => start_date, :ends_at => end_date))
+      expect(ev.number_of_days_until_event_starts).to eq(-2)
+    end
+    
+    it "should work when passing a base comparison date" do
+      base_comparison_date = Date.today + 1.day
+      start_date = Date.today + 2.days
+      end_date = Date.today + 3.days
+      ev = Event.new(attr.merge(:starts_at => start_date, :ends_at => end_date))
+      expect(ev.number_of_days_until_event_starts(base_comparison_date)).to eq(1)
+    end
+  end
 end

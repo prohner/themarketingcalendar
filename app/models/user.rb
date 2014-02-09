@@ -154,7 +154,7 @@ class User < ActiveRecord::Base
     start_date  = start_date.to_i
     end_date    = end_date.to_i
     
-    puts "#{start_date} to #{end_date}"
+    # puts "#{start_date} to #{end_date}"
     events = []
     
     all_category_groups.each do |cg|
@@ -168,7 +168,7 @@ class User < ActiveRecord::Base
             # puts "      evts.count: #{evts.count}"
             events.concat(evts)
           else
-            puts "a #{e.starts_at.to_time.to_i}, b #{start_date}"
+            # puts "a #{e.starts_at.to_time.to_i}, b #{start_date}"
             if e.starts_at.to_time.to_i <= start_date and e.ends_at.to_time.to_i > start_date
               events << e
             elsif e.starts_at.to_time.to_i <= end_date and e.ends_at.to_time.to_i > end_date

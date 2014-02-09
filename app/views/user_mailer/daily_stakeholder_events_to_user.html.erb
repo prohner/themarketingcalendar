@@ -1,0 +1,33 @@
+<p>Hello <%= @user.full_name %>,</p>
+
+<p>
+	This is your daily summary of events from
+	<a href="<%= root_url %>">your calendar</a>
+	for which you have requested an email alert:
+</p>
+
+<table>
+	<tr>
+		<th colspan="4">Upcoming <%= "event".pluralize(@events.count) %></th>
+	</tr>
+	<tr>
+		<th>&nbsp;</th>
+		<th>Start Date</th>
+		<th>Event</th>
+		<th>How many days until start</th>
+	</tr>
+
+<% @events.each do |event| %>
+	<tr>
+		<td bgcolor="<%= event.category.color_scheme.background %>">&nbsp;</td>
+		<td><%= event.starts_at %></td>
+		<td><%= event.description %></td>
+		<td align="center"><%= event.number_of_days_until_event_starts %></td>
+    
+	</tr>
+<% end %>
+</table>
+
+<p>Your friends,<br/>
+	The Marketing Calendar Guys</p>
+
