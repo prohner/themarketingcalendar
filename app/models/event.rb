@@ -108,7 +108,7 @@ class Event < ActiveRecord::Base
     if repetition_type == "weekly"
       # puts "working in weekly from #{from_date} to #{to_date} (starts=#{starts_at}, ends=#{ends_at})"
       (from_date..to_date).each do |d|
-        # puts "  checking #{d} - #{appears_on_day(d)}"
+        # puts "  checking #{d} - #{appears_on_day_of_weekly_repetition(d)}"
         if appears_on_day_of_weekly_repetition(d)
           events << copy_of_self_for_one_day(d)
         end

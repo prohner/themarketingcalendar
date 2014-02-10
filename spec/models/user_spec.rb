@@ -200,8 +200,8 @@ describe User do
     before(:each) do
       @dave = FactoryGirl.create(:user_dave)
   
-      @feb_01 = DateTime.strptime('02/01/2014', '%m/%d/%Y')
-      @feb_28 = DateTime.strptime('02/28/2014', '%m/%d/%Y')
+      @feb_01 = Date.strptime('02/01/2014', '%m/%d/%Y')
+      @feb_28 = Date.strptime('02/28/2014', '%m/%d/%Y')
     end
     it "should return the correct number of events for all_events" do
       expect(@dave.all_events.count).to eq(10)
@@ -210,15 +210,16 @@ describe User do
     it "should return the correct number of events for Feb 2014 with all_events_in_timeframe " do
       events = @dave.all_events_in_timeframe(@feb_01, @feb_28)
       
-      puts "SPEC OUTPUT"
-      events.each do |e|
-        puts "  #{e.explain}"
-      end
+      # puts "SPEC OUTPUT"
+      # @dave.all_events.each do |e|
+      #   puts "  #{e.explain}"
+      # end
+      # puts
+      # events.each do |e|
+      #   puts "  #{e.explain}"
+      # end
       
       expect(events.count).to eq(12)
-      ## 2014-02-06 Was expecting 12 but all_events.count was only 10.  So 
-      ## expecting more within a timeframe doesn't seem to make sense anyway
-      # expect(events.count).to eq(10)
     end
   end
   

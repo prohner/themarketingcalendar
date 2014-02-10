@@ -170,33 +170,42 @@ class User < ActiveRecord::Base
   end
   
   def all_events_in_timeframe(start_date, end_date)
-    # puts_user self
-    # puts
-    # puts "User#all_events_in_timeframe"
+    debugging = false
+
+    puts if debugging
+    puts "User#all_events_in_timeframe" if debugging
     
-    start_date  = start_date.to_i
-    end_date    = end_date.to_i
+    puts "#{start_date} to #{end_date}" if debugging
+    start_date  = start_date.to_time.to_i
+    end_date    = end_date.to_time.to_i
     
-    # puts "#{start_date} to #{end_date}"
+    # from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
+    # to_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
+    
+    
+    puts "#{start_date} to #{end_date}" if debugging
     events = []
     
     all_category_groups.each do |cg|
-      # puts "#{cg.description}"
+      puts "#{cg.description}" if debugging
       cg.categories.each do |c|
-        # puts "  #{c.description}"
+        puts "  #{c.description}" if debugging
         c.events.each do |e|
-          # puts "    #{e.explain}"
+          puts "    #{e.explain}" if debugging
           if e.repeating_event?
-            evts = e.events_for_timeframe(Time.at(start_date.to_i).to_i, Time.at(end_date.to_i).to_i)
-            # puts "      evts.count: #{evts.count}"
+            evts = e.events_for_timeframe(start_date, end_date)
+            puts "      evts.count: #{evts.count}" if debugging
             events.concat(evts)
           else
-            # puts "a #{e.starts_at.to_time.to_i}, b #{start_date}"
+            puts "      a #{e.starts_at.to_time.to_i}, b #{start_date}" if debugging
             if e.starts_at.to_time.to_i <= start_date and e.ends_at.to_time.to_i > start_date
+              puts "      b" if debugging
               events << e
             elsif e.starts_at.to_time.to_i <= end_date and e.ends_at.to_time.to_i > end_date
+              puts "      c" if debugging
               events << e
             elsif start_date <= e.starts_at.to_time.to_i and e.starts_at.to_time.to_i <= end_date
+              puts "      d" if debugging
               events << e
             end
           end
