@@ -208,7 +208,7 @@ describe User do
     end
     
     it "should return the correct number of events for Feb 2014 with all_events_in_timeframe " do
-      events = @dave.all_events_in_timeframe(@feb_01, @feb_28)
+      events = @dave.all_events_in_timeframe(@feb_01.to_time.to_i, @feb_28.to_time.to_i)
       
       # puts "SPEC OUTPUT"
       # @dave.all_events.each do |e|
