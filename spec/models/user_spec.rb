@@ -2,15 +2,26 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  first_name      :string(255)
-#  last_name       :string(255)
-#  email           :string(255)
-#  user_type       :integer
-#  created_at      :datetime
-#  updated_at      :datetime
-#  password_digest :string(255)
-#  remember_token  :string(255)
+#  id                      :integer          not null, primary key
+#  first_name              :string(255)
+#  last_name               :string(255)
+#  email                   :string(255)
+#  user_type               :integer
+#  created_at              :datetime
+#  updated_at              :datetime
+#  password_digest         :string(255)
+#  remember_token          :string(255)
+#  status                  :string(255)
+#  encrypted_password      :string(255)      default(""), not null
+#  reset_password_token    :string(255)
+#  reset_password_sent_at  :datetime
+#  remember_created_at     :datetime
+#  sign_in_count           :integer          default(0), not null
+#  current_sign_in_at      :datetime
+#  last_sign_in_at         :datetime
+#  current_sign_in_ip      :string(255)
+#  last_sign_in_ip         :string(255)
+#  email_summary_frequency :string(255)
 #
 
 require 'spec_helper'
@@ -37,6 +48,7 @@ describe User do
   it { should respond_to(:partners) }
   it { should respond_to(:user_can_use_system) }
   it { should respond_to(:role?) }
+  it { should respond_to(:email_summary_frequency) }
   
   it { should be_valid }
   
@@ -270,16 +282,29 @@ describe User do
     end
   end
 
-  context "when registering as stakeholders" do
+  context "#email_summary_frequency" do
+    it { should respond_to(:email_summary_frequency) }
     let(:dave) { FactoryGirl.create(:user_dave) }
-    let(:bill) { FactoryGirl.create(:user_bill) }
-    let(:daves_event) { dave.all_events.first }
 
-    describe "#stakeholder_events" do
-      it { should respond_to(:stakeholder_events) }
+    describe "valid values" do
+      it "should allow only valid values" do
+        [:none, :daily, :weekdays].each do |val|
+          dave.email_summary_frequency = val
+          expect(dave).to be_valid
+        end
+      end
+
+      it "should not allow invalid values" do
+        [:xnone, :xdaily, :xweekdays].each do |val|
+          dave.email_summary_frequency = val
+          expect(dave).not_to be_valid
+        end
+      end
     end
     
   end
+  
+  
   context "when sharing category groups" do
     let(:dave) { FactoryGirl.create(:user_dave) }
     let(:bill) { FactoryGirl.create(:user_bill) }

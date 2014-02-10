@@ -8,6 +8,7 @@
 #  category_group_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime
+#  uuid              :string(255)
 #
 
 class Share < ActiveRecord::Base

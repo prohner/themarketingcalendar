@@ -5,7 +5,19 @@ namespace :notifications do
     
     ## this should be users who have requested a daily email summary
     User.all.each do |user|
-      UserMailer.daily_summary_to_user(user).deliver
+      should_send_email = false
+      
+      if user.email_summary_frequency == :daily
+        should_send_email = true
+      elsif user.email_summary_frequency == :weekdays
+        unless Date.today.saturday? or Date.today.sunday?
+          should_send_email = true
+        end
+      end
+      
+      if should_send_email
+        UserMailer.daily_summary_to_user(user).deliver
+      end
     end
     # UserMailer.daily_summary_to_user(User.all.first).deliver
     

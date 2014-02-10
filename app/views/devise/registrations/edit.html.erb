@@ -31,6 +31,9 @@
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password, value: password %></div>
 
+  <div><%= f.label :email_summary_frequency %><br />
+  <%= f.select :email_summary_frequency, options_for_select([:none, :daily, :weekdays], :selected => f.object.email_summary_frequency) %></div>
+
   <div><%= f.submit "Update" %></div>
 <% end %>
 

@@ -2,15 +2,26 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  first_name      :string(255)
-#  last_name       :string(255)
-#  email           :string(255)
-#  user_type       :integer
-#  created_at      :datetime
-#  updated_at      :datetime
-#  password_digest :string(255)
-#  remember_token  :string(255)
+#  id                      :integer          not null, primary key
+#  first_name              :string(255)
+#  last_name               :string(255)
+#  email                   :string(255)
+#  user_type               :integer
+#  created_at              :datetime
+#  updated_at              :datetime
+#  password_digest         :string(255)
+#  remember_token          :string(255)
+#  status                  :string(255)
+#  encrypted_password      :string(255)      default(""), not null
+#  reset_password_token    :string(255)
+#  reset_password_sent_at  :datetime
+#  remember_created_at     :datetime
+#  sign_in_count           :integer          default(0), not null
+#  current_sign_in_at      :datetime
+#  last_sign_in_at         :datetime
+#  current_sign_in_ip      :string(255)
+#  last_sign_in_ip         :string(255)
+#  email_summary_frequency :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -39,9 +50,21 @@ class User < ActiveRecord::Base
   USER_TYPES = [ [:root, 1], [:administrator, 2], [:user, 3], [:viewer, 4] ]
   USER_TYPE_VALUES = [1, 2, 3, 4]
   validates_inclusion_of :user_type, :in => USER_TYPE_VALUES
+  validates_inclusion_of :email_summary_frequency, :in => [:none, :daily, :weekdays]
   
   validates :password, length: { minimum: 6 }
 
+  def email_summary_frequency
+    if read_attribute(:email_summary_frequency).nil?
+      :none
+    else
+      read_attribute(:email_summary_frequency).to_sym
+    end
+  end
+  def email_summary_frequency=(value)
+    write_attribute(:email_summary_frequency,value.to_s) 
+  end
+  
   def self.status_options
     ["new", "invited", "signed up", "expired"]
   end
@@ -217,5 +240,6 @@ class User < ActiveRecord::Base
        self.email = email.downcase
        self.user_type ||= 1
        self.status ||= 'new'
+       self.email_summary_frequency ||= :none
     end
 end

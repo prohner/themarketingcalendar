@@ -8,8 +8,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :first_name
-    devise_parameter_sanitizer.for(:sign_up) << :last_name
+    [:sign_up, :account_update].each do |action|
+      devise_parameter_sanitizer.for(action) << :first_name
+      devise_parameter_sanitizer.for(action) << :last_name
+      devise_parameter_sanitizer.for(action) << :email_summary_frequency
+      puts "CHECKING PARAMS"
+    end
   end
   
 end
