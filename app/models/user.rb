@@ -170,7 +170,7 @@ class User < ActiveRecord::Base
   end
   
   def all_events_in_timeframe(start_date, end_date)
-    debugging = false
+    debugging = true
 
     puts if debugging
     puts "User#all_events_in_timeframe" if debugging
@@ -178,12 +178,12 @@ class User < ActiveRecord::Base
     start_date ||= Date.today - 1.month - Date.today.day
     end_date ||= Date.today + 1.month - Date.today.day
     
-    puts "#{start_date} to #{end_date}" if debugging
-    start_date  = start_date.to_time.to_i
-    end_date    = end_date.to_time.to_i
+    # puts "#{start_date} to #{end_date}" if debugging
+    # start_date  = start_date.to_time.to_i
+    # end_date    = end_date.to_time.to_i
     
-    # from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
-    # to_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
+    start_date = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
+    end_date = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
     
     
     puts "#{start_date} to #{end_date}" if debugging
