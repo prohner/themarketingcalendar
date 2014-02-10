@@ -221,6 +221,11 @@ describe User do
       
       expect(events.count).to eq(12)
     end
+    
+    it "should do something reasonable if the arguments are unreasonable" do
+      unreasonable_date = "this ain't no date"
+      expect(@dave.all_events_in_timeframe(unreasonable_date, unreasonable_date)).to be_an(Array)
+    end
   end
   
   describe "owning categories" do
