@@ -174,6 +174,9 @@ class User < ActiveRecord::Base
 
     puts if debugging
     puts "User#all_events_in_timeframe" if debugging
+
+    start_date ||= Date.today - 1.month - Date.today.day
+    end_date ||= Date.today + 1.month - Date.today.day
     
     puts "#{start_date} to #{end_date}" if debugging
     start_date  = start_date.to_time.to_i
