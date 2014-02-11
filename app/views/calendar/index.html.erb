@@ -34,10 +34,17 @@
 	    $("body").on("contextmenu", ".fc-event-inner", function (e) {
 			eventIdThatWasClicked = $(this).parent().attr("id");
 	        // divClicked = this.innerHTML;//$(this).find('.fc-event-inner').find('.fc-event-title');
+			
+			var position = $(this).parent().position();
+			var offset =  $(this).parent().offset();
+			
+			console.log("position left=" + position.left + ", top=" + position.top);
+			console.log("this.height:" + contextMenu.height());
+			
 	        contextMenu.css({
 	            display: "block",
 	            left: e.pageX,
-	            top: e.pageY
+	            top: position.top //+ contextMenu.height()
 	        });
 			console.log("put menu at (" + e.pageX + ", " + e.pageY + "), (" + $(this).parent().offset().left + ", " + $(this).parent().offset().top + ")")
 	        return false;
