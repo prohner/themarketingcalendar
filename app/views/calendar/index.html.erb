@@ -33,12 +33,13 @@
 	
 	    $("body").on("contextmenu", ".fc-event-inner", function (e) {
 			eventIdThatWasClicked = $(this).parent().attr("id");
-	        divClicked = this.innerHTML;//$(this).find('.fc-event-inner').find('.fc-event-title');
+	        // divClicked = this.innerHTML;//$(this).find('.fc-event-inner').find('.fc-event-title');
 	        contextMenu.css({
 	            display: "block",
 	            left: e.pageX,
 	            top: e.pageY
 	        });
+			console.log("put menu at (" + e.pageX + ", " + e.pageY + "), (" + $(this).parent().offset().left + ", " + $(this).parent().offset().top + ")")
 	        return false;
 	    });
 	

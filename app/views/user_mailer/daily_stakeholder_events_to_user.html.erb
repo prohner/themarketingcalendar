@@ -1,9 +1,15 @@
 <p>Hello <%= @user.full_name %>,</p>
 
 <p>
-	This is your daily summary of events from
-	<a href="<%= root_url %>">your calendar</a>
-	for which you have requested an email alert:
+	You are received this email because you have
+	requested 
+	<% if @events.count == 1 %>
+		an email alert
+	<% else %>
+		email alerts
+	<% end %>
+
+	for the <%= "event".pluralize(@events.count) %> below:
 </p>
 
 <table>
@@ -27,6 +33,13 @@
 	</tr>
 <% end %>
 </table>
+
+<p>&nbsp;</p>
+<p>
+Visit 
+<a href="<%= root_url %>">your calendar</a>
+to make updates.
+</p>
 
 <p>Your friends,<br/>
 	The Marketing Calendar Guys</p>
