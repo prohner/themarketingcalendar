@@ -149,8 +149,8 @@ presentPopover = (url, sourceObject, event) ->
 			html: true
 			template: '<div class="popover popover-width-control" style="max-width: 1000px!important; width:600px; height:300px;"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>',
 			content: d
-			placement: 'bottom'
-			container: 'body'
+			placement: 'auto'
+			container: '#calendar'
 		})
 	
 		$(thisObject).on "show.bs.popover", (e) ->
