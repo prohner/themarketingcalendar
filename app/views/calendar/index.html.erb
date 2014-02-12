@@ -38,15 +38,15 @@
 			var position = $(this).parent().position();
 			var offset =  $(this).parent().offset();
 			
-			console.log("position left=" + position.left + ", top=" + position.top);
-			console.log("this.height:" + contextMenu.height());
+			// console.log("position left=" + position.left + ", top=" + position.top);
+			// console.log("this.height:" + contextMenu.height());
 			
 	        contextMenu.css({
 	            display: "block",
 	            left: e.pageX,
 	            top: position.top //+ contextMenu.height()
 	        });
-			console.log("put menu at (" + e.pageX + ", " + e.pageY + "), (" + $(this).parent().offset().left + ", " + $(this).parent().offset().top + ")")
+			// console.log("put menu at (" + e.pageX + ", " + e.pageY + "), (" + $(this).parent().offset().left + ", " + $(this).parent().offset().top + ")")
 	        return false;
 	    });
 	
