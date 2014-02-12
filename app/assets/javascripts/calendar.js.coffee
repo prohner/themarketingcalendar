@@ -7,6 +7,7 @@ is_deleted_event = false
 hidden_categories = []
 snapIsShowing = false
 popoverThatIsCurrentlyShowing = null
+debugging = true
 
 @toggleSnap = ->
 	if snapIsShowing
@@ -57,7 +58,7 @@ ready = ->
 
 			eventRender: (event, element) ->
 				if hidden_categories.indexOf(event.category_id) >= 0
-					console.log "Event's category is hidden"
+					console.log "Event's category is hidden" if debugging
 					$(element).hide();
 			
 			eventAfterRender: (event, element, view) ->
@@ -71,12 +72,12 @@ ready = ->
 				offset = $(this).offset()
 				left = jsEvent.pageX
 				top = jsEvent.pageY
-				console.log "(" + left + ", " + top + ")"
+				console.log "(" + left + ", " + top + ")" if debugging 
 			
 				# alert event.my_url
 				if ! popoverIsShowing
 					popoverIsShowing = true
-					console.log "popping " + event.title
+					console.log "popping " + event.title if debugging 
 					presentPopover event.my_url, thisObject, event
 
 				else
@@ -94,18 +95,25 @@ ready = ->
 		else
 			popoverIsShowing = true
 			presentPopover "/new_event_in_popover", thisObject, { }
+			
+	$('body').click (e) ->
+		console.log "Clicked body" if debugging
+		if popoverIsShowing
+			console.log "  Popover is showing" if debugging
+			removeAnyVisiblePopovers e
+		
 
 removeAnyVisiblePopovers = (clickEvent) ->
-	# console.log "click 0 " + popoverIsShowing
+	console.log "click 0 " + popoverIsShowing if debugging
 	removedAnything = false
 	if popoverIsShowing
-		# console.log "  click 1 " + popoverThatIsCurrentlyShowing
-		if popoverThatIsCurrentlyShowing != null
-			# console.log "    click 2"
+		console.log "  click 1 " + popoverThatIsCurrentlyShowing if debugging
+		if popoverThatIsCurrentlyShowing?
+			console.log "    click 2" if debugging
 			popContainer = jQuery("bs.popover")
 			# alert popContainer
 			if $('.popover').has(clickEvent.target).length == 0
-				# console.log "      click is NOT in popover"
+				console.log "      click is NOT in popover" if debugging
 				$(popoverThatIsCurrentlyShowing).popover('hide')
 				popoverThatIsCurrentlyShowing = null
 				removedAnything = true
@@ -115,7 +123,7 @@ removeAnyVisiblePopovers = (clickEvent) ->
 	
 	
 ajaxComplete = (e, xhr, settings) ->
-	console.log(xhr.responseText)
+	console.log(xhr.responseText) if debugging
 	eval(xhr.responseText)
 	
 massAssignEvent = (event, json_obj) ->
@@ -137,7 +145,7 @@ presentPopover = (url, sourceObject, event) ->
 	thisObject = sourceObject
 
 	is_deleted_event = false
-	console.log "presentPopover starting"
+	console.log "presentPopover starting" if debugging
 	$.get url, (d) ->
 		title = event.title
 		adding_new_event = (typeof event.title == "undefined")
@@ -154,28 +162,28 @@ presentPopover = (url, sourceObject, event) ->
 		})
 	
 		$(thisObject).on "show.bs.popover", (e) ->
-			console.log "popover.on.show "
+			console.log "popover.on.show " if debugging
 			
 		$(thisObject).on "shown.bs.popover", (e) ->
-			console.log "popover.on.shown "
+			console.log "popover.on.shown " if debugging
 			if adding_new_event
 				$("#name_of_popover_that_contains_me").val("add-calendar-event")
 			else
-				console.log "name_of_popover_that_contains_me = " + "event-id-" + event.id
+				console.log "name_of_popover_that_contains_me = " + "event-id-" + event.id if debugging
 				$("#name_of_popover_that_contains_me").val("event-id-" + event.id)
 
 		$(thisObject).on "hide.bs.popover", (e) ->
-			console.log "popover.on.hide, deleted: " + $("#event_was_deleted").val() + ", typeof=" + typeof($("#event_was_deleted").val())
+			console.log "popover.on.hide, deleted: " + $("#event_was_deleted").val() + ", typeof=" + typeof($("#event_was_deleted").val()) if debugging
 			is_deleted_event = ($("#event_was_deleted").val() == "true")
-			console.log "    => is_deleted_event = " + is_deleted_event
+			console.log "    => is_deleted_event = " + is_deleted_event if debugging
 	
 		$(thisObject).on "hidden.bs.popover", (e) ->
-			console.log "popover.on.hidden"
+			console.log "popover.on.hidden" if debugging
 			new_json = $("#saved_event_result_as_json").val()
 			is_new_event = ($("#saved_event_is_new_event").val() == "true")
 			original_repetition_type = $("#original_repetition_type").val()
 			
-			console.log "    => is_deleted_event = " + is_deleted_event + ", is_new_event = " + is_new_event 
+			console.log "    => is_deleted_event = " + is_deleted_event + ", is_new_event = " + is_new_event  if debugging
 			
 			# alert $("#saved_event_is_new_event").val() + " " + is_new_event
 			if is_deleted_event
@@ -183,9 +191,9 @@ presentPopover = (url, sourceObject, event) ->
 			else if typeof new_json != "undefined" and new_json.length > 0
 				# These variables are coming from event.rb
 				json_obj = jQuery.parseJSON new_json
-				console.log "rep_type=" + json_obj.repetition_type + ", originally:" + original_repetition_type
+				console.log "rep_type=" + json_obj.repetition_type + ", originally:" + original_repetition_type if debugging
 				if json_obj.repetition_type == "weekly" 
-					console.log "		REFETCHING EVENTS " + json_obj.repetition_type
+					console.log "		REFETCHING EVENTS " + json_obj.repetition_type if debugging
 					$('#calendar').fullCalendar 'refetchEvents'
 				else if is_new_event
 					event = { }
@@ -205,10 +213,10 @@ presentPopover = (url, sourceObject, event) ->
 	indexOfCategoryId = hidden_categories.indexOf(categoryId)
 	if indexOfCategoryId >= 0
 		hidden_categories.splice indexOfCategoryId, 1
-		console.log "Remove " + categoryId
+		console.log "Remove " + categoryId if debugging
 	else
 		hidden_categories.push(categoryId)
-		console.log "  Add  " + categoryId
+		console.log "  Add  " + categoryId if debugging
 		
 	$.ajax {
 		url: "/update_hidden_category_flag/" + categoryId,
