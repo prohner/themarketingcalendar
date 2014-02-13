@@ -5,7 +5,7 @@ class CategoryGroupsController < ApplicationController
   # GET /category_groups
   # GET /category_groups.json
   def index
-    @category_groups = current_user.category_groups
+    @category_groups = current_user.all_category_groups
   end
 
   # GET /category_groups/1
