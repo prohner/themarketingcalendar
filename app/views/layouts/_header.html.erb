@@ -32,7 +32,6 @@
               <li><%= link_to "Calendars", category_groups_path %></li>
               <li class="divider"></li>
               <li><%= link_to "Profile", edit_user_registration_path %></li>
-              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "Sign out (#{current_user.email})", destroy_user_session_path, method: "delete" %>
