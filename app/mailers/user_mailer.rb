@@ -26,6 +26,9 @@ class UserMailer < ActionMailer::Base
   
   def daily_summary_to_user(user)
     user.email = "prestonrohner@me.com"
+    if user.first_name = "Yves"
+      user.email = "yaccad@gmail.com"
+    end
     subject = "Daily Summary from The Marketing Calendar"
     
     @look_ahead_days = 5
@@ -45,6 +48,9 @@ class UserMailer < ActionMailer::Base
   
   def daily_stakeholder_events_to_user(user)
     user.email = "prestonrohner@me.com"
+    if user.first_name = "Yves"
+      user.email = "yaccad@gmail.com"
+    end
     subject = "Event Alerts from The Marketing Calendar"
     
     @user = user
