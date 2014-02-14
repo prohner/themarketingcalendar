@@ -1,0 +1,16 @@
+<% provide :title, "Let's Get Going" %>
+<h1>Let's Get Going</h1>
+
+<p align="center">We'll walk you through getting the basics set up.  The events will all show up on your marketing calendar.</p>
+
+<table border="0" cellspacing="5" cellpadding="10" align="center">
+	<tr><th colspan=2>What sort of business are you setting up?</th></tr>
+	<tr>
+		<th><%= link_to image_tag("home_business.jpg", :height => 120, :width => 120), get_going_home_biz_path %><br/>Home-Based</th>
+		<th><%= link_to image_tag("small_business.jpg", :height => 120, :width => 120), get_going_small_biz_path %><br/>Small Business</th>
+	</tr>
+	<tr>
+		<th><%= link_to image_tag("medium_business.jpg", :height => 120, :width => 120), get_going_medium_biz_path %><br/>Medium Business</th>
+		<th><%= link_to image_tag("large_business.jpg", :height => 120, :width => 120), get_going_large_biz_path %><br/>Large Business</th>
+	</tr>
+</table>
