@@ -13,4 +13,8 @@ class GetGoingController < ApplicationController
 
   def large_biz
   end
+  
+  def twitter_add
+    
+  end
 end
