@@ -232,6 +232,62 @@ class User < ActiveRecord::Base
     end
   end
   
+  def self.default_calendar_name
+    "My Calendar"
+  end
+  
+  def self.default_categories_hash
+    {
+      :twitter => "Twitter",
+      :facebook => "Facebook",
+      :google_plus => "Google+",
+      :instagram => "Instagram",
+      :pinterest => "Pinterest",
+      :google_search => "Google Search",
+      :facebook_ads => "Facebook ads",
+      :blogging => "Blogging",
+      :podcasting => "Podcasting",
+      :webinars => "Webinars",
+      :email => "Email",
+      :direct_mail => "Direct mail",
+      :trade_shows => "Trade show"
+    }
+  end
+  
+  def create_new_calendar_with_default_categories
+    cs = ColorScheme.all
+    cal = CategoryGroup.find_by_description(User.default_calendar_name)
+    
+    if cal.nil?
+      cal = CategoryGroup.create(description: User.default_calendar_name, color_scheme: cs[0], user: self)
+    end
+    
+    User.default_categories_hash.values.each.with_index(1) do |desc, i|
+      if cs.count > 0
+        scheme = cs[i % cs.count]
+      else
+        scheme = ColorScheme.create(name: "Graphite on cyan", background:"#06A2CB", foreground:"#192823")
+      end
+      
+      cat = Category.find_by_description(desc)
+      if cat.nil?
+        cal.categories << Category.create(description: desc, color_scheme: scheme)
+      end
+    end
+  end
+  
+  def count_for_default_category(category_symbol)
+    cal = category_groups.find_by_description(User.default_calendar_name)
+    count = 0
+    description = User.default_categories_hash[category_symbol]
+    unless cal.nil?
+      cats = cal.categories.select { |c| c.description == description }
+      count = cats[0].events.count if cats.count > 0
+    end
+    
+    count
+  end
+  
   def wants_to_see_category(category)
     wants_to_see = true
     self.hidden_category_flags.each do |hcf|

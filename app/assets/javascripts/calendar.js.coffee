@@ -95,12 +95,13 @@ ready = ->
 		else
 			popoverIsShowing = true
 			presentPopover "/new_event_in_popover", thisObject, { }
-			
-	$('body').click (e) ->
-		console.log "Clicked body" if debugging
-		if popoverIsShowing
-			console.log "  Popover is showing" if debugging
-			removeAnyVisiblePopovers e
+
+	# When this is enabled then clicking on the calendar in the popover dismisses the popover
+	# $('body').click (e) ->
+	# 	console.log "Clicked body" if debugging
+	# 	if popoverIsShowing
+	# 		console.log "  Popover is showing" if debugging
+	# 		removeAnyVisiblePopovers e
 		
 
 removeAnyVisiblePopovers = (clickEvent) ->

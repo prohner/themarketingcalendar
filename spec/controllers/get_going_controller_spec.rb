@@ -1,6 +1,12 @@
 require 'spec_helper'
 
 describe GetGoingController do
+  let(:user) { FactoryGirl.create(:user_dave) }
+  
+  before(:each) do
+    sign_in user
+  end
+
 
   describe "GET 'start'" do
     it "returns http success" do

@@ -454,4 +454,35 @@ describe User do
       expect(pwd).not_to eq("")
     end
   end
+  
+  describe "#create_new_calendar_with_default_categories" do
+    let(:user) { FactoryGirl.create(:user_dave) }
+    
+    before(:each) do
+      x = user  ## Need to access variable to make sure it is all initialized
+    end
+
+    it "should respond to the method" do
+      expect(user).to respond_to(:create_new_calendar_with_default_categories)
+    end
+    
+    it "should add one calendar" do
+      expect do
+        user.create_new_calendar_with_default_categories
+      end.to change { CategoryGroup.count }.by 1
+    end
+    
+    it "should add the right number of categories" do
+      expect do
+        user.create_new_calendar_with_default_categories
+      end.to change { Category.count }.by 13
+    end
+    
+    it "should only add the categories once" do
+      expect do
+        user.create_new_calendar_with_default_categories
+        user.create_new_calendar_with_default_categories
+      end.to change { Category.count }.by 13
+    end
+  end
 end
