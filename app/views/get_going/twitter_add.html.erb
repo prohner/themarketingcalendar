@@ -1,16 +1,26 @@
-<div>
-	<p>You know that social media is important.  Let's take a minute to make some plans to keep your customers up to date.</p>
-	<p><%= image_tag "twitter_icon.jpg", :height => 30, :width => 30 %>
+<div class="get-going-category">
+	<p class="get-going-category-blurb">You know that social media is important.  Let's take a minute to make some plans to keep your customers up to date.</p>
+	<p class="get-going-category-description"><%= image_tag "twitter_icon.jpg", :height => 30, :width => 30 %>
 		<b><%= link_to "Twitter", 'add_twitter_stuff' %>:</b> Expect to broadcast text-based messages to your diverse audience. 
-		Not everyone tweets, but it is a good way to keep your own brand in front of your customers.  
 	</p>
-	<p>&nbsp;</p>
-	<p>List Twitter events here</p>
-	<p>&nbsp;</p>
+
+	<p>
+	<%= link_to "Add Twitter Event", get_going_event_add_path, method: :get, :class => "btn btn-large btn-primary" %>
+	</p>
+	
+	<% if @events.count > 0 %>
+		Planned Twitter events
+		<%= render 'events_list' %>
+	<% else %>
+		<p class="get-going-no-events">
+			Not everyone tweets, but it is a good way to keep your own brand in front of your customers.  
+		</p>
+	<% end %>
+
 		
-	<div style="width:200px;">
+	<div class="get-going-next-button" style="width:200px;">
 		<p>
-		<%= button_to "Let's Facebook", { action: :facebook_add, data: :small }, :class => "getGoingNoButton" %>
+		<%= button_to "Let's move on to Facebook", { action: :facebook_add, data: :small }, :class => "btn btn-large" %>
 		</p>
 	</div>
 

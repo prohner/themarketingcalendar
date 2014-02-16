@@ -256,7 +256,7 @@ class User < ActiveRecord::Base
   
   def create_new_calendar_with_default_categories
     cs = ColorScheme.all
-    cal = CategoryGroup.find_by_description(User.default_calendar_name)
+    cal = default_calendar
     
     if cal.nil?
       cal = CategoryGroup.create(description: User.default_calendar_name, color_scheme: cs[0], user: self)
@@ -277,15 +277,26 @@ class User < ActiveRecord::Base
   end
   
   def count_for_default_category(category_symbol)
-    cal = category_groups.find_by_description(User.default_calendar_name)
-    count = 0
+    category_from_default_calendar(category_symbol).events.count
+  end
+  
+  def default_calendar
+    category_groups.find_by_description(User.default_calendar_name)
+  end
+  
+  def events_for_default_category(category_symbol)
+    category_from_default_calendar(category_symbol).events
+  end
+  
+  def category_from_default_calendar(category_symbol)
+    cal = default_calendar
+    category = Category.new
     description = User.default_categories_hash[category_symbol]
     unless cal.nil?
       cats = cal.categories.select { |c| c.description == description }
-      count = cats[0].events.count if cats.count > 0
+      category = cats[0] if cats.count > 0
     end
-    
-    count
+    category
   end
   
   def wants_to_see_category(category)

@@ -455,34 +455,65 @@ describe User do
     end
   end
   
-  describe "#create_new_calendar_with_default_categories" do
+  context "default calendars and categories" do
     let(:user) { FactoryGirl.create(:user_dave) }
-    
+  
     before(:each) do
       x = user  ## Need to access variable to make sure it is all initialized
     end
 
-    it "should respond to the method" do
-      expect(user).to respond_to(:create_new_calendar_with_default_categories)
-    end
+    describe "#create_new_calendar_with_default_categories" do
+      it "should respond to the method" do
+        expect(user).to respond_to(:create_new_calendar_with_default_categories)
+      end
     
-    it "should add one calendar" do
-      expect do
-        user.create_new_calendar_with_default_categories
-      end.to change { CategoryGroup.count }.by 1
-    end
+      it "should add one calendar" do
+        expect do
+          user.create_new_calendar_with_default_categories
+        end.to change { CategoryGroup.count }.by 1
+      end
     
-    it "should add the right number of categories" do
-      expect do
-        user.create_new_calendar_with_default_categories
-      end.to change { Category.count }.by 13
-    end
+      it "should add the right number of categories" do
+        expect do
+          user.create_new_calendar_with_default_categories
+        end.to change { Category.count }.by 13
+      end
     
-    it "should only add the categories once" do
-      expect do
+      it "should only add the categories once" do
+        expect do
+          user.create_new_calendar_with_default_categories
+          user.create_new_calendar_with_default_categories
+        end.to change { Category.count }.by 13
+      end
+    end
+  
+    describe "#category_from_default_calendar" do
+      it "should find the category" do
         user.create_new_calendar_with_default_categories
+        User.default_categories_hash.keys.each do |key|
+          category = user.category_from_default_calendar(key)
+          expect(category).to be_a(Category)
+          expect(category.description).to eq(User.default_categories_hash[key])
+        end
+      end
+    end
+  
+    describe "#count_for_default_category" do 
+      it "should return 0 for each fresh category" do
         user.create_new_calendar_with_default_categories
-      end.to change { Category.count }.by 13
+        User.default_categories_hash.keys.each do |key|
+          expect(user.count_for_default_category(key)).to eq(0)
+        end
+      end
+
+      it "should find events that exist category" do
+        user.create_new_calendar_with_default_categories
+        cat = user.category_from_default_calendar(:twitter)
+        e = Event.create(description:"Twitter event", starts_at: Time.utc(2014, 2, 14), ends_at: Time.utc(2014, 2, 14), repetition_type: :none)
+        cat.events << e
+        
+        expect(user.count_for_default_category(:twitter)).to eq(1)
+      end
     end
   end
 end

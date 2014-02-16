@@ -4,8 +4,9 @@ TheMarketingCalendar::Application.routes.draw do
   get "get_going/small_biz"
   get "get_going/medium_biz"
   get "get_going/large_biz"
-  post "get_going/twitter_add"
-  post "get_going/facebook_add"
+  get "get_going/twitter_add"
+  get "get_going/facebook_add"
+  get "get_going/event_add"
   
   devise_for :users, path_names: { :sign_in => "login", :sign_out => "logout" }
   get "calendar_share/choose_calendar"

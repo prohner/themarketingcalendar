@@ -9,8 +9,8 @@
 	border-top-style:dotted;
 	border-color: #000;
 	text-align:center;
-    margin-left: auto ;
-    margin-right: auto ;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .category-group h2 {
@@ -51,12 +51,26 @@
 	color: #909090;
 }
 
+.get-going-invitation {
+	font-size:large;
+	width: 50%;
+	text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+	padding-bottom: 10px;
+}
 </style>
+
+<div class="get-going-invitation">
+	There are a lot of ways to promote your business.  The high level summary below may look intimidating.
+	<br/>
+	<%= link_to "Let's make it easy by walking through the steps", get_going_twitter_add_path, method: :get, class: "btn btn-large btn-primary" %>
+</div>
 <div class="category-group">
 	<h2>Social Media...everyone's talking about it!</h2>
 	<div class="category">
 		<div class="category-brand">
-			<%= image_tag "twitter_icon.jpg", :height => 16, :width => 16 %><%= link_to "Twitter", 'add_twitter_stuff' %>
+			<%= image_tag "twitter_icon.jpg", :height => 16, :width => 16 %><%= link_to "Twitter", get_going_twitter_add_path %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:twitter], "event") %>

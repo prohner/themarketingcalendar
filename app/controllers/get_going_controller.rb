@@ -33,8 +33,16 @@ class GetGoingController < ApplicationController
   end
   
   def twitter_add
+    @events = current_user.events_for_default_category(:twitter)
+    puts "RETURNING EVENTS"
+    puts @events.inspect
+    puts "RETURNING EVENTS DONE"
   end
   
   def facebook_add
+  end
+  
+  def event_add
+    
   end
 end
