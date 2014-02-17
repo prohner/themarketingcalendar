@@ -18,3 +18,4 @@
 //= require calendar
 //= require snap
 //= require categories
+//= require get_going

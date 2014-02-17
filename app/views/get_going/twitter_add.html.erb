@@ -5,9 +5,9 @@
 		<b><%= link_to "Twitter", 'add_twitter_stuff' %>:</b> Expect to broadcast text-based messages to your diverse audience. 
 	</p>
 
-	<p>
+	<div id="some-div" data-no-turbolink>
 	<%= link_to "Add Twitter Event", get_going_event_add_path(:event_type => :twitter), :class => "btn btn-large btn-primary" %>
-	</p>
+	</div>
 	
 	<% if @events.count > 0 %>
 		Planned Twitter events
