@@ -1,3 +1,4 @@
+<% provide :title, "Add Twitter Events" %>
 <div class="get-going-category">
 	<p class="get-going-category-blurb">You know that social media is important.  Let's take a minute to make some plans to keep your customers up to date.</p>
 	<p class="get-going-category-description"><%= image_tag "twitter_icon.jpg", :height => 30, :width => 30 %>
@@ -5,7 +6,7 @@
 	</p>
 
 	<p>
-	<%= link_to "Add Twitter Event", get_going_event_add_path, method: :get, :class => "btn btn-large btn-primary" %>
+	<%= link_to "Add Twitter Event", get_going_event_add_path(:event_type => :twitter), :class => "btn btn-large btn-primary" %>
 	</p>
 	
 	<% if @events.count > 0 %>

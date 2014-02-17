@@ -43,6 +43,9 @@ class GetGoingController < ApplicationController
   end
   
   def event_add
-    
+    @event = Event.new
+    event_type = params[:event_type].to_sym
+    @event_type_text = User.default_categories_hash[event_type]
+
   end
 end

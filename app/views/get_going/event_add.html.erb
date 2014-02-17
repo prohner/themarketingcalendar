@@ -1,3 +1,73 @@
 <% provide :title, "Add Event" %>
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "event_add" %>
+<% end %>
 
-whatever
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+ <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+ <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+<%= form_for @event, :html => { :class => 'form-horizontal edit-event-popover-form', :role => "form" } do |f| %>
+<div style="font-size:large;">
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% @event.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+	<p>
+	Alright, let's add an event for <%= @event_type_text %>.
+	</p>
+
+	<div id="description">
+		<div class="control-group form-group" id="event_description_group">
+			<%= f.label :description, :class => "col-sm-2 control-label" %>
+			<div class="col-sm-10 control-container">
+				<%= f.text_field :description, :placeholder => "Describe the new event", :class => "tcm-form-control" %>
+			</div>
+		</div>
+	</div>
+
+	<div id="starts-at">
+		<div class="control-group form-group" id="event_description_group">
+			<%= f.label :starts_at, :class => "col-sm-2 control-label" %>
+			<div class="col-sm-10 control-container">
+				<%= f.text_field :starts_at, :placeholder => "Date activity starts", :class => "datepickerField tcm-form-control" %>
+			</div>
+		</div>
+	</div>
+
+	<div id="ends-at">
+		<div class="control-group form-group" id="event_description_group">
+			<%= f.label :ends_at, :class => "col-sm-2 control-label" %>
+			<div class="col-sm-10 control-container">
+				<%= f.text_field :ends_at, :placeholder => "Date activity ends", :class => "datepickerField tcm-form-control" %>
+			</div>
+		</div>
+	</div>
+
+	<div id="repetition-type">
+		<div class="control-group form-group" id="event_description_group">
+			<%= f.label "How often?", :class => "col-sm-2 control-label" %>
+			<div class="col-sm-10 control-container">
+				<%= f.radio_button "repetition_type", "none", :checked => true %>Happens once (possibly over several days)<br/>
+				<%= f.radio_button "repetition_type", "weekly", :checked => false %>Happens Weekly (maybe several days per week)<br/>
+				<%= f.radio_button "repetition_type", "monthly", :checked => false %>Happens monthly<br/>
+			</div>
+		</div>
+	</div>
+	
+	<p>
+	<%= link_to "Next >>", "", :class => "btn btn-large btn-primary", :onclick => "return nextButtonClicked();" %>
+	</p>
+	
+</div>
+
+<% end %>
+
