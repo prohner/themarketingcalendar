@@ -75,10 +75,6 @@ class Event < ActiveRecord::Base
     super new_repetition_type.nil? ? nil : new_repetition_type.to_s
   end
   
-  def repetition_type
-    self.attributes['repetition_type'].to_sym
-  end
-  
   # need to override the json view to return what full_calendar is expecting.
   # http://arshaw.com/fullcalendar/docs/event_data/Event_Object/
   def as_json(options = {})
