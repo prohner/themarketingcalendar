@@ -4,16 +4,24 @@
 
 ready = ->
 	# alert "Setting events stuff"
-	if $("#event_starts_at") != undefined
+	if $("#event_starts_at").length
 		$("#event_starts_at").datepicker { dateFormat: "yy-mm-dd" }
 		$("#event_ends_at").datepicker { dateFormat: "yy-mm-dd" }
+		$("#weekly-repetition").hide()
 
-	nextButtonClicked()
+		nextButtonClicked()
+	
+	$("input[data-repetition-type]").click ->
+		if $(this).data("repetition-type") == "weekly"
+			$("#weekly-repetition").show()
+		else
+			$("#weekly-repetition").hide()
+			
 	
 focusOn = (div) ->
 	for thisDiv in [ "#description", "#starts-at", "#ends-at", "#repetition-type" ]
 		if thisDiv == div
-			$(thisDiv).css 'background-color', '#FFFF00'
+			$(thisDiv).css 'background-color', '#fbf9ee'
 		else
 			$(thisDiv).css 'background-color', 'white'
 

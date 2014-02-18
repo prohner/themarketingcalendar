@@ -22,40 +22,83 @@
 	Alright, let's add an event for <%= @event_type_text %>.
 	</p>
 
-	<div id="description">
+	<div id="description" class="get-going-form-element">
 		<div class="control-group form-group" id="event_description_group">
 			<%= f.label :description, :class => "col-sm-2 control-label" %>
-			<div class="col-sm-10 control-container">
+			<div class="col-sm-3 control-container">
 				<%= f.text_field :description, :placeholder => "Describe the new event", :class => "tcm-form-control" %>
 			</div>
+			<div class="col-sm-7 small bottom-aligned">
+				This is the title that will appear on your calendar
+			</div>
 		</div>
 	</div>
 
-	<div id="starts-at">
+	<div id="starts-at" class="get-going-form-element">
 		<div class="control-group form-group" id="event_description_group">
 			<%= f.label :starts_at, :class => "col-sm-2 control-label" %>
-			<div class="col-sm-10 control-container">
+			<div class="col-sm-3 control-container">
 				<%= f.text_field :starts_at, :placeholder => "Date activity starts", :class => "datepickerField tcm-form-control" %>
 			</div>
-		</div>
-	</div>
-
-	<div id="ends-at">
-		<div class="control-group form-group" id="event_description_group">
-			<%= f.label :ends_at, :class => "col-sm-2 control-label" %>
-			<div class="col-sm-10 control-container">
-				<%= f.text_field :ends_at, :placeholder => "Date activity ends", :class => "datepickerField tcm-form-control" %>
+			<div class="col-sm-7 small bottom-aligned">
+				When will this event <em>first</em> occur?
 			</div>
 		</div>
 	</div>
 
-	<div id="repetition-type">
+	<div id="ends-at" class="get-going-form-element">
+		<div class="control-group form-group" id="event_description_group">
+			<%= f.label :ends_at, :class => "col-sm-2 control-label" %>
+			<div class="col-sm-3 control-container">
+				<%= f.text_field :ends_at, :placeholder => "Date activity ends", :class => "datepickerField tcm-form-control" %>
+			</div>
+			<div class="col-sm-7 small bottom-aligned">
+				When will this event <em>last</em> occur?
+			</div>
+		</div>
+	</div>
+
+	<div id="repetition-type" class="get-going-form-element">
 		<div class="control-group form-group" id="event_description_group">
 			<%= f.label "How often?", :class => "col-sm-2 control-label" %>
 			<div class="col-sm-10 control-container">
-				<%= f.radio_button "repetition_type", "none", :checked => true %>Happens once (possibly over several days)<br/>
-				<%= f.radio_button "repetition_type", "weekly", :checked => false %>Happens Weekly (maybe several days per week)<br/>
-				<%= f.radio_button "repetition_type", "monthly", :checked => false %>Happens monthly<br/>
+				<%= f.radio_button "repetition_type", "none", :checked => true, "data-repetition-type" => "none" %>Happens once <span class="small">(may span over several days)</span><br/>
+				<%= f.radio_button "repetition_type", "weekly", :checked => false, "data-repetition-type" => "weekly" %>Happens weekly <span class="small">(may be several days per week)</span><br/>
+				<div id="weekly-repetition" class="weekly-repetition">
+					<small>
+					<label class="get-going-daily-checkbox">
+						<%= f.check_box :on_sunday, :class => "" %> Sun
+					</label>
+
+					<label class="get-going-daily-checkbox">
+						<%= f.check_box :on_monday, :class => "" %> Mon
+					</label>
+
+					<label class="get-going-daily-checkbox">
+						<%= f.check_box :on_tuesday, :class => "get-going-daily-checkbox" %> Tue
+					</label>
+
+					<label class="get-going-daily-checkbox">
+						<%= f.check_box :on_wednesday, :class => "get-going-daily-checkbox" %> Wed
+					</label>
+
+					<label class="get-going-daily-checkbox">
+						<%= f.check_box :on_thursday, :class => "get-going-daily-checkbox" %> Thu
+					</label>
+
+					<label class="get-going-daily-checkbox">
+						<%= f.check_box :on_friday, :class => "get-going-daily-checkbox" %> Fri
+					</label>
+
+					<label class="get-going-daily-checkbox">
+						<%= f.check_box :on_saturday, :class => "get-going-daily-checkbox" %> Sat
+					</label>
+					<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					Check days on which event is planned
+					</small>
+				</div>
+				<%= f.radio_button "repetition_type", "monthly", :checked => false, "data-repetition-type" => "monthly" %>Happens monthly <span class="small">(on the same day of each month)</span><br/>
 			</div>
 		</div>
 	</div>
