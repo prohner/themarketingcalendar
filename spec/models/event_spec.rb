@@ -115,7 +115,7 @@ describe Event do
   end
   
   it "should return the list of repetition types exactly correctly" do
-    expect(Event.list_of_repetition_type_options).to eq(["none", "weekly", "monthly"])
+    expect(Event.list_of_repetition_type_options).to eq([:none, :weekly, :monthly])
   end
 
   describe "when building monthly events for timeframe" do

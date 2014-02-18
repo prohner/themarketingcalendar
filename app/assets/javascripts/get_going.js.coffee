@@ -21,7 +21,7 @@ ready = ->
 focusOn = (div) ->
 	for thisDiv in [ "#description", "#starts-at", "#ends-at", "#repetition-type" ]
 		if thisDiv == div
-			$(thisDiv).css 'background-color', '#fbf9ee'
+			$(thisDiv).css 'background-color', '#fdfbbe'
 		else
 			$(thisDiv).css 'background-color', 'white'
 
@@ -41,11 +41,13 @@ focusOn = (div) ->
 		$("#ends-at").hide()
 		$("#repetition-type").hide()
 		focusOn("#starts-at")
+		$("#event_starts_at").focus()
 	else if $("#event_ends_at").val().length == 0
 		$("#starts-at").show()
 		$("#ends-at").show()
 		$("#repetition-type").hide()
 		focusOn("#ends-at")
+		$("#event_ends_at").focus()
 	else
 		$("#starts-at").show()
 		$("#ends-at").show()

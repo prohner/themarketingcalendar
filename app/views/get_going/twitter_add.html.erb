@@ -1,28 +1,31 @@
 <% provide :title, "Add Twitter Events" %>
 <div class="get-going-category">
 	<p class="get-going-category-blurb">You know that social media is important.  Let's take a minute to make some plans to keep your customers up to date.</p>
-	<p class="get-going-category-description"><%= image_tag "twitter_icon.jpg", :height => 30, :width => 30 %>
-		<b><%= link_to "Twitter", 'add_twitter_stuff' %>:</b> Expect to broadcast text-based messages to your diverse audience. 
+	<p class="get-going-category-description">
+		<%= image_tag "twitter_icon.jpg", :height => 30, :width => 30 %>
+		<b>With Twitter you may broadcast text-based messages to your diverse audience. </b>
 	</p>
 
 	<div id="some-div" data-no-turbolink>
-	<%= link_to "Add Twitter Event", get_going_event_add_path(:event_type => :twitter), :class => "btn btn-large btn-primary" %>
+	<%= link_to "Add #{@events.count > 0 ? 'Another ' : ''}Twitter Event", get_going_event_add_path(:event_type => :twitter), :class => "btn btn-large btn-primary" %>
+
+	<span class="get-going-next-button pull-right">
+	<%= button_to "Let's move on to Facebook &rarr;".html_safe, { action: :facebook_add, data: :small }, :class => "btn btn-large" %>
+	</span>
 	</div>
 	
-	<% if @events.count > 0 %>
-		Planned Twitter events
-		<%= render 'events_list' %>
-	<% else %>
-		<p class="get-going-no-events">
-			Not everyone tweets, but it is a good way to keep your own brand in front of your customers.  
-		</p>
-	<% end %>
-
-		
-	<div class="get-going-next-button" style="width:200px;">
-		<p>
-		<%= button_to "Let's move on to Facebook", { action: :facebook_add, data: :small }, :class => "btn btn-large" %>
-		</p>
+	<div class="get-going-event-list">
+		<% if @events.count > 0 %>
+				<h2>Planned Twitter events</h2>
+				<%= render 'events_list' %>
+		<% else %>
+			<p class="get-going-no-events">
+				You do not have any Twitter events planned.  But, hey, 
+				not everyone tweets.  It is a good way to keep your own brand in 
+				front of your customers.  
+			</p>
+		<% end %>
 	</div>
+
 
 </div>

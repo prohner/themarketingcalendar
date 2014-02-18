@@ -1,16 +1,12 @@
 
-<% if @events.count > 0 %>
 	<% @events.each do |event| %>
 		<div class="get-going-event">
 			<div class="get-going-event-description">
 				<%= event.description %>
-				<span class="get-going-event-date">
+				<div class="get-going-event-date">
 					<%= event.humanize_date %>
-				</span>
+				</div>
 			</div>
 			
 		</div>
-	<p></p>
-	<p>&nbsp;</p>
 	<% end %>
-<% end %>

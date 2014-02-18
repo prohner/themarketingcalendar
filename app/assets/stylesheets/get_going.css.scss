@@ -26,7 +26,17 @@
 }
 
 .get-going-no-events {
-	
+	color:#a0a0a0;
+}
+
+.get-going-event-list {
+	margin-top:25px;
+	background-color: #f0f0f0;
+}
+
+.get-going-event {
+	margin-top:10px;
+	margin-bottom:10px;
 }
 
 .get-going-event-description {
@@ -35,6 +45,8 @@
 
 .get-going-event-date {
 	color: #c0c0c0;
+	display: inline-block;
+	font-size:small;
 }
 
 .get-going-category-blurb {
