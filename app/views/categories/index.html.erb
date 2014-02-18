@@ -6,10 +6,10 @@
   <thead>
     <tr>
       <th>Calendar</th>
-      <th>Description</th>
+      <th>Category</th>
       <th>Color</th>
-      <th></th>
-      <th></th>
+      <th>&nbsp;</th>
+      <th>Delete?</th>
       <th></th>
     </tr>
   </thead>
@@ -18,10 +18,10 @@
     <% @categories.each do |category| %>
       <tr>
         <td><%= link_to category.category_group.description, edit_category_group_path(category.category_group) %></td>
-        <td><%= category.description %></td>
+        <td><%= link_to category.description, edit_category_path(category) %></td>
         <td><%= color_scheme_as_html_snippet_to_display(category.color_scheme) %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>&nbsp;</td>
+        <td><%= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
