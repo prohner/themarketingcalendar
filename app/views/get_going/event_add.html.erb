@@ -4,7 +4,8 @@
  <script src="//code.jquery.com/jquery-1.9.1.js"></script>
  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-<%= form_for @event, :html => { :class => 'form-horizontal edit-event-popover-form', :role => "form" } do |f| %>
+
+<%= form_for @event, :url => url_for(:controller => 'get_going', :action => 'create_event'), :html => { :class => 'form-horizontal edit-event-popover-form', :role => "form" } do |f| %>
 <div style="font-size:large;">
   <% if @event.errors.any? %>
     <div id="error_explanation">
@@ -22,6 +23,7 @@
 	Alright, let's add an event for <%= @event_type_text %>.
 	</p>
 
+	<%= f.hidden_field :category_id, :value => @category_id %>
 	<div id="description" class="get-going-form-element">
 		<div class="control-group form-group" id="event_description_group">
 			<%= f.label :description, :class => "col-sm-2 control-label" %>
@@ -103,9 +105,12 @@
 		</div>
 	</div>
 	
-	<p>
-	<%= link_to "Next >>", "", :class => "btn btn-large btn-primary", :onclick => "return nextButtonClicked();" %>
-	</p>
+	<div id="next-button-wrapper">
+		<%= link_to "Next >>", "", :class => "btn btn-large btn-primary", :onclick => "return nextButtonClicked();" %>
+	</div>
+	<div id="create-button-wrapper">
+		<%= f.submit "Create Event!", :class => "btn btn-large btn-success" %>
+	</div>
 	
 </div>
 

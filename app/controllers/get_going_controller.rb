@@ -44,8 +44,43 @@ class GetGoingController < ApplicationController
   
   def event_add
     @event = Event.new
-    event_type = params[:event_type].to_sym
-    @event_type_text = User.default_categories_hash[event_type]
+    
+    unless params[:event_type].nil?
+      event_type = params[:event_type].to_sym
+      @event_type_text = User.default_categories_hash[event_type]
+      category = current_user.category_from_default_calendar(event_type)
+      @category_id = category.id
+    end
 
   end
+  
+  def create_event
+    @event = Event.new(event_params)
+    @event.repetition_type = :none
+    
+    puts ""
+    puts @event.inspect
+    puts ""
+    puts "repetition type = #{@event.repetition_type}"
+    puts ""
+
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to get_going_twitter_add_path, notice: 'Event was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @event }
+      else
+        puts ""
+        puts @event.errors.inspect
+        puts ""
+        format.html { redirect_to get_going_event_add_path(:event_type => params[:event_type]), error: 'Event could not be created.' }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  private
+    def event_params
+      params.require(:event).permit(:description, :category_id, :starts_at, :ends_at, :category_id, :repetition_type, :repetition_frequency, :on_sunday, :on_monday, :on_tuesday, :on_wednesday, :on_thursday, :on_friday, :on_saturday, :repetition_options)
+    end
+  
 end

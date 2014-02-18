@@ -27,6 +27,9 @@ focusOn = (div) ->
 
 @nextButtonClicked = ->
 	# alert "fixing buttons"
+	$("#next-button-wrapper").show()
+	$("#create-button-wrapper").hide()
+
 	if $("#event_description").val().length == 0
 		$("#starts-at").hide()
 		$("#ends-at").hide()
@@ -48,6 +51,10 @@ focusOn = (div) ->
 		$("#ends-at").show()
 		$("#repetition-type").show()
 		focusOn("#repetition-type")
+
+		$("#next-button-wrapper").hide()
+		$("#create-button-wrapper").show()
+		
 
 	false
 
