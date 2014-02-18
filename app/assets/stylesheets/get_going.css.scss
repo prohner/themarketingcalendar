@@ -31,7 +31,14 @@
 
 .get-going-event-list {
 	margin-top:25px;
-	background-color: #f0f0f0;
+	background-color: #f5f5f5;
+	padding: 5px 5px 5px 25px ;
+}
+
+.get-going-event-list h2 {
+	text-align:left;
+	padding-bottom:0;
+	margin-bottom:0;
 }
 
 .get-going-event {
@@ -40,7 +47,7 @@
 }
 
 .get-going-event-description {
-	color: #0000ff;
+	color: #8888ff;
 }
 
 .get-going-event-date {
