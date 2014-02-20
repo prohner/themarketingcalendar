@@ -1,6 +1,6 @@
 <p>Hello <%= @user.full_name %>,</p>
 
-<p>This is your summary of events coming up in the next <%= pluralize(@look_ahead_days, "day") %> The Marketing Calendar:</p>
+<p>This is your summary of events coming up in the next <%= pluralize(@look_ahead_days, "day") %> on The Marketing Calendar:</p>
 
 <table>
 	<tr>
@@ -11,9 +11,9 @@
 	</tr>
 <% @events.each do |event| %>
 	<tr>
-		<td bgcolor="<%= event.category.color_scheme.background %>">&nbsp;</td>
+		<td align="center"><%= color_scheme_as_html_snippet_to_display(event.category.color_scheme) %></td>
 		<td nowrap><%= event.starts_at.strftime("%a, %b %e %Y") %></td>
-		<td nowrap><%= event.ends_at.strftime("%a, %b %e %Y") %> </td>
+		<td nowrap><span style="color:#a0a0a0;"><%= event.ends_at.strftime("%a, %b %e %Y") %></span></td>
 		<td nowrap><%= event.description %></td>
     
 	</tr>
