@@ -43,4 +43,17 @@ describe GetGoingController do
     end
   end
 
+  describe "GET 'twitter_add'" do
+    it "should asssign the necessary variables" do
+      get 'twitter_add'
+      expect(assigns(:events)).not_to be_nil
+      expect(assigns(:blurb)).not_to be_nil
+      expect(assigns(:kind_of_event)).not_to be_nil
+      expect(assigns(:kind_of_event_icon)).not_to be_nil
+      expect(assigns(:kind_of_event_description)).not_to be_nil
+      expect(assigns(:no_events_message)).not_to be_nil
+      expect(assigns(:next_action)).to be_a(Symbol)
+      expect(assigns(:event_type)).to be_in(User.default_categories_hash.keys)
+    end
+  end
 end

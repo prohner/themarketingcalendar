@@ -1,0 +1,28 @@
+<div class="get-going-category">
+	<p class="blurb">
+		<%= @blurb %>
+	</p>
+	<p class="description">
+		<%= image_tag @kind_of_event_icon, :height => 30, :width => 30 %>
+		<%= @kind_of_event_description %>
+	</p>
+
+	<div class="buttons" data-no-turbolink>
+		<%= link_to "Add #{@events.count > 0 ? 'Another ' : ''}#{@kind_of_event} Event".html_safe, get_going_event_add_path(:event_type => @event_type), :class => "add-button btn btn-large btn-primary" %>
+
+		<%= link_to "Let's move on &rarr;".html_safe, { action: @next_action, data: :small }, :class => "next-button btn btn-large btn-primary" %>
+	</div>
+	
+	<div class="event-list">
+		<% if @events.count > 0 %>
+				<h2>Currently Planned <%= @kind_of_event %> events</h2>
+				<%= render 'events_list' %>
+		<% else %>
+			<p class="no-events">
+				<%= @no_events_message %>
+			</p>
+		<% end %>
+	</div>
+
+
+</div>

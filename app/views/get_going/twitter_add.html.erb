@@ -1,33 +1,3 @@
-<% provide :title, "Add Twitter Events" %>
-<div class="get-going-category">
-	<p class="blurb">
-		You know that social media is important.  Let's take a minute to make some plans to keep your customers up to date.
-	</p>
-	<p class="description">
-		<%= image_tag "twitter_icon.jpg", :height => 30, :width => 30 %>
-		With Twitter you may broadcast text-based messages to your diverse audience.
-	</p>
+<% provide :title, "Add #{@kind_of_event} Events" %>
 
-	<div id="buttons" data-no-turbolink>
-		<%= link_to "Add #{@events.count > 0 ? 'Another ' : ''}Twitter Event", get_going_event_add_path(:event_type => :twitter), :class => "btn btn-large btn-primary" %>
-
-		<span class="get-going-next-button pull-right">
-		<%= button_to "Let's move on to Facebook &rarr;".html_safe, { action: :facebook_add, data: :small }, :class => "btn btn-large" %>
-		</span>
-	</div>
-	
-	<div class="event-list">
-		<% if @events.count > 0 %>
-				<h2>Currently Planned Twitter events</h2>
-				<%= render 'events_list' %>
-		<% else %>
-			<p class="no-events">
-				You do not have any Twitter events planned.  But, hey, 
-				not everyone tweets.  It is a good way to keep your own brand in 
-				front of your customers.  
-			</p>
-		<% end %>
-	</div>
-
-
-</div>
+<%= render 'add_events_form' %>

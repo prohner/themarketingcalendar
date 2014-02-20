@@ -34,12 +34,25 @@ class GetGoingController < ApplicationController
   
   def twitter_add
     @events = current_user.events_for_default_category(:twitter)
-    puts "RETURNING EVENTS"
-    puts @events.inspect
-    puts "RETURNING EVENTS DONE"
+    @blurb = "You know that social media is important.  Let's take a minute to make some plans to keep your customers up to date."
+    @event_type = :twitter
+    @kind_of_event = "Twitter"
+    @kind_of_event_icon = "twitter_icon.jpg"
+    @kind_of_event_description = "With Twitter you may broadcast text-based messages to your diverse audience."
+    @no_events_message = "You do not have any Twitter events planned.  But, hey, not everyone tweets.  It is a good way to keep your own brand in front of your customers."
+    @next_action = :facebook_add
   end
   
   def facebook_add
+    @events = current_user.events_for_default_category(:facebook)
+    @blurb = "You know that social media is important.  Let's take a minute to make some plans to keep your customers up to date."
+    @kind_of_event = "Facebook"
+    @kind_of_event_icon = "facebook_icon.png"
+    @kind_of_event_description = "Facebook's content-friendly format is terrific to post regular updates."
+    @no_events_message = "You do not have any Facebook events planned.  Posting regularly to a Facebook page requires a little effort but the rewards can be worth it."
+    @next_action = :facebook_add
+    
+    render 'twitter_add'
   end
   
   def event_add

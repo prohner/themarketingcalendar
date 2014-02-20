@@ -72,8 +72,31 @@
 	}
 	
 	.buttons {
-		background-color:green;
+//		background-color:green;
+//		white-space:nowrap;
+		margin-bottom: 70px;
+
+//		.add-button {
+//			@extend btn;
+//			@extend btn-large;
+//			@extend btn-primary;
+//			display: inline-block;
+//			vertical-align:top;
+//			float:left;
+//			padding: 5px;
+//		}
+//
+		.next-button {
+			float:right;
+//			@extend btn-primary;
+//			@extend btn;
+//			@extend btn-large;
+//			display: inline-block;
+//			vertical-align:top;
+//			padding: 5px;
+		}
 	}
+	
 	
 	.event-list {
 		margin-top:25px;

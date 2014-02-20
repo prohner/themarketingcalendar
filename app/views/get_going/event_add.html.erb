@@ -106,7 +106,7 @@
 	</div>
 	
 	<div id="next-button-wrapper">
-		<%= link_to "Next >>", "", :class => "btn btn-large btn-primary", :onclick => "return nextButtonClicked();" %>
+		<%= link_to "Next &rarr;".html_safe, "", :class => "btn btn-large btn-primary", :onclick => "return nextButtonClicked();" %>
 	</div>
 	<div id="create-button-wrapper">
 		<%= f.submit "Create Event!", :class => "btn btn-large btn-success" %>
