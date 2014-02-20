@@ -5,7 +5,7 @@
  <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
 
-<%= form_for @event, :url => url_for(:controller => 'get_going', :action => 'create_event'), :html => { :class => 'form-horizontal edit-event-popover-form', :role => "form" } do |f| %>
+<%= form_for @event, :url => url_for(:controller => 'get_going', :action => 'create_event'), :html => { :class => 'form-horizontal edit-event-popover-form get-going-form', :role => "form" } do |f| %>
 <div style="font-size:large;">
   <% if @event.errors.any? %>
     <div id="error_explanation">
@@ -19,7 +19,7 @@
     </div>
   <% end %>
 
-	<p>
+	<p class="description">
 	Alright, let's add an event for <%= @event_type_text %>.
 	</p>
 
@@ -30,7 +30,7 @@
 			<div class="col-sm-3 control-container">
 				<%= f.text_field :description, :placeholder => "Describe the new event", :class => "tcm-form-control" %>
 			</div>
-			<div class="col-sm-7 small bottom-aligned">
+			<div class="col-sm-7 sub-description bottom-aligned">
 				This is the title that will appear on your calendar
 			</div>
 		</div>
@@ -42,7 +42,7 @@
 			<div class="col-sm-3 control-container">
 				<%= f.text_field :starts_at, :placeholder => "Date activity starts", :class => "datepickerField tcm-form-control" %>
 			</div>
-			<div class="col-sm-7 small bottom-aligned">
+			<div class="col-sm-7 sub-description bottom-aligned">
 				When will this event <em>first</em> occur?
 			</div>
 		</div>
@@ -54,7 +54,7 @@
 			<div class="col-sm-3 control-container">
 				<%= f.text_field :ends_at, :placeholder => "Date activity ends", :class => "datepickerField tcm-form-control" %>
 			</div>
-			<div class="col-sm-7 small bottom-aligned">
+			<div class="col-sm-7 sub-description bottom-aligned">
 				When will this event <em>last</em> occur?
 			</div>
 		</div>
