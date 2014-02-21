@@ -1,4 +1,24 @@
 TheMarketingCalendar::Application.routes.draw do
+  get "get_going/start"
+  get "get_going/easily"
+  
+  get "get_going/event_add"
+  post "get_going/create_event"
+
+  get "get_going/twitter_add"
+  get "get_going/facebook_add"
+  get "get_going/google_plus_add"
+  get "get_going/instagram_add"
+  get "get_going/pinterest_add"
+  get "get_going/search_engine_add"
+  get "get_going/facebook_ad_add"
+  get "get_going/blogging_add"
+  get "get_going/podcasting_add"
+  get "get_going/webinar_add"
+  get "get_going/email_add"
+  get "get_going/direct_mail_add"
+  get "get_going/trade_show_add"
+  
   devise_for :users, path_names: { :sign_in => "login", :sign_out => "logout" }
   get "calendar_share/choose_calendar"
   get "calendar_share/choose_user"

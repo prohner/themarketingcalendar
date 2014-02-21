@@ -1,0 +1,236 @@
+<% provide :title, "Getting Started Easily" %>
+
+<style type="text/css" media="screen">
+.category-group {
+	margin-bottom: 20px;
+	width: 75%;
+	border-top-width: 1px;
+	border-top-style:dotted;
+	border-color: #000;
+	text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.category-group h2 {
+	border-top: ;
+	text-align: left;
+}
+
+.category {
+	width: 100%;
+/*	background-color:#afa;*/
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top-width: 1px;
+	border-top-style:dotted;
+	border-color: #cfcfcf;
+}
+
+.category-brand {
+	vertical-align: top;
+	display: inline-block;
+	width: 15%;
+	text-align:left;
+/*	padding-right:15px;*/
+/*	background-color:#faa;*/
+}
+
+.category-count {
+	vertical-align: top;
+	display: inline-block;
+	width: 10%;
+}
+
+.category-description {
+	vertical-align: top;
+	display: inline-block;
+	width: 70%;
+	text-align:left;
+	color: #909090;
+}
+
+.get-going-invitation {
+	font-size:large;
+	width: 50%;
+	text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+	padding-bottom: 10px;
+}
+</style>
+
+<div class="get-going-invitation">
+	There are a lot of ways to promote your business.  The high level summary below may look intimidating.
+	<br/>
+	<%= link_to "Let's make it easy by walking through the steps", summary_page_for_category(:twitter), class: "btn btn-large btn-primary" %>
+</div>
+<div class="category-group">
+	<h2>Social Media...everyone's talking about it!</h2>
+	<div class="category">
+		<div class="category-brand">
+			<%= image_tag "twitter_icon.jpg", :height => 16, :width => 16 %><%= link_to "Twitter", summary_page_for_category(:twitter) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:twitter], "event") %>
+		</div>
+		<div class="category-description">
+			Not everyone tweets, but it is a good way to keep your own brand in front of your customers.  Use primarily text to reach a diverse audience.
+		</div>
+	</div>
+
+	<div class="category">
+		<div class="category-brand">
+			<%= image_tag "facebook_icon.png", :height => 16, :width => 16 %><%= link_to "Facebook", summary_page_for_category(:facebook) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:facebook], "event") %>
+		</div>
+		<div class="category-description">
+			Facebook's content-friendly format is terrific to post regular updates.
+		</div>
+	</div>
+
+	<div class="category">
+		<div class="category-brand">
+			<%= image_tag "google_plus_icon.jpg", :height => 16, :width => 16 %><%= link_to "Google+", summary_page_for_category(:google_plus) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:google_plus], "event") %>
+		</div>
+		<div class="category-description">
+			Google+ has more of a tech orientation but you can build authority and get your picture on Google search results.
+		</div>
+	</div>
+
+	<div class="category">
+		<div class="category-brand">
+			<%= image_tag "instagram_icon.jpg", :height => 16, :width => 16 %><%= link_to "Instagram", summary_page_for_category(:instagram) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:instagram], "event") %>
+		</div>
+		<div class="category-description">
+			Now with tight Facebook integration and videos, Instagram is a good complement to Facebook.
+		</div>
+	</div>
+
+	<div class="category">
+		<div class="category-brand">
+			<%= image_tag "pinterest_icon.jpg", :height => 16, :width => 16 %><%= link_to "Pinterest", summary_page_for_category(:pinterest) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:pinterest], "event") %>
+		</div>
+		<div class="category-description">
+			Use your visual appeal to reach a predominantly female audience.  Outstanding for traffic generation, especially for retail.
+		</div>
+	</div>
+
+</div>
+
+<div class="category-group">
+	<h2>Advertising...pay for what you get</h2>
+	<div class="category">
+		<div class="category-brand">
+			<%= link_to "Search Engine", summary_page_for_category(:google_search) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:google_search], "event") %>
+		</div>
+		<div class="category-description">
+			Google is the big dog of search engine advertising, but Bing and Yahoo! offer similar services.
+		</div>
+	</div>
+
+	<div class="category">
+		<div class="category-brand">
+			<%= image_tag "facebook_icon.png", :height => 16, :width => 16 %><%= link_to "Facebook", summary_page_for_category(:facebook_ads) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:facebook_ads], "event") %>
+		</div>
+		<div class="category-description">
+			Facebook does more than just provide space to share...run ads to highly targeted demographic and psychographic groups.
+		</div>
+	</div>
+</div>
+
+<div class="category-group">
+	<h2>Search Engine Optimization...earn their attention</h2>
+	<div class="category">
+		<div class="category-brand">
+			<%= link_to "Blogging", summary_page_for_category(:blogging) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:blogging], "event") %>
+		</div>
+		<div class="category-description">
+			Creating new, interesting, and useful content helps improve your ranking in search engines.
+		</div>
+	</div>
+
+	<div class="category">
+		<div class="category-brand">
+			<%= link_to "Podcasting", summary_page_for_category(:podcasting) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:podcasting], "event") %>
+		</div>
+		<div class="category-description">
+			Podcasting enables you to engage with your customers.
+		</div>
+	</div>
+
+	<div class="category">
+		<div class="category-brand">
+			<%= link_to "Webinars", summary_page_for_category(:webinars) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:webinars], "event") %>
+		</div>
+		<div class="category-description">
+			Webinars help you to position yourself as an expert in your domain.
+		</div>
+	</div>
+</div>
+
+<div class="category-group">
+	<h2>Direct Marketing...reach out directly</h2>
+	<div class="category">
+		<div class="category-brand">
+			<%= link_to "Email", summary_page_for_category(:email) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:email], "event") %>
+		</div>
+		<div class="category-description">
+			Regular email campaigns help you develop an in-depth relationship with your customers.
+		</div>
+	</div>
+
+	<div class="category">
+		<div class="category-brand">
+			<%= link_to "Direct Mail", summary_page_for_category(:direct_mail) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:direct_mail], "event") %>
+		</div>
+		<div class="category-description">
+			A resource-intensive channel that generally yields some successes.
+		</div>
+	</div>
+
+	<div class="category">
+		<div class="category-brand">
+			<%= link_to "Trade Shows", summary_page_for_category(:trade_shows) %>
+		</div>
+		<div class="category-count">
+			<%= pluralize(@event_counts[:trade_shows], "event") %>
+		</div>
+		<div class="category-description">
+			Attending trade show events gives you face-to-face contact with your customers and/or distributors.
+		</div>
+	</div>
+</div>
+

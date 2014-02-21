@@ -1,0 +1,21 @@
+<% provide :title, "Small Business" %>
+<h1><%= image_tag("small_business.jpg", :height => 120, :width => 120) %></h1>
+
+<div>
+	<p>You know that social media is important.  Let's take a minute to make some plans to keep your customers up to date.</p>
+	<p><%= image_tag "twitter_icon.jpg", :height => 30, :width => 30 %>
+		<b><%= link_to "Twitter", 'add_twitter_stuff' %>:</b> Expect to broadcast text-based messages to your diverse audience. 
+		Not everyone tweets, but it is a good way to keep your own brand in front of your customers.  
+	</p>
+	<p>&nbsp;</p>
+		
+	<p>Will you be tweeting?</p>
+	<div style="width:200px;">
+		<p>
+		<%= button_to 'Yes!', { :action => :twitter_add, :biz => :small }, :class => "getGoingYesButton" %>
+		<%= button_to 'Maybe later', { :action => :facebook_add, :biz => :small }, :class => "getGoingNoButton" %>
+		</p>
+	</div>
+
+</div>
+

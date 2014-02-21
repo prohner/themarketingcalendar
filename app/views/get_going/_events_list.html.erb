@@ -1,0 +1,12 @@
+
+	<% @events.each do |event| %>
+		<div class="get-going-event">
+			<div class="get-going-event-description">
+				<%= event.description %>
+				<div class="get-going-event-date">
+					<%= event.humanize_date %>
+				</div>
+			</div>
+			
+		</div>
+	<% end %>

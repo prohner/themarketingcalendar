@@ -31,7 +31,7 @@ class Event < ActiveRecord::Base
   has_many :users, :through => :stakeholders
 
   def self.list_of_repetition_type_options
-    ["none", "weekly", "monthly"]
+    [:none, :weekly, :monthly]
   end
   
   validates :description, 
@@ -63,7 +63,7 @@ class Event < ActiveRecord::Base
   end
   
   def repeating_event?
-    self.repetition_type == "none" ? false : true
+    self.repetition_type == :none ? false : true
   end
   
   def number_of_days_until_event_starts(comparison_date = nil)
@@ -73,6 +73,15 @@ class Event < ActiveRecord::Base
   
   def repetition_type=(new_repetition_type)
     super new_repetition_type.nil? ? nil : new_repetition_type.to_s
+  end
+  
+  def repetition_type
+    rt = read_attribute(:repetition_type)
+    if rt.nil?
+      :none
+    else
+      rt.to_sym
+    end
   end
   
   # need to override the json view to return what full_calendar is expecting.
@@ -105,7 +114,7 @@ class Event < ActiveRecord::Base
     # puts "repetition type is #{self.repetition_type}"
     from_date = Time.at(from_date_as_int.to_i).to_formatted_s.to_date
     to_date   = Time.at(to_date_as_int.to_i).to_formatted_s.to_date
-    if repetition_type == "weekly"
+    if repetition_type == :weekly
       # puts "working in weekly from #{from_date} to #{to_date} (starts=#{starts_at}, ends=#{ends_at})"
       (from_date..to_date).each do |d|
         # puts "  checking #{d} - #{appears_on_day_of_weekly_repetition(d)}"
@@ -113,7 +122,7 @@ class Event < ActiveRecord::Base
           events << copy_of_self_for_one_day(d)
         end
       end
-    elsif repetition_type == "monthly"
+    elsif repetition_type == :monthly
       (from_date..to_date).each do |d|
         if appears_on_day_of_monthly_repetition(d)
           events << copy_of_self_for_one_day(d)
@@ -143,6 +152,18 @@ class Event < ActiveRecord::Base
   
   def explain
     "#{description}  #{starts_at}=>#{ends_at} (#{repetition_type})"
+  end
+  
+  def humanize_date
+    desc = explain
+    if self.repetition_type == :none
+      if starts_at == ends_at
+        desc = "On #{starts_at}"
+      else
+        desc = "From #{starts_at} to #{ends_at}"
+      end
+    end
+    desc
   end
   
   private
