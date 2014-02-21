@@ -57,7 +57,7 @@ class GetGoingController < ApplicationController
     when :direct_mail
       next_action = :trade_show_add
     when :trade_shows
-      next_action = :medium_biz
+      next_action = :easily
     end
     
     return events, category_symbol, next_action
@@ -213,7 +213,7 @@ class GetGoingController < ApplicationController
     @blurb = ""
     @kind_of_event = "Trade Show"
     @kind_of_event_icon = ""
-    @kind_of_event_description = "Attending trade show events gives you face-to-face contact with your customers and/or distributors.  If you're a hail fellow well met then get out and press the flesh!"
+    @kind_of_event_description = "Attending trade show events gives you face-to-face contact with your customers and/or distributors.  If you're a <a href='http://en.wikipedia.org/wiki/Hail_fellow_well_met' target='new'>hail fellow well met</a> then get out and press the flesh!".html_safe
     @no_events_message = "You do not have any trade show planned."
     
     render 'event_overview'
