@@ -3,7 +3,9 @@
 		<%= @blurb %>
 	</p>
 	<p class="description">
-		<%= image_tag @kind_of_event_icon, :height => 30, :width => 30 %>
+		<% if @kind_of_event_icon.length > 0 %>
+			<%= image_tag @kind_of_event_icon, :height => 30, :width => 30 %>
+		<% end %>
 		<%= @kind_of_event_description %>
 	</p>
 
