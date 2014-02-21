@@ -1,9 +1,6 @@
 TheMarketingCalendar::Application.routes.draw do
   get "get_going/start"
-  get "get_going/home_biz"
-  get "get_going/small_biz"
-  get "get_going/medium_biz"
-  get "get_going/large_biz"
+  get "get_going/easily"
   
   get "get_going/event_add"
   post "get_going/create_event"

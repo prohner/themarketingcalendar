@@ -1,16 +1,12 @@
 class GetGoingController < ApplicationController
+  include GetGoingHelper
+  
   before_action :authenticate_user! #, only: [:show, :edit, :update, :destroy]
 
   def start
   end
 
-  def home_biz
-  end
-
-  def small_biz
-  end
-
-  def medium_biz
+  def easily
     current_user.create_new_calendar_with_default_categories
     @event_counts = {
       :twitter => current_user.count_for_default_category(:twitter),
@@ -27,9 +23,6 @@ class GetGoingController < ApplicationController
       :direct_mail => current_user.count_for_default_category(:direct_mail),
       :trade_shows => current_user.count_for_default_category(:trade_shows)
     }
-  end
-
-  def large_biz
   end
   
   def parameters_for_category(category_symbol)
@@ -247,10 +240,10 @@ class GetGoingController < ApplicationController
     puts ""
     puts "repetition type = #{@event.repetition_type}"
     puts ""
-
+    
     respond_to do |format|
       if @event.save
-        format.html { redirect_to summary_page_for_category(:twitter), notice: 'Event was successfully created.' }
+        format.html { redirect_to summary_page_for_category(params[:event_type].to_sym), notice: 'Event was successfully created.' }
         format.json { render action: 'show', status: :created, location: @event }
       else
         puts ""
