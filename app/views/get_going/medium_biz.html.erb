@@ -64,13 +64,13 @@
 <div class="get-going-invitation">
 	There are a lot of ways to promote your business.  The high level summary below may look intimidating.
 	<br/>
-	<%= link_to "Let's make it easy by walking through the steps", get_going_twitter_add_path, class: "btn btn-large btn-primary" %>
+	<%= link_to "Let's make it easy by walking through the steps", summary_page_for_category(:twitter), class: "btn btn-large btn-primary" %>
 </div>
 <div class="category-group">
 	<h2>Social Media...everyone's talking about it!</h2>
 	<div class="category">
 		<div class="category-brand">
-			<%= image_tag "twitter_icon.jpg", :height => 16, :width => 16 %><%= link_to "Twitter", get_going_twitter_add_path %>
+			<%= image_tag "twitter_icon.jpg", :height => 16, :width => 16 %><%= link_to "Twitter", summary_page_for_category(:twitter) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:twitter], "event") %>
@@ -82,7 +82,7 @@
 
 	<div class="category">
 		<div class="category-brand">
-			<%= image_tag "facebook_icon.png", :height => 16, :width => 16 %><%= link_to "Facebook", 'add_twitter_stuff' %>
+			<%= image_tag "facebook_icon.png", :height => 16, :width => 16 %><%= link_to "Facebook", summary_page_for_category(:facebook) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:facebook], "event") %>
@@ -94,7 +94,7 @@
 
 	<div class="category">
 		<div class="category-brand">
-			<%= image_tag "google_plus_icon.jpg", :height => 16, :width => 16 %><%= link_to "Google+", 'add_twitter_stuff' %>
+			<%= image_tag "google_plus_icon.jpg", :height => 16, :width => 16 %><%= link_to "Google+", summary_page_for_category(:google_plus) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:google_plus], "event") %>
@@ -106,7 +106,7 @@
 
 	<div class="category">
 		<div class="category-brand">
-			<%= image_tag "instagram_icon.jpg", :height => 16, :width => 16 %><%= link_to "Instagram", 'add_twitter_stuff' %>
+			<%= image_tag "instagram_icon.jpg", :height => 16, :width => 16 %><%= link_to "Instagram", summary_page_for_category(:instagram) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:instagram], "event") %>
@@ -118,7 +118,7 @@
 
 	<div class="category">
 		<div class="category-brand">
-			<%= image_tag "pinterest_icon.jpg", :height => 16, :width => 16 %><%= link_to "Pinterest", 'add_twitter_stuff' %>
+			<%= image_tag "pinterest_icon.jpg", :height => 16, :width => 16 %><%= link_to "Pinterest", summary_page_for_category(:pinterest) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:pinterest], "event") %>
@@ -134,7 +134,7 @@
 	<h2>Advertising...pay for what you get</h2>
 	<div class="category">
 		<div class="category-brand">
-			<%= link_to "Search Engine", 'add_twitter_stuff' %>
+			<%= link_to "Search Engine", summary_page_for_category(:google_search) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:google_search], "event") %>
@@ -146,7 +146,7 @@
 
 	<div class="category">
 		<div class="category-brand">
-			<%= image_tag "facebook_icon.png", :height => 16, :width => 16 %><%= link_to "Facebook", 'add_twitter_stuff' %>
+			<%= image_tag "facebook_icon.png", :height => 16, :width => 16 %><%= link_to "Facebook", summary_page_for_category(:facebook_ads) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:facebook_ads], "event") %>
@@ -161,7 +161,7 @@
 	<h2>Search Engine Optimization...earn their attention</h2>
 	<div class="category">
 		<div class="category-brand">
-			<%= link_to "Blogging", 'add_twitter_stuff' %>
+			<%= link_to "Blogging", summary_page_for_category(:blogging) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:blogging], "event") %>
@@ -173,7 +173,7 @@
 
 	<div class="category">
 		<div class="category-brand">
-			<%= link_to "Podcasting", 'add_twitter_stuff' %>
+			<%= link_to "Podcasting", summary_page_for_category(:podcasting) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:podcasting], "event") %>
@@ -185,7 +185,7 @@
 
 	<div class="category">
 		<div class="category-brand">
-			<%= link_to "Webinars", 'add_twitter_stuff' %>
+			<%= link_to "Webinars", summary_page_for_category(:webinars) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:webinars], "event") %>
@@ -200,7 +200,7 @@
 	<h2>Direct Marketing...reach out directly</h2>
 	<div class="category">
 		<div class="category-brand">
-			<%= link_to "Email", 'add_twitter_stuff' %>
+			<%= link_to "Email", summary_page_for_category(:email) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:email], "event") %>
@@ -212,7 +212,7 @@
 
 	<div class="category">
 		<div class="category-brand">
-			<%= link_to "Direct Mail", 'add_twitter_stuff' %>
+			<%= link_to "Direct Mail", summary_page_for_category(:direct_mail) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:direct_mail], "event") %>
@@ -224,7 +224,7 @@
 
 	<div class="category">
 		<div class="category-brand">
-			<%= link_to "Trade Show Events", 'add_twitter_stuff' %>
+			<%= link_to "Trade Shows", summary_page_for_category(:trade_shows) %>
 		</div>
 		<div class="category-count">
 			<%= pluralize(@event_counts[:trade_shows], "event") %>

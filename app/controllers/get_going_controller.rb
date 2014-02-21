@@ -230,9 +230,9 @@ class GetGoingController < ApplicationController
     @event = Event.new
     
     unless params[:event_type].nil?
-      event_type = params[:event_type].to_sym
-      @event_type_text = User.default_categories_hash[event_type]
-      category = current_user.category_from_default_calendar(event_type)
+      @event_type = params[:event_type].to_sym
+      @event_type_text = User.default_categories_hash[@event_type]
+      category = current_user.category_from_default_calendar(@event_type)
       @category_id = category.id
     end
 
@@ -250,7 +250,7 @@ class GetGoingController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to get_going_twitter_add_path, notice: 'Event was successfully created.' }
+        format.html { redirect_to summary_page_for_category(:twitter), notice: 'Event was successfully created.' }
         format.json { render action: 'show', status: :created, location: @event }
       else
         puts ""

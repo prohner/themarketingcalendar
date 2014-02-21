@@ -11,5 +11,18 @@ require 'spec_helper'
 #   end
 # end
 describe GetGoingHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "#summary_page_for_category" do
+    it "should have a path for each symbol" do
+      User.default_categories_hash.keys.each do |k|
+        path = summary_page_for_category(k)
+        expect(path).not_to eq("")
+      end
+    end
+
+    it "should reject bad symbols" do
+      [:Xfacebook, :abc].each do |k|
+        expect { summary_page_for_category(k) }.to raise_error(RuntimeError, /not found/)
+      end
+    end
+  end
 end
