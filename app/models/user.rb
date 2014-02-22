@@ -269,7 +269,9 @@ class User < ActiveRecord::Base
         scheme = ColorScheme.create(name: "Graphite on cyan", background:"#06A2CB", foreground:"#192823")
       end
       
-      cat = Category.find_by_description(desc)
+      # cat = Category.find_by_description(desc)
+      cats = cal.categories.select { |cat| cat.description == desc }
+      cat = cats[0]
       if cat.nil?
         cal.categories << Category.create(description: desc, color_scheme: scheme)
       end

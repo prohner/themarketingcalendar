@@ -219,7 +219,7 @@ describe GetGoingController do
       get 'trade_show_add'
       expect(assigns(:events)).not_to be_nil
       expect(assigns(:event_type)).to eq(:trade_shows)
-      expect(assigns(:next_action)).to eq(:medium_biz)
+      expect(assigns(:next_action)).to eq(:easily)
 
       expect(assigns(:blurb)).not_to be_nil
       expect(assigns(:kind_of_event)).not_to be_nil
