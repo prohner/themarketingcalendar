@@ -233,7 +233,6 @@ class GetGoingController < ApplicationController
   
   def create_event
     @event = Event.new(event_params)
-    @event.repetition_type = :none
     
     puts ""
     puts @event.inspect
@@ -241,15 +240,17 @@ class GetGoingController < ApplicationController
     puts "repetition type = #{@event.repetition_type}"
     puts ""
     
+    event_type_description = User.default_categories_hash[params[:event_type].to_sym]
+    
     respond_to do |format|
       if @event.save
-        format.html { redirect_to summary_page_for_category(params[:event_type].to_sym), notice: 'Event was successfully created.' }
+        format.html { redirect_to summary_page_for_category(params[:event_type].to_sym), notice: "#{event_type_description} '#{@event.description}' event was successfully created." }
         format.json { render action: 'show', status: :created, location: @event }
       else
         puts ""
         puts @event.errors.inspect
         puts ""
-        format.html { redirect_to get_going_event_add_path(:event_type => params[:event_type]), error: 'Event could not be created.' }
+        format.html { redirect_to get_going_event_add_path(:event_type => params[:event_type]), error: "#{event_type_description} '#{@event.description}' event could not be created." }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
