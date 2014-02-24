@@ -56,9 +56,11 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
+        puts "SAVING and notes =(#{@event.notes})"
         format.html { redirect_to @event, notice: 'Event was successfully updated.' }
         format.json { render :json => @event }
       else
+        puts my_object.errors.full_messages
         format.html { render action: 'edit' }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
