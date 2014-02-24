@@ -1,3 +1,9 @@
+<style type="text/css" media="screen">
+td {
+	vertical-align: top;
+}
+</style>
+
 <p>Hello <%= @user.full_name %>,</p>
 
 <p>
@@ -27,7 +33,14 @@
 	<tr>
 		<td bgcolor="<%= event.category.color_scheme.background %>">&nbsp;</td>
 		<td><%= event.starts_at %></td>
-		<td><%= event.description %></td>
+		<td><%= event.description %>
+			<% unless event.notes.nil? %>
+			<br/>
+			<span style="color:#c0c0c0;">
+				<%= event.notes %>
+			</span>
+			<% end %>
+		</td>
 		<td align="center"><%= event.number_of_days_until_event_starts %></td>
     
 	</tr>

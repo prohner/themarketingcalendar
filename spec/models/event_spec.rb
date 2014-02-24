@@ -20,6 +20,7 @@
 #  repetition_options   :string(255)
 #  created_at           :datetime
 #  updated_at           :datetime
+#  notes                :string(255)
 #
 
 require 'spec_helper'
@@ -77,6 +78,11 @@ describe Event do
   
   it "should not allow descriptions that are too long" do
     ev = Event.new(attr.merge(:description => "a" * 151))
+    expect(ev).not_to be_valid
+  end
+  
+  it "should not allow notes that are too long" do
+    ev = Event.new(attr.merge(:notes => "a" * 251))
     expect(ev).not_to be_valid
   end
   

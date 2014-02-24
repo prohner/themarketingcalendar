@@ -20,6 +20,7 @@
 #  repetition_options   :string(255)
 #  created_at           :datetime
 #  updated_at           :datetime
+#  notes                :string(255)
 #
 
 class Event < ActiveRecord::Base
@@ -45,6 +46,8 @@ class Event < ActiveRecord::Base
   validates :repetition_type, 
             :presence   => true,
             :inclusion=> { :in => self.list_of_repetition_type_options }            
+  validates :notes, 
+            :length     => { :maximum => 250 }
 
   attr_accessor :edit_url
   

@@ -1,3 +1,9 @@
+<style type="text/css" media="screen">
+td {
+	vertical-align: top;
+}
+</style>
+
 <p>Hello <%= @user.full_name %>,</p>
 
 <p>This is your summary of events coming up in the next <%= pluralize(@look_ahead_days, "day") %> on The Marketing Calendar:</p>
@@ -14,7 +20,14 @@
 		<td align="center"><%= color_scheme_as_html_snippet_to_display(event.category.color_scheme) %></td>
 		<td nowrap><%= event.starts_at.strftime("%a, %b %e %Y") %></td>
 		<td nowrap><span style="color:#a0a0a0;"><%= event.ends_at.strftime("%a, %b %e %Y") %></span></td>
-		<td nowrap><%= event.description %></td>
+		<td nowrap><%= event.description %>
+			<% unless event.notes.nil? %>
+			<br/>
+			<span style="color:#c0c0c0;">
+				<%= event.notes %>
+			</span>
+			<% end %>
+		</td>
     
 	</tr>
 <% end %>
