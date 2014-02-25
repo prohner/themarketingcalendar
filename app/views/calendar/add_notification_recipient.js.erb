@@ -1,0 +1,5 @@
+<% if @saved_successfully %>
+	alert("An email alert for <%= @notification_recipient.event.description %> will be sent to <%= @notification_recipient.user.email %>.");
+<% else %>
+	alert("There was an error saving your request: <%= @notification_recipient.errors.full_messages.to_sentence %>.");
+<% end %>

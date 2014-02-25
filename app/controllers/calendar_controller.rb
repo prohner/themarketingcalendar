@@ -55,13 +55,11 @@ class CalendarController < ApplicationController
   end
   
   def add_notification_recipient
-    puts params.inspect
-    notification_recipient = NotificationRecipient.create(:user_id => current_user.id, :email => params[:email], :event_id => params[:event_id])
-    if notification_recipient.save
-      puts "Saved okay"
-    else
-      puts "Failed to save"
-      puts notification_recipient.errors.full_messages.to_sentence
+    @notification_recipient = NotificationRecipient.create(:user_id => current_user.id, :email => params[:email], :event_id => params[:event_id])
+    @saved_successfully = true
+    unless @notification_recipient.save
+      @saved_successfully = false
+      puts @notification_recipient.errors.full_messages.to_sentence
     end
   end
   

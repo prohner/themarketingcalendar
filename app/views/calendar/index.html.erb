@@ -78,7 +78,6 @@
 	
 	    contextMenu.on("submit", "form", function () {
 			var event_id = eventIdThatWasClicked.substr(9);
-			alert("submitting " + event_id);
 			$("#notification_form_event_id").val(event_id);
 			
 		});
@@ -102,7 +101,7 @@
         <li><a tabindex="-1" href="#">5 days before</a></li>
         <li><a tabindex="-1" href="#">7 days before</a></li>
         <li class="divider"></li>
-		<li role="presentation" class="dropdown-header">Email me an event alert to</li>
+		<li role="presentation" class="dropdown-header">Email an event alert to</li>
         <li>
 			<%= form_tag(notification_recipient_path, remote: true, id: :notification_form) do %>
 				<%= hidden_field_tag :event_id, "0", :id => :notification_form_event_id %>
