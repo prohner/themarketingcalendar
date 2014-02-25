@@ -66,5 +66,20 @@ class UserMailer < ActionMailer::Base
       mail(:to => email_with_name, :subject => subject)
     end
   end
+  
+  def daily_notification_recipients_email
+    subject = "Event Alert from The Marketing Calendar"
+    events = Event.all ##.before(2.days.from_now).after(Time.now)
+    events.each do |event|
+      event.notification_recipients.each do |recip|
+        @recipient = recip
+        recipient_email = @recipient.email
+        
+        recipient_email = 'preston@mscnet.com'
+        
+        mail(:to => recipient_email, :subject => subject)
+      end
+    end
+  end
 end
 

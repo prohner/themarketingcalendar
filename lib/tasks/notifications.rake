@@ -2,6 +2,7 @@ namespace :notifications do
   desc "Sends daily notifications to admins and users"
   task :send => :environment do
     UserMailer.daily_reminder.deliver
+    UserMailer.daily_notification_recipients_email.deliver
     
     ## this should be users who have requested a daily email summary
     User.all.each do |user|

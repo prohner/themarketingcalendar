@@ -1,0 +1,10 @@
+<p>
+	"<%= @recipient.event.description %>" is coming
+	up on <%= @recipient.event.starts_at %>.
+</p>
+
+<p>
+	You are receiving this email because <%= @recipient.user.email %>
+	requested that we send this to you.  The request was 
+	made <%= @recipient.created_at %>.
+</p>
