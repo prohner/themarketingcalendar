@@ -54,6 +54,17 @@ class CalendarController < ApplicationController
     Stakeholder.create(:event => event, :user => current_user, :reminder_notification_days => reminder_notification_days)
   end
   
+  def add_notification_recipient
+    puts params.inspect
+    notification_recipient = NotificationRecipient.create(:user_id => current_user.id, :email => params[:email], :event_id => params[:event_id])
+    if notification_recipient.save
+      puts "Saved okay"
+    else
+      puts "Failed to save"
+      puts notification_recipient.errors.full_messages.to_sentence
+    end
+  end
+  
   private
     def category_params
       params.require(:id)

@@ -30,6 +30,8 @@ class Event < ActiveRecord::Base
   belongs_to :category
   has_many :stakeholders
   has_many :users, :through => :stakeholders
+  has_many :notification_recipients
+  
 
   def self.list_of_repetition_type_options
     [:none, :weekly, :monthly]

@@ -76,6 +76,12 @@
 	        contextMenu.hide();
 	    });
 	
+	    contextMenu.on("submit", "form", function () {
+			var event_id = eventIdThatWasClicked.substr(9);
+			alert("submitting " + event_id);
+			$("#notification_form_event_id").val(event_id);
+			
+		});
 	});
 </script>
 
@@ -90,13 +96,22 @@
 
 <div id="contextMenu" class="dropdown clearfix">
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
-		<li role="presentation" class="dropdown-header">Email an event alert</li>
+		<li role="presentation" class="dropdown-header">Email me an event alert</li>
         <li><a tabindex="-1" href="#">1 day before </a></li>
         <li><a tabindex="-1" href="#">2 days before</a></li>
         <li><a tabindex="-1" href="#">5 days before</a></li>
         <li><a tabindex="-1" href="#">7 days before</a></li>
-        <!-- <li class="divider"></li>
-        <li><a tabindex="-1" href="#">Separated link</a></li> -->
+        <li class="divider"></li>
+		<li role="presentation" class="dropdown-header">Email me an event alert to</li>
+        <li>
+			<%= form_tag(notification_recipient_path, remote: true, id: :notification_form) do %>
+				<%= hidden_field_tag :event_id, "0", :id => :notification_form_event_id %>
+				<%= text_field_tag 'email', "", :size => 15, :class => "", :placeholder => "Enter an email address" %>
+				<%= submit_tag('Go', :class => "btn btn-xs btn-primary") %>
+			<% end %>
+		</li>
+
+
     </ul>
 </div>
 

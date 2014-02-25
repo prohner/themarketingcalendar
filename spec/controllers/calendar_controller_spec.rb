@@ -27,6 +27,25 @@ describe CalendarController do
       expect(subject).to redirect_to(new_user_session_path)
     end
   end
+  
+  it { should respond_to(:add_notification_recipient) }
+  describe "#add_notification_recipient" do
+    before(:each) do
+      @dave = FactoryGirl.create(:user_dave)
+      sign_in @dave
+      @recipient_info = { :email => 'new_addr@domain.com' }
+    end
+    
+    it "should create a new record" do
+      expect do
+        post 'add_notification_recipient', @recipient_info
+      end.to change { NotificationRecipient.count }.by 1
+      # expect {
+      #   post :create, {:user => valid_attributes}, valid_session
+      # }.to change(User, :count).by(1)
+      
+    end
+  end
 
   it { should respond_to(:stakeholder_interest) }
   # describe "#stakeholder_interest" do

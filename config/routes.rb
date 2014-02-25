@@ -45,6 +45,7 @@ TheMarketingCalendar::Application.routes.draw do
   match '/share-calendars',           to: 'calendar_share#share_calendars',         via: 'post'
   match '/share-calendars',           to: 'calendar_share#share_calendars_signup',  via: 'get'
   match '/calendar-reminder',         to: 'calendar#stakeholder_interest',          via: 'post'
+  match '/notification_recipient',    to: 'calendar#add_notification_recipient',    via: 'post'
   
   get "static_pages/home"
   get "static_pages/help"

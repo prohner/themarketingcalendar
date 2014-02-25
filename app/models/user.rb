@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   has_many :events, :through => :stakeholders
   has_many :category_groups
   has_many :hidden_category_flags
+  has_many :notification_recipients
   
   has_many :shares, :foreign_key => 'owner_id', :class_name => "Share"
   has_many :partners, :foreign_key => 'partner_id', :class_name => "Share"
