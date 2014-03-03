@@ -22,6 +22,7 @@ doc/
 !app/views/uploads
 Capfile
 deploy.rb
+stripe.rb
 erd.pdf
 
 #ignore mailer
