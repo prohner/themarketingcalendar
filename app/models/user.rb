@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
          
   before_validation :default_values
   before_create :create_remember_token
+  after_create :create_a_customer
   
   has_many :stakeholders
   has_many :events, :through => :stakeholders
@@ -54,6 +55,35 @@ class User < ActiveRecord::Base
   validates_inclusion_of :email_summary_frequency, :in => [:none, :daily, :weekdays]
   
   validates :password, length: { minimum: 6 }
+  
+  attr_accessor :stripe_card_token
+  
+  def create_a_customer
+    puts ""
+    puts ""
+    puts "#create_a_customer #{self.stripe_card_token}"
+    puts ""
+    puts ""
+    token = self.stripe_card_token
+    customer = Stripe::Customer.create(
+      :card => token,
+      :plan => "regular_monthly",
+      :email => self.email
+      )
+      puts "#create_a_customer #{customer.inspect}"
+  end
+  
+  def save_with_payment
+    if valid?
+      customer = Stripe::Customer.create(description: email, plan: plan_id, card: stripe_card_token)
+      self.stripe_customer_token = customer.id
+      save!
+    end
+  rescue Stripe::InvalidRequestError => e
+    logger.error "Stripe error while creating customer: #{e.message}"
+    errors.add :base, "There was a problem with your credit card."
+    false
+  end
 
   def email_summary_frequency
     if read_attribute(:email_summary_frequency).nil?

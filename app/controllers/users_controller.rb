@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     # puts "creating #{user_params.inspect}"
 
     respond_to do |format|
-      if @user.save
+      if @user.save_with_payment
         sign_in @user
         flash[:success] = "Welcome!"
         

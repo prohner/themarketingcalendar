@@ -19,3 +19,4 @@
 //= require snap
 //= require categories
 //= require get_going
+//= require users

@@ -75,6 +75,6 @@ gem "font-awesome-rails"
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
-gem 'cancan'
+gem 'stripe'
 
 gem 'net-ssh', '2.6.5'

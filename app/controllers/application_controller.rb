@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(action) << :first_name
       devise_parameter_sanitizer.for(action) << :last_name
       devise_parameter_sanitizer.for(action) << :email_summary_frequency
+      devise_parameter_sanitizer.for(action) << :stripe_card_token
     end
   end
   
