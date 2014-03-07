@@ -2,12 +2,13 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-jQuery ->
+ready = ->
 	Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
 	subscription.setupForm()
 
 subscription =
 	setupForm: ->
+		# alert "setting up form"
 		$('#new_user').submit ->
 			$('input[type=submit]').attr('disabled', true)
 			# alert "submitting form"
@@ -36,3 +37,6 @@ subscription =
 			alert response.error.message
 			$('#stripe_error').text(response.error.message)
 			$('input[type=submit]').attr('disabled', false)
+			
+$(document).ready(ready)
+$(document).on('page:load', ready)
