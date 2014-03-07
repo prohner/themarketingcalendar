@@ -76,5 +76,6 @@ gem "font-awesome-rails"
 
 gem 'devise'
 gem 'stripe'
+gem 'cancan'
 
 gem 'net-ssh', '2.6.5'
