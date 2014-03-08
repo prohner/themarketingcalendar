@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  include ApplicationHelper
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # before_action :verify_user_is_signed_in_or_redirect #, only: [:show, :edit, :update, :destroy]
@@ -61,6 +62,17 @@ class CategoriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to categories_url }
       format.json { head :no_content }
+    end
+  end
+  
+  def color_sample
+    color_scheme = ColorScheme.find(params[:color_scheme_id])
+    s = {
+      :example => color_scheme_as_html_snippet_to_display(color_scheme),
+      :name => color_scheme.name
+    }
+    respond_to do |format|
+      format.json { render json: s }
     end
   end
 

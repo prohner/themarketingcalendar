@@ -52,6 +52,8 @@ TheMarketingCalendar::Application.routes.draw do
   get "static_pages/about"
   get "static_pages/contact"
 
+  match '/get_color_sample',    to: 'categories#color_sample',    via: 'get'
+
   resources :events
 
   resources :categories

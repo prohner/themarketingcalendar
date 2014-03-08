@@ -24,16 +24,23 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :color %><br>
-	<%= collection_select(:category, :color_scheme_id, ColorScheme.all, :id, :name, 
-		{prompt: false},
-		{:onChange => "editCategoryColorSchemeChange(this);"}) 
-	%>
+		<%= f.label :color %><br>
+		<%= collection_select(:category, :color_scheme_id, ColorScheme.all, :id, :name, 
+			{prompt: false},
+			{:onChange => "editCategoryColorSchemeChange(this);"}) 
+		%>
 	
-	<% unless @category.color_scheme.nil? %>
-		<%= color_scheme_as_html_snippet_to_display(@category.color_scheme) %>
-		<span id="editCategoryColorSchemeExample"><%= @category.color_scheme.name %></span>
-	<% end %>
+	
+		<span id="editCategoryColorSchemeExample">
+			<% unless @category.color_scheme.nil? %>
+				<%= color_scheme_as_html_snippet_to_display(@category.color_scheme) %>
+			<% end %>
+		</span>
+		<span id="editCategoryColorSchemeName">
+			<% unless @category.color_scheme.nil? %>
+				<%= @category.color_scheme.name %>
+			<% end %>
+		</span>
   </div>
   <div class="actions">
     <%= f.submit %>

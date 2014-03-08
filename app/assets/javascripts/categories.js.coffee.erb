@@ -13,4 +13,19 @@
 		name = "<%= cs.name %>"
 	<% end %>
 	
-	$("#editCategoryColorSchemeExample").html name
+	# $("#editCategoryColorSchemeExample").html name
+
+	# $.getJSON "/get_color_sample.js",  (data) ->
+	# 	console.log data
+	# 	alert data 
+
+
+	$.ajax "/get_color_sample.json", 
+		type: "GET"
+		data: {"color_scheme_id" : obj.options[obj.selectedIndex].value}
+		# dataType: "json"
+		success: (data) ->
+			$("#editCategoryColorSchemeExample").html data.example
+			$("#editCategoryColorSchemeName").html data.name
+		error: (jqXHR, textStatus, errorThrown) ->
+        	alert "error " + errorThrown
