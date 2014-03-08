@@ -59,24 +59,29 @@ class User < ActiveRecord::Base
   attr_accessor :stripe_card_token
   
   def create_a_customer
-    puts ""
-    puts ""
-    puts "#create_a_customer #{self.stripe_card_token}"
-    puts ""
-    puts ""
-    token = self.stripe_card_token
-    customer = Stripe::Customer.create(
-      :card => token,
-      :plan => "regular_monthly",
-      :email => self.email
-      )
-      puts "#create_a_customer #{customer.inspect}"
+    unless Rails.env.test?
+      # puts ""
+      # puts ""
+      # puts "#create_a_customer #{self.stripe_card_token}"
+      # puts ""
+      # puts ""
+      token = self.stripe_card_token
+    
+      customer = Stripe::Customer.create(
+        :card => token,
+        :plan => "regular_monthly",
+        :email => self.email
+        )
+        # puts "#create_a_customer #{customer.inspect}"
+    end
   end
   
   def save_with_payment
     if valid?
-      customer = Stripe::Customer.create(description: email, plan: plan_id, card: stripe_card_token)
-      self.stripe_customer_token = customer.id
+      unless Rails.env.test?
+        customer = Stripe::Customer.create(description: email, plan: plan_id, card: stripe_card_token)
+        self.stripe_customer_token = customer.id
+      end
       save!
     end
   rescue Stripe::InvalidRequestError => e
