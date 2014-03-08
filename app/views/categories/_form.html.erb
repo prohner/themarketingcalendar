@@ -30,7 +30,6 @@
 			{:onChange => "editCategoryColorSchemeChange(this);"}) 
 		%>
 	
-	
 		<span id="editCategoryColorSchemeExample">
 			<% unless @category.color_scheme.nil? %>
 				<%= color_scheme_as_html_snippet_to_display(@category.color_scheme) %>

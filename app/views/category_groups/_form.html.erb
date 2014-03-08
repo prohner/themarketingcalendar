@@ -17,12 +17,22 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :color %><br>
-	<%= collection_select(:category_group, :color_scheme_id, ColorScheme.all, :id, :name, 
-		{prompt: false},
-		{:onChange => "editCategoryColorSchemeChange(this);"}) 
-	%>
-	<span id="editCategoryColorSchemeExample"></span>
+		<%= f.label :color %><br>
+		<%= collection_select(:category_group, :color_scheme_id, ColorScheme.all, :id, :name, 
+			{prompt: false},
+			{:onChange => "editCategoryColorSchemeChange(this);"}) 
+		%>
+
+		<span id="editCategoryColorSchemeExample">
+			<% unless @category_group.color_scheme.nil? %>
+				<%= color_scheme_as_html_snippet_to_display(@category_group.color_scheme) %>
+			<% end %>
+		</span>
+		<span id="editCategoryColorSchemeName">
+			<% unless @category_group.color_scheme.nil? %>
+				<%= @category_group.color_scheme.name %>
+			<% end %>
+		</span>
   </div>
 
   <div class="actions">

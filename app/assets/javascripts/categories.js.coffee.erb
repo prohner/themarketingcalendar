@@ -3,23 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 @editCategoryColorSchemeChange = (obj) ->
-	foreground = "black"
-	background = "white"
-	name = "Default"
-	<% ColorScheme.all.each do |cs| %>
-	if obj.options[obj.selectedIndex].value == "<%= cs.id %>"
-		foreground = "<%= cs.foreground %>"
-		background = "<%= cs.background %>"
-		name = "<%= cs.name %>"
-	<% end %>
-	
-	# $("#editCategoryColorSchemeExample").html name
-
-	# $.getJSON "/get_color_sample.js",  (data) ->
-	# 	console.log data
-	# 	alert data 
-
-
 	$.ajax "/get_color_sample.json", 
 		type: "GET"
 		data: {"color_scheme_id" : obj.options[obj.selectedIndex].value}
