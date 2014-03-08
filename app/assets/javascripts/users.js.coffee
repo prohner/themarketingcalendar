@@ -16,7 +16,7 @@ subscription =
 				subscription.processCard()
 				false
 			else
-				alert "couldn't find card number"
+				# alert "couldn't find card number"
 				true
 
 	processCard: ->
