@@ -32,6 +32,7 @@ GEM
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     builder (3.1.4)
+    cancan (1.6.10)
     capistrano (2.15.5)
       highline
       net-scp (>= 1.0.0)
@@ -221,6 +222,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (>= 2.6.0)
+  cancan
   capistrano (~> 2.15.5)
   capistrano-ext
   capybara
