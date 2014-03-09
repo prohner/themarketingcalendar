@@ -24,14 +24,10 @@
 		%>
 
 		<span id="editCategoryColorSchemeExample">
-			<% unless @category_group.color_scheme.nil? %>
-				<%= color_scheme_as_html_snippet_to_display(@category_group.color_scheme) %>
-			<% end %>
+			<%= color_scheme_as_html_snippet_to_display(@color_scheme) %>
 		</span>
 		<span id="editCategoryColorSchemeName">
-			<% unless @category_group.color_scheme.nil? %>
-				<%= @category_group.color_scheme.name %>
-			<% end %>
+			<%= @color_scheme.name %>
 		</span>
   </div>
 

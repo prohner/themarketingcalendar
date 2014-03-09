@@ -16,10 +16,17 @@ class CategoryGroupsController < ApplicationController
   # GET /category_groups/new
   def new
     @category_group = CategoryGroup.new
+    @color_scheme = ColorScheme.all.first
   end
 
   # GET /category_groups/1/edit
   def edit
+    puts "#{@category_group.inspect}"
+    if @category_group.color_scheme_id.nil?
+      @color_scheme = ColorScheme.all.first
+    else
+      @color_scheme = ColorScheme.find(@category_group.color_scheme_id)
+    end
   end
 
   # POST /category_groups

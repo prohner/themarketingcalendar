@@ -57,6 +57,35 @@ describe CategoryGroupsController do
     end
   end
   
+  describe "GET new" do
+    before(:each) do
+      FactoryGirl.create(:color_scheme)
+      sign_in FactoryGirl.create(:user)
+    end
+
+    it "assigns a new category_group as @category_group" do
+      get :new, {}, valid_session
+      expect(assigns(:category_group)).to be_an_instance_of(CategoryGroup)
+      expect(assigns(:color_scheme)).to be_an_instance_of(ColorScheme)
+    end
+  end
+  
+  
+  describe "GET edit" do
+    before(:each) do
+      FactoryGirl.create(:color_scheme)
+      sign_in FactoryGirl.create(:user)
+    end
+
+    it "assigns a new category_group as @category_group" do
+      category_group = CategoryGroup.create! valid_attributes
+      get :edit, {:id => category_group.to_param}, valid_session
+      
+      expect(assigns(:category_group)).to eq(category_group)
+      expect(assigns(:color_scheme)).to be_an_instance_of(ColorScheme)
+    end
+  end
+  
   # describe "GET new" do
   #   it "assigns a new category_group as @category_group" do
   #     get :new, {}, valid_session

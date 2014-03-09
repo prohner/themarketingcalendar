@@ -14,15 +14,18 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @color_scheme = ColorScheme.find(@category.color_scheme_id)
   end
 
   # GET /categories/new
   def new
     @category = Category.new
+    @color_scheme = ColorScheme.all.first
   end
 
   # GET /categories/1/edit
   def edit
+    @color_scheme = ColorScheme.find(@category.color_scheme_id)
   end
 
   # POST /categories

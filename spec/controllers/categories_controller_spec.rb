@@ -51,16 +51,32 @@ describe CategoriesController do
 
   describe "when signed in" do
     before(:each) do 
+      FactoryGirl.create(:color_scheme)
       @user = FactoryGirl.create(:user_dave)
       sign_in @user
     end
     
+    it "assigns category" do
+      category = Category.create! valid_attributes
+      get :show, {:id => category.to_param}, valid_session
+      expect(assigns(:category)).to eq(category)
+      expect(assigns(:color_scheme)).to be_an_instance_of(ColorScheme)
+    end
     it "assigns all categories as @categories"
     # it "assigns all categories as @categories" do
     #   category = Category.create valid_attributes
     #   get :index, {}, valid_session
     #   expect(assigns(:categories)).to eq([category])
     # end
+    
+    describe "GET new" do
+      it "assigns a new category as @category" do
+        get :new, {}, valid_session
+        expect(assigns(:category)).to be_an_instance_of(Category)
+        expect(assigns(:color_scheme)).to be_an_instance_of(ColorScheme)
+      end
+    end
+  
   end
 
   # describe "GET index" do
@@ -76,13 +92,6 @@ describe CategoriesController do
   #     category = Category.create! valid_attributes
   #     get :show, {:id => category.to_param}, valid_session
   #     assigns(:category).should eq(category)
-  #   end
-  # end
-  # 
-  # describe "GET new" do
-  #   it "assigns a new category as @category" do
-  #     get :new, {}, valid_session
-  #     assigns(:category).should be_a_new(Category)
   #   end
   # end
   # 

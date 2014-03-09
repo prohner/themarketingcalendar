@@ -31,14 +31,10 @@
 		%>
 	
 		<span id="editCategoryColorSchemeExample">
-			<% unless @category.color_scheme.nil? %>
-				<%= color_scheme_as_html_snippet_to_display(@category.color_scheme) %>
-			<% end %>
+			<%= color_scheme_as_html_snippet_to_display(@color_scheme) %>
 		</span>
 		<span id="editCategoryColorSchemeName">
-			<% unless @category.color_scheme.nil? %>
-				<%= @category.color_scheme.name %>
-			<% end %>
+			<%= @color_scheme.name %>
 		</span>
   </div>
   <div class="actions">
