@@ -198,6 +198,9 @@ presentPopover = (url, sourceObject, event) ->
 				if json_obj.repetition_type == "weekly" 
 					console.log "		REFETCHING EVENTS " + json_obj.repetition_type if debugging
 					$('#calendar').fullCalendar 'refetchEvents'
+				else if json_obj.repetition_type == "biweekly" 
+					console.log "		REFETCHING EVENTS " + json_obj.repetition_type if debugging
+					$('#calendar').fullCalendar 'refetchEvents'
 				else if is_new_event
 					event = { }
 					event = massAssignEvent event, json_obj
