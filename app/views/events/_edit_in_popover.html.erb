@@ -162,7 +162,7 @@
 		function updateDailyCheckboxes() {
 			var repetitionTypeDropDown = $('#event_repetition_type');
 			
-			if (repetitionTypeDropDown.attr('value') == "weekly") {
+			if (repetitionTypeDropDown.attr('value') == "weekly" || repetitionTypeDropDown.attr('value') == "biweekly") {
 				$("input.daily_checkbox").removeAttr("disabled");
 			} else {
 				$("input.daily_checkbox").attr("disabled", true);
