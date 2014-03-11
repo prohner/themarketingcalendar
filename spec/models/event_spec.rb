@@ -93,7 +93,7 @@ describe Event do
   
   describe "when changing repetition type" do
     it "should be valid with valid repetition types" do
-      [:weekly, :monthly, :none].each do |freq|
+      [:weekly, :biweekly, :monthly, :none].each do |freq|
         ev = Event.new(attr.merge(:repetition_type => freq))
         expect(ev).to be_valid
       end
@@ -121,7 +121,7 @@ describe Event do
   end
   
   it "should return the list of repetition types exactly correctly" do
-    expect(Event.list_of_repetition_type_options).to eq([:none, :weekly, :monthly])
+    expect(Event.list_of_repetition_type_options).to eq([:none, :weekly, :biweekly, :monthly])
   end
 
   describe "when building monthly events for timeframe" do
@@ -281,6 +281,87 @@ describe Event do
     end
   end
 
+  describe "when building biweekly events for timeframe" do
+    context "when handling a biweekly once-a-week event for Feb 2014" do
+      before(:each) do
+        @attr = { 
+          :description => "the description", 
+          :starts_at => Date.strptime("2/1/2014", "%m/%d/%Y"), 
+          :ends_at => Date.strptime("2/28/2014", "%m/%d/%Y"), 
+          :category => category, 
+          :repetition_type => :biweekly, 
+          :on_friday => true 
+        }
+  
+        @february_repeater = Event.new(@attr)
+        expect(@february_repeater).to be_valid
+        # @february_repeater.should be_valid
+  
+        from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
+        to_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
+        @events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      end
+    
+      it "should create the correct number of events for a subset of biweekly repeater timeframe" do
+        expect(@events.count).to eq(2)
+      end
+      
+      it "should create the correct dates for events for biweekly repeater timeframe" do
+        expect(@events[0].starts_at).to eq(Date.strptime("2/14/2014", "%m/%d/%Y"))
+        expect(@events[1].starts_at).to eq(Date.strptime("2/28/2014", "%m/%d/%Y"))
+      end
+      
+      it "should have each event set to one date" do
+        @events.each do |e|
+          expect(e.starts_at).to eq(e.ends_at)
+        end
+      end
+    end
+    
+    context "when handling a biweekly few-times-a-week event for Feb 2014" do
+      before(:each) do
+        @attr = { 
+          :description => "the description", 
+          :starts_at => Date.strptime("2/1/2014", "%m/%d/%Y"), 
+          :ends_at => Date.strptime("2/28/2014", "%m/%d/%Y"), 
+          :category => category, 
+          :repetition_type => :biweekly, 
+          :on_monday => true,
+          :on_wednesday => true,
+          :on_friday => true
+        }
+  
+        @february_repeater = Event.new(@attr)
+        expect(@february_repeater).to be_valid
+        # @february_repeater.should be_valid
+  
+        from_date_as_int = Date.strptime("2/1/2014", "%m/%d/%Y").to_time.to_i
+        to_date_as_int = Date.strptime("2/28/2014", "%m/%d/%Y").to_time.to_i
+        @events = @february_repeater.events_for_timeframe(from_date_as_int, to_date_as_int)
+      end
+    
+      it "should create the correct number of events for a subset of biweekly repeater timeframe" do
+        expect(@events.count).to eq(6)
+      end
+      
+      it "should create the correct dates for events for biweekly repeater timeframe" do
+        expect(@events[0].starts_at).to eq(Date.strptime("2/10/2014", "%m/%d/%Y"))
+        expect(@events[1].starts_at).to eq(Date.strptime("2/12/2014", "%m/%d/%Y"))
+        expect(@events[2].starts_at).to eq(Date.strptime("2/14/2014", "%m/%d/%Y"))
+        expect(@events[3].starts_at).to eq(Date.strptime("2/24/2014", "%m/%d/%Y"))
+        expect(@events[4].starts_at).to eq(Date.strptime("2/26/2014", "%m/%d/%Y"))
+        expect(@events[5].starts_at).to eq(Date.strptime("2/28/2014", "%m/%d/%Y"))
+      end
+      
+      it "should have each event set to one date" do
+        @events.each do |e|
+          expect(e.starts_at).to eq(e.ends_at)
+        end
+      end
+    end
+    
+  end
+  
   describe "#number_of_days_until_event_starts" do 
     it "should handle a single day into the future" do
       start_date = Date.today + 1.day

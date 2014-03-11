@@ -34,7 +34,7 @@ class Event < ActiveRecord::Base
   
 
   def self.list_of_repetition_type_options
-    [:none, :weekly, :monthly]
+    [:none, :weekly, :biweekly, :monthly]
   end
   
   validates :description, 
@@ -127,6 +127,12 @@ class Event < ActiveRecord::Base
           events << copy_of_self_for_one_day(d)
         end
       end
+    elsif repetition_type == :biweekly
+      (from_date..to_date).each do |d|
+        if appears_on_day_of_biweekly_repetition(d)
+          events << copy_of_self_for_one_day(d)
+        end
+      end
     elsif repetition_type == :monthly
       (from_date..to_date).each do |d|
         if appears_on_day_of_monthly_repetition(d)
@@ -189,6 +195,26 @@ class Event < ActiveRecord::Base
         # puts "checking #{day} between #{starts_at} and #{ends_at}"
         if (starts_at <= day and ends_at > day) or (starts_at < day and ends_at >= day)
           is_it_on_the_day = true
+        end
+      end
+      is_it_on_the_day
+    end
+
+    def appears_on_day_of_biweekly_repetition(day)
+      is_it_on_the_day = false
+      
+      week_number_of_start_date = starts_at.strftime("%U").to_i
+      week_number_of_test_date = day.strftime("%U").to_i
+      is_correct_week = ((week_number_of_test_date - week_number_of_start_date).abs % 2 == 0)
+      # puts "#{starts_at} is #{week_number_of_start_date}, #{day} is #{week_number_of_test_date} #{is_correct_week}"
+      
+      
+      if is_correct_week
+        if (day.wday == 0 and on_sunday) or (day.wday == 1 and on_monday) or (day.wday == 2 and on_tuesday) or (day.wday == 3 and on_wednesday) or (day.wday == 4 and on_thursday) or (day.wday == 5 and on_friday) or (day.wday == 6 and on_saturday)
+          # puts "checking #{day} between #{starts_at} and #{ends_at}"
+          if (starts_at <= day and ends_at > day) or (starts_at < day and ends_at >= day)
+            is_it_on_the_day = true
+          end
         end
       end
       is_it_on_the_day
