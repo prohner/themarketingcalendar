@@ -101,9 +101,6 @@ class User < ActiveRecord::Base
     write_attribute(:email_summary_frequency,value.to_s) 
   end
   
-  def self.status_options
-    ["new", "invited", "signed up", "expired"]
-  end
   
   def self.default_value_for_empty_name
     "tmc name tbd"
@@ -111,6 +108,10 @@ class User < ActiveRecord::Base
   
   def self.default_value_for_password
     "secret"
+  end
+  
+  def user_can_use_system
+    true
   end
   
   def role?(role)
@@ -127,14 +128,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  validates :status, 
-            :presence   => true,
-            :inclusion=> { :in => self.status_options }            
 
-  def user_can_use_system
-    status == "signed up"
-  end
-  
   def full_name
     f = ""
     l = ""
@@ -356,7 +350,6 @@ class User < ActiveRecord::Base
     def default_values
        self.email = email.downcase
        self.user_type ||= 1
-       self.status ||= 'new'
-       self.email_summary_frequency ||= :none
+      self.email_summary_frequency ||= :none
     end
 end
