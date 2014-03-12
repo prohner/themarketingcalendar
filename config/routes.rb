@@ -19,7 +19,9 @@ TheMarketingCalendar::Application.routes.draw do
   get "get_going/direct_mail_add"
   get "get_going/trade_show_add"
   
-  devise_for :users, path_names: { :sign_in => "login", :sign_out => "logout" }
+  # devise_for :users, path_names: { :sign_in => "login", :sign_out => "logout" }
+  devise_for :users, :controllers => { :registrations => "registrations" }
+  
   get "calendar_share/choose_calendar"
   get "calendar_share/choose_user"
 

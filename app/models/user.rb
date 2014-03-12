@@ -54,9 +54,19 @@ class User < ActiveRecord::Base
   validates_inclusion_of :user_type, :in => USER_TYPE_VALUES
   validates_inclusion_of :email_summary_frequency, :in => [:none, :daily, :weekdays]
   
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, :if => :should_validate_password?
   
   attr_accessor :stripe_card_token
+  attr_accessor :updating_without_password
+  
+  def should_validate_password?
+    # Flipping the attribute
+    if updating_without_password.nil?
+      true
+    else
+      ! updating_without_password
+    end
+  end
   
   def create_a_customer
     unless Rails.env.test?
