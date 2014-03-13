@@ -64,6 +64,7 @@ FactoryGirl.define do
     u.first_name            "DaveFirst"
     u.last_name             "DaveLast"
     u.sequence(:email)      { |n| "dave#{n}@example.com" }
+    u.user_type             "1"
     u.password              "foobar"
     u.password_confirmation "foobar"
 

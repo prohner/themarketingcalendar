@@ -128,7 +128,10 @@ class User < ActiveRecord::Base
     end
   end
 
-
+  def root?
+    user_type == 1
+  end
+  
   def full_name
     f = ""
     l = ""

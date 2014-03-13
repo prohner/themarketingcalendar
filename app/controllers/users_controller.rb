@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   # before_action :verify_user_is_signed_in_or_redirect, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :root_user, only: [:index, :show, :edit, :udpdate, :destroy]
   # GET /users
   # GET /users.json
   def index
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+   @user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -20,6 +21,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
   end
 
   # POST /users
@@ -59,7 +61,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted."
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
@@ -73,12 +76,33 @@ class UsersController < ApplicationController
     end
     
   end
+  
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    
     def set_user
       @user = User.find(params[:id])
     end
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
+    def root_user
+      user_is_a_root_user = false
+      if not current_user.nil? and current_user.root?
+        user_is_a_root_user = true
+      end
+      # redirect_to root_url , alert: "You are not permitted to perform this operation!" unless not current_user.nil? && current_user.root?
+      unless user_is_a_root_user
+        redirect_to root_path, alert: "You are not permitted to perform this operation!"
+      end
+      
+      user_is_a_root_user
+    end
+  
+    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
