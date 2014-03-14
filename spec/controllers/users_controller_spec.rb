@@ -32,10 +32,23 @@ describe UsersController do
   let(:valid_session) { {} }
 
   describe "GET index" do
-    it "assigns all users as @users" do
-      user = User.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:users)).to eq([user])
+    context "when signed in" do
+      before(:each) do
+        @user = FactoryGirl.create(:user_dave)
+        sign_in @user
+      end
+    
+      it "assigns all users as @users" do
+        get :index, {}, valid_session
+        expect(assigns(:users)).to eq([@user])
+      end
+    end
+    
+    context "when NOT signed in" do
+      it "assigns all users as @users" do
+        get :index, {}, valid_session
+        expect(response).to redirect_to(root_path)
+      end
     end
   end
 
