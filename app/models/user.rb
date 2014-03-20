@@ -11,7 +11,6 @@
 #  updated_at              :datetime
 #  password_digest         :string(255)
 #  remember_token          :string(255)
-#  status                  :string(255)
 #  encrypted_password      :string(255)      default(""), not null
 #  reset_password_token    :string(255)
 #  reset_password_sent_at  :datetime
@@ -22,6 +21,7 @@
 #  current_sign_in_ip      :string(255)
 #  last_sign_in_ip         :string(255)
 #  email_summary_frequency :string(255)
+#  stripe_customer_token   :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -58,6 +58,10 @@ class User < ActiveRecord::Base
   
   attr_accessor :stripe_card_token
   attr_accessor :updating_without_password
+  
+  def self.user_type_values
+    USER_TYPE_VALUES
+  end
   
   def should_validate_password?
     # Flipping the attribute

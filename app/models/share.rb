@@ -9,6 +9,7 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #  uuid              :string(255)
+#  user_type         :integer
 #
 
 class Share < ActiveRecord::Base
@@ -26,6 +27,8 @@ class Share < ActiveRecord::Base
   validates :uuid,
             :presence   => true
   validate :owner_is_different_from_partner
+
+  validates_inclusion_of :user_type, :in => User.user_type_values
   
   def owner_is_different_from_partner
     return if owner.nil? or partner.nil?

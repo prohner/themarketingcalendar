@@ -11,7 +11,6 @@
 #  updated_at              :datetime
 #  password_digest         :string(255)
 #  remember_token          :string(255)
-#  status                  :string(255)
 #  encrypted_password      :string(255)      default(""), not null
 #  reset_password_token    :string(255)
 #  reset_password_sent_at  :datetime
@@ -22,6 +21,7 @@
 #  current_sign_in_ip      :string(255)
 #  last_sign_in_ip         :string(255)
 #  email_summary_frequency :string(255)
+#  stripe_customer_token   :string(255)
 #
 
 require 'spec_helper'
@@ -314,7 +314,7 @@ describe User do
   context "when sharing category groups" do
     let(:dave) { FactoryGirl.create(:user_dave) }
     let(:bill) { FactoryGirl.create(:user_bill) }
-    let(:share) { Share.create(:owner => dave, :partner => bill, :category_group => dave.category_groups.first) }
+    let(:share) { Share.create(:owner => dave, :partner => bill, :category_group => dave.category_groups.first, :user_type => User.user_type_values[0]) }
     
     describe "#shares" do
       it "owner should have the share" do
@@ -344,8 +344,9 @@ describe User do
       
       
       it "should not return any duplicates" do
-        share2 = Share.create(:owner => dave, :partner => bill, :category_group => dave.category_groups.first)
-        
+        share2 = Share.create(:owner => dave, :partner => bill, :category_group => dave.category_groups.first, :user_type => User.user_type_values[0])
+
+        expect(share2).to be_valid
         expect(dave.shares).to match_array([share, share2])
         expect(bill.partners).to match_array([share, share2])
 
