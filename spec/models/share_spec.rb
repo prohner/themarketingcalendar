@@ -52,12 +52,14 @@ describe Share do
     expect(share).not_to be_valid
   end
   
-  it "should require a user type value" do
+  it "should require have a default user type value" do
     share = Share.create(:owner => dave, :partner => bill, :category_group => category_group)
-    expect(share).not_to be_valid
-    
-    share.user_type = User.user_type_values[0]
     expect(share).to be_valid
+  end
+  
+  it "should have the right default user_type" do
+    share = Share.create(:owner => dave, :partner => bill, :category_group => category_group)
+    share.user_type = User.default_user_type_for_shares
   end
   
 end

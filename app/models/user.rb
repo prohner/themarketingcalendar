@@ -63,6 +63,10 @@ class User < ActiveRecord::Base
     USER_TYPE_VALUES
   end
   
+  def self.default_user_type_for_shares
+    4
+  end
+  
   def should_validate_password?
     # Flipping the attribute
     if updating_without_password.nil?

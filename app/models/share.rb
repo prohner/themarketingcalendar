@@ -40,6 +40,7 @@ class Share < ActiveRecord::Base
   private
   def default_values
      self.uuid ||= SecureRandom.uuid
+     self.user_type ||= User.default_user_type_for_shares
   end
   
 end

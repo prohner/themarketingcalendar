@@ -35,7 +35,6 @@ class CalendarShareController < ApplicationController
             partner = User.create!(:email => email, 
                         :first_name => User.default_value_for_empty_name,
                         :last_name => User.default_value_for_empty_name, 
-                        :status => 'invited',
                         :password => User.default_value_for_password,
                         :password_confirmation => User.default_value_for_password)
           end
