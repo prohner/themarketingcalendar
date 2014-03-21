@@ -15,8 +15,8 @@ a:hover {
     <tr>
       <th>Calendar</th>
       <th>Colors</th>
-      <th>Shared Partners</th>
       <th colspan="2">Actions</th>
+      <th>Shared Partners</th>
     </tr>
   </thead>
 
@@ -25,16 +25,16 @@ a:hover {
       <tr>
         <td><%= category_group.description %></td>
         <td><%= color_scheme_as_html_snippet_to_display(category_group.color_scheme) %></td>
+        <td><%= link_to 'Edit', edit_category_group_path(category_group) %></td>
+        <td><%= link_to 'Destroy', category_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<td>
 			<% category_group.shares[0..0].each do |share| %>
 				<%= share.partner.full_name %> &nbsp;
 			<% end %>
-			<% if category_group.shares.count > 1 %>
-				<a href="#" class="calendar-shares" data-toggle="tooltip" title="<%= category_group.list_of_invited_partner_names.to_sentence %>">and others</a>
+			<% if category_group.list_of_invited_partner_names.uniq.count > 1 %>
+				<a href="#" class="calendar-shares" data-toggle="tooltip" title="<%= category_group.list_of_invited_partner_names.uniq.to_sentence %>">and others</a>
 			<% end %>
 		</td>
-        <td><%= link_to 'Edit', edit_category_group_path(category_group) %></td>
-        <td><%= link_to 'Destroy', category_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

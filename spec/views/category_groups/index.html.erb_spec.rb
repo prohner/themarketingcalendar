@@ -14,6 +14,7 @@ describe "category_groups/index" do
     @dave.shares << @share
     
     assign(:category_groups, [@calendar1, @calendar2])
+    assign(:share, [@share])
   end
 
   it "renders a list of category_groups" do
@@ -23,16 +24,18 @@ describe "category_groups/index" do
   
   describe "category groups list" do
     # it "should login and display successfully"
-    it "User views category groups page" do
+    
+    it "should have the right title" do
       visit "/category_groups"
       expect(page).to have_title "#{application_name} | Calendars"
-      
+    end
+    
+    it "User views category groups page" do
       render
 
       assert_select "tr>td", :text => "desc".to_s, :count => 2
-      # assert_select "tr>td", :text => "dave".to_s, :count => 1
+      expect(rendered).to match @bill.full_name
       
-      puts "* = * = * = * = * = * = * = * = * = * = * = * = DAVE"
       @dave.category_groups[0].shares.each do |share|
         puts share.partner.full_name
       end
