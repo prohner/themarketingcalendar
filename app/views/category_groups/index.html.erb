@@ -27,7 +27,7 @@ a:hover {
         <td><%= color_scheme_as_html_snippet_to_display(category_group.color_scheme) %></td>
 		<td>
 			<% category_group.shares[0..0].each do |share| %>
-				<%= share.partner.full_name %> (<%= share.partner.status %>)&nbsp;
+				<%= share.partner.full_name %> &nbsp;
 			<% end %>
 			<% if category_group.shares.count > 1 %>
 				<a href="#" class="calendar-shares" data-toggle="tooltip" title="<%= category_group.list_of_invited_partner_names.to_sentence %>">and others</a>
