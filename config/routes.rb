@@ -1,6 +1,4 @@
 TheMarketingCalendar::Application.routes.draw do
-  get "share/edit"
-  get "share/destroy"
   get "get_going/start"
   get "get_going/easily"
   
@@ -57,6 +55,8 @@ TheMarketingCalendar::Application.routes.draw do
   get "static_pages/contact"
 
   match '/get_color_sample',    to: 'categories#color_sample',    via: 'get'
+
+  resources :share
 
   resources :events
 
