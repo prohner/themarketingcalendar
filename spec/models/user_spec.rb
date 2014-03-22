@@ -510,4 +510,44 @@ describe User do
       end
     end
   end
+  
+  describe "#root?" do
+    it { should be_valid }
+
+    it "should answer true if user is root level" do
+      user.user_type = User.root_user_type_value
+      expect(user.root?).to be_true
+    end
+
+    it "should answer false if user is not root level" do
+      User.user_type_values.each do |val|
+        unless val == User.root_user_type_value
+          user.user_type = val
+          expect(user.root?).to be_false
+        end
+      end
+    end
+  end
+
+  describe "User.root_user_type_value" do
+    it "should have all of the values for a root user" do
+      user.user_type = User.root_user_type_value
+      expect(User.user_types_array_for_user(user).count).to eq(User.user_type_values.count)
+    end
+
+    it "should have all of the values minus 1 for an administrator user" do
+      user.user_type = 2
+      expect(User.user_types_array_for_user(user).count).to eq(User.user_type_values.count - 1)
+    end
+
+    it "should have all of the values minus 2 for an user user" do
+      user.user_type = 3
+      expect(User.user_types_array_for_user(user).count).to eq(User.user_type_values.count - 2)
+    end
+
+    it "should have all of the values minus 3 for an administrator user" do
+      user.user_type = 4
+      expect(User.user_types_array_for_user(user).count).to eq(User.user_type_values.count - 3)
+    end
+  end
 end
