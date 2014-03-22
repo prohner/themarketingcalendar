@@ -1,4 +1,6 @@
 TheMarketingCalendar::Application.routes.draw do
+  get "share/edit"
+  get "share/destroy"
   get "get_going/start"
   get "get_going/easily"
   

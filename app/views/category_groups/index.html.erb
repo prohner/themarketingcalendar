@@ -29,7 +29,7 @@ a:hover {
         <td><%= link_to 'Destroy', category_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 		<td>
 			<% category_group.shares[0..0].each do |share| %>
-				<%= share.partner.full_name %> &nbsp;
+				<%= link_to share.partner.full_name, share_edit_path(share) %> &nbsp;
 			<% end %>
 			<% if category_group.list_of_invited_partner_names.uniq.count > 1 %>
 				<a href="#" class="calendar-shares" data-toggle="tooltip" title="<%= category_group.list_of_invited_partner_names.uniq.to_sentence %>">and others</a>

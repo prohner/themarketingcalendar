@@ -35,10 +35,6 @@ describe "category_groups/index" do
 
       assert_select "tr>td", :text => "desc".to_s, :count => 2
       expect(rendered).to match @bill.full_name
-      
-      @dave.category_groups[0].shares.each do |share|
-        puts share.partner.full_name
-      end
     end
   end
   
