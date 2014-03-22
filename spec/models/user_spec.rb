@@ -509,4 +509,23 @@ describe User do
       end
     end
   end
+  
+  describe "#root?" do
+    it { should be_valid }
+
+    it "should answer true if user is root level" do
+      user.user_type = User.root_user_type_value
+      expect(user.root?).to be_true
+    end
+
+    it "should answer false if user is not root level" do
+      User.user_type_values.each do |val|
+        unless val == User.root_user_type_value
+          user.user_type = val
+          expect(user.root?).to be_false
+        end
+      end
+    end
+  end
+  
 end
