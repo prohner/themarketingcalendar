@@ -1,4 +1,27 @@
-<h1>Share#edit</h1>
-<p>Find me in app/views/share/edit.html.erb</p>
+<h1><%= @share.category_group.description %></h1>
 
+  <div class="row">
+	  <div class="span6 offset6">
+		<%= form_for(@share) do |f| %>
+
+			<%= render 'shared/error_messages' %>
+
+			<%= f.label "Owner" %>
+			<%= @share.owner.full_name %><br>
+
+			<%= f.label "Partner" %>
+			<%= @share.partner.full_name %><br>
+			
+			<%= select_tag('name',options_for_select(User.user_types_array_for_user(current_user))) %>
+			
+
+			<div class="actions">
+				<%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+			</div>
+		<% end %>
+	  </div>
+  </div>
+
+<br/>
 <%= @share.inspect %>
+

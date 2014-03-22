@@ -63,6 +63,11 @@ class User < ActiveRecord::Base
     USER_TYPE_VALUES
   end
   
+  def self.user_types_array_for_user(current_user)
+    ## Return only user types with same or lesser privilege
+    USER_TYPES.select { |elem| elem[1] > current_user.user_type }
+  end
+  
   def self.default_user_type_for_shares
     4
   end
