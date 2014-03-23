@@ -7,6 +7,9 @@ class ShareController < ApplicationController
 
   def destroy
     @share.destroy
+    respond_to do |format|
+      format.html { redirect_to category_groups_path, notice: "#{@share.partner.full_name} no longer has access to #{@share.category_group.description}." }
+    end
   end
   
   def update

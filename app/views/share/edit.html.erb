@@ -18,6 +18,9 @@
 
 			<div class="actions">
 				<%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+				&nbsp; &nbsp; &nbsp; &nbsp; 
+				<%= link_to "Delete this share", share_path(@share), method: :delete, data: { confirm: "Are you certain you want to remove #{@share.partner.full_name}'s access to #{@share.category_group.description}?" } %>
+				
 			</div>
 		<% end %>
 	  </div>
