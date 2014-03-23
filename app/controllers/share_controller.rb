@@ -9,6 +9,20 @@ class ShareController < ApplicationController
     @share.destroy
   end
   
+  def update
+    @share.user_type = params[:share][:user_type]
+    puts @share.inspect
+    respond_to do |format|
+      if @share.save
+        format.html { redirect_to category_groups_path, notice: "#{@share.partner.full_name} is now #{User.description_for_user_type(@share.user_type)} on #{@share.category_group.description}." }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @share.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
   def signed_in
     unless not current_user.nil? and current_user.id == @share.owner_id
       redirect_to signin_path
@@ -21,6 +35,6 @@ class ShareController < ApplicationController
     end
   
     def user_params
-      params.require(:share).permit(:id)
+      params.require(:share).permit(:id, :user_type)
     end
 end

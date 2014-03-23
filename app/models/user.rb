@@ -181,7 +181,11 @@ class User < ActiveRecord::Base
   end
   
   def user_type_description
-    case self.user_type
+    User.description_for_user_type(self.user_type)
+  end
+  
+  def self.description_for_user_type(user_type)
+    case user_type
     when 1
       "Root"
     when 2

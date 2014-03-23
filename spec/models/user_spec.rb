@@ -99,10 +99,19 @@ describe User do
   end
   
   describe "when user type is valid" do
-    it "should have a description" do
+    it "should have a description for every value" do
       User::USER_TYPE_VALUES.each do |type|
         user.user_type = type
         expect(user.user_type_description).not_to be_nil
+      end
+    end
+
+  end
+  
+  describe "User.description_for_user_type" do
+    it "should have a description for every value" do
+      User::USER_TYPE_VALUES.each do |type|
+        expect(User.description_for_user_type(type)).not_to be_nil
       end
     end
   end

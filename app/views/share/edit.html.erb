@@ -1,7 +1,9 @@
+<% provide(:title, "Update Share") %>
+
 <h1><%= @share.category_group.description %></h1>
 
-  <div class="row">
-	  <div class="span6 offset6">
+  <div class="container">
+	  <div class="">
 		<%= form_for(@share) do |f| %>
 
 			<%= render 'shared/error_messages' %>
@@ -12,8 +14,7 @@
 			<%= f.label "Partner" %>
 			<%= @share.partner.full_name %><br>
 			
-			<%= select_tag('name',options_for_select(User.user_types_array_for_user(current_user))) %>
-			
+			<%= f.select(:user_type, User.user_types_array_for_user(current_user)) %>
 
 			<div class="actions">
 				<%= f.submit "Save changes", class: "btn btn-large btn-primary" %>

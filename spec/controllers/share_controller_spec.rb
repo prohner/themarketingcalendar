@@ -32,6 +32,15 @@ describe ShareController do
       end
     end
   end
+  
+  describe "#update" do
+    context "when NOT logged in" do
+      it "redirects" do
+        post 'update', :id => @share.id
+        expect(response).to redirect_to(signin_path)
+      end
+    end
+  end
 
   describe "GET 'destroy'" do
     context "when NOT logged in" do
