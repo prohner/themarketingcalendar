@@ -42,6 +42,7 @@ FactoryGirl.define do
     email                 "bill@example.com"
     password              "foobar"
     password_confirmation "foobar"
+    user_type             2
   end
 
   factory :user_bill_skeleton, class: User do |u|

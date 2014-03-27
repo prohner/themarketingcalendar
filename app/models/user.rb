@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
     1
   end
 
+  def self.administrator_user_type_value
+    2
+  end
+
   def self.user_types_array_for_user(current_user)
     ## Return only user types with same or lesser privilege
     USER_TYPES.select { |elem| elem[1] >= current_user.user_type }
@@ -383,7 +387,7 @@ class User < ActiveRecord::Base
 
     def default_values
        self.email = email.downcase
-       self.user_type ||= 1
+       self.user_type ||= 2#User.administrator_user_type_value
       self.email_summary_frequency ||= :none
     end
 end

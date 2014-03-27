@@ -10,4 +10,16 @@ module ApplicationHelper
       "<span style=\"background-color:#{color_scheme.background};color:#{color_scheme.foreground};\" data-toggle=\"tooltip\" title=\"#{color_scheme.name}\">&#9733;</span>".html_safe
     end
   end
+  
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end  
 end

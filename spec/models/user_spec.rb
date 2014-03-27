@@ -88,31 +88,46 @@ describe User do
     it { should_not be_valid }
   end
   
-  describe "when user type is invalid" do
-    it "should be invalid" do
-      invalid_types = %w[0 5 -1]
-      invalid_types.each do |bad_type|
-        user.user_type = bad_type
-        expect(user).not_to be_valid
-      end
-    end
-  end
-  
-  describe "when user type is valid" do
-    it "should have a description for every value" do
-      User::USER_TYPE_VALUES.each do |type|
-        user.user_type = type
-        expect(user.user_type_description).not_to be_nil
+  describe "user_type" do
+    context "when user type is invalid" do
+      it "should be invalid" do
+        invalid_types = %w[0 5 -1]
+        invalid_types.each do |bad_type|
+          user.user_type = bad_type
+          expect(user).not_to be_valid
+        end
       end
     end
 
-  end
-  
-  describe "User.description_for_user_type" do
+    context "when user type is valid" do
+      it "should have a description for every value" do
+        User::USER_TYPE_VALUES.each do |type|
+          user.user_type = type
+          expect(user.user_type_description).not_to be_nil
+        end
+      end
+    end
+
     it "should have a description for every value" do
       User::USER_TYPE_VALUES.each do |type|
         expect(User.description_for_user_type(type)).not_to be_nil
       end
+    end
+    
+    context "user_type defaults" do
+      describe "User.administrator_user_type_value" do
+        it "should respond with the right value" do
+          user.user_type = User.administrator_user_type_value
+          expect(user.role?(:administrator)).to be_true
+        end
+      end
+    end
+    
+    it "default user type to administrator" do
+      user = User.new(first_name: "a", last_name: "b", email: "user@example.com", password: "123456", password_confirmation: "123456")
+      expect(user).to be_valid
+      
+      expect(user.role?(:administrator)).to be_true
     end
   end
   
@@ -431,12 +446,12 @@ describe User do
       expect(user.role?(:administrator)).to be_true
     end
     
-    it "should respond correctly about each user type: administrator" do
+    it "should respond correctly about each user type: user" do
       user.user_type = 3
       expect(user.role?(:user)).to be_true
     end
     
-    it "should respond correctly about each user type: administrator" do
+    it "should respond correctly about each user type: viewer" do
       user.user_type = 4
       expect(user.role?(:viewer)).to be_true
     end

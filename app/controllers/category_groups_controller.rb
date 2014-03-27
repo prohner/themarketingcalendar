@@ -21,7 +21,7 @@ class CategoryGroupsController < ApplicationController
 
   # GET /category_groups/1/edit
   def edit
-    puts "#{@category_group.inspect}"
+    # puts "#{@category_group.inspect}"
     if @category_group.color_scheme_id.nil?
       @color_scheme = ColorScheme.all.first
     else
