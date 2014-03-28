@@ -1,14 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
   def update
     @user = User.find(current_user.id)
-    puts ""
-    puts ""
-    puts "        DOING IT #{needs_password?(@user, params)} "
-    puts ""
-    puts ""
+    # puts ""
+    # puts ""
+    # puts "        DOING IT #{needs_password?(@user, params)} "
+    # puts ""
+    # puts ""
 
     @user.updating_without_password = ! needs_password?(@user, params)
-    puts "        updating without = #{@user.updating_without_password} "
+    # puts "        updating without = #{@user.updating_without_password} "
     
     successfully_updated = if needs_password?(@user, params)
       @user.update_with_password(devise_parameter_sanitizer.sanitize(:account_update))
