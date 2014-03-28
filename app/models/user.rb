@@ -387,7 +387,7 @@ class User < ActiveRecord::Base
 
     def default_values
        self.email = email.downcase
-       self.user_type ||= 2#User.administrator_user_type_value
+       self.user_type ||= User.administrator_user_type_value
       self.email_summary_frequency ||= :none
     end
 end
