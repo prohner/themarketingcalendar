@@ -4,8 +4,10 @@ class CalendarController < ApplicationController
   def index
     @event = Event.new
     # @categories = current_user.all_categories
+    puts "IN THE INDEX METHOD"
     puts current_user.inspect
     @calendars = current_user.all_category_groups
+    puts @calendars.inspect
   end
 
   def events

@@ -23,7 +23,7 @@
 	});
 	// toggleSnap();
 
-	<% current_user.hidden_category_flags.each do |hcf| %>
+	<% current_user.hidden_category_group_flags.each do |hcf| %>
 		toggleCalendarFilterCategory(<%= hcf.category_id %>);
 	<% end %>
 	
@@ -179,7 +179,7 @@ input {
 					<h4 class="panel-title">Checked Calendars Are Visible</h4>
 					<div class="panel-body">
 						
-  					  <% @calendars.each do |calendar| %>
+					<% @calendars.each do |calendar| %>
 						<div class="control-group form-group" style="margin:0; margin-left:-15px;">
 							<%= check_box_tag "calendar-#{calendar.id}", calendar.id, true, :onclick => "toggleCalendar_#{calendar.id}();", :style => "width:13px" %>
 							<%= calendar.description %>
@@ -194,24 +194,7 @@ input {
 							}
 							</script>
 						</div>
-						<% if true %>
-							<% calendar.categories.each do |category| %>
-								<div class="control-group form-group" style="margin:0; margin-left:5px;">
-									<div class="controls">
-
-										<label class="checkbox inline" style="font-weight:normal;">
-											<%= check_box_tag "category-#{category.id}", category.id, current_user.wants_to_see_category(category), :onclick => "toggleCalendarFilterCategory(#{category.id});", :style => "width:13px" %>
-											&nbsp; &nbsp;
-											<%= color_scheme_as_html_snippet_to_display(category.color_scheme) %>
-											<%= category.description %> 
-											<!-- <span class="badge pull-right"><%= category.events.count %></span> -->
-										</label>
-									</div>
-								</div>
-							<% end %>
-	    				<% end %>
-
-  					  <% end %>
+					<% end %>
 					</div>
 				</div>
 		    </div>

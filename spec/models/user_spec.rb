@@ -42,8 +42,8 @@ describe User do
   it { should respond_to(:all_events) }
   it { should respond_to(:all_events_in_timeframe) }
   it { should respond_to(:all_categories) }
-  it { should respond_to(:wants_to_see_category) }
-  it { should respond_to(:toggle_viewing_category) }
+  it { should respond_to(:wants_to_see_category_group) }
+  it { should respond_to(:toggle_viewing_category_group) }
   it { should respond_to(:shares) }
   it { should respond_to(:partners) }
   it { should respond_to(:user_can_use_system) }
@@ -264,39 +264,39 @@ describe User do
     end
   end
   
-  describe "wants_to_see_category" do
+  describe "#wants_to_see_category_group" do
     before(:each) do
       @dave = FactoryGirl.create(:user_dave)
-      @category_to_see  = @dave.category_groups.first.categories.first
-      @category_to_hide = @dave.category_groups.last.categories.last
+      @category_group_to_see  = @dave.category_groups.first
+      @category_group_to_hide = @dave.category_groups.last
     end
     
-    it "should want to see a category by default" do
-      expect(@dave.wants_to_see_category(@category_to_hide)).to eq(true)
-      expect(@dave.wants_to_see_category(@category_to_see)).to eq(true)
+    it "should want to see a category group by default" do
+      expect(@dave.wants_to_see_category_group(@category_group_to_hide)).to eq(true)
+      expect(@dave.wants_to_see_category_group(@category_group_to_see)).to eq(true)
     end
   
     it "should answer correctly that category should be hidden" do
-      hcf = HiddenCategoryFlag.create(:user => @dave, :category => @category_to_hide)
-      expect(@dave.wants_to_see_category(@category_to_hide)).to eq(false)
+      hcf = HiddenCategoryGroupFlag.create(:user => @dave, :category_group => @category_group_to_hide)
+      expect(@dave.wants_to_see_category_group(@category_group_to_hide)).to eq(false)
     end
     
     it "should answer correctly that category should be hidden" do
-      hcf = HiddenCategoryFlag.create(:user => @dave, :category => @category_to_hide)
-      expect(@dave.wants_to_see_category(@category_to_see)).to eq(true)
+      hcf = HiddenCategoryGroupFlag.create(:user => @dave, :category_group => @category_group_to_hide)
+      expect(@dave.wants_to_see_category_group(@category_group_to_see)).to eq(true)
     end
   end
   
   describe "toggle_viewing_category" do
     before(:each) do
       @dave = FactoryGirl.create(:user_dave)
-      @category  = @dave.category_groups.first.categories.first
-      @category2 = @dave.category_groups.last.categories.last
+      @category_group  = @dave.category_groups.first
+      @category_group2 = @dave.category_groups.last
     end
     
     it "should toggle a category" do
-      @dave.toggle_viewing_category(@category)
-      expect(@dave.wants_to_see_category(@category)).to eq(false)
+      @dave.toggle_viewing_category_group(@category_group)
+      expect(@dave.wants_to_see_category_group(@category_group)).to eq(false)
   
       # destroy in the toggle_viewing_category doesn't seem to take effect in test environment
       # @dave.hidden_category_flags.reload
@@ -304,11 +304,11 @@ describe User do
       # @dave.wants_to_see_category(@category).should == true
     end
   
-    it "should work when toggling multiple categories" do
-      @dave.toggle_viewing_category(@category)
-      @dave.toggle_viewing_category(@category2)
-      expect(@dave.wants_to_see_category(@category)).to eq(false)
-      expect(@dave.wants_to_see_category(@category2)).to eq(false)
+    it "should work when toggling multiple category groups" do
+      @dave.toggle_viewing_category_group(@category_group)
+      @dave.toggle_viewing_category_group(@category_group2)
+      expect(@dave.wants_to_see_category_group(@category_group)).to eq(false)
+      expect(@dave.wants_to_see_category_group(@category_group2)).to eq(false)
     end
   end
 

@@ -26,7 +26,9 @@ describe "category_groups/index" do
     # it "should login and display successfully"
     
     it "should have the right title" do
+      # sign_in @dave
       visit "/category_groups"
+      render
       expect(page).to have_title "#{application_name} | Calendars"
     end
     

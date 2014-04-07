@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140320053514) do
+ActiveRecord::Schema.define(version: 20140331043910) do
 
   create_table "categories", force: true do |t|
     t.string   "description"
@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(version: 20140320053514) do
     t.string   "notes"
   end
 
-  create_table "hidden_category_flags", force: true do |t|
+  create_table "hidden_category_group_flags", force: true do |t|
+    t.integer  "category_group_id"
     t.integer  "user_id"
-    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

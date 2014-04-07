@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   has_many :stakeholders
   has_many :events, :through => :stakeholders
   has_many :category_groups
-  has_many :hidden_category_flags
+  has_many :hidden_category_group_flags
   has_many :notification_recipients
   
   has_many :shares, :foreign_key => 'owner_id', :class_name => "Share"
@@ -286,13 +286,13 @@ class User < ActiveRecord::Base
     events
   end
   
-  def toggle_viewing_category(category)
-    if wants_to_see_category(category)
+  def toggle_viewing_category_group(category_group)
+    if wants_to_see_category_group(category_group)
       # so we need to hide it
-      hidden_category_flags << HiddenCategoryFlag.create(:user => self, :category => category)
+      hidden_category_group_flags << HiddenCategoryGroupFlag.create(:user => self, :category_group => category_group)
     else
       # we need to remove the hidden flag
-      self.hidden_category_flags.each do |hcf|
+      self.hidden_category_group_flags.each do |hcf|
         if hcf.category_id == category.id
           hcf.destroy
         end
@@ -369,10 +369,10 @@ class User < ActiveRecord::Base
     category
   end
   
-  def wants_to_see_category(category)
+  def wants_to_see_category_group(category_group)
     wants_to_see = true
-    self.hidden_category_flags.each do |hcf|
-      if hcf.category_id == category.id
+    self.hidden_category_group_flags.each do |hcf|
+      if hcf.category_group_id == category_group.id
         wants_to_see = false
       end
     end
