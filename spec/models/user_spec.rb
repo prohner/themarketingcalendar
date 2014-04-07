@@ -310,6 +310,13 @@ describe User do
       expect(@dave.wants_to_see_category_group(@category_group)).to eq(false)
       expect(@dave.wants_to_see_category_group(@category_group2)).to eq(false)
     end
+    
+    it "should work when toggling category groups on AND off" do
+      @dave.toggle_viewing_category_group(@category_group)
+
+      expect(@dave.wants_to_see_category_group(@category_group)).to eq(false)
+      expect(@dave.wants_to_see_category_group(@category_group2)).to eq(true)
+    end
   end
 
   context "#email_summary_frequency" do

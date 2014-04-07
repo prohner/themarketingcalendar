@@ -23,10 +23,6 @@
 	});
 	// toggleSnap();
 
-	<% current_user.hidden_category_group_flags.each do |hcf| %>
-		toggleCalendarFilterCategory(<%= hcf.category_id %>);
-	<% end %>
-	
 	$(function () {
 	    var contextMenu = $("#contextMenu");
 	    var eventIdThatWasClicked;
@@ -181,16 +177,12 @@ input {
 						
 					<% @calendars.each do |calendar| %>
 						<div class="control-group form-group" style="margin:0; margin-left:-15px;">
-							<%= check_box_tag "calendar-#{calendar.id}", calendar.id, true, :onclick => "toggleCalendar_#{calendar.id}();", :style => "width:13px" %>
+							<%= check_box_tag "calendar-#{calendar.id}", calendar.id, current_user.wants_to_see_category_group(calendar), :onclick => "toggleCalendar_#{calendar.id}();", :style => "width:13px" %>
 							<%= calendar.description %>
 							<script type="text/javascript" charset="utf-8">
 							function toggleCalendar_<%= calendar.id %>() {
 								var on_or_off = $("#calendar-<%= calendar.id %>").is(":checked");
-								// alert("checked is " + on_or_off);
-								<% calendar.categories.each do |category| %>
-									$("#category-<%= category.id %>").prop('checked', on_or_off);
-									toggleCalendarFilterCategory(<%= category.id %>);
-								<% end %>
+								toggleCalendarFilterCategoryGroup(<%= calendar.id %>);
 							}
 							</script>
 						</div>

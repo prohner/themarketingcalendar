@@ -28,7 +28,7 @@ TheMarketingCalendar::Application.routes.draw do
   get "calendar/index"
   get "calendar/events"
 
-  match '/update_hidden_category_flag/:id',  to: 'calendar#update_hidden_category_flag',    via: 'get'
+  match '/update_hidden_category_group_flag/:id',  to: 'calendar#update_hidden_category_group_flag',    via: 'get'
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'

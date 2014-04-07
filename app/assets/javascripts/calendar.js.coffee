@@ -4,7 +4,7 @@
 
 popoverIsShowing = false
 is_deleted_event = false
-hidden_categories = []
+hidden_category_groups = []
 snapIsShowing = false
 popoverThatIsCurrentlyShowing = null
 debugging = true
@@ -59,7 +59,7 @@ ready = ->
 			]
 
 			eventRender: (event, element) ->
-				if hidden_categories.indexOf(event.category_id) >= 0
+				if hidden_category_groups.indexOf(event.category_group_id) >= 0
 					console.log "Event's category is hidden" if debugging
 					$(element).hide();
 			
@@ -215,17 +215,17 @@ presentPopover = (url, sourceObject, event) ->
 		popoverThatIsCurrentlyShowing = thisObject
 
 
-@toggleCalendarFilterCategory = (categoryId) ->
-	indexOfCategoryId = hidden_categories.indexOf(categoryId)
-	if indexOfCategoryId >= 0
-		hidden_categories.splice indexOfCategoryId, 1
-		console.log "Remove " + categoryId if debugging
+@toggleCalendarFilterCategoryGroup = (categoryGroupId) ->
+	indexOfCategoryGroupId = hidden_category_groups.indexOf(categoryGroupId)
+	if indexOfCategoryGroupId  >= 0
+		hidden_category_groups.splice indexOfCategoryGroupId , 1
+		console.log "Remove " + categoryGroupId if debugging
 	else
-		hidden_categories.push(categoryId)
-		console.log "  Add  " + categoryId if debugging
+		hidden_category_groups.push(categoryGroupId)
+		console.log "  Add  " + categoryGroupId if debugging
 		
 	$.ajax {
-		url: "/update_hidden_category_flag/" + categoryId,
+		url: "/update_hidden_category_group_flag/" + categoryGroupId,
 		type: "GET",
 		dataType: "JSON" 
 	}

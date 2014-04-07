@@ -289,11 +289,14 @@ class User < ActiveRecord::Base
   def toggle_viewing_category_group(category_group)
     if wants_to_see_category_group(category_group)
       # so we need to hide it
-      hidden_category_group_flags << HiddenCategoryGroupFlag.create(:user => self, :category_group => category_group)
+      hcgf = HiddenCategoryGroupFlag.create(:user => self, :category_group => category_group)
+      hidden_category_group_flags << hcgf
+      hcgf.save
+      puts "WAS VIEWING CATEGORY GROUP AND NOW TURNING IT OFF"
     else
       # we need to remove the hidden flag
       self.hidden_category_group_flags.each do |hcf|
-        if hcf.category_id == category.id
+        if hcf.category_group_id == category_group.id
           hcf.destroy
         end
       end
