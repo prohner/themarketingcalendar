@@ -292,7 +292,6 @@ class User < ActiveRecord::Base
       hcgf = HiddenCategoryGroupFlag.create(:user => self, :category_group => category_group)
       hidden_category_group_flags << hcgf
       hcgf.save
-      puts "WAS VIEWING CATEGORY GROUP AND NOW TURNING IT OFF"
     else
       # we need to remove the hidden flag
       self.hidden_category_group_flags.each do |hcf|
