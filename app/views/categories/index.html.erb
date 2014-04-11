@@ -21,7 +21,7 @@
         <td><%= link_to category.description, edit_category_path(category) %></td>
         <td><%= color_scheme_as_html_snippet_to_display(category.color_scheme) %></td>
         <td>&nbsp;</td>
-        <td><%= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -29,4 +29,4 @@
 
 <br>
 
-<%= link_to 'New Category', new_category_path %>
+<%= link_to 'New Category', new_category_path, :class => "btn btn-xs btn-primary" %>

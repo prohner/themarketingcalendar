@@ -279,7 +279,7 @@
 
 
   <div class="actions pull-right inline" style="width:230px;">
-    <%= f.submit :id => "submit-button", :style => "float:left;" %>
+    <%= f.submit :id => "submit-button", :style => "float:left;", :class => "btn btn-xs btn-primary" %>
 	<% unless @event.new_record? %>
 		<label for="delete-button" class="delete-event-button-proxy" id="delete-event-button-proxy" style="float:right;">Delete this event</label>	
 	<% end %>

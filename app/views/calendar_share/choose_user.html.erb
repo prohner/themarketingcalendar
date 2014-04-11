@@ -8,6 +8,6 @@
 	<%= hidden_field_tag :i, @category_group_ids %>
 	<%= text_field_tag :email, "", :placeholder => "Enter emails separated by commas", :style => "width: 300px;" %>
 	<br/>
-	<%= submit_tag %>
+	<%= submit_tag("Share calendars", :class => "btn btn-xs btn-primary") %>
 	<% end %>
 </div>
