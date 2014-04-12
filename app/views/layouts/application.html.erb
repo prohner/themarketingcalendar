@@ -10,7 +10,9 @@
     <%= csrf_meta_tags %>
 	<%= tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY %>
 	<%= render 'layouts/shim' %>
-	<%= render 'layouts/google_analytics' %>
+	<% if not Rails.env.development? %>
+		<%= render 'layouts/google_analytics' %>
+	<% end %>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 

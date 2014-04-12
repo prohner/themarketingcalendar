@@ -59,8 +59,9 @@ ready = ->
 			]
 
 			eventRender: (event, element) ->
+				# console.log "Checking '" + event.title + "'" if debugging
 				if hidden_category_groups.indexOf(event.category_group_id) >= 0
-					console.log "Event's category is hidden" if debugging
+					# console.log "  Event '" + event.title + "' category is hidden" if debugging
 					$(element).hide();
 			
 			eventAfterRender: (event, element, view) ->
@@ -215,7 +216,7 @@ presentPopover = (url, sourceObject, event) ->
 		popoverThatIsCurrentlyShowing = thisObject
 
 
-@toggleCalendarFilterCategoryGroup = (categoryGroupId) ->
+@toggleCalendarFilterCategoryGroup = (categoryGroupId, updateDatabaseToo) ->
 	indexOfCategoryGroupId = hidden_category_groups.indexOf(categoryGroupId)
 	if indexOfCategoryGroupId  >= 0
 		hidden_category_groups.splice indexOfCategoryGroupId , 1
@@ -223,12 +224,13 @@ presentPopover = (url, sourceObject, event) ->
 	else
 		hidden_category_groups.push(categoryGroupId)
 		console.log "  Add  " + categoryGroupId if debugging
-		
-	$.ajax {
-		url: "/update_hidden_category_group_flag/" + categoryGroupId,
-		type: "GET",
-		dataType: "JSON" 
-	}
+	
+	if updateDatabaseToo
+		$.ajax {
+			url: "/update_hidden_category_group_flag/" + categoryGroupId,
+			type: "GET",
+			dataType: "JSON" 
+		}
 	
 	$('#calendar').fullCalendar 'rerenderEvents'
 

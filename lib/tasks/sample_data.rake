@@ -7,15 +7,15 @@ namespace :db do
     CategoryGroup.delete_all
     Share.delete_all
     Category.delete_all
-    HiddenCategoryFlag.delete_all
+    HiddenCategoryGroupFlag.delete_all
     Stakeholder.delete_all
     Event.delete_all
     
     color_schemes = create_array_of_color_schemes
     
-    user_pr = User.create(email:"pr@TheMarketingCalendar.com", first_name: "Preston", last_name: "Rohner", password: "foobar", password_confirmation: "foobar", user_type: 1, status: "signed up")
-    user_ya = User.create(email:"ya@TheMarketingCalendar.com", first_name: "Yves", last_name: "Accad", password: "foobar", password_confirmation: "foobar", user_type: 1, status: "signed up")
-    user_gr = User.create(email:"gr@TheMarketingCalendar.com", first_name: "Gerb", last_name: "Rockstar", password: "foobar", password_confirmation: "foobar", user_type: 1, status: "signed up")
+    user_pr = User.create(email:"pr@TheMarketingCalendar.com", first_name: "Preston", last_name: "Rohner", password: "foobar", password_confirmation: "foobar", user_type: 1)
+    user_ya = User.create(email:"ya@TheMarketingCalendar.com", first_name: "Yves", last_name: "Accad", password: "foobar", password_confirmation: "foobar", user_type: 1)
+    user_gr = User.create(email:"gr@TheMarketingCalendar.com", first_name: "Gerb", last_name: "Rockstar", password: "foobar", password_confirmation: "foobar", user_type: 1)
 
     user_pr.save
     user_ya.save
@@ -264,8 +264,8 @@ def create_sample_data_for_user(user, cs)
   research.categories << advertising_effectiveness
   
   current_year = 2014
-  current_month = 2
-  last_day_of_month = 28
+  current_month = 4
+  last_day_of_month = 30
 
   e = Event.create(description:"Every Friday", starts_at: make_time(2014, 1, 17), ends_at: make_time(2014, 3, 31), repetition_type: :weekly, on_friday: true)
   sales_promotion.events << e

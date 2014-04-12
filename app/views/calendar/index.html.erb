@@ -23,6 +23,10 @@
 	});
 	// toggleSnap();
 
+	<% current_user.hidden_category_group_flags.each do |hcf| %>
+		toggleCalendarFilterCategoryGroup(<%= hcf.category_group_id %>, false);
+	<% end %>
+	 
 	$(function () {
 	    var contextMenu = $("#contextMenu");
 	    var eventIdThatWasClicked;
@@ -182,7 +186,7 @@ input {
 							<script type="text/javascript" charset="utf-8">
 							function toggleCalendar_<%= calendar.id %>() {
 								var on_or_off = $("#calendar-<%= calendar.id %>").is(":checked");
-								toggleCalendarFilterCategoryGroup(<%= calendar.id %>);
+								toggleCalendarFilterCategoryGroup(<%= calendar.id %>, true);
 							}
 							</script>
 						</div>
