@@ -1,5 +1,5 @@
 <% provide :title, "Create Calendar" %>
-<%= form_for(@category_group) do |f| %>
+<%= form_for(@category_group, html: { :role => "form" }) do |f| %>
   <% if @category_group.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category_group.errors.count, "error") %> prohibited this category_group from being saved:</h2>
@@ -12,15 +12,15 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, :class => "form-control", :placeholder => "Calendar description" %>
   </div>
   <div class="field">
 		<%= f.label :color %><br>
 		<%= collection_select(:category_group, :color_scheme_id, ColorScheme.all, :id, :name, 
 			{prompt: false},
-			{:onChange => "editCategoryColorSchemeChange(this);"}) 
+			{:onChange => "editCategoryColorSchemeChange(this);", :class => "form-control"}) 
 		%>
 
 		<span id="editCategoryColorSchemeExample">
