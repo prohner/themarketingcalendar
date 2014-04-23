@@ -1,4 +1,4 @@
-<%= form_for(@category) do |f| %>
+<%= form_for(@category, html: { :role => "form" }) do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
@@ -11,23 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :calendar %><br>
 	<%= collection_select(:category, :category_group_id, current_user.all_category_groups, :id, :description, 
-		{prompt: false}) 
+		{prompt: false},
+    {:class => "form-control"}) 
 	%>
 	
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, :class => "form-control", :placeholder => "Calendar description" %>
   </div>
-  <div class="field">
+  <div class="field form-group">
 		<%= f.label :color %><br>
 		<%= collection_select(:category, :color_scheme_id, ColorScheme.all, :id, :name, 
 			{prompt: false},
-			{:onChange => "editCategoryColorSchemeChange(this);"}) 
+			{:onChange => "editCategoryColorSchemeChange(this);", :class => "form-control"}) 
 		%>
 	
 		<span id="editCategoryColorSchemeExample">
