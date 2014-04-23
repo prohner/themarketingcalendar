@@ -1,34 +1,35 @@
-<h2>Sign up</h2>
+<h1>You're Almost There!</h1>
+<h2>After you sign up you will have access to The Marketing Calendar</h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { :role => "form" }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :first_name %><br />
-  <%= f.text_field :first_name, :autofocus => true %></div>
+  <div class="form-group"><%= f.label :first_name %><br />
+  <%= f.text_field :first_name, :autofocus => true, :class => "form-control", :placeholder => "First name" %></div>
 
-  <div><%= f.label :last_name %><br />
-  <%= f.text_field :last_name %></div>
+  <div class="form-group"><%= f.label :last_name %><br />
+  <%= f.text_field :last_name, :class => "form-control", :placeholder => "Last name" %></div>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+  <div class="form-group"><%= f.label :email %><br />
+  <%= f.email_field :email, :class => "form-control", :placeholder => "Email address" %></div>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div class="form-group"><%= f.label :password %><br />
+  <%= f.password_field :password, :class => "form-control", :placeholder => "Your password" %></div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
+  <div class="form-group"><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "" %></div>
 
 	<%= f.hidden_field :stripe_card_token %>
 	<% if @user.stripe_card_token.present? %>
 		Credit card has been provided.
 	<% else %>
-	  <div><%= label_tag :card_number, "Credit Card Number" %><br />
-	  <%= text_field_tag :card_number, "4242424242424242", name: nil %></div>
+	  <div class="form-group"><%= label_tag :card_number, "Credit Card Number" %><br />
+	  <%= text_field_tag :card_number, Rails.env.development? ? "4242424242424242" : "", name: nil, :class => "form-control", :placeholder => "Credit card number" %></div>
 
-	  <div><%= label_tag :card_code, "Security Code on Card (CVV)" %><br />
-	  <%= text_field_tag :card_code, "123", name: nil %></div>
+	  <div class="form-group"><%= label_tag :card_code, "Security Code on Card (CVV)" %><br />
+	  <%= text_field_tag :card_code, "123", name: nil, :class => "form-control", :placeholder => "Credit card number" %></div>
 
-	  <div><%= label_tag :card_month, "Card Expiration" %><br />
+	  <div class="form-group"><%= label_tag :card_month, "Card Expiration" %><br />
 	  <%= select_month nil, { add_month_numbers: true }, { name: nil, id: "card_month" } %>
 	  <%= select_year nil, { start_year: Date.today.year, end_year: Date.today.year+15 }, { name: nil, id: "card_year" } %>
 	  </div>
@@ -36,7 +37,8 @@
 	<div id="stripe_error">
 	  <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
 	</div>
-  <div><%= f.submit "Sign up" %></div>
+  <div><%= f.submit "Sign up", class: "btn btn-large btn-primary" %></div>
 <% end %>
+
 
 <%= render "devise/shared/links" %>
