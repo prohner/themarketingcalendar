@@ -10,6 +10,12 @@ class StaticPagesController < ApplicationController
 
   def contact
   end
+
+  def whats_in_it_for_me
+  end
+  
+  def pricing
+  end
   
   def interested
     @ip = InterestedParty.new(:email => params[:email])

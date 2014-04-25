@@ -1,6 +1,26 @@
 <% provide(:title, 'Home') %>
 <h1>Welcome to <%= application_name %></h1>
 
+<% if show_marketing_messages? %>
+
+We're glad you're here!  Really, we mean it.  Here's the thing: we have felt your pain
+too.  We were:
+<ul>
+	<li><strong>emailing</strong> around spreadsheets</li>
+	<li><strong>begging</strong> spreadsheet owners to update</li>
+	<li><strong>calling</strong> people to figure out whether they communicated their changes</li>
+</ul> 
+
+How frustrating! <strong>How ridiculous!</strong>
+We couldn't take it anymore.
+<a href="https://www.youtube.com/watch?v=HQFLqMyo0fo" style="color:black;">There had to be another way.</a>
+
+
+
+<br/>
+<hr>
+<% end %>
+
 <%= render :partial => "in_progress" %>
 
 
