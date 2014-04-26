@@ -49,7 +49,7 @@ h1 {
 
 h2 {
   font-size: 1.2em;
-  letter-spacing: -1px;
+  /*letter-spacing: -1px;*/
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
@@ -213,4 +213,14 @@ input {
 
 .alert-alert {
 	@extend .alert-danger;
+}
+
+.marketing-h1, .marketing-h2 {
+  text-align: left;
+}
+
+.marketing-page-container {
+  margin-left: auto;
+  margin-right: auto;
+  width: 550px;
 }

@@ -23,5 +23,9 @@ describe StaticPagesController do
       expect(:get => "/pricing").to route_to("static_pages#pricing")
     end
 
+    it "routes to #our_technology" do
+      expect(:get => "/our_technology").to route_to("static_pages#our_technology")
+    end
+
   end
 end

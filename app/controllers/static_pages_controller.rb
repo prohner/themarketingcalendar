@@ -16,6 +16,9 @@ class StaticPagesController < ApplicationController
   
   def pricing
   end
+
+  def our_technology
+  end
   
   def interested
     @ip = InterestedParty.new(:email => params[:email])
