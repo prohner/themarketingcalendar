@@ -224,3 +224,16 @@ input {
   margin-right: auto;
   width: 550px;
 }
+
+.marketing-ul {
+  color: #808080;
+  letter-spacing: 1px;
+  list-style-image:url('checkmark.png');
+}
+.marketing-ul strong{
+  color: #000000;
+}
+.marketing-ul li {
+  line-height: 160%;
+  margin-bottom: 15px;
+}
