@@ -222,13 +222,15 @@ input {
 .marketing-page-container {
   margin-left: auto;
   margin-right: auto;
-  width: 550px;
+  width: 650px;
 }
 
 .marketing-ul {
   color: #808080;
+  font-size: 18px;
   letter-spacing: 1px;
   list-style-image:url('checkmark.png');
+  list-style-position:outside;
 }
 .marketing-ul strong{
   color: #000000;
