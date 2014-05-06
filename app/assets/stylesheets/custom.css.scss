@@ -224,19 +224,29 @@ input {
   margin-left: auto;
   margin-right: auto;
   width: 650px;
+  line-height: 160%;
+  font-size: 18px;
+  letter-spacing: 1px;
 }
 
 .marketing-ul {
   color: #808080;
-  font-size: 18px;
-  letter-spacing: 1px;
   list-style-image:url('checkmark.png');
   list-style-position:outside;
+  vertical-align: top;
 }
-.marketing-ul strong{
+
+.marketing-ul strong, i, a {
   color: #000000;
+  vertical-align: top;
 }
+
 .marketing-ul li {
-  line-height: 160%;
+  vertical-align: top;
   margin-bottom: 15px;
+  margin-top: 0px;
+  padding-top: 0px;
+  border-bottom-width: 1px;
+  border-bottom-color: #c0c0c0;
+  border-bottom-style: dotted;
 }
