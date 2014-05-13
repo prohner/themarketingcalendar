@@ -3,7 +3,7 @@ class UserMailer < ActionMailer::Base
   default :from => "The Marketing Calendar <admin@themarketingcalendar.com>"
 
   def daily_reminder
-    @interested_parties = InterestedParty.all
+    @interested_parties = InterestedParty.all.select(:email).uniq
    
     mail(:to => ADMINISTRATOR_EMAIL_ADDRESSES,
          :subject => "Daily reminder of interested parties")    

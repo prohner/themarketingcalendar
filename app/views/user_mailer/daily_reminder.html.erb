@@ -1,14 +1,18 @@
 <h3>This is the list of users who have signed up to be notified of The Marketing Calendar news:</h3>
 
-<% @interested_parties.each do |party| %>
+<% @interested_parties.each_with_index do |party, index| %>
   <tr>
     
-    <td><%= party.email %><BR></td>
+    <td><%= index %>. <%= party.email %><BR></td>
     
   </tr>
 <% end %>
 
 
-
+<br/>
+There are only 2 difficult things in computer science:<br/>
+0. Cache invalidation<br/>
+1. Data naming<br/>
+2. 0-based indexes<br/>
   
 <h2>The Marketing Calendar Admin.</h2>
