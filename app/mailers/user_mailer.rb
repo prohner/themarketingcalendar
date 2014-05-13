@@ -43,7 +43,9 @@ class UserMailer < ActionMailer::Base
     
     email_with_name = "#{@user.full_name} <#{@user.email}>"
     puts "Emailing #{subject} to #{email_with_name}"
-    mail(:to => email_with_name, :subject => subject)
+    if @events.count > 0
+      mail(:to => email_with_name, :subject => subject)
+    end
   end
   
   def daily_stakeholder_events_to_user(user)
