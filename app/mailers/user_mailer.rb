@@ -58,7 +58,9 @@ class UserMailer < ActionMailer::Base
     @user = user
     @events = []
     @user.stakeholders.each do |stakeholder|
+      unless stakeholder.event.nil?
         @events << stakeholder.event if stakeholder.event.number_of_days_until_event_starts == stakeholder.reminder_notification_days
+      end
     end
 
     if @events.count > 0 
