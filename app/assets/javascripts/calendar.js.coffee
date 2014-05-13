@@ -87,7 +87,7 @@ ready = ->
 					popoverIsShowing = false
 		}
 	
-	$('span:contains(today)').parents('td').filter(':first').before('<span id="add-calendar-event" class="fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right">&#8853;</span>');
+	$('span:contains(today)').parents('td').filter(':first').before('<span id="add-calendar-event" class="expand-panel-btn fc-button fc-button-today fc-state-default fc-corner-left fc-corner-right">&#8853;</span>');
 	# $('span:contains(today)').parents('td').filter(':first').before('<span class="fc-button fc-state-default fc-corner-left fc-corner-right no-underline-on-hover"><a href="#" onclick="return toggleSnap();" style="color:#000;a:hover {text-decoration:none;}">&#8596;</a></span>');
 
 		
