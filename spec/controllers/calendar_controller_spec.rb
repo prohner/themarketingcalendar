@@ -96,4 +96,7 @@ describe CalendarController do
   #   #   expect(assigns(:events)).to eq(@dave.all_events)
   #   # end
   # end
+  
+  it { should respond_to(:download_all_events_for_user) }
+  
 end

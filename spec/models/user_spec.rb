@@ -49,6 +49,7 @@ describe User do
   it { should respond_to(:user_can_use_system) }
   it { should respond_to(:role?) }
   it { should respond_to(:email_summary_frequency) }
+  it { should respond_to(:filename_for_user_to_download_data) }
   
   it { should be_valid }
   

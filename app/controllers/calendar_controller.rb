@@ -1,4 +1,5 @@
 class CalendarController < ApplicationController
+  require 'csv'
   before_action :authenticate_user! #, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -63,6 +64,16 @@ class CalendarController < ApplicationController
       @saved_successfully = false
       puts @notification_recipient.errors.full_messages.to_sentence
     end
+  end
+  
+  def download_all_events_for_user
+    @file = current_user.csv_filename_for_user_to_download_data
+  end
+  
+  def download_csv_file
+    send_file current_user.csv_filename_for_user_to_download_data, 
+      :type=>"application/text", 
+      :x_sendfile=>true
   end
   
   private

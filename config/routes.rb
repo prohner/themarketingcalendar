@@ -44,6 +44,9 @@ TheMarketingCalendar::Application.routes.draw do
   match '/whats_in_it_for_me',  to: 'static_pages#whats_in_it_for_me',  via: 'get'
   match '/pricing',             to: 'static_pages#pricing',             via: 'get'
   match '/our_technology',      to: 'static_pages#our_technology',      via: 'get'
+  
+  match '/download_data',       to: 'calendar#download_all_events_for_user',  via: 'get'
+  match '/download_data_csv',   to: 'calendar#download_csv_file',             via: 'get'
 
   match '/choose-calendar-to-share',  to: 'calendar_share#choose_calendar',         via: 'get'
   match '/choose-person-to-share',    to: 'calendar_share#choose_user',             via: 'post'

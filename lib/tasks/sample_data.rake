@@ -84,8 +84,8 @@ def create_sample_email_calendars_for_user(user, cs)
   mf_calendar.categories << survey
   
   current_year = 2014
-  current_month = 2
-  last_day_of_month = 28
+  current_month = 5
+  last_day_of_month = 31
   
   survey.events       << create_one_day_event("MF Panel Recruit Survey", current_year, current_month, 22)
   regular.events      << create_one_day_event("Value Props + Last Day for Winter Clearance (8033)", current_year, current_month - 1, 31)
