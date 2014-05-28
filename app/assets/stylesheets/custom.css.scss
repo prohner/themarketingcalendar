@@ -220,6 +220,10 @@ input {
   text-align: left;
 }
 
+//.marketing-h1 {
+//  font-size: 22px;
+//}
+
 .marketing-page-container {
   margin-left: auto;
   margin-right: auto;
@@ -249,4 +253,8 @@ input {
   border-bottom-width: 1px;
   border-bottom-color: #c0c0c0;
   border-bottom-style: dotted;
+}
+
+.marketing-page-column {
+	display: inline;
 }
