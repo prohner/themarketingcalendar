@@ -388,7 +388,7 @@ class User < ActiveRecord::Base
   
   def filename_for_user_to_download_data
     file = csv_filename_for_user_to_download_data
-    puts "Writing CSV to #{file}"
+    logger.info "Writing CSV to #{file}"
     CSV.open(file, 'w') do |writer|
       writer << ['Calendar', 'Category', 'Event', 'Starts', 'Ends', 'Notes', 'Frequency', 'Options', 'Repetition Type',
         'Sunday?', 'Monday?', 'Tuesday?', 'Wednesday?', 'Thursday?', 'Friday?', 'Saturday?'

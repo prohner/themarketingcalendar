@@ -71,8 +71,8 @@ class CalendarController < ApplicationController
   end
   
   def download_csv_file
-    puts "download_csv_file: #{current_user.csv_filename_for_user_to_download_data}"
-    send_file current_user.csv_filename_for_user_to_download_data, 
+    logger.info "download_csv_file: #{current_user.csv_filename_for_user_to_download_data}"
+    send_file current_user.filename_for_user_to_download_data, 
       :type=>"application/text", 
       :x_sendfile=>true
   end
