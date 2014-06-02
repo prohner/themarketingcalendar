@@ -388,28 +388,29 @@ class User < ActiveRecord::Base
   
   def filename_for_user_to_download_data
     file = csv_filename_for_user_to_download_data
+    logger.info "Writing CSV to #{file}"
     CSV.open(file, 'w') do |writer|
       writer << ['Calendar', 'Category', 'Event', 'Starts', 'Ends', 'Notes', 'Frequency', 'Options', 'Repetition Type',
         'Sunday?', 'Monday?', 'Tuesday?', 'Wednesday?', 'Thursday?', 'Friday?', 'Saturday?'
       ]
       all_events.each do |e|
-      writer << [e.category.category_group.description,
-                  e.category.description,
-                  e.description,
-                  e.starts_at,
-                  e.ends_at,
-                  e.notes,
-                  e.repetition_frequency,
-                  e.repetition_options,
-                  e.repetition_type,
-                  e.on_sunday,
-                  e.on_monday,
-                  e.on_tuesday,
-                  e.on_wednesday,
-                  e.on_thursday,
-                  e.on_friday,
-                  e.on_saturday
-                ]
+        writer << [e.category.category_group.description,
+                    e.category.description,
+                    e.description,
+                    e.starts_at,
+                    e.ends_at,
+                    e.notes,
+                    e.repetition_frequency,
+                    e.repetition_options,
+                    e.repetition_type,
+                    e.on_sunday,
+                    e.on_monday,
+                    e.on_tuesday,
+                    e.on_wednesday,
+                    e.on_thursday,
+                    e.on_friday,
+                    e.on_saturday
+                  ]
       end
     end    
     file
