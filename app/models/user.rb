@@ -383,7 +383,7 @@ class User < ActiveRecord::Base
   
   def csv_filename_for_user_to_download_data
     name = full_name.gsub(/[^0-9A-Za-z\-]/, '_')
-    file = "tmp/#{id}_#{name}.csv"
+    file = "#{Rails.root}/tmp/#{id}_#{name}.csv"
   end
   
   def filename_for_user_to_download_data
