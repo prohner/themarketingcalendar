@@ -12,19 +12,31 @@
     </tr>
   </thead>
 
-  <tbody>
-	    <% @category_groups.each do |category_group| %>
-	      <tr>
-  	        <td><%= check_box_tag "category_groups[]", category_group.id, false %></td>
-	        <td><%= category_group.description %></td>
-	      </tr>
-	    <% end %>
-		<tr>
-			<td colspan="3" align="center">
-				<%= submit_tag("Share checked calendars", :class => "btn btn-xs btn-primary") %>
-			</td>
-		</tr>
-  </tbody>
+	<tbody>
+		<% if @category_groups.count > 0 %>
+			<% @category_groups.each do |category_group| %>
+				<tr>
+					<td><%= check_box_tag "category_groups[]", category_group.id, false %></td>
+					<td><%= category_group.description %></td>
+				</tr>
+			<% end %>
+				<tr>
+					<td colspan="3" align="center">
+						<%= submit_tag("Share checked calendars", :class => "btn btn-xs btn-primary") %>
+					</td>
+				</tr>
+		<% else %>
+			<tr>
+				<td>
+					Whoops...you don't have any calendars setup yet which makes it hard to share them.
+					<br/>
+					On the bright side, you can 
+					<%= link_to "setup new calendars", category_groups_path, :style => "text-decoration:underline;" %> 
+					pretty easily.
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
 </table>
 <% end %>
 
