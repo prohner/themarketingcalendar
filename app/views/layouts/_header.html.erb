@@ -30,6 +30,16 @@
 						<li> <%= link_to "Pricing", pricing_path %> </li>
 					<% end %>
 
+					<li id="fat-menu" class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							Articles <b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							<li><%= link_to "Implementation of a Marketing Plan", articles_implementation_of_a_marketing_plan_path %></li>
+							<li><%= link_to "Example marketing strategy", articles_example_marketing_strategy_path %></li>
+							<li><%= link_to "Best marketing strategy", articles_best_marketing_strategy_path %></li>
+						</ul>
+					</li>
 
 					<% if user_signed_in? %>
 						<li><%= link_to 'Calendar', calendar_index_path %></li>

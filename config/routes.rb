@@ -1,4 +1,8 @@
 TheMarketingCalendar::Application.routes.draw do
+  get "articles/implementation_of_a_marketing_plan"
+  get "articles/example_marketing_strategy"
+  get "articles/best_marketing_strategy"
+  post "articles/add_to_email_list"
   get "get_going/start"
   get "get_going/easily"
   
