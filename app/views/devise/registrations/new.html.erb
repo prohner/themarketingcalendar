@@ -27,7 +27,7 @@
 	  <%= text_field_tag :card_number, Rails.env.development? ? "4242424242424242" : "", name: nil, :class => "form-control", :placeholder => "Credit card number" %></div>
 
 	  <div class="form-group"><%= label_tag :card_code, "Security Code on Card (CVV)" %><br />
-	  <%= text_field_tag :card_code, "123", name: nil, :class => "form-control", :placeholder => "Credit card number" %></div>
+	  <%= text_field_tag :card_code, Rails.env.development? ? "123" : "", name: nil, :class => "form-control", :placeholder => "Credit card number" %></div>
 
 	  <div class="form-group"><%= label_tag :card_month, "Card Expiration" %><br />
 	  <%= select_month nil, { add_month_numbers: true }, { name: nil, id: "card_month" } %>
