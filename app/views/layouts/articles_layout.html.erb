@@ -25,7 +25,9 @@
 				<table border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td>
-						<%= yield %>
+							<div class="marketing-article">
+								<%= yield %>
+							</div>
 						</td>
 						<td valign="top" style="padding-top:100px;">
 							&nbsp;
@@ -35,8 +37,14 @@
 									<%= text_field_tag :email, params[:email], :placeholder => "I'm interested! (enter email)" %>
 									<%= submit_tag "Lemme know!", :class => "btn btn-xs btn-primary" %>
 								<% end %>
-								<font size="small" style="color:gray;">One or two emails per month</font>
+								<font size="small" style="color:gray;">(One-two emails per month)</font>
 							<% end %>
+							
+							<p>
+								&nbsp;<br/>
+								<%= link_to "Or sign right up...", new_user_registration_path, :style => "text-decoration:underline;" %>
+							</p>
+							
 						</td>
 					</tr>
 				</table>
