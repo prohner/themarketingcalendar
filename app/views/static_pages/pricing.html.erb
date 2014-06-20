@@ -1,8 +1,7 @@
 <% provide(:title, "Pricing") %>
 
 <div class="marketing-page-container">
-	<h1 class="makreting-h1">Pricing</h1>
-
+	<h1 class="marketing-h1">Pricing</h1>
 
 	<p>
 		<strong>$19 / month.</strong> That's all we need from you to make the pain go away.
@@ -11,9 +10,34 @@
 
 	</p>
 
-<ul class="marketing-ul">
-	<li>Unlimited events so <strong>you can successfully work your plan rather than worrying about communication</strong></li>
-	<li>Share events: <strong>your whole team is following the same tactical plan</strong></li>
-	<li>Setup wizard: <strong>get started easily and quickly</strong></li>
-</ul>
+	<ul class="marketing-ul">
+		<li>Unlimited events so <strong>you can successfully work your plan rather than worrying about communication</strong></li>
+		<li>Share events: <strong>your whole team is following the same tactical plan</strong></li>
+		<li>Setup wizard: <strong>get started easily and quickly</strong></li>
+	</ul>
+
+	&nbsp;<br/>
+	<div class="guarantee">
+		<%= image_tag "guarantee_stamp.png", :style => "float:right;margin-top:-90px;margin-right:-130px;" %>
+		<p>
+			<%= application_name %> has a very simple guarantee.  We believe in the real value of our product.  So we
+			believe you should not have to risk anything to get it.
+		</p>
+
+		<p>
+			Try it out.  If it works we'll bill you each month after you use the system.  If it's not working for you 
+			at any point you can just let us know and we will not bill you.
+		</p>
+
+		<p>
+			Email any questions to <%= link_to "pr@themarketingcalendar.com", "mailto:pr@themarketingcalendar.com", :style => "text-decoration:underline;" %> and
+			we'll help you figure out whether <%= application_name %> is right for you.
+		</p>
+	</div>
+
+	&nbsp;<br/>
+	<div style="float:right;width:250px; margin-left: auto; margin-right: auto;text-align:right;">
+		<%= link_to "Get started fast...", new_user_registration_path, :style => "text-decoration:underline;" %>
+	</div>
+
 </div>

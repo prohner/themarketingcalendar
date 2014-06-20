@@ -1,7 +1,7 @@
 <% provide(:title, "What's in it for me?") %>
 
 <div class="marketing-page-container">
-	<h2 class="marketing-h1">What's in it for me?</h2>
+	<h1 class="marketing-h1">What's in it for me?</h1>
 
 	<table border="0">
 		<tr>
@@ -71,8 +71,8 @@
 		 We have a <%= link_to "seriously reliable backup strategy", our_technology_path(:anchor => "backup") %>.</li>
  -->
 
-	<h1>What'll it do for me?</h1>
-	<ul>
+	<h1 class="marketing-h1">What'll it do for me?</h1>
+	<ul class="marketing-ul">
 		<li>Provide visibility of all marketing activities, in a single integrated view</li>
 		<li>Automatically be updated through activities entered in the system</li>
 		<li>Reduce back-and-forward emails</li>
@@ -82,11 +82,16 @@
 		<li>Let any stakeholder (or new team member) see exactly what is going on in marketing</li>
 	</ul>
 
-	<h1>But wait!  I can't do this.  Here's why:</h1>
+	<h1 class="marketing-h1">But wait!  I can't do this.  Here's why:</h1>
 
-	<ul>
+	<ul class="marketing-ul">
+		<li>It's too easy.  <strong>We're used to all the confusing hassle of sharing spreadsheets.</strong></li>
 		<li>What if I enter in a bunch of stuff and then quit?  <strong>Not a worry, you can download all your data at any time in a spreadsheet.</strong></li>
 	</ul>
+
+	<div style="float:right;width:250px; margin-left: auto; margin-right: auto;text-align:right;">
+		<%= link_to "Get started fast...", new_user_registration_path, :style => "text-decoration:underline;" %>
+	</div>
 
 	<!-- <ul><li>Privacy</li><li>Security</li><li>Backups</li></ul> -->
 </div>

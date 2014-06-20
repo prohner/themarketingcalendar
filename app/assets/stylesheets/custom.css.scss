@@ -218,6 +218,9 @@ input {
 
 .marketing-h1, .marketing-h2 {
   text-align: left;
+  font-size:larger;
+  letter-spacing: 0.2px;
+  color:#ff6600;
 }
 
 //.marketing-h1 {
@@ -238,6 +241,7 @@ input {
   list-style-image:url('checkmark.png');
   list-style-position:outside;
   vertical-align: top;
+  background-color:#fffcf5;
 }
 
 .marketing-ul strong, i, a {
@@ -247,14 +251,18 @@ input {
 
 .marketing-ul li {
   vertical-align: top;
-  margin-bottom: 15px;
+  padding-bottom: 15px;
   margin-top: 0px;
   padding-top: 0px;
-  border-bottom-width: 1px;
+  border-bottom-width: 0px;
   border-bottom-color: #c0c0c0;
   border-bottom-style: dotted;
+  background-color:#fffcf5;
 }
 
+.marketing-ul li:nth-child(even) {  
+  background-color:#fff5dd;
+}
 .marketing-page-column {
 	display: inline;
 }
@@ -267,4 +275,15 @@ input {
 .marketing-article li {
     font-size: 18px;
     letter-spacing: 0.5px;
+}
+
+.guarantee {
+	background: #edfaff;
+	border: 3px dotted #7cb1e7;
+	box-shadow: 0 0 25px rgba(0,0,0,.1);
+	margin: 28px 0 0 -50px;
+	padding: 28px 50px;
+	width: 600px;
+	align:center;
+	margin: 0 auto;
 }
