@@ -9,6 +9,7 @@ class CalendarController < ApplicationController
     puts current_user.inspect
     @calendars = current_user.all_category_groups
     puts @calendars.inspect
+    @number_of_events_for_user = current_user.all_events.count
   end
 
   def events

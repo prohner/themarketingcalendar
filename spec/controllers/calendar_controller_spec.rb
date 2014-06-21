@@ -9,6 +9,7 @@ describe CalendarController do
       expect(subject).to redirect_to(new_user_session_path)
     end
 
+    it "should assign @number_of_events_for_user"
     
     it "should return user's categories in alphabetical order"
     # it "should return user's categories in alphabetical order" do

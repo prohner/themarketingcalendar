@@ -92,7 +92,12 @@
 }
 </style>
 
-
+<% if @number_of_events_for_user == 0 %>
+	<div class="no-calendar-items-warning">
+		You don't yet have any events on your calendar.
+		Here's how to <%= link_to "Get Going Easily", get_going_easily_path %>.
+	</div>
+<% end %>
 <div id="contextMenu" class="dropdown clearfix">
     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
 		<li role="presentation" class="dropdown-header">Email me an event alert</li>
