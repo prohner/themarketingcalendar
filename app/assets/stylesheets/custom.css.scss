@@ -228,12 +228,19 @@ input {
 //}
 
 .marketing-page-container {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
-  line-height: 160%;
-  font-size: 18px;
-  letter-spacing: 0.5px;
+  margin-left     : auto;
+  margin-right    : auto;
+  width           : 650px;
+  line-height     : 160%;
+  font-size       : 18px;
+  letter-spacing  : 0.5px;
+}
+
+.marketing-page-images {
+	display          : inline-block;
+	width            : 250px;
+	float            : left;
+	padding          : 0;
 }
 
 .marketing-ul {

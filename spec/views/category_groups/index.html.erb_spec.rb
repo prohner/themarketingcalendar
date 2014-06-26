@@ -29,7 +29,7 @@ describe "category_groups/index" do
       # sign_in @dave
       visit "/category_groups"
       render
-      expect(page).to have_title "#{application_name} | Calendars"
+      expect(page).to have_title "Calendars | #{application_name}"
     end
     
     it "User views category groups page" do

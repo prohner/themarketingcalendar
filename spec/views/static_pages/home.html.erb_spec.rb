@@ -9,7 +9,7 @@ require 'spec_helper'
 feature "Home Page" do
   scenario "User visits home page" do
     visit "/static_pages/home.html"
-    expect(page).to have_title "#{application_name} | Home"
+    expect(page).to have_title "Home | #{application_name}"
   end
 
   scenario "User visits home page" do

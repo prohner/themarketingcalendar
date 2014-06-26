@@ -21,7 +21,7 @@ describe "Signup Page" do
         # expect(find_field("user[password]").value).to eq(user.password)
       end
     
-      it { should have_title("The Marketing Calendar | Edit User") }
+      it { should have_title("Edit User | The Marketing Calendar") }
 
       describe "with invalid information" do
         before(:each) do
@@ -46,7 +46,7 @@ describe "Signup Page" do
     context "when NOT logged in" do
       before { visit signup_path }
     
-      it { should have_title("The Marketing Calendar | Signup") }
+      it { should have_title("Signup | The Marketing Calendar") }
       it { expect(current_path).to eq(signup_path) }
     end
   end
