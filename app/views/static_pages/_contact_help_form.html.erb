@@ -1,14 +1,14 @@
 <%= form_tag contact_help_path do %>
 	<%= label_tag :email %>
-	<%= text_field_tag :email, params[:email], :placeholder => "Your email address" %>
+	<%= text_field_tag :email, params[:email], :size => 60, :placeholder => "Your email address" %>
 
 	<br/>
 	<%= label_tag :subject %>
-	<%= text_field_tag :subject, params[:subject], :placeholder => "Brief issue description" %>
+	<%= text_field_tag :subject, params[:subject], :size => 60, :placeholder => "Brief issue description" %>
 
 	<br/>
 	<%= label_tag :description %>
-	<%= text_field_tag :description, params[:description], :placeholder => "Give us some detail" %>
+	<%= text_area_tag :description, "", size: "64x6", :placeholder => "Give us some detail" %>
 
 	<br/>
 	<%= submit_tag "Send Contact Request", :class => "btn btn-xs btn-primary" %>
