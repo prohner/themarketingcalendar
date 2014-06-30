@@ -34,6 +34,16 @@ class StaticPagesController < ApplicationController
   end
   
   def contact_help
+    @help_request = HelpRequest.new(:email => params[:email], :subject => params[:subject], :description => params[:description])
+    UserMailer.contact_help(@help_request).deliver
+    
+    if @help_request.save
+      flash[:success] = "Thank you for contacting us.  We will email you back just as soon as we can."
+    else
+      flash[:error] = "Something went wrong while saving your request to the database.  It was emailed anyway so expect us to email you back."
+    end
+    
+    redirect_to "#{request.referer}?ip=y"
     
   end
 end

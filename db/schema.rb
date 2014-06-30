@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331043910) do
+ActiveRecord::Schema.define(version: 20140630132950) do
 
   create_table "categories", force: true do |t|
     t.string   "description"
@@ -56,6 +56,14 @@ ActiveRecord::Schema.define(version: 20140331043910) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "notes"
+  end
+
+  create_table "help_requests", force: true do |t|
+    t.string   "email"
+    t.string   "subject"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "hidden_category_group_flags", force: true do |t|

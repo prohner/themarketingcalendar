@@ -15,6 +15,11 @@ class UserMailer < ActionMailer::Base
     mail(:to => email, :subject => "Thank you for your interest!")
   end
   
+  def contact_help(help_request)
+    @help_request = help_request
+    mail(:to => ADMINISTRATOR_EMAIL_ADDRESSES, :subject => "The Marketing Calendar Support Request")
+  end
+  
   def shared_calendar_invitation(share, original_url)
     @owner = share.owner
     @partner = share.partner
