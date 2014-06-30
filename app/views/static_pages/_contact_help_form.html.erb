@@ -1,0 +1,5 @@
+<%= form_tag interested_path do %>
+	<%= label_tag :email %>
+	<%= text_field_tag :email, params[:email], :placeholder => "I'm interested!" %>
+	<%= submit_tag "Lemme know!", :class => "btn btn-xs btn-primary" %>
+<% end %>
