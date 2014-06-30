@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def show_marketing_messages?
-    signed_in?
+    not signed_in?
   end
   
   def color_scheme_as_html_snippet_to_display(color_scheme)
