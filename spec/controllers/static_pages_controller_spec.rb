@@ -30,4 +30,11 @@ describe StaticPagesController do
     end
   end
 
+  describe "POST 'contact'" do
+    it "returns http success" do
+      subject { post 'contact_help' }
+      expect(response.status).to eq(200)
+    end
+  end
+
 end

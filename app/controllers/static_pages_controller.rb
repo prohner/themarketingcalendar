@@ -32,4 +32,8 @@ class StaticPagesController < ApplicationController
     
     redirect_to "#{request.referer}?ip=y"
   end
+  
+  def contact_help
+    
+  end
 end

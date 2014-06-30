@@ -26,6 +26,14 @@ describe StaticPagesController do
     it "routes to #our_technology" do
       expect(:get => "/our_technology").to route_to("static_pages#our_technology")
     end
+    
+    it "routes to #contact_help" do
+      expect(:post => "/contact_help").to route_to("static_pages#contact_help")
+    end
+    
+    it "routes to #contact_help" do
+      expect(:post => "/contact_help").to route_to("static_pages#contact_help")
+    end
 
   end
 end

@@ -37,7 +37,6 @@ TheMarketingCalendar::Application.routes.draw do
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
-  match '/interested', to: 'static_pages#interested',     via: 'post'
   
   get 'edit_event_in_popover/:id/edit' => 'events#edit_event_in_popover', as: :edit_in_po
   get 'new_event_in_popover' => 'events#new_event_in_popover', as: :new_in_po
@@ -48,6 +47,8 @@ TheMarketingCalendar::Application.routes.draw do
   match '/whats_in_it_for_me',  to: 'static_pages#whats_in_it_for_me',  via: 'get'
   match '/pricing',             to: 'static_pages#pricing',             via: 'get'
   match '/our_technology',      to: 'static_pages#our_technology',      via: 'get'
+  match '/interested',          to: 'static_pages#interested',          via: 'post'
+  match '/contact_help',        to: 'static_pages#contact_help',        via: 'post'
   
   match '/download_data',       to: 'calendar#download_all_events_for_user',  via: 'get'
   match '/download_data_csv',   to: 'calendar#download_csv_file',             via: 'get'
