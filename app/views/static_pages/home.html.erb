@@ -45,6 +45,8 @@
 	<div style="float:right;width:250px; margin-left: auto; margin-right: auto;text-align:right;">
 		<%= link_to "Or sign right up...", new_user_registration_path, :style => "text-decoration:underline;" %>
 	</div>
+
+	<%= render 'layouts/quick_signin_form' %>
 	
 	<% if Rails.env.development? %>
 		<div style="float:clear;">&nbsp;</div>
