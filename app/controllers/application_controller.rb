@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  ## redirect after Devise signin
+  def after_sign_in_path_for(resource)
+    calendar_index_path
+  end
+
   protected
 
   def configure_permitted_parameters
