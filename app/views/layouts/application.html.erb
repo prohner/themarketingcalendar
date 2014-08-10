@@ -44,7 +44,9 @@
 
 		    <div class="container" style="width:100%;">
 				<% flash.each do |key, value| %>
-					<div class="alert alert-<%= key %>"><%= value %></div>
+					<div class="alert alert-<%= key %>"><%= value %> 
+						<a class="alert-<%= key %> alert-dismissal" href="#" onclick="$('.alert-<%= key %>').alert('close');">X</a>
+					</div>
 				<% end %>
 				<%= yield %>
 				<%= render 'layouts/footer' %>
