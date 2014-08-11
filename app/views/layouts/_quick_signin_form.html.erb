@@ -72,12 +72,13 @@
 								:url => session_path(resource_name), 
 								html: { :role => "form" }) do |f| %>
 			<ul>
+				<li><%= f.label "Sign In" %></li>
 				<li>
-					<%= f.label :email %>
+					<!-- <%= f.label :email %> -->
 					<%= f.email_field :email, :placeholder => "Email address" %>
 				</li>
 				<li>
-					<%= f.label :password %>
+					<!-- <%= f.label :password %> -->
 					<%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
 				</li>
 				<li>
