@@ -219,7 +219,7 @@
   <div class="control-group form-group" id="event_ends_at_group">
     <%= f.label :notes, :class => "col-sm-2 control-label" %>
 	<div class="col-sm-10">
-		<%= f.text_area :notes, :placeholder => "Any additional thoughts or notes", :class => "tcm-form-control" %>
+		<%= f.text_area :notes, :placeholder => "Any additional thoughts or notes", :class => "tcm-form-control", :maxlength => 255 %>
 	</div>
   </div>
   

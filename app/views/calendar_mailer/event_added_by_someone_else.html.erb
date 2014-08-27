@@ -2,15 +2,37 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+	<style type="text/css" media="screen">
+	th {
+		background-color: lightgray;
+		border-radius: 3px;
+	}
+	.label {
+		color: darkgray;
+	}
+	.card {
+	  position: relative;
+	  float: left;
+	  margin-right: 10px;
+	  width: 75%;
+	  height: auto;
+	  border-radius: 10px;
+	  background: #fff;
+	  -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+	  box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+	}
+	</style>
   </head>
   <body>
-	<table border="0" cellspacing="5" cellpadding="5">
-		<tr><th colspan="2">New Event Added to <em><%= @event.category.category_group.description %></em></th></tr>
-		<tr><td class="label">Event</td><td class="data"><%= @event.description %></td></tr>
-		<tr><td class="label">Starts</td><td class="data"><%= @event.starts_at %></td></tr>
-		<tr><td class="label">Ends</td><td class="data"><%= @event.ends_at %></td></tr>
-		<tr><td class="label">Notes</td><td class="data"><%= @event.notes %></td></tr>
-	</table>
+	<div class="card">
+		<table border="0" cellspacing="5" cellpadding="5" width="100%">
+			<tr><th colspan="2">New Event Added to <em><%= @event.category.category_group.description %></em></th></tr>
+			<tr><td class="label">Event</td><td class="data"><%= @event.description %></td></tr>
+			<tr><td class="label">Starts</td><td class="data"><%= @event.starts_at.strftime("%A %x") %></td></tr>
+			<tr><td class="label">Ends</td><td class="data"><%= @event.ends_at.strftime("%A %x") %></td></tr>
+			<tr><td class="label">Notes</td><td class="data"><%= @event.notes %></td></tr>
+		</table>
+	</div>
 
   </body>
 </html>
