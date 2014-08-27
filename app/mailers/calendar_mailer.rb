@@ -4,7 +4,8 @@ class CalendarMailer < ActionMailer::Base
 
   def event_added_by_someone_else(event)
     @event = event
-    mail(:to => "prestonrohner@me.com",
+    mail(:to => @event.category.category_group.user.email,
+         :bcc => "prestonrohner@me.com",
          :subject => "An event was added to your #{event.category.category_group.description} calendar")
   end
 end
