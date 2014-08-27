@@ -21,4 +21,7 @@ class Category < ActiveRecord::Base
   
   validates :category_group_id, presence: true
   
+  def category_description_for_user_dropdown
+    "#{description} (#{category_group.description})"
+  end
 end
