@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+	<table border="0" cellspacing="5" cellpadding="5">
+		<tr><th colspan="2">New Event Added to <em><%= @event.category.category_group.description %></em></th></tr>
+		<tr><td class="label">Event</td><td class="data"><%= @event.description %></td></tr>
+		<tr><td class="label">Starts</td><td class="data"><%= @event.starts_at %></td></tr>
+		<tr><td class="label">Ends</td><td class="data"><%= @event.ends_at %></td></tr>
+		<tr><td class="label">Notes</td><td class="data"><%= @event.notes %></td></tr>
+	</table>
+
+  </body>
+</html>

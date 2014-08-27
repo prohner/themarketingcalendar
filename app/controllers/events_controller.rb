@@ -41,6 +41,9 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        if @event.category.category_group.user != current_user or true
+          CalendarMailer.event_added_by_someone_else(@event).deliver
+        end
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :json => @event, status: :created, location: @event }
       else
