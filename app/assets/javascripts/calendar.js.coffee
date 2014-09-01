@@ -147,6 +147,7 @@ massAssignEvent = (event, json_obj) ->
 
 presentPopover = (url, sourceObject, event) ->
 	thisObject = sourceObject
+	thisObject.isUnshownObject = true
 
 	is_deleted_event = false
 	console.log "presentPopover starting" if debugging
@@ -203,9 +204,11 @@ presentPopover = (url, sourceObject, event) ->
 					console.log "		REFETCHING EVENTS " + json_obj.repetition_type if debugging
 					$('#calendar').fullCalendar 'refetchEvents'
 				else if is_new_event
-					event = { }
-					event = massAssignEvent event, json_obj
-					$('#calendar').fullCalendar 'renderEvent', event, true
+					if thisObject.isUnshownObject
+						event = { }
+						event = massAssignEvent event, json_obj
+						$('#calendar').fullCalendar 'renderEvent', event, true
+					thisObject.isUnshownObject = false
 				else
 					event = massAssignEvent event, json_obj
 					$('#calendar').fullCalendar 'updateEvent', event
