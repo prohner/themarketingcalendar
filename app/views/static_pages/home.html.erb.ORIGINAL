@@ -1,0 +1,102 @@
+<% provide(:title, 'Home') %>
+<% provide(:description, 'The Marketing Calendar helps marketing professionals to lay out their plans and successfully implement those plans') %>
+
+<% if show_marketing_messages? %>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-lg-2 col-md-2">
+			<%= image_tag("calendar_pictures.png", :style => "width: 250px; height: auto;") %>
+		</div>
+		<div class="col-lg-1 col-md-1">
+			&nbsp;
+		</div>
+
+		<div class="col-lg-7 col-md-7">
+			<h1 class="marketing-h1">Welcome to <%= application_name %></h1>
+
+			We are glad you're here!  Really, we mean it.  Here's the thing: we have felt your pain
+			too.  We were:
+			<ul>
+				<li><strong>emailing</strong> around spreadsheets</li>
+				<li><strong>begging</strong> spreadsheet owners to update</li>
+				<li><strong>calling</strong> people to figure out whether they communicated their changes</li>
+			</ul> 
+
+			How frustrating! <strong>How ridiculous!</strong>
+			We couldn't take it anymore.
+			<%= link_to "There had to be another way.", "https://www.youtube.com/watch?v=HQFLqMyo0fo", :style => "color:black;" %>
+
+			<p>
+				We needed a fix for this mess.  So we built one.
+			</p>
+
+			<p>
+				A solution to take care of a few things:
+				<ul class="marketing-ul">
+					<li>Prevent our planned items from slipping through the cracks</li>
+					<li>Add a feeling of organization to our marketing efforts</li>
+					<li>Consolidate several calendars into one, easy-to-use calendar</li>
+					<li>Pull everyone together onto the same web page</li>
+					<li>Create a visual representation of the greater marketing calendar</li>
+					<li>Be available all the time, from anywhere</li>
+				</ul>
+			</p>
+
+			<div style="float:right;width:250px; margin-left: auto; margin-right: auto;text-align:right;">
+				<%= link_to "Learn what's in it for you...", whats_in_it_for_me_path, :style => "text-decoration:underline;" %>
+			</div>
+			<div style="float:clear;">&nbsp;</div>
+			<div style="float:right;width:250px; margin-left: auto; margin-right: auto;text-align:right;">
+				<%= link_to "Or sign right up...", new_user_registration_path, :style => "text-decoration:underline;" %>
+			</div>
+
+			<% if Rails.env.development? %>
+				<div style="float:clear;">&nbsp;</div>
+				<hr style="color: #f00;background-color: #f00;height: 5px;color:red;border:3;" />
+				<p>WHY ARE PEOPLE ON THIS PAGE?  WHAT IS THEIR PAIN POINT? WHAT RESULT DO THEY WANT, BUT NOT HAVE?</p>
+				<ul>
+					<li>They need to share their calendar amongst a group</li>
+					<li>They want to see their calendar...what tactics are coordinated, duplicated whatever</li>
+					<li>Tired of items slipping through the cracks</li>
+					<li>Confused in trying to manage effectively multiple marketing campaigns</li>
+					<li>Feeling of lack of organization...this is the foundation of your marketing systems, organizing variety of content across many channels</li>
+					<li>Wandering off track during the tough or slow times</li>
+					<li>Lack of advance plans...</li>
+					<li>Lack of accountability</li>
+					<li>Lack of correlation between your plans and your results</li>
+					<li>Lack of consistency</li>
+					<li>Lack of an overall strategy (a higher level view may give users an ability to visualize their strategy)</li>
+					<li>How many “calendars” does your company currently consult? Does your demand generation team use one to map out email sends, while your customer marketing emails get mapped out on another? When you schedule a webinar to promote a hot new piece of content, can you instantly tell whether it overlaps with your virtual event?</li>
+					<li>Your calendar is supposed to help you plan your activities – not set them in stone. While one part of a calendar’s job is to help you record things, if you can’t use your calendar to map, move, and tweak your plans, you won’t end up using it at all.</li>
+					<li>Your calendar is not tied to action...we have the reminder system (calendar-in-your-inbox) to help you make sure everyone implements their piece of the action</li>
+					<li>C-cubed: Communication, coordination, and collaboration are just as important when you’re stuck in the marketing clouds</li>
+					<li>Solid marketing program planning--combined with a unified, high-functioning calendar--can help eliminate confusion and misunderstandings, pulling everybody together on the same page.</li>
+					<li>Adding an entry gives you something concrete...these concrete goals/objectives lead to a successful marketing program.  That is, ill-defined objectives crash marketing programs. </li>
+					<li>Using a single, department-wide calendaring tool can help define the role of a campaign in the greater marketing calendar.</li>
+					<li>Small business owners often do not have systems in place to ensure they are always marketing and communicating with potential clients. </li>
+					<li>It provides 24/7 access from anywhere you have a Web connection, no loading or updating of software, give your agency access to your plan and schedule and has all your marketing information securely in one place. No worries for your IT department and no resources needed since it is 100% hosted off-site.</li>
+					<li></li>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+				<br/>
+				<hr>
+			<% end %>
+		</div>
+
+		<div class="col-lg-2 col-md-2">
+			<%= render 'layouts/quick_signin_form' %>
+		</div>
+	</div>
+</div>
+
+
+
+<% end %>
+
+<%= render :partial => "in_progress" %>
+
+
+<!-- <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %> -->

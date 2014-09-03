@@ -1,3 +1,43 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300');
+
+.jumbotron {
+	background: url('/assets/bg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+	color:#fff;
+  	background-color:#333;
+  	//font-family: 'Open Sans',Arial,Helvetica,Sans-Serif;
+	
+}
+.block {
+	background-color:rgba(0, 0, 0, 0.85);
+    height:100%;
+  	padding-left:12px;
+  	padding-right:12px;
+	opacity:1;
+}
+.logo {
+	float:left;
+	position:relative;
+	left:-10px;
+	padding-top:5px;
+  	padding-left:12px;
+  	padding-right:12px;
+}
+.navbar-default .navbar-brand {
+	
+	color:black;
+	padding-left:12px;
+  	padding-right:12px;
+	font-size:15px;
+	
+}
