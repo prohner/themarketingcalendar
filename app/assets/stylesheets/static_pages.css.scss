@@ -25,13 +25,50 @@
   	padding-right:12px;
 	opacity:1;
 }
+.logo-bg{
+	
+	background-image:url("new-logo.png");
+	float:left;
+	width:80px;
+	height:100px;
+	margin:0;
+	position:relative;
+	padding-top:18px;
+  	padding-left:34px;
+  	padding-right:18px;
+	font-size:1em;
+	text-align:center;
+}
 .logo {
+	
+	//background-image:url("new-logo.png");
+	background-color:#ddd;
+	box-shadow: 4px 4px 5px #888888;
+	//border-style:solid;
+	border-width:2px;
+	//border-color:blue;
+	border-radius:5px;
 	float:left;
 	position:relative;
 	left:-10px;
 	padding-top:5px;
   	padding-left:12px;
   	padding-right:12px;
+	font-size:1em;
+	color:#333;
+	padding:0;
+	overflow:hidden;
+	text-align:center;
+	width:28px;
+	font-weight:bold;
+}
+.month {
+	background-color:#e00;
+	width:100%;
+	margin: 0;
+	font-size:-2em;
+	color:#fff;
+	font-weight:normal;
 }
 .navbar-default .navbar-brand {
 	

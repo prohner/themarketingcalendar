@@ -17,10 +17,18 @@
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse"><span class="sr-only">Toggle navigation</span></button>
+		<div class="logo-bg">
+			
 			<div class="logo">
-				<%= link_to image_tag("logo-fp.png", :width => 52.5, :height => 52.5), id: "logo", style: "z-index:-100;" %>
-			</div><a class="navbar-brand" href="#">The Marketing Calendar</a>
+					<div class="month">
+					<%= Time.now.strftime("%b")%>
+				</div>
+				<%= Time.now.strftime("%-d")%>
+			</div>
 		</div>
+			<a class="navbar-brand" href="#">The Marketing Calendar</a>
+		</div>
+	
 		<div class="navbar-collapse collapse">
 			<%= form_for(resource,  :as => resource_name, 
 									:url => session_path(resource_name), 
