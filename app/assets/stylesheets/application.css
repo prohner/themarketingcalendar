@@ -18,6 +18,7 @@
  *= require snap_demo
  *= require get_going
  *= require static_pages
+ *= require events
  */
 
 @font-face {
