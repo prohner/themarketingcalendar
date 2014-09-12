@@ -207,6 +207,9 @@ input {
 .container {
 	//padding-top:55px;
 }
+.spacer {
+	padding-bottom:96px;
+}
 
 .alert-notice {
 	@extend .alert-warning;

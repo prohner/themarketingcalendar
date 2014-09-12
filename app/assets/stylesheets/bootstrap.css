@@ -2664,6 +2664,7 @@ input[type="button"].btn-block {
 }
 
 .collapse {
+  margin-top:-60px;
   display: none;
 }
 
