@@ -217,11 +217,19 @@ input {
 	padding-bottom:66px;
 	
 }
-ul.nav.navbar-nav.pull-right.logged-in {
-	margin-top:-66px;
+
+.logged-in {
+   padding-top:15px;	
+   height:72px;
+   margin-bottom:0px;
+  /*display: none;*/
+}
+
+//ul.nav.navbar-nav.pull-right.logged-in {
+//	margin-top:-66px;
 	//padding-bottom:66px;
 	
-}
+	//}
 
 .alert-notice {
 	@extend .alert-warning;

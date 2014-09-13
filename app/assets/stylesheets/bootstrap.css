@@ -2667,12 +2667,7 @@ input[type="button"].btn-block {
   margin-top:-60px;
   display: none;
 }
-.logged-in {
-   padding-top:15px;	
-   height:72px;
-   margin-bottom:-40px;
-  /*display: none;*/
-}
+
 
 
 .collapse.in {
