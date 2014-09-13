@@ -205,10 +205,22 @@ input {
 }
 
 .container {
-	//padding-top:55px;
+	//padding-top:0px;
 }
 .spacer {
+	
 	padding-bottom:96px;
+	
+}
+.spacer .logged-in {
+	margin-top:-16px;
+	padding-bottom:66px;
+	
+}
+ul.nav.navbar-nav.pull-right.logged-in {
+	margin-top:-66px;
+	//padding-bottom:66px;
+	
 }
 
 .alert-notice {
