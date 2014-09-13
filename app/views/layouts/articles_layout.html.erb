@@ -20,7 +20,11 @@
   </head>
   <body>
       <div id="content" class="snap-content">
-		  	<%= render 'layouts/header_logged_in' %>
+			<% if user_signed_in? %>
+				<%= render 'layouts/header_logged_in' %>
+			<% else %>
+				<%= render 'layouts/header' %>
+			<% end %>
 
 		    <div class="container" style="width:70%;">
 				<table border="0" cellspacing="0" cellpadding="0">
