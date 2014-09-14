@@ -119,7 +119,7 @@ describe User do
       describe "User.administrator_user_type_value" do
         it "should respond with the right value" do
           user.user_type = User.administrator_user_type_value
-          expect(user.role?(:administrator)).to be_true
+          expect(user.role?(:administrator)).to be_truthy
         end
       end
     end
@@ -128,7 +128,7 @@ describe User do
       user = User.new(first_name: "a", last_name: "b", email: "user@example.com", password: "123456", password_confirmation: "123456")
       expect(user).to be_valid
       
-      expect(user.role?(:administrator)).to be_true
+      expect(user.role?(:administrator)).to be_truthy
     end
   end
   
@@ -425,14 +425,14 @@ describe User do
   describe "#user_can_use_system" do
     let(:user) { FactoryGirl.create(:user_dave) }
 
-    it "should actually verify the method"
+    skip "should actually verify the method"
     # it "should grant access appropriately" do
     #   User.status_options.each do |status|
     #     user.status = status
     #     if status == "signed up"
-    #       expect(user.user_can_use_system).to be_true
+    #       expect(user.user_can_use_system).to be_truthy
     #     else
-    #       expect(user.user_can_use_system).to be_false
+    #       expect(user.user_can_use_system).to be_falsey
     #     end
     #   end
     # end
@@ -446,22 +446,22 @@ describe User do
     end
     
     it "should respond correctly about each user type" do
-      expect(user.role?(:root)).to be_true
+      expect(user.role?(:root)).to be_truthy
     end
     
     it "should respond correctly about each user type: administrator" do
       user.user_type = 2
-      expect(user.role?(:administrator)).to be_true
+      expect(user.role?(:administrator)).to be_truthy
     end
     
     it "should respond correctly about each user type: user" do
       user.user_type = 3
-      expect(user.role?(:user)).to be_true
+      expect(user.role?(:user)).to be_truthy
     end
     
     it "should respond correctly about each user type: viewer" do
       user.user_type = 4
-      expect(user.role?(:viewer)).to be_true
+      expect(user.role?(:viewer)).to be_truthy
     end
   end
 
@@ -548,14 +548,14 @@ describe User do
 
     it "should answer true if user is root level" do
       user.user_type = User.root_user_type_value
-      expect(user.root?).to be_true
+      expect(user.root?).to be_truthy
     end
 
     it "should answer false if user is not root level" do
       User.user_type_values.each do |val|
         unless val == User.root_user_type_value
           user.user_type = val
-          expect(user.root?).to be_false
+          expect(user.root?).to be_falsey
         end
       end
     end

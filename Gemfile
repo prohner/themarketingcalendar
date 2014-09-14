@@ -56,6 +56,7 @@ group :development, :test do
 
   gem 'rspec-activemodel-mocks'
   gem 'rspec-rails'
+  gem 'rspec-its', '~> 1.0.1'
   gem 'capybara'
   gem 'guard-rspec', '2.5.0'
   gem 'terminal-notifier-guard'

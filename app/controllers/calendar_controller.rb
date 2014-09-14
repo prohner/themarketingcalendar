@@ -5,15 +5,15 @@ class CalendarController < ApplicationController
   def index
     @event = Event.new
     # @categories = current_user.all_categories
-    puts "IN THE INDEX METHOD"
-    puts current_user.inspect
+    # puts "IN THE INDEX METHOD"
+    # puts current_user.inspect
     @calendars = current_user.all_category_groups
-    puts @calendars.inspect
+    # puts @calendars.inspect
     @number_of_events_for_user = current_user.all_events.count
   end
 
   def events
-    puts "Calling CalendarController#events"
+    # puts "Calling CalendarController#events"
     # full_calendar will hit the index method with query parameters
     # 'start' and 'end' in order to filter the results for the
     # appropriate month/week/day.  It should be possiblt to change

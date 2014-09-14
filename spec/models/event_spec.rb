@@ -110,13 +110,13 @@ describe Event do
       ev = Event.new(attr)
   
       ev.repetition_type = :none
-      expect(ev.repeating_event?).to be_false
+      expect(ev.repeating_event?).to be_falsey
   
       ev.repetition_type = :weekly
-      expect(ev.repeating_event?).to be_true
+      expect(ev.repeating_event?).to be_truthy
   
       ev.repetition_type = :monthly
-      expect(ev.repeating_event?).to be_true
+      expect(ev.repeating_event?).to be_truthy
     end
   end
   
