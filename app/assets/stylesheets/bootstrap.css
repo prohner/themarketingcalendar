@@ -4491,9 +4491,21 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-brand {
   float: left;
-  padding: 15px 15px;
-  font-size: 18px;
+  padding: 5px 5px;
+  font-size: 20px;
+  font-weight:bold;
   line-height: 20px;
+  
+  margin-top:20px;
+}
+.navbar-brand.logged-in {
+  float: left;
+  padding: 15px 15px;
+  font-size: 20px;
+  font-weight:bold;
+  line-height: 20px;
+  
+  margin-top:12px;
 }
 
 .navbar-brand:hover,
