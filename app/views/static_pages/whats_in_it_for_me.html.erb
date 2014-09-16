@@ -2,73 +2,125 @@
 <% provide(:description, 'The Marketing Calendar gives you a central location for all of your marketing tactics, keeping everyone on the same page, and on task') %>
 
 
-<h1><a name="learnmore">The Marketing Calendar simplifies your marketing organization</a></h1>
-<p>
-	Running any marketing organization, large or small, is an ongoing challenge.  Having 
-	multiple people working on multiple projects requires extraordinary communication.  It's 
-	so frustrating to find that we have missed a tactic.  Someone forgets their piece of 
-	the project.  I forget to do my task.  I just get overwhelmed and decide I'm not gonna 
-	bother to come up with that creative tweet one day.  Holes start appearing in the plan.
-</p>
-<p>
-	These things happen for one main reason:  Someone forgets what needs to be done.
-</p>
-<p>
-	The Marketing Calendar simplifies your life by becoming the hub for your marketing 
-	plans.  Everyone you invite can see the plans, on a calendar.  Everyone can see the 
-	schedule and how each tactic fits into the overall strategic implementation.
-</p>
-<p>
-	We have kept The Marketing Calendar a stand-alone system.  You don't need to try to 
-	get up and running on an insanely expensive marketing automation system to organize 
-	your team.  A specialized calendar simplifies your marketing organization.
-</p>
 
-<%= link_to "Simplify your organization &raquo;".html_safe, new_user_registration_path, :class => "btn btn-success btn-lg", :role => "button" %>
+<div class="container">
+    <div class="row">
+        <div class="row spacer">
+			<div class="span4"></div>
+		</div>
+		<div class="col-md-10">
+        <div class="blockquote-box clearfix">
+            <div class="square pull-left">
+                <span class="glyphicon glyphicon-calendar glyphicon-lg"></span>
+            </div>
+            <h4>
+                <a name="learnmore">The Marketing Calendar simplifies your marketing organization</a></h4>
+            <p>
+				Running any marketing organization, large or small, is an ongoing challenge.  Having 
+				multiple people working on multiple projects requires extraordinary communication.  It's 
+				so frustrating to find that we have missed a tactic.  Someone forgets their piece of 
+				the project.  I forget to do my task.  I just get overwhelmed and decide I'm not gonna 
+				bother to come up with that creative tweet one day.  Holes start appearing in the plan.
+            </p>
+			<p>
+				These things happen for one main reason:  Someone forgets what needs to be done.
+			</p>
+			<p>
+				The Marketing Calendar simplifies your life by becoming the hub for your marketing 
+				plans.  Everyone you invite can see the plans, on a calendar.  Everyone can see the 
+				schedule and how each tactic fits into the overall strategic implementation.
+			</p>
+			<p>
+				We have kept The Marketing Calendar a stand-alone system.  You don't need to try to 
+				get up and running on an insanely expensive marketing automation system to organize 
+				your team.  A specialized calendar simplifies your marketing organization.
+			</p>
+			<p><%if !user_signed_in?%>
+				<%= link_to "Simplify your organization &raquo;".html_safe, new_user_registration_path, :class => "btn btn-success btn-lg", :role => "button" %>
+				<%end%>
+			</p>
+        </div>
+        <div class="row spacer">
+			<div class="span4"></div>
+		</div>
+        
+            <div class="blockquote-box blockquote-info clearfix">
+                <div class="square pull-left">
+                    <span class="glyphicon glyphicon-info-sign glyphicon-lg"></span>
+                </div>
+                <h4>
+                    <a name="dazzleme">Your entire team shares the same marketing plan on the same calendar</a></h4>
+				<p>
+					Marketers have developed some tried-and-true programs over the years.  Especially in 
+					retail environments these programs are run annually.  But they must advance with the demands 
+					of today’s customers.  
+				</p>
+				<p>
+					Marketing teams perform SWOT (strength, weakness, opportunity, and threat) analyses.  
+					Using the analyses they develop tight strategies with detailed tactics.  There are lots of 
+					details. More than a person can track in their head.  And then they need to adapt to the 
+					changing tactics of competitors and feedback from customers.  With so many changing details 
+					teams need a communication hub.
+				</p>
+				<p>
+					You can keep doing what you’ve always done.  You’re probably emailing spreadsheets around 
+					hoping that everyone looks for the changes.  Or maybe you have weekly meetings to keep 
+					reviewing the same tactics.
+				</p>
+				<p>
+					The Marketing Calendar acts as the hub of your marketing planning so that everyone keeps 
+					informed of the details even as the details change.
+				</p>
+				<p>
+					You'll enjoy the relief of knowing that your team is effectively working together.  
+					Your team gets reminder notifications when they should be working on their tasks.
+					Work gets done.  You hear birds singing once again.
+				</p>
+				<p>
+				<%if !user_signed_in?%>
+				<%= link_to "Collaborate on one calendar &raquo;".html_safe, new_user_registration_path, :class => "btn btn-success btn-lg", :role => "button" %>
+				<%end%>
+			   </p>
+            </div>
+       
+   <div class="row spacer">
+	<div class="span4"></div>
+</div>
+			 
+            <div class="blockquote-box blockquote-primary clearfix">
+                <div class="square pull-left">
+                    <span class="glyphicon glyphicon-usd glyphicon-lg"></span>
+                </div>
+                <h4>
+                    <a name="showmethemoney">Our simple pricing plan is just one outgrowth from our core mission</a></h4>
+				<p>
+					To simplify your planning we offer an all-inclusive plan.  You get the whole kit and 
+					kaboodle.  No matter how many marketing events you schedule, there’s always room for 
+					more.  Add hundreds of events.  It’s all good.
+				</p>
+				<p>
+					Need another teammate on the calendar?  No prob.  Invite anyone you’d like to include.
+				</p>
+				<p>
+					Let the setup wizard prompt you to get started and cover your bases.  The wizard 
+					will walk you through the various media and help you setup your plan.  
+				</p>
+				<p>
+					For only $19 / month you can start working your plan now...
+				</p>
+				<p><%if !user_signed_in?%>
+					<%= link_to "Start now &raquo;".html_safe, new_user_registration_path, :class => "btn btn-success btn-lg", :role => "button" %>
+					<%end%>
+				</p>
+            </div>
+            
+        </div>
 
-<h1><a name="dazzlme">Your entire team shares the same marketing plan on the same calendar</a></h1>
-<p>
-	Marketers have developed some tried-and-true programs over the years.  Especially in 
-	retail environments these programs are run annually.  But they must advance with the demands 
-	of today’s customers.  
-</p>
-<p>
-	Marketing teams perform SWOT (strength, weakness, opportunity, and threat) analyses.  
-	Using the analyses they develop tight strategies with detailed tactics.  There are lots of 
-	details. More than a person can track in their head.  And then they need to adapt to the 
-	changing tactics of competitors and feedback from customers.  With so many changing details 
-	teams need a communication hub.
-</p>
-<p>
-	You can keep doing what you’ve always done.  You’re probably emailing spreadsheets around 
-	hoping that everyone looks for the changes.  Or maybe you have weekly meetings to keep 
-	reviewing the same tactics.
-</p>
-<p>
-	The Marketing Calendar acts as the hub of your marketing planning so that everyone keeps 
-	informed of the details even as the details change.
-</p>
-<p>
-	You'll enjoy the relief of knowing that your team is effectively working together.  
-	Your team gets reminder notifications when they should be working on their tasks.
-	Work gets done.  You hear birds singing once again.
-</p>
-<%= link_to "Collaborate on one calendar &raquo;".html_safe, new_user_registration_path, :class => "btn btn-success btn-lg", :role => "button" %>
+          
+           
+        </div>
+    </div>
+</div>
 
-<h1><a name="showmethemoney">Our simple pricing plan is just one outgrowth from our core mission</a></h1>
-<p>
-	To simplify your planning we offer an all-inclusive plan.  You get the whole kit and 
-	kaboodle.  No matter how many marketing events you schedule, there’s always room for 
-	more.  Add hundreds of events.  It’s all good.
-</p>
-<p>
-	Need another teammate on the calendar?  No prob.  Invite anyone you’d like to include.
-</p>
-<p>
-	Let the setup wizard prompt you to get started and cover your bases.  The wizard 
-	will walk you through the various media and help you setup your plan.  
-</p>
-<p>
-	For only $19 / month you can start working your plan now...
-</p>
-<%= link_to "Start now &raquo;".html_safe, new_user_registration_path, :class => "btn btn-success btn-lg", :role => "button" %>
+
+
