@@ -1,13 +1,21 @@
 <ul class="nav navbar-nav pull-right">
-	<li class=""><%= link_to "Home",    root_path %></li>
+	<li class="">
+		<%= link_to root_path, class: "btn" do %>
+		  <span class="glyphicon glyphicon-home"><font class="nav-font">Home</font> </span>
+		<% end %>
+	</li>
 
 	<% if show_marketing_messages? %>
-		<li> <%= link_to "What's in it for me?", whats_in_it_for_me_path %> </li>
+		<li> 
+			<%= link_to whats_in_it_for_me_path do %>
+			<font class="nav-font">What's in it for me? </font>
+		    <% end %>
+		 </li>
 	<% end %>
 
 	<li id="fat-menu" class="dropdown">
 		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-			Articles <b class="caret"></b>
+			<span class="glyphicon glyphicon-list-alt"><font class="nav-font">Articles</font></span> <b class="caret"></b>
 		</a>
 		<ul class="dropdown-menu">
 			<li><%= link_to "Implementation of a Marketing Plan", articles_implementation_of_a_marketing_plan_path %></li>
@@ -17,11 +25,15 @@
 	</li>
 
 	<% if user_signed_in? %>
-		<li><%= link_to 'Calendar', calendar_index_path %></li>
+		<li>
+			<%= link_to calendar_index_path  do%>
+			 <span class="glyphicon glyphicon-calendar"></span><font class="nav-font">Calendar</font></span>
+			<% end %>
+		</li>
 		<!-- <li><%= link_to "Users", '#' %></li> -->
 		<li id="fat-menu" class="dropdown">
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-				Account <b class="caret"></b>
+				<font class="nav-font">Account</font> <b class="caret"></b>
 			</a>
 			<ul class="dropdown-menu">
 				<li><%= link_to "Share Calendar", '/choose-calendar-to-share' %></li>
@@ -33,15 +45,28 @@
 				<li class="divider"></li>
 				<li><%= link_to "Download My Data", download_data_path %></li>
 				<li class="divider"></li>
-				<li><%= link_to "Profile", edit_user_registration_path %></li>
+				<li>
+					<%= link_to edit_user_registration_path do %>
+					<span class="glyphicon glyphicon-user">Profile</span>
+					<% end %>
+				</li>
 				<li class="divider"></li>
 				<li>
-					<%= link_to "Sign out (#{current_user.email})", destroy_user_session_path, method: "delete" %>
+					<%= link_to destroy_user_session_path, method: "delete" do %>
+					<span class="glyphicon glyphicon-off">Logout <%=current_user.email%></span>
+					<% end %>
 				</li>
 			</ul>
 		</li>
 	<% else %>
-		<li><%= link_to "Sign up", new_user_registration_path %></li>
+		<li>
+			<%= link_to new_user_registration_path do %>
+			<font class="nav-font">Sign up</font>
+			<% end %>
+		</li>
 	<% end %>
-	<li><%= link_to "Help",    help_path %></li>
+	<li><%= link_to help_path do%>
+		<font class="nav-font">Help</font>
+		<% end %>
+	</li>
 </ul>
