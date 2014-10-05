@@ -1,8 +1,9 @@
 <div class="email-list-signup-form">
 	<%= form_tag articles_add_to_email_list_path do %>
 		<%= label_tag "More Insights" %>
-		<%= text_field_tag :email, params[:email], :placeholder => "(Your email)" %>
+		<%= text_field_tag :email, params[:email], :placeholder => "(Your email)", :class => "input-field" %>
 		<%= submit_tag "Send Me Ideas!", :class => "btn btn-xs btn-primary" %>
 	<% end %>
 	<small style="color:#909090;">(One-two emails per month)</small>
 </div>
+
