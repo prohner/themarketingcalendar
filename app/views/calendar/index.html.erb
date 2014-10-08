@@ -17,7 +17,7 @@
 		maxPosition: 266,
 		minPosition: -266,
 		tapToClose: true,
-		touchToDrag: true,
+		touchToDrag: false,
 		slideIntent: 40,
 		minDragDistance: 5
 	});
@@ -123,7 +123,7 @@
 	<tr>
 		<td width="5%" valign="top" align="left">
 			<div id="reveal-snap-toggle" class="reveal-snap-toggle pull-left margin-left:0; float:left; display:inline-block;">
-				<%= button_to_function "&#8596;".html_safe, "return toggleSnap();", class: "fc-button fc-state-default fc-corner-left fc-corner-right no-underline-on-hover" %>
+				<%= button_to_function "&#8596;".html_safe, "return toggleSnap();", class: "fc-button fc-state-default fc-corner-left fc-corner-right no-underline-on-hover", id: "reveal-snap-toggle-button" %>
 			</div>
 		</td>
 		<td>

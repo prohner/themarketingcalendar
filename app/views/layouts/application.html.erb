@@ -55,6 +55,19 @@
 				<%= yield %>
 				<%= render 'layouts/footer' %>
 				<%= debug(params) if Rails.env.development? %>
+				<% if Rails.env.development? %>
+					<%= form_for(resource,  :as => resource_name, 
+											:url => session_path(resource_name), 
+											html: { :role => "form" }) do |f| %>
+						<div class="form-group">
+							<%= f.email_field :email, :class => "form-control", :placeholder => "Email" %>
+						</div>
+						<div class="form-group">
+							<%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
+						</div><%= f.submit "Sign in", :class => "btn btn-default" %>
+					<% end %>
+
+				<% end %>
 		    </div>
 	    </div>
   </body>
