@@ -36,7 +36,7 @@
 				your team.  A specialized calendar simplifies your marketing organization.
 			</p>
 			<p><%if !user_signed_in?%>
-				<%= link_to "Simplify your organization &raquo;".html_safe, new_user_registration_path, :class => "btn btn-primary btn-lg", :role => "button" %>
+				<%= link_to "Simplify your organization &raquo;".html_safe, new_user_registration_path, :class => "btn btn-default btn-lg", :role => "button" %>
 				<%end%>
 			</p>
         </div>
@@ -78,7 +78,7 @@
 				</p>
 				<p>
 				<%if !user_signed_in?%>
-				<%= link_to "Collaborate on one calendar &raquo;".html_safe, new_user_registration_path, :class => "btn btn-primary btn-lg", :role => "button" %>
+				<%= link_to "Collaborate on one calendar &raquo;".html_safe, new_user_registration_path, :class => "btn btn-default btn-lg", :role => "button" %>
 				<%end%>
 			   </p>
             </div>
@@ -129,7 +129,7 @@
 </div></p>
 				
 				<p><%if !user_signed_in?%>
-					<%= link_to "Start now &raquo;".html_safe, new_user_registration_path, :class => "btn btn-primary btn-lg", :role => "button" %>
+					<%= link_to "Start now &raquo;".html_safe, new_user_registration_path, :class => "btn btn-default btn-lg", :role => "button" %>
 					<%end%>
 				</p>
             </div>
