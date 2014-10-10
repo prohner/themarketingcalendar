@@ -59,7 +59,17 @@
 			</ul>
 		</li>
 	<% else %>
+	
+	 <li>
+		
+		 <%= link_to '/users/sign_in' do %>
+		 <font class="nav-font hidden-sm hidden-md hidden-lg">Sign in</font>
+		 <% end %>
+		 
+	 </li>
+		
 		<li>
+			
 			<%= link_to new_user_registration_path do %>
 			<font class="nav-font">Sign up</font>
 			<% end %>
