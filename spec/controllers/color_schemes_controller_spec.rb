@@ -23,7 +23,7 @@ describe ColorSchemesController do
   # This should return the minimal set of attributes required to create a valid
   # ColorScheme. As you add validations to ColorScheme, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { { "name" => "MyString", "foreground" => "foreground", "background" => "background" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -34,7 +34,7 @@ describe ColorSchemesController do
     it "assigns all color_schemes as @color_schemes" do
       color_scheme = ColorScheme.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:color_schemes).should eq([color_scheme])
+      expect(assigns(:color_schemes)).to eq([color_scheme])
     end
   end
 
@@ -42,14 +42,14 @@ describe ColorSchemesController do
     it "assigns the requested color_scheme as @color_scheme" do
       color_scheme = ColorScheme.create! valid_attributes
       get :show, {:id => color_scheme.to_param}, valid_session
-      assigns(:color_scheme).should eq(color_scheme)
+      expect(assigns(:color_scheme)).to eq(color_scheme)
     end
   end
 
   describe "GET new" do
     it "assigns a new color_scheme as @color_scheme" do
       get :new, {}, valid_session
-      assigns(:color_scheme).should be_a_new(ColorScheme)
+      expect(assigns(:color_scheme)).to be_a_new(ColorScheme)
     end
   end
 
@@ -57,7 +57,7 @@ describe ColorSchemesController do
     it "assigns the requested color_scheme as @color_scheme" do
       color_scheme = ColorScheme.create! valid_attributes
       get :edit, {:id => color_scheme.to_param}, valid_session
-      assigns(:color_scheme).should eq(color_scheme)
+      expect(assigns(:color_scheme)).to eq(color_scheme)
     end
   end
 
@@ -71,13 +71,13 @@ describe ColorSchemesController do
 
       it "assigns a newly created color_scheme as @color_scheme" do
         post :create, {:color_scheme => valid_attributes}, valid_session
-        assigns(:color_scheme).should be_a(ColorScheme)
-        assigns(:color_scheme).should be_persisted
+        expect(assigns(:color_scheme)).to be_a(ColorScheme)
+        expect(assigns(:color_scheme)).to be_persisted
       end
 
       it "redirects to the created color_scheme" do
         post :create, {:color_scheme => valid_attributes}, valid_session
-        response.should redirect_to(ColorScheme.last)
+        expect(response).to redirect_to(ColorScheme.last)
       end
     end
 
@@ -86,14 +86,14 @@ describe ColorSchemesController do
         # Trigger the behavior that occurs when invalid params are submitted
         ColorScheme.any_instance.stub(:save).and_return(false)
         post :create, {:color_scheme => { "name" => "invalid value" }}, valid_session
-        assigns(:color_scheme).should be_a_new(ColorScheme)
+        expect(assigns(:color_scheme)).to be_a_new(ColorScheme)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         ColorScheme.any_instance.stub(:save).and_return(false)
         post :create, {:color_scheme => { "name" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -113,13 +113,13 @@ describe ColorSchemesController do
       it "assigns the requested color_scheme as @color_scheme" do
         color_scheme = ColorScheme.create! valid_attributes
         put :update, {:id => color_scheme.to_param, :color_scheme => valid_attributes}, valid_session
-        assigns(:color_scheme).should eq(color_scheme)
+        expect(assigns(:color_scheme)).to eq(color_scheme)
       end
 
       it "redirects to the color_scheme" do
         color_scheme = ColorScheme.create! valid_attributes
         put :update, {:id => color_scheme.to_param, :color_scheme => valid_attributes}, valid_session
-        response.should redirect_to(color_scheme)
+        expect(response).to redirect_to(color_scheme)
       end
     end
 
@@ -129,7 +129,7 @@ describe ColorSchemesController do
         # Trigger the behavior that occurs when invalid params are submitted
         ColorScheme.any_instance.stub(:save).and_return(false)
         put :update, {:id => color_scheme.to_param, :color_scheme => { "name" => "invalid value" }}, valid_session
-        assigns(:color_scheme).should eq(color_scheme)
+        expect(assigns(:color_scheme)).to eq(color_scheme)
       end
 
       it "re-renders the 'edit' template" do
@@ -137,7 +137,7 @@ describe ColorSchemesController do
         # Trigger the behavior that occurs when invalid params are submitted
         ColorScheme.any_instance.stub(:save).and_return(false)
         put :update, {:id => color_scheme.to_param, :color_scheme => { "name" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -153,7 +153,7 @@ describe ColorSchemesController do
     it "redirects to the color_schemes list" do
       color_scheme = ColorScheme.create! valid_attributes
       delete :destroy, {:id => color_scheme.to_param}, valid_session
-      response.should redirect_to(color_schemes_url)
+      expect(response).to redirect_to(color_schemes_url)
     end
   end
 

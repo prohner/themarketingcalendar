@@ -5,7 +5,7 @@ describe AdministrationController do
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
-      response.should be_success
+      expect(response).to redirect_to(root_path)
     end
   end
 

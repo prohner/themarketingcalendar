@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
   end
   
   def authorize_for_admin
-    unless current_user.email.ends_with?("@themarketingcalendar.com")
-      redirect_to home_path
+    unless not current_user.nil? and current_user.email.ends_with?("@themarketingcalendar.com")
+      redirect_to root_path
     end
   end
 
