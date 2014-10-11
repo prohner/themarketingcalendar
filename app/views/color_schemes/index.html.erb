@@ -1,0 +1,29 @@
+<h1>Listing color_schemes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @color_schemes.each do |color_scheme| %>
+      <tr>
+        <td><%= color_scheme.name %></td>
+        <td><%= color_scheme.foreground %></td>
+        <td><%= color_scheme.background %></td>
+        <td><span style="color:<%= color_scheme.foreground %>;background-color:<%= color_scheme.background %>;">This is some sample text.</span></td>
+        <td><%= link_to 'Show', color_scheme %></td>
+        <td><%= link_to 'Edit', edit_color_scheme_path(color_scheme) %></td>
+        <td><%= link_to 'Destroy', color_scheme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Color scheme', new_color_scheme_path %>

@@ -1,4 +1,5 @@
 TheMarketingCalendar::Application.routes.draw do
+  get "administration/index"
   get "articles/implementation_of_a_marketing_plan"
   get "articles/example_marketing_strategy"
   get "articles/best_marketing_strategy"
@@ -79,6 +80,8 @@ TheMarketingCalendar::Application.routes.draw do
   resources :users
 
   resources :companies
+
+  resources :color_schemes
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

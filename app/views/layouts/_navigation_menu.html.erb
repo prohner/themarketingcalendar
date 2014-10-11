@@ -50,10 +50,15 @@
 					<span class="glyphicon glyphicon-user">Profile</span>
 					<% end %>
 				</li>
+				<% if current_user.email.ends_with?("@themarketingcalendar.com") %>
+					<li>
+						<%= link_to "Administration", administration_index_path %>
+					</li>
+				<% end %>
 				<li class="divider"></li>
 				<li>
 					<%= link_to destroy_user_session_path, method: "delete" do %>
-					<span class="glyphicon glyphicon-off">Logout <%=current_user.email%></span>
+					<span class="glyphicon glyphicon-off">Logout <%= current_user.email %></span>
 					<% end %>
 				</li>
 			</ul>

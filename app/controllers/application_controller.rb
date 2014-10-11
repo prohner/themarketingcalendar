@@ -9,6 +9,12 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     calendar_index_path
   end
+  
+  def authorize_for_admin
+    unless current_user.email.ends_with?("@themarketingcalendar.com")
+      redirect_to home_path
+    end
+  end
 
   protected
 
