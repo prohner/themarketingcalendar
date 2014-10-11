@@ -1,4 +1,23 @@
 <p id="notice"><%= notice %></p>
 
+<p>
+  <strong>Name:</strong>
+  <%= @color_scheme.name %>
+</p>
+
+<p>
+  <strong>Foreground:</strong>
+  <%= @color_scheme.foreground %>
+</p>
+
+<p>
+  <strong>Background:</strong>
+  <%= @color_scheme.background %>
+</p>
+
+<p>
+	<%= render 'color_scheme_example', :color_scheme => @color_scheme %>
+</p>
+
 <%= link_to 'Edit', edit_color_scheme_path(@color_scheme) %> |
 <%= link_to 'Back', color_schemes_path %>

@@ -23,7 +23,7 @@ describe ColorSchemesController do
   # This should return the minimal set of attributes required to create a valid
   # ColorScheme. As you add validations to ColorScheme, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { {  } }
+  let(:valid_attributes) { { "name" => "MyString" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -85,14 +85,14 @@ describe ColorSchemesController do
       it "assigns a newly created but unsaved color_scheme as @color_scheme" do
         # Trigger the behavior that occurs when invalid params are submitted
         ColorScheme.any_instance.stub(:save).and_return(false)
-        post :create, {:color_scheme => {  }}, valid_session
+        post :create, {:color_scheme => { "name" => "invalid value" }}, valid_session
         assigns(:color_scheme).should be_a_new(ColorScheme)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         ColorScheme.any_instance.stub(:save).and_return(false)
-        post :create, {:color_scheme => {  }}, valid_session
+        post :create, {:color_scheme => { "name" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -106,8 +106,8 @@ describe ColorSchemesController do
         # specifies that the ColorScheme created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        ColorScheme.any_instance.should_receive(:update).with({ "these" => "params" })
-        put :update, {:id => color_scheme.to_param, :color_scheme => { "these" => "params" }}, valid_session
+        ColorScheme.any_instance.should_receive(:update).with({ "name" => "MyString" })
+        put :update, {:id => color_scheme.to_param, :color_scheme => { "name" => "MyString" }}, valid_session
       end
 
       it "assigns the requested color_scheme as @color_scheme" do
@@ -128,7 +128,7 @@ describe ColorSchemesController do
         color_scheme = ColorScheme.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ColorScheme.any_instance.stub(:save).and_return(false)
-        put :update, {:id => color_scheme.to_param, :color_scheme => {  }}, valid_session
+        put :update, {:id => color_scheme.to_param, :color_scheme => { "name" => "invalid value" }}, valid_session
         assigns(:color_scheme).should eq(color_scheme)
       end
 
@@ -136,7 +136,7 @@ describe ColorSchemesController do
         color_scheme = ColorScheme.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ColorScheme.any_instance.stub(:save).and_return(false)
-        put :update, {:id => color_scheme.to_param, :color_scheme => {  }}, valid_session
+        put :update, {:id => color_scheme.to_param, :color_scheme => { "name" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end

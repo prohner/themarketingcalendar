@@ -1,3 +1,24 @@
+<script type="text/javascript">
+function onColorChange() {
+	var fg = $('#color_scheme_foreground').val();
+	var bg = $('#color_scheme_background').val();
+	var ex = $('#color_scheme_example');
+	
+	// alert("fg=" + fg + " and bg=" + bg);
+	$(ex).css('color', fg); 
+	$(ex).css('background-color', bg); 
+}
+
+$(document).ready(function() {
+	$('#color_scheme_foreground').keyup(function() {
+		onColorChange();
+	});
+	$('#color_scheme_background').keyup(function() {
+		onColorChange();
+	});
+});
+</script>
+
 <%= form_for(@color_scheme) do |f| %>
   <% if @color_scheme.errors.any? %>
     <div id="error_explanation">
@@ -11,6 +32,24 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :foreground %><br>
+    <%= f.text_field :foreground %>
+  </div>
+  <div class="field">
+    <%= f.label :background %><br>
+    <%= f.text_field :background %>
+  </div>
+  <div style="margin:10px;">
+	  Changes the colors to see the live effect here:
+	  <div class="field">
+		<%= render 'color_scheme_example', :color_scheme => @color_scheme %>
+	  </div>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

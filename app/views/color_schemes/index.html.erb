@@ -3,6 +3,9 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
+      <th>Foreground</th>
+      <th>Background</th>
       <th></th>
       <th></th>
       <th></th>
@@ -15,10 +18,18 @@
         <td><%= color_scheme.name %></td>
         <td><%= color_scheme.foreground %></td>
         <td><%= color_scheme.background %></td>
-        <td><span style="color:<%= color_scheme.foreground %>;background-color:<%= color_scheme.background %>;">This is some sample text.</span></td>
+		<td>
+			<%= render 'color_scheme_example', :color_scheme => color_scheme %>
+		</td>
         <td><%= link_to 'Show', color_scheme %></td>
         <td><%= link_to 'Edit', edit_color_scheme_path(color_scheme) %></td>
-        <td><%= link_to 'Destroy', color_scheme, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+			<% if false %>
+				<%= link_to 'Destroy', color_scheme, method: :delete, data: { confirm: 'Are you sure?' } %>
+			<% else %>
+				<span style="color:lightgray;font-size:small;">Destroy might remove schemes in use.</span>
+			<% end %>
+		</td>
       </tr>
     <% end %>
   </tbody>
