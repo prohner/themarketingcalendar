@@ -28,6 +28,63 @@ namespace :db do
     create_sample_data_for_user(user_ya, color_schemes)
     create_sample_email_calendars_for_user(user_ya, color_schemes)
   end
+  
+  desc "Assign better default colors without recreating all of the objects"
+  task :set_colors => :environment do
+    print "Assigning colors\n"
+    c = ColorScheme.find_by_name("White on gray")
+    c.background = "#a0a0a0"
+    c.save
+    
+    c = ColorScheme.find_by_name("cs5")
+    unless c.nil?
+      c.name = "White on green"
+      c.foreground = "#ffffff"
+      c.background = "#82af6f"
+      c.save
+    end
+    
+    c = ColorScheme.find_by_name("Green on brown")
+    unless c.nil?
+      c.name = "White on red"
+      c.foreground = "#ffffff"
+      c.background = "#d15b47"
+      c.save
+    end
+    
+    c = ColorScheme.find_by_name("Gray on light brown")
+    unless c.nil?
+      c.name = "White on purple"
+      c.foreground = "#ffffff"
+      c.background = "#9585bf"
+      c.save
+    end
+    
+    c = ColorScheme.find_by_name("Dark gray on pale")
+    unless c.nil?
+      c.name = "Purple on yellow"
+      c.foreground = "#963"
+      c.background = "#fee188"
+      c.save
+    end
+    
+    c = ColorScheme.find_by_name("Brown on brown")
+    unless c.nil?
+      c.name = "White on pink"
+      c.foreground = "#ffffff"
+      c.background = "#d6487e"
+      c.save
+    end
+    
+    c = ColorScheme.find_by_name("Light brown on dark brown")
+    unless c.nil?
+      c.name = "White on steelblue"
+      c.foreground = "#ffffff"
+      c.background = "#3a87ad"
+      c.save
+    end
+    
+  end
 end
 
 def create_array_of_color_schemes
