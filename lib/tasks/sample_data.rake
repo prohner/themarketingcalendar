@@ -1,6 +1,13 @@
 namespace :db do
+  desc "Give Preston some sample data"
+  task :populatePreston => :environment do
+    pr = User.find_by_email('pr@themarketingcalendar.com')
+    cs = ColorScheme.all
+    create_sample_email_calendars_for_user(user_ya, color_schemes)
+  end
+  
   desc "Fill database with sample data"
-  task :populate => :environment do
+  task :populateXXXXX => :environment do
     # Delete from specific tables to we don't delete all in InterestedParty
     User.delete_all
     ColorScheme.delete_all
@@ -141,8 +148,8 @@ def create_sample_email_calendars_for_user(user, cs)
   mf_calendar.categories << survey
   
   current_year = 2014
-  current_month = 8
-  last_day_of_month = 31
+  current_month = 10
+  last_day_of_month = 30
   
   survey.events       << create_one_day_event("MF Panel Recruit Survey", current_year, current_month, 22)
   regular.events      << create_one_day_event("Value Props + Last Day for Winter Clearance (8033)", current_year, current_month - 1, 31)
