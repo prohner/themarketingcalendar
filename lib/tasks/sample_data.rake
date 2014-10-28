@@ -1,9 +1,14 @@
 namespace :db do
   desc "Give Preston some sample data"
   task :populatePreston => :environment do
-    pr = User.find_by_email('pr@themarketingcalendar.com')
+    # We should delete the demo user if it already exists for this process
+    # pr = User.find_by_email('demo@themarketingcalendar.com')
+    # pr.delete
+
+    pr = User.create(email:"demo@TheMarketingCalendar.com", first_name: "Demo", last_name: "User", password: "foobar", password_confirmation: "foobar", user_type: 1)
     cs = ColorScheme.all
     create_sample_email_calendars_for_user(pr, cs)
+
   end
   
   desc "Fill database with sample data"
