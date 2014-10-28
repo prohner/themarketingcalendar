@@ -3,7 +3,7 @@ namespace :db do
   task :populatePreston => :environment do
     pr = User.find_by_email('pr@themarketingcalendar.com')
     cs = ColorScheme.all
-    create_sample_email_calendars_for_user(pr, color_schemes)
+    create_sample_email_calendars_for_user(pr, cs)
   end
   
   desc "Fill database with sample data"
