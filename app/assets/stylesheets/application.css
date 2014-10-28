@@ -12,6 +12,7 @@
  *= require_self
  *= require fullcalendar
  *= require calendar
+ *= require ace.min
  *= require font-awesome
  *= require custom
  *= require snap
